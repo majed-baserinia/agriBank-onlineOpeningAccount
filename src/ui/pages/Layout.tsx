@@ -66,11 +66,11 @@ const Layout = () => {
 
       <MaterialThemeProvider>
         {configReady ? (
-          <div className="mx-auto md:container">
+          <div>
             <AppAlerts />
-            <div className="content-star xl:w-2/4 m-auto grid grid-rows-1 gap-y-4 p-7 md:w-3/4 lg:w-3/5">
+            {/* <div className="content-star xl:w-2/4 m-auto grid grid-rows-1 gap-y-4 p-7 md:w-3/4 lg:w-3/5"> */}
               <Outlet />
-            </div>
+            {/* </div> */}
           </div>
         ) : (
           <Loader showLoader={!configReady}></Loader>

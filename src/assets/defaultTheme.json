@@ -126,7 +126,7 @@
     "divider": "rgba(0, 0, 0, 0.12)",
     "background": {
       "paper": "#ffffff",
-      "default": "#ffffff"
+      "default": "#F2F2F2"
     },
     "action": {
       "active": "rgba(0, 0, 0, main4)",
