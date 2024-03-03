@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "baseUrl": "./src" /* Base directory to resolve non-absolute module names. */,
+    "paths": {
+      "@Mediatr/*": ["./thirdtools/mediatr/*"],
+      "@Fluentvalidator/*": ["./thirdtools/fluentvalidation/*"]
+    },
+    "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
+    "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "exclude": ["node_modules", "lib/**/*.js"],
+  "include": ["src", "test", "public/browserUpdate.js"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

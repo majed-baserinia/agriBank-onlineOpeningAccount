@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  margin: 0;
+  padding: 0;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "IRANSans";
+  src:
+    url("assets/fonts/IRANSansWeb_Medium.woff2") format("woff2"),
+    url("assets/fonts/IRANSansWeb_Medium.woff") format("woff"),
+    url("assets/fonts/IRANSansWeb_Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+form {
+  width: 100%;
+}
+
+.hstack-direction {
+  direction: initial;
+}
+.SanitizeHTML {
+  height: 30em;
+  padding: 3em;
+  padding-top: 0em;
+  line-height: 1.7em;
+}
+.SanitizeHTML h2 {
+  font-weight: bold;
+}
+
+.SanitizeHTML div li {
+  margin-right: 2em;
+  margin-left: 2em;
+  margin-top: 1em;
+}
+
+.SanitizeHTML div {
+  margin-top: 2em;
+}
+
+.MuiPopper-root[role="presentation"] {
+  z-index: 10 !important;
+  /* max-height: calc(85vh - 50px); */
+  overflow: auto;
+}
+
+.MuiPopper-root[role="presentation"]::-webkit-scrollbar {
+  display: none;
+}
+.MuiAutocomplete-listbox::-webkit-scrollbar {
+  display: none;
+}
+.muirtl-zbanjl-MuiAutocomplete-listbox .MuiAutocomplete-option[aria-selected="true"]{
+  background-color: #fff  !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
