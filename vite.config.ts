@@ -7,5 +7,5 @@ export default defineConfig(
   {
 
   plugins: [react(), tsconfigPaths()],
-  base: "/chakad/"
+  base: "/cheque/"
 });

@@ -28,7 +28,7 @@ const Layout = () => {
 
   const getConfig = useCallback(async () => {
     try {
-      const res = await fetch("/chakad/api-config.json");
+      const res = await fetch("/cheque/api-config.json");
       const apiConf = await res.json();
       ApiConfigSingleton.initiateApiConfig(apiConf?.apiBaseUrl);
 
