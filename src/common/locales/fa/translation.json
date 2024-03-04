@@ -5,5 +5,7 @@
   "confirmRecivedCheck": "ثبت چک دریافتی",
   "checkTeransfer": "انتقال چک",
   "checkCashing": "نقد کردن چک",
-  "chequeMenu": "خدمات چک الکترونیک"
+  "chequeMenu": "خدمات چک الکترونیک",
+  "accountServices": "خدمات حساب",
+  "electronicCheck": "چک الکترونیک"
 }

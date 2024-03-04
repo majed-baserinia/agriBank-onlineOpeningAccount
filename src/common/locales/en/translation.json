@@ -5,5 +5,7 @@
  "confirmRecivedCheck": "Confirm Recived Check",
  "checkTeransfer": "Check Teransfer",
  "checkCashing":"Check Cashing",
- "chequeMenu":"Electronic Check Services"
+ "chequeMenu":"Electronic Check Services",
+ "accountServices":"Account Services",
+ "electronicCheck":"Electronic Check"
 }
