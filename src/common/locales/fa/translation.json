@@ -7,5 +7,12 @@
   "checkCashing": "نقد کردن چک",
   "chequeMenu": "خدمات چک الکترونیک",
   "accountServices": "خدمات حساب",
-  "electronicCheck": "چک الکترونیک"
+  "electronicCheck": "چک الکترونیک",
+  "activationElCheck": "فعالسازی چک الکترونیک",
+  "continue": "ادامه",
+  "activationFirstStepText": "جهت فعالسازی برای دریافت خدمات چک الکترونیک یک گزینه را انتخاب کنید.",
+  "activateForMe": "فعالسازی برای خودم",
+  "activateForCompany": "فعالسازی برای شرکت هایی که امضا کننده هستم",
+  "selectACompany": "یک شرکت از لیست زیر را انتخاب کنید.",
+  "companyList": "لیست شرکت ها"
 }

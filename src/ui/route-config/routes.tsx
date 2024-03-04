@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from "ui/pages/HomePage/HomePage";
+import ActivationFirstStep from "ui/pages/ActivationFirstStep";
+import HomePage from "../pages/HomePage";
 import ErrorPage from "../pages/ErrorPage";
 import Layout from "../pages/Layout";
 
@@ -8,7 +9,13 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     errorElement: <ErrorPage />,
-    children: [{ index: true,path: '/cheque', element: <HomePage /> }]
+    children: [
+      { index: true, path: "/cheque", element: <HomePage /> },
+      {
+        path: "/cheque/activation/firstStep",
+        element: <ActivationFirstStep />
+      }
+    ]
   }
 ]);
 
