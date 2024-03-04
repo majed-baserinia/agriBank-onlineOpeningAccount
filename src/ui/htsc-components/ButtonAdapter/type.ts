@@ -9,6 +9,7 @@ export type ButtonAdapterProps = {
   forwardIcon?: boolean;
   children?: ReactNode | ReactNode[];
   muiButtonProps?: ButtonProps;
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
 };
 
 type Size = "medium" | "large" | "small";

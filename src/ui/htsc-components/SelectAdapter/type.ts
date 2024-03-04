@@ -8,5 +8,6 @@ export type Props = {
   icon?: ReactNode;
   children: ReactNode[];
   onChange: (value: string) => void;
-  muiSelectProps: SelectProps;
+  muiSelectProps?: SelectProps;
+  defaultValue?: string;
 };

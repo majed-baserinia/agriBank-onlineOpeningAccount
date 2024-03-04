@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { ButtonAdapterProps } from "./type";
 
 export default function ButtonAdapter(props: ButtonAdapterProps) {
-  const { variant, size, disabled, backIcon, forwardIcon, children, muiButtonProps } =
+  const { variant, size, disabled, backIcon, forwardIcon, children,onClick, muiButtonProps } =
     props;
 
   return (
@@ -13,9 +13,10 @@ export default function ButtonAdapter(props: ButtonAdapterProps) {
       variant={variant}
       size={size}
       disableRipple
+      onClick={(e)=>onClick(e)}
       //TODO check for the direction from i18 if needed
-      endIcon={forwardIcon ? <ChevronRightIcon /> : null}
-      startIcon={backIcon ? <ChevronLeftIcon /> : null}
+      endIcon={forwardIcon ? <ChevronLeftIcon /> : null}
+      startIcon={backIcon ? <ChevronRightIcon /> : null}
       {...muiButtonProps}
     >
       {children}

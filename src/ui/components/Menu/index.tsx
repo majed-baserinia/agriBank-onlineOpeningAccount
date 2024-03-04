@@ -11,14 +11,13 @@ export default function Menu(props: Props) {
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Grid container>
+    <>
       {list?.map((item, index) => {
         return (
           <>
             <Grid
               container
               justifyContent={"space-between"}
-              direction={theme.direction == "rtl" ? "row-reverse" : undefined}
               sx={{ padding: matches ? "16px 0" : "24px 0", cursor: "pointer" }}
               onClick={(e) => {
                 item.onClick?.(e);
@@ -28,7 +27,6 @@ export default function Menu(props: Props) {
               <Grid>
                 <Grid
                   container
-                  direction={theme.direction == "rtl" ? "row-reverse" : undefined}
                   gap={"8px"}
                 >
                   <span> {item.icon}</span>
@@ -51,6 +49,6 @@ export default function Menu(props: Props) {
           </>
         );
       })}
-    </Grid>
+    </>
   );
 }

@@ -5,16 +5,16 @@ export default function RadioButtonAdapter(props: Props) {
   const { value, label, checked, onChange, disabled } = props;
   const theme = useTheme();
 
-
   return (
     <FormControlLabel
       sx={{
-        direction: theme.direction,
         padding: "8px",
         border: checked
-          ? `2px solid ${theme.palette.primary.main}`
-          : `2px solid ${theme.palette.grey[200]}`,
-        borderRadius: "16px"
+          ? `1px solid ${theme.palette.primary.main}`
+          : `1px solid ${theme.palette.grey[200]}`,
+        borderRadius: "16px",
+        marginRight: 'unset',
+        marginLeft: 'unset',
       }}
       disabled={disabled}
       value={value}

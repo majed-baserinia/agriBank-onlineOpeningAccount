@@ -7,7 +7,11 @@ export default function BoxAdapter(props: Props) {
   return (
     <Paper
       elevation={0}
-      sx={{ height: "100%", borderRadius: fullWidth ? 0 : "16px", padding: "16px" }}
+      sx={{
+        minWidth: "25%",
+        borderRadius: fullWidth ? 0 : "32px",
+        padding: "32px"
+      }}
       {...muiPaperProps}
     >
       {children}

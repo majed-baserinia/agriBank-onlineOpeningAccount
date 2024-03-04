@@ -13,10 +13,10 @@ import { ReactNode, useState } from "react";
 import { Props } from "./type";
 
 export default function SelectAdapter(props: Props) {
-  const { onChange, label, error, disabled, icon, children, muiSelectProps } = props;
+  const { onChange, label, error, disabled, icon, children,defaultValue, muiSelectProps } = props;
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(defaultValue);
   const [open, setOpen] = useState(false);
 
   const handleChange = (e: SelectChangeEvent<unknown>, child: ReactNode) => {
@@ -33,18 +33,18 @@ export default function SelectAdapter(props: Props) {
     zIndex: "9",
     padding: "16px",
     height: window.innerHeight + "px",
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.paper
   };
 
   const menuStyle = {
     "& .MuiMenu-list": {
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: theme.palette.background.paper,
       height: "100%",
       width: "100%",
       boxShadow: "none"
     },
     "& .MuiMenu-paper": {
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: theme.palette.background.paper,
       height: "100%",
       width: "100%",
       boxShadow: "none"
