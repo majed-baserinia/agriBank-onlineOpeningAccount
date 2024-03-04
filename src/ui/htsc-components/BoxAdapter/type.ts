@@ -1,6 +1,8 @@
+import { PaperProps } from "@mui/material";
 import { ReactNode } from "react";
 
 export type Props = {
   children: ReactNode | ReactNode[];
-  title: string;
+  fullWidth?: boolean
+  muiPaperProps?: PaperProps
 };
