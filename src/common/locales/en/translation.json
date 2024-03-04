@@ -1,3 +1,9 @@
 {
- 
+ "activation": "Activation",
+ "deactivation": "Deactivation",
+ "issueCheck": "Issue Check",
+ "confirmRecivedCheck": "Confirm Recived Check",
+ "checkTeransfer": "Check Teransfer",
+ "checkCashing":"Check Cashing",
+ "chequeMenu":"Electronic Check Services"
 }

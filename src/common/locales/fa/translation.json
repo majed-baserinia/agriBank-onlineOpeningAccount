@@ -1,3 +1,9 @@
 {
-  
+  "activation": "فعالسازی",
+  "deactivation": "غیر فعالسازی",
+  "issueCheck": "ثبت چک",
+  "confirmRecivedCheck": "ثبت چک دریافتی",
+  "checkTeransfer": "انتقال چک",
+  "checkCashing": "نقد کردن چک",
+  "chequeMenu": "خدمات چک الکترونیک"
 }
