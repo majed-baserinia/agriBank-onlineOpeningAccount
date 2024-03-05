@@ -30,7 +30,6 @@ export default function ActivationFirstStep() {
   };
 
   const {
-    register,
     handleSubmit,
     formState: { errors: AccountChargeInquiryerror, isValid }
   } = useForm<ActivationCommand>({
@@ -43,18 +42,18 @@ export default function ActivationFirstStep() {
   return (
     <Grid
       container
-      sx={{ padding: "64px 0" }}
+      sx={{ padding: matches ? "0" : "64px 0" }}
       justifyContent={"center"}
       gap={"24px"}
       dir={theme.direction}
     >
       <Grid
-        sm={12}
+        xs={12}
         md={8}
       >
-        <BoxAdapter>
+        <BoxAdapter fullWidth={matches}>
           <Grid
-            height={"calc(100vh - 130px)"}
+            height={matches ? "calc(100vh - 64px)" : "calc(100vh - 192px)"}
             container
             direction={"column"}
             justifyContent={"space-between"}
@@ -69,7 +68,7 @@ export default function ActivationFirstStep() {
               </Typography>
               <RadioGroup
                 dir={theme.direction}
-                name="test"
+                name="whoToActivate"
                 value={value}
                 onChange={handleRadioChange}
                 sx={{
@@ -92,7 +91,7 @@ export default function ActivationFirstStep() {
                   checked={value == "2"}
                 />
               </RadioGroup>
-              {"selected item" ? (
+              {value == "2" ? (
                 <Grid
                   sx={{ marginTop: "48px" }}
                   sm={12}

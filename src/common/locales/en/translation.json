@@ -13,5 +13,9 @@
  "activationFirstStepText": "Select an option to activate to receive electronic check services.",
  "activateForCompany": "Activation for companies I am a signatory to",
  "selectACompany": "Select a company from the list below.",
- "companyList": "Companies List"
+ "companyList": "Companies List",
+ "activationSecondStepText": "The signature request has been sent to you. To confirm and sign, go to Hamoon software and confirm the correctness of the information.",
+ "dontRecieveMessage": "Have you not received a message in Hamon?",
+ "sendAgain": "Send Again",
+ "FinalSignatureRegistration": "Final signature registration"
 }

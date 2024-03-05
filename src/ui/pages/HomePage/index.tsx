@@ -1,4 +1,4 @@
-import { Grid, useTheme } from "@mui/material";
+import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import Menu from "ui/components/Menu";
@@ -10,6 +10,7 @@ import { menuList } from "./menuList";
 export default function HomePage() {
   const { t } = useTranslation();
   const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   const breadcrumbs = useMemo(() => {
     return [
@@ -27,8 +28,8 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div style={{ height: "100%" }}>
-      <BoxAdapter fullWidth>
+    <div style={{ height: "100%", padding: matches ? "16px" : "64px" }}>
+      <BoxAdapter>
         <BreadcrumbsAdapter breadcrumbs={breadcrumbs} />
         <Title>{t("chequeMenu")}</Title>
         <Grid dir={theme.direction}>

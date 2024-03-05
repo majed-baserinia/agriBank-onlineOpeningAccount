@@ -14,5 +14,9 @@
   "activateForMe": "فعالسازی برای خودم",
   "activateForCompany": "فعالسازی برای شرکت هایی که امضا کننده هستم",
   "selectACompany": "یک شرکت از لیست زیر را انتخاب کنید.",
-  "companyList": "لیست شرکت ها"
+  "companyList": "لیست شرکت ها",
+  "activationSecondStepText": "درخواست امضا برای شما ارسال شد. جهت تایید و امضا به نرم افزار هامون رفته و صحت اطلاعات را تایید کنید.",
+  "dontRecieveMessage": "پیامی در هامون دریافت نکرده‌اید؟",
+  "sendAgain": "ارسال مجدد",
+  "FinalSignatureRegistration": "ثبت نهایی امضا"
 }

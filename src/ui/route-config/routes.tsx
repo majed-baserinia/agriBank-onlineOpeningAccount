@@ -3,6 +3,8 @@ import ActivationFirstStep from "ui/pages/ActivationFirstStep";
 import HomePage from "../pages/HomePage";
 import ErrorPage from "../pages/ErrorPage";
 import Layout from "../pages/Layout";
+import ActivationSecondStep from "ui/pages/ActivationSecondStep";
+import ActivationThirdStep from "ui/pages/ActivationThirdStep";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +16,15 @@ const router = createBrowserRouter([
       {
         path: "/cheque/activation/firstStep",
         element: <ActivationFirstStep />
-      }
+      },
+      {
+        path: "/cheque/activation/secondStep",
+        element: <ActivationSecondStep />
+      },
+      {
+        path: "/cheque/activation/thirdStep",
+        element: <ActivationThirdStep />
+      },
     ]
   }
 ]);
