@@ -74,7 +74,6 @@ export default function ActivationSecondStep() {
                 variant="contained"
                 size="medium"
                 muiButtonProps={{ sx: { width: "100%" } }}
-                forwardIcon
                 onClick={(e) => console.log(e)}
               >
                 {t("FinalSignatureRegistration")}

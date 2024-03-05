@@ -14,6 +14,8 @@ export default function ActivationThirdStep() {
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const { t } = useTranslation();
 
+
+
   return (
     <Grid
       container
@@ -74,7 +76,7 @@ export default function ActivationThirdStep() {
                 variant="contained"
                 size="medium"
                 muiButtonProps={{ sx: { width: "100%" } }}
-                forwardIcon
+                
                 onClick={(e) => console.log(e)}
               >
                 {t("FinalSignatureRegistration")}
