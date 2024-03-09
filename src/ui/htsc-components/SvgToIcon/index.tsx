@@ -3,11 +3,18 @@ import { Grid } from "@mui/material";
 type props = {
   icon: string;
   alt?: string;
+  width?: string;
+  height?: string;
 };
 
-export default function SvgToIcon({ icon, alt = "" }: props) {
+export default function SvgToIcon({
+  icon,
+  alt = "",
+  height = "24px",
+  width = "24px"
+}: props) {
   return (
-    <Grid sx={{ width: "24px", height: "24px", flexShrink: 0 }}>
+    <Grid sx={{ width: width, height: height, flexShrink: 0 }}>
       <img
         style={{ width: "100%", height: "100%", objectFit: "contain" }}
         src={icon}

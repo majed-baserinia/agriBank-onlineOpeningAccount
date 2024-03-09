@@ -9,7 +9,7 @@ export default function Title(props: { children: ReactNode }) {
   return (
     <h1
       dir={theme.direction}
-      style={{ fontSize: "16px", fontWeight: "700" }}
+      style={{ fontSize: "16px", fontWeight: "700" , marginBottom: '24px'}}
     >
       {children}
     </h1>
