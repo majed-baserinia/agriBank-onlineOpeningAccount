@@ -17,5 +17,8 @@
  "activationSecondStepText": "The signature request has been sent to you. To confirm and sign, go to Hamoon software and confirm the correctness of the information.",
  "dontRecieveMessage": "Have you not received a message in Hamon?",
  "sendAgain": "Send Again",
- "FinalSignatureRegistration": "Final signature registration"
+ "FinalSignatureRegistration": "Final signature registration",
+ "accountInfo": "Account Info",
+ "electroincSignature": "Electroinc Signature",
+ "end": "End"
 }

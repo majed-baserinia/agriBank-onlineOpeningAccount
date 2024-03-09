@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import ActivationCommand from "business/application/cheque/activationFirstStep/activationCommand";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useController, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Menu from "ui/components/Menu";
 import Title from "ui/components/Title";
@@ -18,6 +18,7 @@ import ButtonAdapter from "ui/htsc-components/ButtonAdapter";
 import RadioButtonAdapter from "ui/htsc-components/RadioButtonAdapter";
 import SelectAdapter from "ui/htsc-components/SelectAdapter";
 import { menuList } from "../HomePage/menuList";
+import Stepper from "ui/htsc-components/Stepper";
 
 export default function ActivationFirstStep() {
   const { t } = useTranslation();
@@ -29,7 +30,8 @@ export default function ActivationFirstStep() {
     setValue((event.target as HTMLInputElement).value);
   };
 
-  const {
+ const {
+    control,
     handleSubmit,
     formState: { errors: AccountChargeInquiryerror, isValid }
   } = useForm<ActivationCommand>({
@@ -51,7 +53,8 @@ export default function ActivationFirstStep() {
         xs={12}
         md={8}
       >
-        <BoxAdapter fullWidth={matches}>
+        <BoxAdapter fullWidth={matches} >
+         
           <Grid
             height={matches ? "calc(100vh - 64px)" : "calc(100vh - 192px)"}
             container
@@ -60,6 +63,7 @@ export default function ActivationFirstStep() {
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>
+              <Stepper list={[t('accountInfo'),t('electroincSignature'),t('end')]} active={0}/>
               <Typography
                 variant="body1"
                 sx={{ marginBottom: "8px" }}
@@ -103,16 +107,24 @@ export default function ActivationFirstStep() {
                   >
                     {t("selectACompany")}
                   </Typography>
-                  <SelectAdapter
-                    label={t("companyList")}
-                    onChange={(e) => {
-                      console.log(e);
+                  <Controller
+                    control={control}
+                    name="SourceCard"
+                    render={({ field }) => {
+                      return (
+                        <SelectAdapter
+                          label={t("companyList")}
+                          onChange={(e) => {
+                            field.onChange(e);
+                          }}
+                          defaultValue={"10"}
+                        >
+                          <MenuItem value={10}>q</MenuItem>
+                          <MenuItem value={11}>d</MenuItem>
+                        </SelectAdapter>
+                      );
                     }}
-                    defaultValue={"10"}
-                  >
-                    <MenuItem value={10}>q</MenuItem>
-                    <MenuItem value={11}>d</MenuItem>
-                  </SelectAdapter>
+                  />
                 </Grid>
               ) : null}
             </Grid>

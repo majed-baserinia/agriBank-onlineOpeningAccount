@@ -18,5 +18,8 @@
   "activationSecondStepText": "درخواست امضا برای شما ارسال شد. جهت تایید و امضا به نرم افزار هامون رفته و صحت اطلاعات را تایید کنید.",
   "dontRecieveMessage": "پیامی در هامون دریافت نکرده‌اید؟",
   "sendAgain": "ارسال مجدد",
-  "FinalSignatureRegistration": "ثبت نهایی امضا"
+  "FinalSignatureRegistration": "ثبت نهایی امضا",
+  "accountInfo": "اطلاعات حساب",
+  "electroincSignature": "امضای دیجیتال",
+  "end": "پایان"
 }

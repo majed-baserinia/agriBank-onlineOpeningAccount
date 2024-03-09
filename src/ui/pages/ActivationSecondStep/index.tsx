@@ -8,6 +8,7 @@ import SvgToIcon from "ui/htsc-components/SvgToIcon";
 import infoIcon from "../../../assets/icon/info-circle.svg";
 import sendAaginIcon from "../../../assets/icon/refresh-alert.svg";
 import { menuList } from "../HomePage/menuList";
+import Stepper from "ui/htsc-components/Stepper";
 
 export default function ActivationSecondStep() {
   const theme = useTheme();
@@ -35,6 +36,8 @@ export default function ActivationSecondStep() {
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>
+              <Stepper list={[t('accountInfo'),t('electroincSignature'),t('end')]} active={1}/>
+
               <Grid
                 container
                 flexWrap={"nowrap"}

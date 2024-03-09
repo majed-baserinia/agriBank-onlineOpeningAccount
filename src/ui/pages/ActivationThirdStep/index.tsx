@@ -1,6 +1,7 @@
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import Menu from "ui/components/Menu";
+import Stepper from "ui/htsc-components/Stepper";
 import Title from "ui/components/Title";
 import BoxAdapter from "ui/htsc-components/BoxAdapter";
 import ButtonAdapter from "ui/htsc-components/ButtonAdapter";
@@ -13,8 +14,6 @@ export default function ActivationThirdStep() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const { t } = useTranslation();
-
-
 
   return (
     <Grid
@@ -37,6 +36,11 @@ export default function ActivationThirdStep() {
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>
+              <Stepper
+                list={[t("accountInfo"), t("electroincSignature"), t("end")]}
+                active={3}
+              />
+
               <Grid
                 container
                 flexWrap={"nowrap"}
@@ -76,7 +80,6 @@ export default function ActivationThirdStep() {
                 variant="contained"
                 size="medium"
                 muiButtonProps={{ sx: { width: "100%" } }}
-                
                 onClick={(e) => console.log(e)}
               >
                 {t("FinalSignatureRegistration")}
