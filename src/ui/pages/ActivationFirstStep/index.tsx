@@ -24,7 +24,7 @@ export default function ActivationFirstStep() {
   const { t } = useTranslation();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("1");
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
@@ -60,6 +60,7 @@ export default function ActivationFirstStep() {
             container
             direction={"column"}
             justifyContent={"space-between"}
+            wrap="nowrap"
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>

@@ -33,6 +33,7 @@ export default function ActivationThirdStep() {
             container
             direction={"column"}
             justifyContent={"space-between"}
+            wrap="nowrap"
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>
