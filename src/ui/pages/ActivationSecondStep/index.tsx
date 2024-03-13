@@ -29,7 +29,7 @@ export default function ActivationSecondStep() {
       >
         <BoxAdapter fullWidth={matches}>
           <Grid
-            height={matches ? "calc(100vh - 64px)" : "calc(100vh - 192px)"}
+            minHeight={matches ? "calc(100vh - 64px)" : "calc(100vh - 192px)"}
             container
             direction={"column"}
             justifyContent={"space-between"}
@@ -37,7 +37,7 @@ export default function ActivationSecondStep() {
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>
-              <Stepper list={[t('accountInfo'),t('electroincSignature'),t('end')]} active={1}/>
+             { !matches ?<Stepper list={[t('accountInfo'),t('electroincSignature'),t('end')]} active={1}/>: null}
 
               <Grid
                 container

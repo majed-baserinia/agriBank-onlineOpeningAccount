@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 import acticeIcon from "assets/icon/stepper/active.svg";
 import completedIcon from "assets/icon/stepper/completed.svg";
 import { useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import { Props, step } from "./types";
 export default function Stepper(props: Props) {
   const { list, active } = props;
   const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"))
   const [steps, setSteps] = useState<step[]>();
 
   useEffect(() => {
