@@ -52,11 +52,12 @@ export default function ActivationFirstStep() {
       <Grid
         xs={12}
         md={8}
+        
       >
         <BoxAdapter fullWidth={matches} >
          
           <Grid
-            height={matches ? "calc(100vh - 64px)" : "calc(100vh - 192px)"}
+            minHeight={matches ? "calc(100vh - 64px)" : "calc(100vh - 192px)"}
             container
             direction={"column"}
             justifyContent={"space-between"}
@@ -64,7 +65,7 @@ export default function ActivationFirstStep() {
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>
-              <Stepper list={[t('accountInfo'),t('electroincSignature'),t('end')]} active={0}/>
+             { !matches ? <Stepper list={[t('accountInfo'),t('electroincSignature'),t('end')]} active={0}/> : null}
               <Typography
                 variant="body1"
                 sx={{ marginBottom: "8px" }}
@@ -98,7 +99,7 @@ export default function ActivationFirstStep() {
               </RadioGroup>
               {value == "2" ? (
                 <Grid
-                  sx={{ marginTop: "48px" }}
+                  sx={{ marginTop: "48px", marginBottom:"48px" }}
                   sm={12}
                   md={9}
                 >
@@ -147,6 +148,7 @@ export default function ActivationFirstStep() {
         <Grid
           md={3}
           dir={theme.direction}
+          
         >
           <BoxAdapter>
             <Menu list={menuList} />

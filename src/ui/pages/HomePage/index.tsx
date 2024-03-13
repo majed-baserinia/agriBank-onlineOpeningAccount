@@ -28,7 +28,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div style={{ height: "100%", padding: matches ? "16px" : "64px" }}>
+    <div style={{ minHeight: "calc(100% - 128px)", padding: matches ? "16px" : "64px" }}>
       <BoxAdapter>
         <BreadcrumbsAdapter breadcrumbs={breadcrumbs} />
         <Title>{t("chequeMenu")}</Title>
