@@ -7,9 +7,9 @@ import {
   useMediaQuery,
   useTheme
 } from "@mui/material";
-import ActivationCommand from "business/application/cheque/activationFirstStep/activationCommand";
+import RegisterChakadCustomerCommand from "business/application/cheque/activationFirstStep/RegisterChakadCustomerCommand";
 import { useState } from "react";
-import { Controller, useController, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import Menu from "ui/components/Menu";
 import Title from "ui/components/Title";
@@ -17,8 +17,8 @@ import BoxAdapter from "ui/htsc-components/BoxAdapter";
 import ButtonAdapter from "ui/htsc-components/ButtonAdapter";
 import RadioButtonAdapter from "ui/htsc-components/RadioButtonAdapter";
 import SelectAdapter from "ui/htsc-components/SelectAdapter";
-import { menuList } from "../HomePage/menuList";
 import Stepper from "ui/htsc-components/Stepper";
+import { menuList } from "../HomePage/menuList";
 
 export default function ActivationFirstStep() {
   const { t } = useTranslation();
@@ -30,17 +30,19 @@ export default function ActivationFirstStep() {
     setValue((event.target as HTMLInputElement).value);
   };
 
- const {
+  const {
     control,
     handleSubmit,
     formState: { errors: AccountChargeInquiryerror, isValid }
-  } = useForm<ActivationCommand>({
+  } = useForm<RegisterChakadCustomerCommand>({
     resolver: (values, context, options) => {
       return fluentValidationResolver(values, context, options);
     },
-    context: ActivationCommand
+    context: RegisterChakadCustomerCommand
   });
-
+  const RegisterChakadCustomerHandlerSubmit = () => {
+    
+  };
   return (
     <Grid
       container
@@ -53,8 +55,7 @@ export default function ActivationFirstStep() {
         xs={12}
         md={8}
       >
-        <BoxAdapter fullWidth={matches} >
-         
+        <BoxAdapter fullWidth={matches}>
           <Grid
             height={matches ? "calc(100vh - 64px)" : "calc(100vh - 192px)"}
             container
@@ -64,7 +65,10 @@ export default function ActivationFirstStep() {
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>
-              <Stepper list={[t('accountInfo'),t('electroincSignature'),t('end')]} active={0}/>
+              <Stepper
+                list={[t("accountInfo"), t("electroincSignature"), t("end")]}
+                active={0}
+              />
               <Typography
                 variant="body1"
                 sx={{ marginBottom: "8px" }}
@@ -110,7 +114,7 @@ export default function ActivationFirstStep() {
                   </Typography>
                   <Controller
                     control={control}
-                    name="SourceCard"
+                    name="CustomerNumber"
                     render={({ field }) => {
                       return (
                         <SelectAdapter
@@ -135,7 +139,7 @@ export default function ActivationFirstStep() {
                 size="medium"
                 muiButtonProps={{ sx: { width: "100%" } }}
                 forwardIcon
-                onClick={handleSubmit((e) => console.log(e))}
+                onClick={handleSubmit(RegisterChakadCustomerHandlerSubmit)}
               >
                 {t("continue")}
               </ButtonAdapter>
