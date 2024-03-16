@@ -120,14 +120,14 @@ export default function ActivationFirstStep() {
                   onChange={handleRadioChange}
                   checked={value == "1"}
                 />
-                <RadioButtonAdapter
+                {/* <RadioButtonAdapter
                   value="2"
                   label={t("activateForCompany")}
                   onChange={handleRadioChange}
                   checked={value == "2"}
-                />
+                /> */}
               </RadioGroup>
-              {value == "2" ? (
+              {/* {value == "2" ? (
                 <Grid
                   sx={{ marginTop: "48px", marginBottom: "48px" }}
                   sm={12}
@@ -158,7 +158,7 @@ export default function ActivationFirstStep() {
                     }}
                   />
                 </Grid>
-              ) : null}
+              ) : null} */}
             </Grid>
             <Grid container>
               <ButtonAdapter
