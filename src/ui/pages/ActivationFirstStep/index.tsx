@@ -8,9 +8,12 @@ import {
   useTheme
 } from "@mui/material";
 import RegisterChakadCustomerCommand from "business/application/cheque/activationFirstStep/RegisterChakadCustomerCommand";
+import useRegisterChakadCustomer from "business/hooks/cheque/useRegisterChakadCustomer";
+import { useAccountChargeStore } from "business/stores/Chakad/ChakadQueryStore";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import Menu from "ui/components/Menu";
 import Title from "ui/components/Title";
 import BoxAdapter from "ui/htsc-components/BoxAdapter";
@@ -21,6 +24,7 @@ import Stepper from "ui/htsc-components/Stepper";
 import { menuList } from "../HomePage/menuList";
 
 export default function ActivationFirstStep() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -29,19 +33,40 @@ export default function ActivationFirstStep() {
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
   };
-
+  const setChakad_FirstStep = useAccountChargeStore((s) => s.setChakad_FirstStep);
+  const {
+    error: RegisterChakadCustomerApiErrors,
+    isLoading: loading,
+    mutate: mutateRegisterChakadCustomer,
+    data: RegisterChakadCustomerResponse
+  } = useRegisterChakadCustomer();
   const {
     control,
     handleSubmit,
     formState: { errors: AccountChargeInquiryerror, isValid }
   } = useForm<RegisterChakadCustomerCommand>({
     resolver: (values, context, options) => {
+      values = {
+        ...values,
+        CustomerNumber: 1000126631152
+      };
       return fluentValidationResolver(values, context, options);
     },
     context: RegisterChakadCustomerCommand
   });
-  const RegisterChakadCustomerHandlerSubmit = () => {
-    
+
+  const RegisterChakadCustomerHandlerSubmit = (data: RegisterChakadCustomerCommand) => {
+    mutateRegisterChakadCustomer(
+      { ...data },
+      {
+        onSuccess: (response) => {
+          setChakad_FirstStep(response.ActivationKey);
+          console.log(response);
+
+          navigate(import.meta.env.VITE_APP_SIGN_CHAKAD);
+        }
+      }
+    );
   };
   return (
     <Grid
@@ -54,7 +79,6 @@ export default function ActivationFirstStep() {
       <Grid
         xs={12}
         md={8}
-        
       >
         <BoxAdapter fullWidth={matches}>
           <Grid
@@ -66,7 +90,12 @@ export default function ActivationFirstStep() {
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>
-             { !matches ? <Stepper list={[t('accountInfo'),t('electroincSignature'),t('end')]} active={0}/> : null}
+              {!matches ? (
+                <Stepper
+                  list={[t("accountInfo"), t("electroincSignature"), t("end")]}
+                  active={0}
+                />
+              ) : null}
               <Typography
                 variant="body1"
                 sx={{ marginBottom: "8px" }}
@@ -100,7 +129,7 @@ export default function ActivationFirstStep() {
               </RadioGroup>
               {value == "2" ? (
                 <Grid
-                  sx={{ marginTop: "48px", marginBottom:"48px" }}
+                  sx={{ marginTop: "48px", marginBottom: "48px" }}
                   sm={12}
                   md={9}
                 >
@@ -149,7 +178,6 @@ export default function ActivationFirstStep() {
         <Grid
           md={3}
           dir={theme.direction}
-          
         >
           <BoxAdapter>
             <Menu list={menuList} />

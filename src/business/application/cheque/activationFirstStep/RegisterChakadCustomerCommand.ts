@@ -1,8 +1,8 @@
 import { IRequest } from "@Mediatr/index";
-import RegisterChakadCustomerRequest from "common/entities/cheque/RegisterChakadCustomerRequest";
+import RegisterChakadCustomerResponse from "common/entities/cheque/RegisterChakadCustomerResponse";
 //VITE_APP_INITIAL_CHAKAD
 export default class RegisterChakadCustomerCommand
-  implements IRequest<RegisterChakadCustomerRequest>
+  implements IRequest<RegisterChakadCustomerResponse>
 {
   CustomerNumber: number;
 

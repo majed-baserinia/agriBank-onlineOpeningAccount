@@ -1,21 +1,23 @@
 import { IRequestHandler, requestHandler } from "@Mediatr/index";
 import APIClient from "business/infrastructure/api-client";
+import RegisterchakadcustomerRequest from "common/entities/cheque/RegisterChakadCustomerRequest";
 import RegisterChakadCustomerResponse from "common/entities/cheque/RegisterChakadCustomerResponse";
-import registerchakadcustomerRequest from "common/entities/cheque/RegisterChakadCustomerRequest";
 import RegisterChakadCustomerCommand from "./RegisterChakadCustomerCommand";
 
 @requestHandler(RegisterChakadCustomerCommand)
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export class AccountChargeharimCommandHandler
+export class RegisterChakadCustomerCommandHandler
   implements
     IRequestHandler<RegisterChakadCustomerCommand, RegisterChakadCustomerResponse>
 {
   handle(value: RegisterChakadCustomerCommand): Promise<RegisterChakadCustomerResponse> {
+    console.log("salam");
+
     const apiClient = new APIClient<
-      registerchakadcustomerRequest,
+      RegisterchakadcustomerRequest,
       RegisterChakadCustomerResponse
     >(import.meta.env.VITE_APP_INITIAL_CHAKAD);
-    return apiClient.post(<registerchakadcustomerRequest>{
+    return apiClient.post(<RegisterchakadcustomerRequest>{
       CustomerNumber: value.CustomerNumber
     });
   }
