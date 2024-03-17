@@ -1,4 +1,3 @@
-import { t } from "i18next";
 import SvgToIcon from "ui/htsc-components/SvgToIcon";
 import activation from "../../../assets/menu/active-check.svg";
 import issueCheck from "../../../assets/menu/check-issue.svg";
@@ -10,7 +9,7 @@ import checkTeransfer from "../../../assets/menu/transfer-check.svg";
 export const menuList = [
   {
     id: "1",
-    title: t("activation"),
+    title: "activation",
     icon: (
       <SvgToIcon
         icon={activation}
@@ -21,7 +20,7 @@ export const menuList = [
   },
   {
     id: "2",
-    title: t("deactivation"),
+    title: "deactivation",
     icon: (
       <SvgToIcon
         icon={deactivation}
@@ -30,7 +29,7 @@ export const menuList = [
     )
   },
   {
-    title: t("issueCheck"),
+    title: "issueCheck",
     icon: (
       <SvgToIcon
         icon={issueCheck}
@@ -39,7 +38,7 @@ export const menuList = [
     )
   },
   {
-    title: t("confirmRecivedCheck"),
+    title: "confirmRecivedCheck",
     icon: (
       <SvgToIcon
         icon={confirmRecivedCheck}
@@ -48,7 +47,7 @@ export const menuList = [
     )
   },
   {
-    title: t("checkTeransfer"),
+    title: "checkTeransfer",
     icon: (
       <SvgToIcon
         icon={checkTeransfer}
@@ -57,7 +56,7 @@ export const menuList = [
     )
   },
   {
-    title: t("checkCashing"),
+    title: "checkCashing",
     icon: (
       <SvgToIcon
         icon={checkCashing}

@@ -22,9 +22,10 @@
  "electroincSignature": "Electroinc Signature",
  "end": "End",
  "IUnderstand": "I understand",
- "info": "Inof",
+ "info": "info",
   "error": "Error",
   "warning":"Warning",
   "success": "Success",
-  "sendAgainAlertSuccessText": "The signature request has been sent to you. To confirm and sign, go to Hamoon software."
+  "sendAgainAlertSuccessText": "The signature request has been sent to you. To confirm and sign, go to Hamoon software.",
+  "activateForMe": "Activate for me"
 }

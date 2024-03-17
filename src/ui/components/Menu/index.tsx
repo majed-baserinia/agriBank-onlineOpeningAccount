@@ -3,10 +3,12 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Divider, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Props } from "./type";
+import { useTranslation } from "react-i18next";
 
 export default function Menu(props: Props) {
   const { list } = props;
   const theme = useTheme();
+  const {t} = useTranslation()
   const navigate = useNavigate();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -30,7 +32,7 @@ export default function Menu(props: Props) {
                   gap={"8px"}
                 >
                   <span> {item.icon}</span>
-                  <span> {item.title}</span>
+                  <span> {t(item.title)}</span>
                 </Grid>
               </Grid>
               <Grid>
