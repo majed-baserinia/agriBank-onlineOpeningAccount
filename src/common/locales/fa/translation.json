@@ -21,5 +21,11 @@
   "FinalSignatureRegistration": "ثبت نهایی امضا",
   "accountInfo": "اطلاعات حساب",
   "electroincSignature": "امضای دیجیتال",
-  "end": "پایان"
+  "end": "پایان",
+  "IUnderstand": "متوجه شدم",
+  "info": "اطلاعیه",
+  "error": "خطا",
+  "warning":"هشدار",
+  "success": "موفق",
+  "sendAgainAlertSuccessText": "درخواست امضا برای شما ارسال شد. جهت تایید و امضا به نرم افزار هامون مراجعه کنید."
 }

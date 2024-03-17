@@ -5,22 +5,20 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  useMediaQuery,
   useTheme
 } from "@mui/material";
 import { clearAlert, useAlert } from "business/stores/AppAlertsStore";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-//import Button from "ui/htsc-components/buttons/button/Button";
 
+import ButtonAdapter from "../ButtonAdapter";
 import AlertIcon from "./alertIcon";
 import { AppAlert } from "./type";
 
 export default function AppAlerts() {
   const { alerts } = useAlert();
-  const theme = useTheme();
   const { t } = useTranslation();
-  const matches = useMediaQuery(theme.breakpoints.down("sm"));
+  const theme = useTheme();
   const [open, setOpen] = useState(true);
   const [localAlerts, setLocalAlerts] = useState<AppAlert[]>([]);
   const capturedAlert = localAlerts[0];
@@ -48,27 +46,6 @@ export default function AppAlerts() {
   //   clearApiError();
   // };
 
-  //    const mobileView = (
-  //   <Snackbar
-  //   open={open}
-  //   autoHideDuration={4000}
-  //   onClose={handleClose}
-  //   anchorOrigin={{ vertical: "top", horizontal: "center" }}
-  // >
-  //   <Alert
-  //     onClose={handleClose}
-  //     severity="error"
-  //     variant="filled"
-  //     sx={{ width: "100%" }}
-  //   >
-  //     test
-  //     {err[0].detail}
-  //   </Alert>
-  // </Snackbar>
-  //    );
-
-  //   const desktopView = <></>;
-
   capturedAlert?.type === "errorWithConfirmation" ||
   capturedAlert?.type === "warningWithConfirmation"
     ? capturedAlert.actions?.onConfirm?.()
@@ -79,7 +56,7 @@ export default function AppAlerts() {
         setOpen(false);
         clearAlert();
         setLocalAlerts([]);
-        capturedAlert?.actions?.onCloseModal && capturedAlert?.actions?.onCloseModal();
+        capturedAlert?.actions?.onCloseModal?.();
       }}
       open={open}
       PaperProps={{
@@ -93,35 +70,38 @@ export default function AppAlerts() {
       </Center>
       <DialogTitle sx={{ margin: "auto" }}>{t(mappedType)}</DialogTitle>
 
-      <DialogContent sx={{ margin: "auto" }}>
+      <DialogContent sx={{ margin: "auto", direction: theme.direction }}>
         <DialogContentText>{capturedAlert?.messageText}</DialogContentText>
       </DialogContent>
 
-      {/* <DialogActions>
-        <Button
-          onClick={() => {
-            setOpen(false);
-            clearAlert();
-            setLocalAlerts([]);
-            capturedAlert?.actions?.onClick?.();
-          }}
-          variant={"contained"}
-          text={t("Irealized")}
-        ></Button>
-        {capturedAlert?.type === "errorWithConfirmation" ||
-        capturedAlert?.type === "warningWithConfirmation" ? (
-          <Button
+      <DialogActions sx={{ justifyContent: "center" }}>
+        {capturedAlert?.hasConfirmAction ? (
+          <ButtonAdapter
             onClick={() => {
               setOpen(false);
               clearAlert();
               setLocalAlerts([]);
-              capturedAlert.actions?.onConfirm?.();
+              capturedAlert?.actions?.onConfirm?.();
             }}
             variant={"contained"}
-            text={t("Irealized")}
-          ></Button>
+          >
+            {t("IUnderstand")}
+          </ButtonAdapter>
         ) : null}
-      </DialogActions> */}
+        {capturedAlert?.hasContinueAction ? (
+          <ButtonAdapter
+            onClick={() => {
+              setOpen(false);
+              clearAlert();
+              setLocalAlerts([]);
+              capturedAlert.actions?.onContinue?.();
+            }}
+            variant={"contained"}
+          >
+            {t("continue")}
+          </ButtonAdapter>
+        ) : null}
+      </DialogActions>
     </Dialog>
   ) : undefined;
 }

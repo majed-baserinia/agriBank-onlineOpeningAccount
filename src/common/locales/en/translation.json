@@ -20,5 +20,11 @@
  "FinalSignatureRegistration": "Final signature registration",
  "accountInfo": "Account Info",
  "electroincSignature": "Electroinc Signature",
- "end": "End"
+ "end": "End",
+ "IUnderstand": "I understand",
+ "info": "Inof",
+  "error": "Error",
+  "warning":"Warning",
+  "success": "Success",
+  "sendAgainAlertSuccessText": "The signature request has been sent to you. To confirm and sign, go to Hamoon software."
 }
