@@ -12,8 +12,8 @@ import BoxAdapter from "ui/htsc-components/BoxAdapter";
 import ButtonAdapter from "ui/htsc-components/ButtonAdapter";
 import Stepper from "ui/htsc-components/Stepper";
 import SvgToIcon from "ui/htsc-components/SvgToIcon";
-import infoIcon from "../../../assets/icon/info-circle.svg";
-import sendAaginIcon from "../../../assets/icon/refresh-alert.svg";
+import infoIcon from "../../../../assets/icon/info-circle.svg";
+import sendAaginIcon from "../../../../assets/icon/refresh-alert.svg";
 import { menuList } from "../../HomePage/menuList";
 
 export default function ActivationSecondStep() {
