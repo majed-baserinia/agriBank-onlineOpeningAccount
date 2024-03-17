@@ -1,7 +1,7 @@
 import fluentValidationResolver from "@Fluentvalidator/extentions/fluentValidationResolver";
 import { Grid, RadioGroup, Typography, useMediaQuery, useTheme } from "@mui/material";
 import FirstStepCommand from "business/application/cheque/activation/firstStep/FirstStepCommand";
-import useFirstStepCall from "business/hooks/cheque/useFirstStepCall";
+import useFirstStepCall from "business/hooks/cheque/activation/useFirstStepCall";
 import { useAccountChargeStore } from "business/stores/Chakad/ChakadQueryStore";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -13,7 +13,7 @@ import BoxAdapter from "ui/htsc-components/BoxAdapter";
 import ButtonAdapter from "ui/htsc-components/ButtonAdapter";
 import RadioButtonAdapter from "ui/htsc-components/RadioButtonAdapter";
 import Stepper from "ui/htsc-components/Stepper";
-import { menuList } from "../HomePage/menuList";
+import { menuList } from "../../HomePage/menuList";
 
 export default function ActivationFirstStep() {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
-import useSecondStepCall from "business/hooks/cheque/useSecondStepCall";
-import useThirdStepCall from "business/hooks/cheque/useThirdStepCall";
+import useSecondStepCall from "business/hooks/cheque/activation/useSecondStepCall";
+import useThirdStepCall from "business/hooks/cheque/activation/useThirdStepCall";
 import { pushAlert } from "business/stores/AppAlertsStore";
 import { useAccountChargeStore } from "business/stores/Chakad/ChakadQueryStore";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ import Stepper from "ui/htsc-components/Stepper";
 import SvgToIcon from "ui/htsc-components/SvgToIcon";
 import infoIcon from "../../../assets/icon/info-circle.svg";
 import sendAaginIcon from "../../../assets/icon/refresh-alert.svg";
-import { menuList } from "../HomePage/menuList";
+import { menuList } from "../../HomePage/menuList";
 
 export default function ActivationSecondStep() {
   const theme = useTheme();
@@ -67,6 +67,17 @@ export default function ActivationSecondStep() {
         });
       },
       onError: (err) => {
+        if (err.status == 453) {
+          pushAlert({
+            type: "error",
+            messageText: err.detail,
+            hasConfirmAction: true,
+            actions: {
+              onCloseModal: () => navigate("/cheque"),
+              onConfirm: () => navigate("/cheque")
+            }
+          });
+        }
         pushAlert({ type: "error", messageText: err.detail, hasConfirmAction: true });
       }
     });
