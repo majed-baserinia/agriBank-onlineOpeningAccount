@@ -1,7 +1,7 @@
 import fluentValidationResolver from "@Fluentvalidator/extentions/fluentValidationResolver";
 import { Grid, RadioGroup, Typography, useMediaQuery, useTheme } from "@mui/material";
-import RegisterChakadCustomerCommand from "business/application/cheque/activationFirstStep/RegisterChakadCustomerCommand";
-import useRegisterChakadCustomer from "business/hooks/cheque/useRegisterChakadCustomer";
+import FirstStepCommand from "business/application/cheque/activation/firstStep/FirstStepCommand";
+import useFirstStepCall from "business/hooks/cheque/useFirstStepCall";
 import { useAccountChargeStore } from "business/stores/Chakad/ChakadQueryStore";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -20,35 +20,29 @@ export default function ActivationFirstStep() {
   const { t } = useTranslation();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const setChakad_FirstStep = useAccountChargeStore((s) => s.setChakad_FirstStep);
   const [value, setValue] = useState("1");
+  const { error: RegisterChakadCustomerApiErrors, mutate, data } = useFirstStepCall();
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
   };
-  const setChakad_FirstStep = useAccountChargeStore((s) => s.setChakad_FirstStep);
-  const {
-    error: RegisterChakadCustomerApiErrors,
-    mutate,
-    data
-  } = useRegisterChakadCustomer();
 
-
-  const { handleSubmit } = useForm<RegisterChakadCustomerCommand>({
+  const { handleSubmit } = useForm<FirstStepCommand>({
     resolver: (values, context, options) => {
       return fluentValidationResolver(values, context, options);
     },
-    context: RegisterChakadCustomerCommand
+    context: FirstStepCommand
   });
 
-  const RegisterChakadCustomerHandlerSubmit = (data: RegisterChakadCustomerCommand) => {
-    const usersCustomerNumber = {CustomerNumber: 0}
+  const submitHandler = (data: FirstStepCommand) => {
+    const usersCustomerNumber = { CustomerNumber: 0 };
 
-    
     mutate(
       { ...usersCustomerNumber },
       {
         onSuccess: (response) => {
-          setChakad_FirstStep(response.ActivationKey);
+          setChakad_FirstStep(response.activationKey);
           console.log(response);
 
           navigate("/cheque/activation/secondStep");
@@ -154,7 +148,7 @@ export default function ActivationFirstStep() {
                 size="medium"
                 muiButtonProps={{ sx: { width: "100%" } }}
                 forwardIcon
-                onClick={handleSubmit(RegisterChakadCustomerHandlerSubmit)}
+                onClick={handleSubmit(submitHandler)}
               >
                 {t("continue")}
               </ButtonAdapter>

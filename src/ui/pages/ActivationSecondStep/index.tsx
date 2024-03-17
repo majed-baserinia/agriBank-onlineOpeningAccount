@@ -1,19 +1,76 @@
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import useSecondStepCall from "business/hooks/cheque/useSecondStepCall";
+import useThirdStepCall from "business/hooks/cheque/useThirdStepCall";
+import { pushAlert } from "business/stores/AppAlertsStore";
+import { useAccountChargeStore } from "business/stores/Chakad/ChakadQueryStore";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import Menu from "ui/components/Menu";
 import Title from "ui/components/Title";
 import BoxAdapter from "ui/htsc-components/BoxAdapter";
 import ButtonAdapter from "ui/htsc-components/ButtonAdapter";
+import Stepper from "ui/htsc-components/Stepper";
 import SvgToIcon from "ui/htsc-components/SvgToIcon";
 import infoIcon from "../../../assets/icon/info-circle.svg";
 import sendAaginIcon from "../../../assets/icon/refresh-alert.svg";
 import { menuList } from "../HomePage/menuList";
-import Stepper from "ui/htsc-components/Stepper";
 
 export default function ActivationSecondStep() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const [isThirdStep, setIsThirdStep] = useState(false);
+
+  const activationKey = useAccountChargeStore((s) => s.activationKeyStore.ActivationKey);
+  const { mutate: sendAgain } = useSecondStepCall();
+  const { mutate: submition } = useThirdStepCall();
+
+  useEffect(() => {
+    sendAgain(activationKey, {
+      onError: (err) => {
+        pushAlert({ type: "error", messageText: err.detail, hasConfirmAction: true });
+      }
+    });
+  }, []);
+
+  const handleSendAgain = () => {
+    sendAgain(activationKey, {
+      onSuccess: (response) => {
+        pushAlert({
+          type: "info",
+          messageText: response.message,
+          hasConfirmAction: true
+        });
+      },
+      onError: (err) => {
+        pushAlert({ type: "error", messageText: err.detail, hasConfirmAction: true });
+      }
+    });
+  };
+
+  const handleSubmit = () => {
+    submition(activationKey, {
+      onSuccess: (response) => {
+        setIsThirdStep(true);
+
+        pushAlert({
+          type: "success",
+          messageText: response.message,
+          hasConfirmAction: true,
+          actions: {
+            onCloseModal: () => navigate("/cheque"),
+            onConfirm: () => navigate("/cheque")
+          }
+        });
+      },
+      onError: (err) => {
+        pushAlert({ type: "error", messageText: err.detail, hasConfirmAction: true });
+      }
+    });
+  };
 
   return (
     <Grid
@@ -37,7 +94,12 @@ export default function ActivationSecondStep() {
           >
             <Grid>
               <Title>{t("activationElCheck")}</Title>
-             { !matches ?<Stepper list={[t('accountInfo'),t('electroincSignature'),t('end')]} active={1}/>: null}
+              {!matches ? (
+                <Stepper
+                  list={[t("accountInfo"), t("electroincSignature"), t("end")]}
+                  active={isThirdStep ? 3 : 1}
+                />
+              ) : null}
 
               <Grid
                 container
@@ -62,7 +124,7 @@ export default function ActivationSecondStep() {
                 <Typography sx={{ margin: "0 24px" }}>
                   {t("dontRecieveMessage")}
                 </Typography>
-                <ButtonAdapter onClick={(e) => console.log(e)}>
+                <ButtonAdapter onClick={handleSendAgain}>
                   {t("sendAgain")}
                   <span>
                     <SvgToIcon
@@ -78,7 +140,7 @@ export default function ActivationSecondStep() {
                 variant="contained"
                 size="medium"
                 muiButtonProps={{ sx: { width: "100%" } }}
-                onClick={(e) => console.log(e)}
+                onClick={handleSubmit}
               >
                 {t("FinalSignatureRegistration")}
               </ButtonAdapter>
