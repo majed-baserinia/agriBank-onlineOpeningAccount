@@ -10,9 +10,7 @@ export class RegisterChakadCustomerCommandHandler
   implements
     IRequestHandler<RegisterChakadCustomerCommand, RegisterChakadCustomerResponse>
 {
-  handle(value: RegisterChakadCustomerCommand): Promise<RegisterChakadCustomerResponse> {
-    console.log("salam");
-
+  handle(value: RegisterChakadCustomerCommand): Promise<RegisterChakadCustomerResponse> {    
     const apiClient = new APIClient<
       RegisterchakadcustomerRequest,
       RegisterChakadCustomerResponse

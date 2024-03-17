@@ -1,6 +1,6 @@
 import { Mediator } from "@Mediatr/index";
 import { useMutation } from "@tanstack/react-query";
-import ActivationChakadCustomerCommand from "business/application/cheque/activationThirthStep/ActivationChakadCustomerCommand";
+import ActivationChakadCustomerCommand from "business/application/cheque/activationFirstStep/RegisterChakadCustomerCommand";
 import ActivationChakadCustomerRequest from "common/entities/cheque/ActivationChakadCustomerRequest";
 import ActivationChakadCustomerResponse from "common/entities/cheque/ActivationChakadCustomerResponse";
 import { ErrorType } from "common/entities/ErrorType";

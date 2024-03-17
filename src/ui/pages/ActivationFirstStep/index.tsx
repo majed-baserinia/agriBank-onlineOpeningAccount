@@ -1,17 +1,10 @@
 import fluentValidationResolver from "@Fluentvalidator/extentions/fluentValidationResolver";
-import {
-  Grid,
-  MenuItem,
-  RadioGroup,
-  Typography,
-  useMediaQuery,
-  useTheme
-} from "@mui/material";
+import { Grid, RadioGroup, Typography, useMediaQuery, useTheme } from "@mui/material";
 import RegisterChakadCustomerCommand from "business/application/cheque/activationFirstStep/RegisterChakadCustomerCommand";
 import useRegisterChakadCustomer from "business/hooks/cheque/useRegisterChakadCustomer";
 import { useAccountChargeStore } from "business/stores/Chakad/ChakadQueryStore";
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Menu from "ui/components/Menu";
@@ -19,7 +12,6 @@ import Title from "ui/components/Title";
 import BoxAdapter from "ui/htsc-components/BoxAdapter";
 import ButtonAdapter from "ui/htsc-components/ButtonAdapter";
 import RadioButtonAdapter from "ui/htsc-components/RadioButtonAdapter";
-import SelectAdapter from "ui/htsc-components/SelectAdapter";
 import Stepper from "ui/htsc-components/Stepper";
 import { menuList } from "../HomePage/menuList";
 
@@ -36,34 +28,30 @@ export default function ActivationFirstStep() {
   const setChakad_FirstStep = useAccountChargeStore((s) => s.setChakad_FirstStep);
   const {
     error: RegisterChakadCustomerApiErrors,
-    isLoading: loading,
-    mutate: mutateRegisterChakadCustomer,
-    data: RegisterChakadCustomerResponse
+    mutate,
+    data
   } = useRegisterChakadCustomer();
-  const {
-    control,
-    handleSubmit,
-    formState: { errors: AccountChargeInquiryerror, isValid }
-  } = useForm<RegisterChakadCustomerCommand>({
+
+
+  const { handleSubmit } = useForm<RegisterChakadCustomerCommand>({
     resolver: (values, context, options) => {
-      values = {
-        ...values,
-        CustomerNumber: 1000126631152
-      };
       return fluentValidationResolver(values, context, options);
     },
     context: RegisterChakadCustomerCommand
   });
 
   const RegisterChakadCustomerHandlerSubmit = (data: RegisterChakadCustomerCommand) => {
-    mutateRegisterChakadCustomer(
-      { ...data },
+    const usersCustomerNumber = {CustomerNumber: 0}
+
+    
+    mutate(
+      { ...usersCustomerNumber },
       {
         onSuccess: (response) => {
           setChakad_FirstStep(response.ActivationKey);
           console.log(response);
 
-          navigate(import.meta.env.VITE_APP_SIGN_CHAKAD);
+          navigate("/cheque/activation/secondStep");
         }
       }
     );

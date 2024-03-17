@@ -6,7 +6,7 @@ export default class RegisterChakadCustomerCommand
 {
   CustomerNumber: number;
 
-  constructor(AccountChargeInquiryCommand: RegisterChakadCustomerCommand) {
-    this.CustomerNumber = AccountChargeInquiryCommand?.CustomerNumber;
+  constructor(RegisterChakadCustomerCommand: RegisterChakadCustomerCommand) {
+    this.CustomerNumber = RegisterChakadCustomerCommand?.CustomerNumber;
   }
 }

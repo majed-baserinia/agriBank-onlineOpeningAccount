@@ -1,3 +1,3 @@
 export default interface ActivationChakadCustomerRequest {
-  ActivationKey: string;
+  CustomerNumber: string;
 }
