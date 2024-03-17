@@ -1,10 +1,10 @@
-import { Center } from "@chakra-ui/react";
 import {
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Grid,
   useTheme
 } from "@mui/material";
 import { clearAlert, useAlert } from "business/stores/AppAlertsStore";
@@ -65,9 +65,13 @@ export default function AppAlerts() {
       maxWidth={"xs"}
       fullWidth
     >
-      <Center>
+      <Grid
+        container
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
         <AlertIcon type={mappedType} />
-      </Center>
+      </Grid>
       <DialogTitle sx={{ margin: "auto" }}>{t(mappedType)}</DialogTitle>
 
       <DialogContent sx={{ margin: "auto", direction: theme.direction }}>

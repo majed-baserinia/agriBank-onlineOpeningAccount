@@ -1,21 +1,18 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Typography } from "@mui/material";
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
-
 
 const ErrorPage = () => {
   const error = useRouteError();
 
   return (
     <>
-
       <Box padding={5}>
-        <Heading>Oops</Heading>
-        <Text>
+        <Typography variant="h1">Oops</Typography>
+        <Typography>
           {isRouteErrorResponse(error)
             ? "This page does not exist."
             : "An unexpected error occurred."}
-        </Text>
+        </Typography>
       </Box>
     </>
   );
