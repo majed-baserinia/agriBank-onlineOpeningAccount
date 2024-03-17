@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import ActivationFirstStep from "ui/pages/acrivation/ActivationFirstStep";
-import ActivationSecondStep from "ui/pages/acrivation/ActivationSecondStep";
+import ActivationFirstStep from "ui/pages/activation/ActivationFirstStep";
+import ActivationSecondStep from "ui/pages/activation/ActivationSecondStep";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import Layout from "../pages/Layout";
