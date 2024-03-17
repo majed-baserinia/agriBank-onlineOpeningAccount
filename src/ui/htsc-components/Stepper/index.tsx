@@ -1,27 +1,12 @@
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import acticeIcon from "assets/icon/stepper/active.svg";
 import completedIcon from "assets/icon/stepper/completed.svg";
-import { useEffect, useState } from "react";
 import SvgToIcon from "ui/htsc-components/SvgToIcon";
-import { Props, step } from "./types";
+import { Props } from "./types";
 
 export default function Stepper(props: Props) {
   const { list, active } = props;
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("md"))
-  const [steps, setSteps] = useState<step[]>();
-
-  useEffect(() => {
-    const steps = list.map((item, index) => {
-      return {
-        index: index + 1,
-        title: item,
-        active: index === active,
-        completed: index < active
-      };
-    });
-    setSteps(steps);
-  }, []);
 
   const activeIconRnderer = (text: number) => (
     <div className="relative h-8 w-8">
@@ -38,39 +23,36 @@ export default function Stepper(props: Props) {
   return (
     <div className="mb-10">
       <ul className="relative flex flex-row   p-5">
-        {steps?.map((item, index) => {
+        {list?.map((item, index) => {
           return (
             <li
               className={`group flex flex-1  shrink ${
-                index + 1 == steps.length ? "basis-0" : "basis-full"
+                index + 1 == list.length ? "basis-0" : "basis-full"
               } items-center `}
             >
               <span className="group  flex min-h-7 min-w-7 flex-col items-center gap-y-3 text-center text-xs">
-                {item.completed ? (
+                {index < active ? (
                   <SvgToIcon
                     icon={completedIcon}
                     alt="completed icon"
                     height="32px"
                     width="32px"
                   />
-                ) : item.active ? (
-                  activeIconRnderer(item.index)
+                ) : index === active ? (
+                  activeIconRnderer(index + 1)
                 ) : (
                   <span className="flex size-8 flex-shrink-0  items-center justify-center rounded-full bg-gray-100 font-medium">
-                    <span className="text-base">{item.index}</span>
+                    <span className="text-base">{index + 1}</span>
                   </span>
                 )}
-                <span className="min-w-20 text-center text-sm font-medium">
-                  {item.title}
-                </span>
+                <span className="min-w-20 text-center text-sm font-medium">{item}</span>
               </span>
               <div
                 className=" mb-8 w-full flex-1 rounded  group-last:hidden"
                 style={{
-                  backgroundColor: item.completed
-                    ? theme.palette.success.main
-                    : theme.palette.grey[100],
-                  height: item.completed ? "4px" : "1px"
+                  backgroundColor:
+                    index < active ? theme.palette.success.main : theme.palette.grey[100],
+                  height: index < active ? "4px" : "1px"
                 }}
               ></div>
             </li>
