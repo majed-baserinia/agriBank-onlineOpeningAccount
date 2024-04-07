@@ -35,7 +35,8 @@ export const menuList = [
         icon={issueCheck}
         alt="issueCheck"
       />
-    )
+    ),
+    routeTo: "/cheque/Issue/firstStep"
   },
   {
     title: "confirmRecivedCheck",

@@ -4,6 +4,7 @@ import ActivationSecondStep from "ui/pages/activation/ActivationSecondStep";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import Layout from "../pages/Layout";
+import IssueCheck from "ui/pages/IssueCheck/SelectCheck";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/cheque/activation/secondStep",
         element: <ActivationSecondStep />
+      },
+      {
+        path: "/cheque/Issue/firstStep",
+        element: <IssueCheck />
       }
     ]
   }
