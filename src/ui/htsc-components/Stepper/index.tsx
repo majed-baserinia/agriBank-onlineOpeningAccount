@@ -1,7 +1,8 @@
-import { useTheme } from "@mui/material";
-import acticeIcon from "assets/icon/stepper/active.svg";
 import completedIcon from "assets/icon/stepper/completed.svg";
+import acticeIcon from "assets/icon/stepper/active.svg";
 import SvgToIcon from "ui/htsc-components/SvgToIcon";
+import { useTheme } from "@mui/material";
+
 import { Props } from "./types";
 
 export default function Stepper(props: Props) {

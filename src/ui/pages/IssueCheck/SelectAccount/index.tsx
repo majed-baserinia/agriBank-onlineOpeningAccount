@@ -1,16 +1,17 @@
 import { Divider, Grid, MenuItem, Typography, useMediaQuery, useTheme } from '@mui/material';
+import ChipWrapperForSelect from 'ui/htsc-components/ChipWrapperForSelect';
+import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
+import SelectAdapter from 'ui/htsc-components/SelectAdapter';
+import ChipAdapter from 'ui/htsc-components/chipAdapter';
+import BoxAdapter from 'ui/htsc-components/BoxAdapter';
+import Stepper from 'ui/htsc-components/Stepper';
+import CheqeCard from 'ui/components/CheqeCard';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import Menu from 'ui/components/Menu';
 import Title from 'ui/components/Title';
-import BoxAdapter from 'ui/htsc-components/BoxAdapter';
-import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import ChipWrapperForSelect from 'ui/htsc-components/ChipWrapperForSelect';
-import SelectAdapter from 'ui/htsc-components/SelectAdapter';
-import Stepper from 'ui/htsc-components/Stepper';
-import ChipAdapter from 'ui/htsc-components/chipAdapter';
+import Menu from 'ui/components/Menu';
+
 import { menuList } from '../../HomePage/menuList';
-import CheqeCard from 'ui/components/CheqeCard';
 
 export default function SelectAccount() {
 	const navigate = useNavigate();
@@ -112,8 +113,8 @@ export default function SelectAccount() {
 							</SelectAdapter>
 						</Grid>
 						<Divider />
-
-							<CheqeCard/>
+						<Typography>2. از دسته چک مورد نطر خود یک برگ انتخاب کنید.</Typography>
+						{/* <CheqeCard /> */}
 						<Grid container>
 							<ButtonAdapter
 								variant="contained"

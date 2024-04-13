@@ -1,4 +1,5 @@
 import { Paper } from "@mui/material";
+
 import { Props } from "./type";
 
 export default function BoxAdapter(props: Props) {

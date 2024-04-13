@@ -1,6 +1,7 @@
+import { Breadcrumbs, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { Breadcrumbs, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
+
 import { Props } from "./type";
 
 export default function BreadcrumbsAdapter(props: Props) {

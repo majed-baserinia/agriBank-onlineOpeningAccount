@@ -1,15 +1,15 @@
 import {
-  Dialog,
+  DialogContentText,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
+  useTheme,
+  Dialog,
   Grid,
-  useTheme
 } from "@mui/material";
 import { clearAlert, useAlert } from "business/stores/AppAlertsStore";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 
 import ButtonAdapter from "../ButtonAdapter";
 import AlertIcon from "./alertIcon";

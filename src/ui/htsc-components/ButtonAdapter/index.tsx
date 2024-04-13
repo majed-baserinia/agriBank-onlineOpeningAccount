@@ -1,7 +1,8 @@
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useTheme } from "@mui/material";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material";
+
 import { ButtonAdapterProps } from "./type";
 
 export default function ButtonAdapter(props: ButtonAdapterProps) {

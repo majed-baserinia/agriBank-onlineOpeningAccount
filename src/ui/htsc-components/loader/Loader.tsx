@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import logoLoader from '../../../assets/images/logo-loader.gif';
-import MaterialThemeProvider from "../../components/MaterialThemeProvider";
+import {useState} from 'react';
+
 import useInitialSettingStore from "../../../business/stores/initial-setting-store";
+import MaterialThemeProvider from "../../components/MaterialThemeProvider";
+import logoLoader from '../../../assets/images/logo-loader.gif';
 
 export type Props = {
     showLoader:boolean;

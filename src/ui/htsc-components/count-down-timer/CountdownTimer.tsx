@@ -1,5 +1,5 @@
 import { useCountDownTimer } from "ui/htsc-components/count-down-timer/useCountDownTimer";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 export type Props = {
   timerInSeconds: number | undefined;

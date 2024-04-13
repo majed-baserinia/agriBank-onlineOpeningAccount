@@ -1,19 +1,20 @@
-import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import useSecondStepCall from "business/hooks/cheque/activation/useSecondStepCall";
 import useThirdStepCall from "business/hooks/cheque/activation/useThirdStepCall";
-import { pushAlert } from "business/stores/AppAlertsStore";
 import { useAccountChargeStore } from "business/stores/Chakad/ChakadQueryStore";
-import { useEffect, useState } from "react";
+import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import ButtonAdapter from "ui/htsc-components/ButtonAdapter";
+import { pushAlert } from "business/stores/AppAlertsStore";
+import BoxAdapter from "ui/htsc-components/BoxAdapter";
+import SvgToIcon from "ui/htsc-components/SvgToIcon";
+import Stepper from "ui/htsc-components/Stepper";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Menu from "ui/components/Menu";
+import { useEffect, useState } from "react";
 import Title from "ui/components/Title";
-import BoxAdapter from "ui/htsc-components/BoxAdapter";
-import ButtonAdapter from "ui/htsc-components/ButtonAdapter";
-import Stepper from "ui/htsc-components/Stepper";
-import SvgToIcon from "ui/htsc-components/SvgToIcon";
-import infoIcon from "../../../../assets/icon/info-circle.svg";
+import Menu from "ui/components/Menu";
+
 import sendAaginIcon from "../../../../assets/icon/refresh-alert.svg";
+import infoIcon from "../../../../assets/icon/info-circle.svg";
 import { menuList } from "../../HomePage/menuList";
 
 export default function ActivationSecondStep() {

@@ -1,7 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
-import SelectAccount from "ui/pages/IssueCheck/SelectAccount";
-import ActivationFirstStep from "ui/pages/activation/ActivationFirstStep";
 import ActivationSecondStep from "ui/pages/activation/ActivationSecondStep";
+import ActivationFirstStep from "ui/pages/activation/ActivationFirstStep";
+import SelectAccount from "ui/pages/IssueCheck/SelectAccount";
+import { createBrowserRouter } from "react-router-dom";
+import CheckInfo from "ui/pages/IssueCheck/CheckInfo";
+
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import Layout from "../pages/Layout";
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/cheque/Issue/SelectAccount",
         element: <SelectAccount />
+      },
+      {
+        path: "/cheque/Issue/CheckInfo",
+        element: <CheckInfo />
       }
     ]
   }

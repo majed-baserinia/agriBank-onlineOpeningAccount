@@ -1,15 +1,16 @@
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {
-  FormControl,
-  Grid,
-  InputAdornment,
-  InputLabel,
-  Select,
   SelectChangeEvent,
+  InputAdornment,
   useMediaQuery,
-  useTheme
+  FormControl,
+  InputLabel,
+  useTheme,
+  Select,
+  Grid,
 } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ReactElement, ReactNode, SyntheticEvent, useState } from "react";
+
 import { Props } from "./type";
 
 export default function SelectAdapter(props: Props) {
