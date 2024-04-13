@@ -26,6 +26,7 @@ export default function Stepper(props: Props) {
         {list?.map((item, index) => {
           return (
             <li
+              key={index}
               className={`group flex flex-1  shrink ${
                 index + 1 == list.length ? "basis-0" : "basis-full"
               } items-center `}

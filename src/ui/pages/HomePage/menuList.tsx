@@ -36,7 +36,7 @@ export const menuList = [
         alt="issueCheck"
       />
     ),
-    routeTo: "/cheque/Issue/firstStep"
+    routeTo: "/cheque/Issue/SelectAccount"
   },
   {
     title: "confirmRecivedCheck",

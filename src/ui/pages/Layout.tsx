@@ -1,6 +1,6 @@
 import useInitPostMessage from "business/hooks/postMessage/useInitPostMessage";
 import { changeLanguage } from "i18next";
-import { memo, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import MaterialThemeProvider from "ui/components/MaterialThemeProvider";
@@ -37,18 +37,18 @@ const Layout = () => {
       const language = urlParams.get("Lang");
       const themeName = urlParams.get("Theme");
 
-      //get the theme and set the language 
+      //get the theme and set the language
       const theme = await themeInitializer(themeName, apiConf?.ThemeRoute);
       changeLanguage(language ? language : "fa-IR");
 
-      //set the settings {theme, language, idToken, refreshToken} to store 
+      //set the settings {theme, language, idToken, refreshToken} to store
       const initials = initData ? initData : {};
       setSettings({
         ...initials,
         theme: theme,
-        language: language
+        language: language ? language : "fa-IR"
       } as InitialSetting);
-      
+
       seConfigReady(true);
     } catch (err) {
       //TODO: add a convinent alert for this
@@ -69,7 +69,7 @@ const Layout = () => {
           <div>
             <AppAlerts />
             {/* <div className="content-star xl:w-2/4 m-auto grid grid-rows-1 gap-y-4 p-7 md:w-3/4 lg:w-3/5"> */}
-              <Outlet />
+            <Outlet />
             {/* </div> */}
           </div>
         ) : (

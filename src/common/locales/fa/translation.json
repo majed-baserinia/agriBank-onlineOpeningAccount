@@ -25,7 +25,17 @@
   "IUnderstand": "متوجه شدم",
   "info": "اطلاعیه",
   "error": "خطا",
-  "warning":"هشدار",
+  "warning": "هشدار",
   "success": "موفق",
-  "sendAgainAlertSuccessText": "درخواست امضا برای شما ارسال شد. جهت تایید و امضا به نرم افزار هامون مراجعه کنید."
+  "sendAgainAlertSuccessText": "درخواست امضا برای شما ارسال شد. جهت تایید و امضا به نرم افزار هامون مراجعه کنید.",
+  "accountsList": "لیست حساب ها",
+  "personalAccount": "حساب حقیقی",
+  "corporateAccount": "حساب حقوقی",
+  "selectCheck": "انتخاب چک",
+  "checkInfo": "اطلاعات چک",
+  "recivers": "دریافت کنندگان",
+  "issueSigniture": "ثبت امضا",
+  "selectSignitureGroup": "انتخاب گروه امضا",
+  "selectAaccountText": "حساب مورد نظر خود را از لیست زیر انتخاب کنید",
+  "selectCheckSheet": "انتخاب برگه چک"
 }

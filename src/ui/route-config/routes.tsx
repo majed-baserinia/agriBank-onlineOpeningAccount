@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
+import SelectAccount from "ui/pages/IssueCheck/SelectAccount";
 import ActivationFirstStep from "ui/pages/activation/ActivationFirstStep";
 import ActivationSecondStep from "ui/pages/activation/ActivationSecondStep";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import Layout from "../pages/Layout";
-import IssueCheck from "ui/pages/IssueCheck/SelectCheck";
 
 const router = createBrowserRouter([
   {
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
         element: <ActivationSecondStep />
       },
       {
-        path: "/cheque/Issue/firstStep",
-        element: <IssueCheck />
+        path: "/cheque/Issue/SelectAccount",
+        element: <SelectAccount />
       }
     ]
   }

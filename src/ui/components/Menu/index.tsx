@@ -1,14 +1,14 @@
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Divider, Grid, useMediaQuery, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Props } from "./type";
-import { useTranslation } from "react-i18next";
 
 export default function Menu(props: Props) {
   const { list } = props;
   const theme = useTheme();
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -16,7 +16,7 @@ export default function Menu(props: Props) {
     <>
       {list?.map((item, index) => {
         return (
-          <>
+          <div key={index}>
             <Grid
               container
               justifyContent={"space-between"}
@@ -48,7 +48,7 @@ export default function Menu(props: Props) {
                 <Divider sx={{ width: "calc(100% - 32px)", margin: "auto" }} />
               )
             ) : null}
-          </>
+          </div>
         );
       })}
     </>

@@ -9,19 +9,48 @@ import {
   useMediaQuery,
   useTheme
 } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { ReactElement, ReactNode, SyntheticEvent, useState } from "react";
 import { Props } from "./type";
 
 export default function SelectAdapter(props: Props) {
-  const { onChange, label, error, disabled, icon, children,defaultValue, muiSelectProps } = props;
+  const {
+    onChange,
+    label,
+    error,
+    disabled,
+    icon,
+    children,
+    defaultValue = "",
+    muiSelectProps
+  } = props;
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
   const [selectedValue, setSelectedValue] = useState(defaultValue);
   const [open, setOpen] = useState(false);
 
   const handleChange = (e: SelectChangeEvent<unknown>, child: ReactNode) => {
-    setSelectedValue(e.target.value as string);
-    onChange(e.target.value as string);
+    if ((child as ReactElement).type == "div") {
+      setOpen(true);
+    } else {
+      console.log(e);
+      console.log(child);
+
+      setSelectedValue(e.target.value as string);
+      onChange(e.target.value as string);
+    }
+  };
+
+  const handleClickedItem = (e: SyntheticEvent<Element, Event>) => {
+    
+    //check if the user is clicking on buttons  inside the select
+    const clickedItemTagName = e.currentTarget.tagName.toLowerCase();
+    const clickedItemClassName = e.currentTarget.className;
+
+    if (clickedItemTagName == "div" && clickedItemClassName === "clickedNotClose") {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
   };
 
   const gridStyle = {
@@ -50,6 +79,7 @@ export default function SelectAdapter(props: Props) {
       boxShadow: "none"
     }
   };
+
   return (
     <Grid
       container
@@ -58,20 +88,24 @@ export default function SelectAdapter(props: Props) {
       sx={open && matches ? { ...gridStyle } : null}
     >
       <FormControl fullWidth>
-        <InputLabel>{label}</InputLabel>
+        <InputLabel id="label">{label}</InputLabel>
         <Select
+          labelId="label"
           {...muiSelectProps}
           disabled={disabled}
           dir={theme.direction}
-          onClose={() => setOpen(false)}
+          open={open}
           onOpen={() => setOpen(true)}
+          onClose={(e) => handleClickedItem(e)}
           value={selectedValue}
           label={label}
           onChange={handleChange}
           sx={{ "& .MuiSvgIcon-root": { color: theme.palette.grey[400] } }}
           IconComponent={KeyboardArrowDownIcon}
           error={error}
-          startAdornment={<InputAdornment position="start">{icon}</InputAdornment>}
+          startAdornment={
+            icon ? <InputAdornment position="start">{icon}</InputAdornment> : undefined
+          }
           MenuProps={{
             dir: theme.direction,
             sx: matches ? menuStyle : null
