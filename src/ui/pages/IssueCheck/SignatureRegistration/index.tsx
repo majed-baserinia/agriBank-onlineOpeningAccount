@@ -13,10 +13,10 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 
-import SelectSigniture from 'ui/components/SelectSigniture';
+import SelectSignature from 'ui/components/SelectSignature';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
-import infoIcon from '../../../../assets/icon/info-circle.svg';
-import sendAaginIcon from '../../../../assets/icon/refresh-alert.svg';
+import infoIcon from 'assets/icon/info-circle.svg';
+import sendAaginIcon from 'assets/icon/refresh-alert.svg';
 import { menuList } from '../../HomePage/menuList';
 
 export default function SignatureRegistration() {
@@ -113,7 +113,7 @@ export default function SignatureRegistration() {
 										t('selectCheck'),
 										t('checkInfo'),
 										t('recivers'),
-										t('issueSigniture'),
+										t('issueSignature'),
 										t('end')
 									]}
 									active={3}
@@ -176,7 +176,7 @@ export default function SignatureRegistration() {
 				</Grid>
 			)}
 			<ModalOrBottomSheet breackpoint="sm" snapPoints={[400, 0]} >
-				<SelectSigniture />
+				<SelectSignature />
 			</ModalOrBottomSheet>
 		</Grid>
 	);

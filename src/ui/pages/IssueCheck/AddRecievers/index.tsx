@@ -55,7 +55,7 @@ export default function AddRecievers() {
 											t('selectCheck'),
 											t('checkInfo'),
 											t('recivers'),
-											t('issueSigniture'),
+											t('issueSignature'),
 											t('end')
 										]}
 										active={2}

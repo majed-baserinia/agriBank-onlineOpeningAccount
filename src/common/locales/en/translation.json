@@ -34,8 +34,8 @@
 	"selectCheck": "Select Check",
 	"checkInfo": "Check Info",
 	"recivers": "Recivers",
-	"issueSigniture": "Issue Signiture",
-	"selectSignitureGroup": "Select Signature Group",
+	"issueSignature": "Issue Signature",
+	"selectSignatureGroup": "Select Signature Group",
 	"selectAaccountText": "Select Your Intended Account",
 	"selectCheckSheet": "Select Check Sheet",
 	"checkbookNumber": "Checkbook Number",
@@ -57,11 +57,11 @@
 	"companyLegalID": "Legal ID of the company",
 	"companyName": "Company Name",
 	"IssuerSignature": "Issuer's Signature",
-	"selectSignitureText": "To sign a check, you can act as a single signatory. Otherwise, select the signatories.",
+	"selectSignatureText": "To sign a check, you can act as a single signatory. Otherwise, select the signatories.",
 	"mySignature": "My signature",
 	"mySignatureSubText": "You can sign it as a sole signatory",
-	"selectSignatureGroup": "Select signature group",
 	"selectSignatureGroupSubText": "Select a group or groups of signers",
 	"checkSheet" : "Check sheet",
-	"checkbook" : "Checkbook"
+	"checkbook" : "Checkbook",
+	"signatureGroupText" : "Select a single signature or a group of signatures."
 }

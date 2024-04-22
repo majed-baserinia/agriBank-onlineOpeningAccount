@@ -4,10 +4,11 @@ import infoIcon from 'assets/icon/info-circle.svg';
 import { useTranslation } from 'react-i18next';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 
-export default function SelectSigniture() {
+export default function SelectSignature() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const isMatched = useMediaQuery(theme.breakpoints.down('sm'));
+	
 	return (
 		<Grid
 			sx={{ padding: isMatched ? '16px' : '40px' }}
@@ -30,7 +31,7 @@ export default function SelectSigniture() {
 					/>
 					<Typography>{t('IssuerSignature')}</Typography>
 				</Grid>
-				<Typography variant="body2">{t('selectSignitureText')}</Typography>
+				<Typography variant="body2">{t('selectSignatureText')}</Typography>
 			</Grid>
 			<Grid>
 				<Grid

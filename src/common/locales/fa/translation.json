@@ -34,8 +34,8 @@
 	"selectCheck": "انتخاب چک",
 	"checkInfo": "اطلاعات چک",
 	"recivers": "دریافت کنندگان",
-	"issueSigniture": "ثبت امضا",
-	"selectSignitureGroup": "انتخاب گروه امضا",
+	"issueSignature": "ثبت امضا",
+	"selectSignatureGroup": "انتخاب گروه امضا",
 	"selectAaccountText": "حساب مورد نظر خود را از لیست زیر انتخاب کنید",
 	"selectCheckSheet": "انتخاب برگه چک",
 	"checkbookNumber": "شمازه دسته چک",
@@ -57,11 +57,11 @@
 	"companyLegalID": "شناسه حقوقی شرکت",
 	"companyName": "نام شرکت",
 	"IssuerSignature": "امضا صادر کننده",
-	"selectSignitureText":"برای امضای چک، می توانید به عنوان فرد تک امضا اقدام کنید. در غیر این صورت، امضا کنندگان را انتخاب کنید.",
+	"selectSignatureText":"برای امضای چک، می توانید به عنوان فرد تک امضا اقدام کنید. در غیر این صورت، امضا کنندگان را انتخاب کنید.",
 	"mySignature": "امضای خودم",
 	"mySignatureSubText": "به عنوان تک امضاکننده می توانید آن را امضا کنید",
-	"selectSignatureGroup": "انتخاب گروه امضا",
 	"selectSignatureGroupSubText": "گروه یا گروه‌هایی از امضا کنندگان را انتخاب کنید",
 	"checkSheet": "برگه چک",
-	"checkbook": "دسته چک"
+	"checkbook": "دسته چک",
+	"signatureGroupText": "تک امضا یا گروه امضا مدنظر را انتخاب کنید. "
 }
