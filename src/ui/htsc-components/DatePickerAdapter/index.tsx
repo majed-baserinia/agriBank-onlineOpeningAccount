@@ -12,7 +12,7 @@ type Props = {
 	placeHolder?: string;
 	className?: string;
 	error?: string;
-	helperText: string;
+	helperText?: string;
 };
 
 export default function DatePickerAdapter(props: Props) {

@@ -55,5 +55,13 @@
 	"first&lastName": "نام و نام خانوادگی",
 	"optionalShahab": "شماره شهاب (اختیاری)",
 	"companyLegalID": "شناسه حقوقی شرکت",
-	"companyName": "نام شرکت"
+	"companyName": "نام شرکت",
+	"IssuerSignature": "امضا صادر کننده",
+	"selectSignitureText":"برای امضای چک، می توانید به عنوان فرد تک امضا اقدام کنید. در غیر این صورت، امضا کنندگان را انتخاب کنید.",
+	"mySignature": "امضای خودم",
+	"mySignatureSubText": "به عنوان تک امضاکننده می توانید آن را امضا کنید",
+	"selectSignatureGroup": "انتخاب گروه امضا",
+	"selectSignatureGroupSubText": "گروه یا گروه‌هایی از امضا کنندگان را انتخاب کنید",
+	"checkSheet": "برگه چک",
+	"checkbook": "دسته چک"
 }

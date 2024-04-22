@@ -55,5 +55,13 @@
 	"first&lastName": "First and Last Name",
 	"optionalShahab": "Shahab Number (optional)",
 	"companyLegalID": "Legal ID of the company",
-	"companyName": "Company Name"
+	"companyName": "Company Name",
+	"IssuerSignature": "Issuer's Signature",
+	"selectSignitureText": "To sign a check, you can act as a single signatory. Otherwise, select the signatories.",
+	"mySignature": "My signature",
+	"mySignatureSubText": "You can sign it as a sole signatory",
+	"selectSignatureGroup": "Select signature group",
+	"selectSignatureGroupSubText": "Select a group or groups of signers",
+	"checkSheet" : "Check sheet",
+	"checkbook" : "Checkbook"
 }

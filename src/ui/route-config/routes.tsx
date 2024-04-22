@@ -8,6 +8,7 @@ import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import Layout from "../pages/Layout";
 import AddRecievers from "ui/pages/IssueCheck/AddRecievers";
+import SignatureRegistration from "ui/pages/IssueCheck/SignatureRegistration";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/cheque/Issue/addRecievers",
         element: <AddRecievers />
+      },
+      {
+        path: "/cheque/Issue/SignatureRegistration",
+        element: <SignatureRegistration />
       }
     ]
   }

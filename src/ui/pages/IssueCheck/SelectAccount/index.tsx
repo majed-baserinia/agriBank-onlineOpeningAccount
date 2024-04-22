@@ -113,7 +113,7 @@ export default function SelectAccount() {
 								>
 									<SelectAdapter
 										onChange={(a) => {}}
-										label={t('برگه چک')}
+										label={t('checkSheet')}
 									>
 										<ChipWrapperForSelect>
 											<ChipAdapter
@@ -156,7 +156,7 @@ export default function SelectAccount() {
 								>
 									<SelectAdapter
 										onChange={(a) => {}}
-										label={t('دسته')}
+										label={t('checkbook')}
 									>
 										<MenuItemAdapter
 											value={'1'}

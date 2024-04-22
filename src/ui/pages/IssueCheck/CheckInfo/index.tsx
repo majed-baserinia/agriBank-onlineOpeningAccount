@@ -74,7 +74,7 @@ export default function CheckInfo() {
 								type="money"
 							/>
                             <TextareaAdapter/> */}
-							{/* <DatePickerAdapter/> */}
+							<DatePickerAdapter />
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
