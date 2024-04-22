@@ -1,9 +1,9 @@
-import { TextFieldProps, Theme } from "@mui/material";
+import { SxProps, TextFieldProps, Theme } from "@mui/material";
 
 export type InputAdapterProps = {
   placeholder?: string;
   disabled?: boolean;
-  sx?: object;
+  sx?: SxProps;
   isRequired?: boolean;
   label: string;
   icon?: React.ReactNode;

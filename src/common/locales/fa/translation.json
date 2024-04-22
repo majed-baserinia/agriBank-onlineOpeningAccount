@@ -44,6 +44,16 @@
 	"issueDate": "تاریخ صدور",
 	"expireDate": "تاریخ انقضا",
 	"infoCheckText": "اطلاعات چک مد نظر را وارد کنید.",
-  "checkAmount": "مبلغ چک",
-  "description": "شرح"
+	"checkAmount": "مبلغ چک",
+	"description": "شرح",
+	"add": "افزودن",
+	"personal": "حقیقی",
+	"corporate": "حقوقی",
+	"inquiry": "استعلام",
+	"addRecieverDataText": "اطلاعات دریافت کننده چک را وارد کنید.",
+	"personalIDOrUniversalID": "کد ملی یا شناسه فراگیر",
+	"first&lastName": "نام و نام خانوادگی",
+	"optionalShahab": "شماره شهاب (اختیاری)",
+	"companyLegalID": "شناسه حقوقی شرکت",
+	"companyName": "نام شرکت"
 }

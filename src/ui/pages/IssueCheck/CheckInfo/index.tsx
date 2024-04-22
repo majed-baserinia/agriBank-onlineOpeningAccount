@@ -10,6 +10,7 @@ import Title from 'ui/components/Title';
 import Menu from 'ui/components/Menu';
 
 import { menuList } from '../../HomePage/menuList';
+import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
 
 export default function CheckInfo() {
 	const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function CheckInfo() {
 				xs={12}
 				md={8}
 			>
-				<BoxAdapter fullWidth={matches}>
+				<BoxAdapter fullWidth={matches} >
 					<Grid
 						minHeight={matches ? 'calc(100vh - 64px)' : 'calc(100vh - 192px)'}
 						container
@@ -42,6 +43,7 @@ export default function CheckInfo() {
 							container
 							direction={'column'}
 							gap={'16px'}
+							
 						>
 							<Title>{t('activationElCheck')}</Title>
 							{!matches ? (
@@ -72,6 +74,7 @@ export default function CheckInfo() {
 								type="money"
 							/>
                             <TextareaAdapter/> */}
+							{/* <DatePickerAdapter/> */}
 						</Grid>
 						<Grid container>
 							<ButtonAdapter

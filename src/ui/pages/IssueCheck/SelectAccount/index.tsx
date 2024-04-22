@@ -1,16 +1,16 @@
-import { Divider, Grid, MenuItem, Typography, useMediaQuery, useTheme } from '@mui/material';
-import ChipWrapperForSelect from 'ui/htsc-components/ChipWrapperForSelect';
-import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import SelectAdapter from 'ui/htsc-components/SelectAdapter';
-import ChipAdapter from 'ui/htsc-components/chipAdapter';
-import BoxAdapter from 'ui/htsc-components/BoxAdapter';
-import Stepper from 'ui/htsc-components/Stepper';
-import CheqeCard from 'ui/components/CheqeCard';
+import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import Title from 'ui/components/Title';
 import Menu from 'ui/components/Menu';
+import Title from 'ui/components/Title';
+import BoxAdapter from 'ui/htsc-components/BoxAdapter';
+import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
+import SelectAdapter from 'ui/htsc-components/SelectAdapter';
+import Stepper from 'ui/htsc-components/Stepper';
 
+import ChipWrapperForSelect from 'ui/htsc-components/ChipWrapperForSelect';
+import MenuItemAdapter from 'ui/htsc-components/MenuItemAdapter';
+import ChipAdapter from 'ui/htsc-components/chipAdapter';
 import { menuList } from '../../HomePage/menuList';
 
 export default function SelectAccount() {
@@ -60,61 +60,121 @@ export default function SelectAccount() {
 							>
 								{t('selectAaccountText')}
 							</Typography>
-							<SelectAdapter
-								onChange={(a) => {}}
-								label={t('accountsList')}
+							<Grid
+								container
+								spacing={'24px'}
+								direction={'row'}
 							>
-								<ChipWrapperForSelect>
-									<ChipAdapter
-										label={t('personalAccount')}
-										onClick={(e) => {}}
-									/>
-									<ChipAdapter
-										label={t('corporateAccount')}
-										onClick={(e) => {}}
-										checked
-									/>
-								</ChipWrapperForSelect>
-
-								<MenuItem>
-									{/* <Grid
-                  container
-                  justifyContent={"center"}
-                  alignItems="Center"
-                  gap={"5px"}
-                  wrap="nowrap"
-                  >
-                  <Grid sx={{ height: "30px", width: "30px" }}>
-                  <img
-                  style={{ width: "100%", height: "100%" }}
-                  src={option.iconImg}
-                  alt={option.nameIcon}
-                  />
-                  </Grid>
-                  <Grid
-                  container
-                  direction={"column"}
-                  alignItems="flex-start"
-                  gap={"5px"}
-                  >
-                  <span
-                  style={{
-                    fontSize: "10px",
-                    color: theme.palette.grey[200]
-                  }}
-                  >
-                  {option.label + " (" + option.nameIcon + ")"}
-                  </span>
-                  <span style={{ fontSize: "14px" }}>{formatToCart(option.value)}</span>
-                  </Grid>
-                </Grid> */}
-									<Divider />
-								</MenuItem>
-							</SelectAdapter>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+									sx={{ order: { xs: 1, sm: 1, md: 1, lg: 1, xl: 1 } }}
+								>
+									<SelectAdapter
+										onChange={(a) => {}}
+										label={t('accountsList')}
+									>
+										<MenuItemAdapter type="default">
+											{/* <span
+												style={{
+													fontSize: '10px',
+													color: theme.palette.grey[200]
+												}}
+											>
+												{option.label + ' (' + option.nameIcon + ')'}
+											</span>
+											<span style={{ fontSize: '14px' }}>{formatToCart(option.value)}</span> */}
+										</MenuItemAdapter>
+										<MenuItemAdapter type="default">
+											{/* <span
+												style={{
+													fontSize: '10px',
+													color: theme.palette.grey[200]
+												}}
+											>
+												{option.label + ' (' + option.nameIcon + ')'}
+											</span>
+											<span style={{ fontSize: '14px' }}>{formatToCart(option.value)}</span> */}
+										</MenuItemAdapter>
+									</SelectAdapter>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+									sx={{ order: { xs: 3, sm: 3, md: 3, lg: 3, xl: 3 } }}
+								>
+									<SelectAdapter
+										onChange={(a) => {}}
+										label={t('برگه چک')}
+									>
+										<ChipWrapperForSelect>
+											<ChipAdapter
+												label={t('personalAccount')}
+												onClick={(e) => {}}
+											/>
+											<ChipAdapter
+												label={t('corporateAccount')}
+												onClick={(e) => {}}
+												checked
+											/>
+											<ChipAdapter
+												label={t('corporateAccount')}
+												onClick={(e) => {}}
+												checked
+											/>
+										</ChipWrapperForSelect>
+										<MenuItemAdapter
+											value={'1'}
+											title="1"
+											subtitle="11"
+											type="bordred"
+										/>
+										<MenuItemAdapter
+											value={'2'}
+											title="12"
+											subtitle="12"
+											type="bordred"
+										/>
+									</SelectAdapter>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+									sx={{ order: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 } }}
+								>
+									<SelectAdapter
+										onChange={(a) => {}}
+										label={t('دسته')}
+									>
+										<MenuItemAdapter
+											value={'1'}
+											title="1"
+											subtitle="11"
+											type="bordred"
+										/>
+										<MenuItemAdapter
+											value={'2'}
+											title="12"
+											subtitle="12"
+											type="bordred"
+										/>
+									</SelectAdapter>
+								</Grid>
+							</Grid>
 						</Grid>
-						<Divider />
-						<Typography>2. از دسته چک مورد نطر خود یک برگ انتخاب کنید.</Typography>
-						{/* <CheqeCard /> */}
+
 						<Grid container>
 							<ButtonAdapter
 								variant="contained"

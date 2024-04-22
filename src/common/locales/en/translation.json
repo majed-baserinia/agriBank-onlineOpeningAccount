@@ -44,6 +44,16 @@
 	"issueDate": "Issue Date",
 	"expireDate": "Expire Date",
 	"infoCheckText": "Input The Informations For The Check",
-  "checkAmount": "Check Amount",
-  "description": "Description"
+	"checkAmount": "Check Amount",
+	"description": "Description",
+	"add": "َAdd",
+	"personal": "Personal",
+	"corporate": "Corporate",
+	"inquiry": "Inquiry",
+	"addRecieverDataText": "Enter the check recipient information.",
+	"personalIDOrUniversalID": "Personal ID or UniversalID",
+	"first&lastName": "First and Last Name",
+	"optionalShahab": "Shahab Number (optional)",
+	"companyLegalID": "Legal ID of the company",
+	"companyName": "Company Name"
 }

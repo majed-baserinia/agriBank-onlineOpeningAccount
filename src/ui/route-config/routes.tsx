@@ -7,6 +7,7 @@ import CheckInfo from "ui/pages/IssueCheck/CheckInfo";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import Layout from "../pages/Layout";
+import AddRecievers from "ui/pages/IssueCheck/AddRecievers";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/cheque/Issue/CheckInfo",
         element: <CheckInfo />
+      },
+      {
+        path: "/cheque/Issue/addRecievers",
+        element: <AddRecievers />
       }
     ]
   }
