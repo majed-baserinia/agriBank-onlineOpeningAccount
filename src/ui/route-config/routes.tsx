@@ -10,6 +10,7 @@ import Layout from "../pages/Layout";
 import AddRecievers from "ui/pages/IssueCheck/AddRecievers";
 import SignatureRegistration from "ui/pages/IssueCheck/SignatureRegistration";
 import SignatureGroup from "ui/pages/IssueCheck/SignatureGroup";
+import OverView from "ui/pages/IssueCheck/OverView";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/cheque/Issue/SignatureGroup",
         element: <SignatureGroup />
+      },
+      {
+        path: "/cheque/Issue/OverView",
+        element: <OverView />
       }
     ]
   }

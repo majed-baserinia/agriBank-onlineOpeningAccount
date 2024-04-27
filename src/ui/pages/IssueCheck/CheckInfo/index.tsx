@@ -1,16 +1,17 @@
-import { Divider, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
-import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
-import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import InputAdapter from 'ui/htsc-components/InputAdapter';
-import BoxAdapter from 'ui/htsc-components/BoxAdapter';
-import Stepper from 'ui/htsc-components/Stepper';
+import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import Title from 'ui/components/Title';
 import Menu from 'ui/components/Menu';
+import Title from 'ui/components/Title';
+import BoxAdapter from 'ui/htsc-components/BoxAdapter';
+import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
+import InputAdapter from 'ui/htsc-components/InputAdapter';
+import Stepper from 'ui/htsc-components/Stepper';
+import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 
-import { menuList } from '../../HomePage/menuList';
+import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
+import { menuList } from '../../HomePage/menuList';
 
 export default function CheckInfo() {
 	const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function CheckInfo() {
 				xs={12}
 				md={8}
 			>
-				<BoxAdapter fullWidth={matches} >
+				<BoxAdapter fullWidth={matches}>
 					<Grid
 						minHeight={matches ? 'calc(100vh - 64px)' : 'calc(100vh - 192px)'}
 						container
@@ -43,7 +44,6 @@ export default function CheckInfo() {
 							container
 							direction={'column'}
 							gap={'16px'}
-							
 						>
 							<Title>{t('activationElCheck')}</Title>
 							{!matches ? (
@@ -60,21 +60,60 @@ export default function CheckInfo() {
 								/>
 							) : null}
 							<Typography variant="body1">{t('infoCheckText')}</Typography>
-							<InputAdapter
-								isRequired
-								label={t('checkAmount')}
-								onChange={() => {}}
-								type="money"
-							/>
-                            <TextareaAdapter onChange={() => {}} isRequired label={t('description')}/>
-							{/* <InputAdapter
-								isRequired
-								label={t('date')}
-								onChange={() => {}}
-								type="money"
-							/>
-                            <TextareaAdapter/> */}
-							<DatePickerAdapter />
+							<Grid
+								container
+								spacing={'16px'}
+							>
+								<Grid
+									item
+									xs={12}
+									sm={6}
+								>
+									<InputAdapter
+										isRequired
+										label={t('checkAmount')}
+										onChange={() => {}}
+										type="money"
+									/>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+									sm={6}
+								>
+									<DatePickerAdapter
+										placeHolder={t('date')}
+										onChange={(date) => console.log(date)}
+									/>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+									sm={6}
+								>
+									<BottomSheetSelect
+										isRequired
+										label={t('reason')}
+										list={[
+											{ value: '1', name: '0' },
+											{ value: '2', name: '1' }
+										]}
+										onChange={(item) => {
+											console.log(item);
+										}}
+									/>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+								>
+									<TextareaAdapter
+										onChange={() => {}}
+										isRequired
+										label={t('description')}
+									/>
+								</Grid>
+							</Grid>
 						</Grid>
 						<Grid container>
 							<ButtonAdapter

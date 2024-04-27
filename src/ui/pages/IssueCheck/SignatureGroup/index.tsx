@@ -1,4 +1,4 @@
-import { Avatar, Grid, ListItem, ListItemAvatar, ListItemText, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Grid, RadioGroup, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Menu from 'ui/components/Menu';
@@ -8,69 +8,21 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
 import { menuList } from '../../HomePage/menuList';
-import {
-	DragDropContext,
-	Droppable,
-	OnDragEndResponder,
-	DropResult,
-	Draggable
-  } from 'react-beautiful-dnd';
 
-
-
-
-
+import infoIcon from 'assets/icon/info-circle.svg';
 import { useState } from 'react';
-
-export type Item = {
-	id: string;
-	text: string;
-
-  };
-
-  
-export type DraggableListProps = {
-	items: Item[];
-	onDragEnd: OnDragEndResponder;
-  };
-
-
-  const reorder = <T,>(
-	list: T[],
-	startIndex: number,
-	endIndex: number
-  ): T[] => {
-	const result = Array.from(list);
-	const [removed] = result.splice(startIndex, 1);
-	result.splice(endIndex, 0, removed);
-  
-	return result;
-  };
+import DraggableList from 'ui/components/DraggableList';
+import RadioButtonOpenable from 'ui/components/RadioButtonOpenable';
+import ModalOrPage from 'ui/htsc-components/ModalOrPage';
+import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 
 export default function SignatureGroup() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-
-
-	const [items, setItems] = useState([
-		{ id: '1', text: 'Item 1' },
-		{ id: '2', text: 'Item 2' },
-		{ id: '3', text: 'Item 3' },
-		{ id: '4', text: 'Item 4' },
-	  ]);
-
-	const onDragEnd = ({ destination, source }: DropResult) => {
-	  // dropped outside the list
-	  if (!destination) return;
-  
-	  const newItems = reorder(items, source.index, destination.index);
-  
-	  setItems(newItems);
-	};
-
-	  
+	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+	const [value, setValue] = useState('q');
 
 	return (
 		<Grid
@@ -93,7 +45,11 @@ export default function SignatureGroup() {
 						justifyContent={'space-between'}
 						wrap="nowrap"
 					>
-						<Grid>
+						<Grid
+							container
+							direction={'column'}
+							gap={'16px'}
+						>
 							<Title>{t('activationElCheck')}</Title>
 							{!matches ? (
 								<Stepper
@@ -119,35 +75,41 @@ export default function SignatureGroup() {
 								spacing={'24px'}
 								direction={'row'}
 							>
-<DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppable-list">
-        {provided => (
-          <div ref={provided.innerRef} {...provided.droppableProps}>
-            {items.map((item, index) => (
-              <Draggable draggableId={item.id.toString()} index={index} key={item.id}>
- {(provided, snapshot) => (
-        <ListItem
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          
-        >
-          <ListItemAvatar>
-            <Avatar>
-            
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={item.text} secondary={item.text} />
-        </ListItem>
-      )}
-			  </Draggable>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
-
+								<RadioGroup
+									value={value}
+									onChange={(e) => {
+										setValue(e.target.value);
+									}}
+									sx={{ width: '100%', marginLeft: '20px' }}
+								>
+									<RadioButtonOpenable
+										label="asdv"
+										groupParts={['asdf', 'adsfa', 'asdfga']}
+										value={'q'}
+										checked={value === 'q'}
+										onChange={(e) => {
+											setValue(e.target.value);
+										}}
+									/>
+									<RadioButtonOpenable
+										label="asdv"
+										groupParts={['asdf', 'adsfa', 'asdfga']}
+										value={'w'}
+										checked={value === 'w'}
+										onChange={(e) => {
+											setValue(e.target.value);
+										}}
+									/>
+									<RadioButtonOpenable
+										label="asdv"
+										groupParts={['asdf', 'adsfa', 'asdfga']}
+										value={'e'}
+										checked={value === 'e'}
+										onChange={(e) => {
+											setValue(e.target.value);
+										}}
+									/>
+								</RadioGroup>
 							</Grid>
 						</Grid>
 
@@ -177,16 +139,48 @@ export default function SignatureGroup() {
 					</BoxAdapter>
 				</Grid>
 			)}
+			<ModalOrPage breackpoint="sm">
+				<Grid
+					container
+					direction={'column'}
+					gap={'32px'}
+					justifyContent={'space-between'}
+					sx={{ borderRadius: '24px', padding: matchesSM ? '16px ' : '40px', height: '100%' }}
+				>
+					<Grid>
+						<Grid
+							container
+							flexWrap={'nowrap'}
+							gap={'8px'}
+						>
+							<SvgToIcon
+								icon={infoIcon}
+								alt="info"
+							/>
+							<Typography textOverflow={'ellipsis'}>{t('draggableListText')}</Typography>
+						</Grid>
+						<DraggableList
+							list={[
+								{ id: '1', text: 'Item 1' },
+								{ id: '2', text: 'Item 2' },
+								{ id: '3', text: 'Item 3' },
+								{ id: '4', text: 'Item 4' }
+							]}
+							getData={(a) => {
+								console.log(a);
+							}}
+						/>
+					</Grid>
+					<ButtonAdapter
+						variant="contained"
+						size="medium"
+						muiButtonProps={{ sx: { width: '100%' } }}
+						onClick={() => console.log()}
+					>
+						{t('register')}
+					</ButtonAdapter>
+				</Grid>
+			</ModalOrPage>
 		</Grid>
 	);
 }
-
-
-
-
-
-
-
-
-
-
