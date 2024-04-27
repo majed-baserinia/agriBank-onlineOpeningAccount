@@ -1,14 +1,15 @@
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import { Grid, ListItem, ListItemText, Typography } from '@mui/material';
 import { useState } from 'react';
-import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
-import { Props } from './type';
+import { DragDropContext, Draggable, DropResult } from 'react-beautiful-dnd';
 import { useTranslation } from 'react-i18next';
+import { StrictModeDroppable } from './StrictModeDroppable';
+import { Props } from './type';
 
 export default function DraggableList(props: Props) {
 	const { list, getData } = props;
 	const [items, setItems] = useState(list);
-	const {  t, i18n } = useTranslation()
+	const { t, i18n } = useTranslation();
 
 	const onDragEnd = ({ destination, source }: DropResult) => {
 		// dropped outside the list
@@ -45,7 +46,7 @@ export default function DraggableList(props: Props) {
 
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
-			<Droppable droppableId="droppable-list">
+			<StrictModeDroppable droppableId="droppable-list">
 				{(provided) => (
 					<div
 						ref={provided.innerRef}
@@ -68,8 +69,8 @@ export default function DraggableList(props: Props) {
 												<Grid
 													container
 													direction={i18n.dir() === 'rtl' ? 'row' : 'row-reverse'}
-                                                    justifyContent={"start"}
-                                                    gap={'6px'}
+													justifyContent={'start'}
+													gap={'6px'}
 												>
 													<span>{t('signatory')} </span>
 													<span>{mapNumbers[index]} </span>
@@ -92,7 +93,7 @@ export default function DraggableList(props: Props) {
 						{provided.placeholder}
 					</div>
 				)}
-			</Droppable>
+			</StrictModeDroppable>
 		</DragDropContext>
 	);
 }
