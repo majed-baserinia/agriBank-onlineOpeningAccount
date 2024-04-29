@@ -1,4 +1,4 @@
 {
-  "apiBaseUrl": "http://10.0.189.141:31100",
-  "ThemeRoute": "http://10.0.189.141:31100/cdn/themes/"
+	"apiBaseUrl": "http://10.0.189.142:31100",
+	"ThemeRoute": "http://10.0.189.141:31100/cdn/themes/"
 }

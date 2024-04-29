@@ -12,7 +12,7 @@ import ApiConfigSingleton from '../../business/stores/api-config-singleton';
 import useInitialSettingStore, { InitialSetting } from '../../business/stores/initial-setting-store';
 
 const Layout = () => {
-	const [initData] = useInitPostMessage();
+	 useInitPostMessage();
 	const { settings, setSettings } = useInitialSettingStore((s) => s);
 	const [configReady, seConfigReady] = useState(false);
 
@@ -39,9 +39,9 @@ const Layout = () => {
 			changeLanguage(language ? language : 'fa-IR');
 
 			//set the settings {theme, language, idToken, refreshToken} to store
-			const initials = initData ? initData : {};
+			
 			setSettings({
-				...initials,
+				
 				theme: theme,
 				language: language ? language : 'fa-IR'
 			} as InitialSetting);
