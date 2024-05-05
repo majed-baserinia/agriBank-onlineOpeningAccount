@@ -38,7 +38,7 @@
 	"selectSignatureGroup": "انتخاب گروه امضا",
 	"selectAaccountText": "حساب مورد نظر خود را از لیست زیر انتخاب کنید",
 	"selectCheckSheet": "انتخاب برگه چک",
-	"checkbookNumber": "شمازه دسته چک",
+	"checkbookNumber": "شماره دسته چک",
 	"checkbookType": "نوع دسته چک",
 	"branchCode": "کد شعبه صادر کننده",
 	"issueDate": "تاریخ صدور",
@@ -89,5 +89,12 @@
 	"register": "ثبت",
 	"edit": "ویرایش",
 	"reason": "بابت",
-	"date": "تاریخ"
+	"date": "تاریخ",
+	"curentAccountP": "(حساب جاری)",
+	"all": "همه",
+	"whiteCheck": "چک سفید",
+	"issuedCheck": "چک صادر شده",
+	"sayadNumber": "شماره صیادی",
+	"series": "سری",
+	"serial": "سریال"
 }

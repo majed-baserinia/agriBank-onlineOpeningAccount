@@ -1,4 +1,4 @@
-import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Grid, MenuItem, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Menu from 'ui/components/Menu';
@@ -8,14 +8,15 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import SelectAdapter from 'ui/htsc-components/SelectAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
+import keshavarzi from 'assets/icon/Banks/Color/Keshavarzi.svg';
 import useAccounts from 'business/hooks/cheque/Digital Cheque/useAccounts';
+import useGetCheckbooks from 'business/hooks/cheque/Digital Cheque/useGetCheckbooks';
+import useGetChecksheets from 'business/hooks/cheque/Digital Cheque/useGetChecksheets';
 import { useState } from 'react';
 import ChipWrapperForSelect from 'ui/htsc-components/ChipWrapperForSelect';
-import MenuItemAdapter from 'ui/htsc-components/MenuItemAdapter';
 import ChipAdapter from 'ui/htsc-components/chipAdapter';
 import { menuList } from '../../HomePage/menuList';
-
-export interface option {
+export interface item {
 	value: string;
 	iconImg: string;
 	label: string;
@@ -25,8 +26,11 @@ export default function SelectAccount() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const AccountData = useAccounts().data;
-	const [isVisibleAccountData, setIsVisibleAccountData] = useState(false); // State to manage visibility
+	const { data: AccountData } = useAccounts();
+	const { data: checkbooks, mutate: getCheckbooks } = useGetCheckbooks();
+	const { data: checksheets, mutate: getChecksheets } = useGetChecksheets();
+	const [selectedAccountNumber, setSelectedAccountNumber] = useState('');
+	const [selectedCheckbook, setSelectedCheckbook] = useState<null | {}>(null);
 
 	return (
 		<Grid
@@ -84,31 +88,54 @@ export default function SelectAccount() {
 									sx={{ order: { xs: 1, sm: 1, md: 1, lg: 1, xl: 1 } }}
 								>
 									<SelectAdapter
-										onChange={(a) => {
-											setIsVisibleAccountData(true);
+										onChange={(selectedValue) => {
+											setSelectedAccountNumber(selectedValue);
+											getCheckbooks({ accountNumber: selectedValue });
 										}}
 										label={t('accountsList')}
 									>
 										{AccountData?.map((item, index) => {
 											return (
-												<MenuItemAdapter
-													type="default"
+												<MenuItem
 													key={index}
+													style={{ margin: '10px 0' }}
 													value={item.accountNumber}
 												>
-													<span
-														style={{
-															fontSize: '10px',
-															color: theme.palette.grey[200]
-														}}
+													<Grid
+														container
+														justifyContent={'center'}
+														alignItems="Center"
+														gap={'5px'}
+														wrap="nowrap"
 													>
-														{...item.owners?.map(
-															(owner) =>
-																`${owner.firstName} ${owner.lastName} ${item.accountTypeName}`
-														)}
-													</span>
-													<span style={{ fontSize: '14px' }}>{item.accountNumber}</span>
-												</MenuItemAdapter>
+														<Grid sx={{ height: '30px', width: '30px' }}>
+															<img
+																style={{ width: '100%', height: '100%' }}
+																src={keshavarzi}
+																alt={'icon'}
+															/>
+														</Grid>
+														<Grid
+															container
+															direction={'column'}
+															alignItems="flex-start"
+															gap={'5px'}
+														>
+															<span
+																style={{
+																	fontSize: '10px',
+																	color: theme.palette.grey[200]
+																}}
+															>
+																{`${item.owners[0]?.firstName} ${item.owners[0]
+																	?.lastName} ${t('curentAccountP')}`}
+															</span>
+															<span style={{ fontSize: '14px' }}>
+																{item.accountNumber}
+															</span>
+														</Grid>
+													</Grid>
+												</MenuItem>
 											);
 										})}
 									</SelectAdapter>
@@ -123,38 +150,71 @@ export default function SelectAccount() {
 									sx={{ order: { xs: 3, sm: 3, md: 3, lg: 3, xl: 3 } }}
 								>
 									<SelectAdapter
-										disabled={!isVisibleAccountData}
+										disabled={!selectedCheckbook}
 										onChange={(a) => {}}
 										label={t('checkSheet')}
 									>
 										<ChipWrapperForSelect>
 											<ChipAdapter
-												label={t('personalAccount')}
+												label={t('all')}
 												onClick={(e) => {}}
 											/>
 											<ChipAdapter
-												label={t('corporateAccount')}
+												label={t('whiteCheck')}
 												onClick={(e) => {}}
 												checked
 											/>
 											<ChipAdapter
-												label={t('corporateAccount')}
+												label={t('issuedCheck')}
 												onClick={(e) => {}}
-												checked
+												
 											/>
 										</ChipWrapperForSelect>
-										<MenuItemAdapter
-											value={'1'}
-											title="1"
-											subtitle="11"
-											type="bordred"
-										/>
-										<MenuItemAdapter
-											value={'2'}
-											title="12"
-											subtitle="12"
-											type="bordred"
-										/>
+										{checksheets?.map((sheet) => {
+											return (
+												<MenuItem
+													value={sheet.amount}
+													onClick={(e) => {
+														// const selectedCheckbook = {
+														// 	accountNumber: selectedAccountNumber,
+														// 	startChequeNo: checkbook.chequeFrom,
+														// 	endChequeNo: checkbook.chequeTo
+														// };
+														// setSelectedCheckbook(selectedCheckbook);
+														// getChecksheets(selectedCheckbook);
+													}}
+													sx={{
+														border: `1px solid ${theme.palette.grey[50]}`,
+														borderRadius: '16px',
+														margin: '16px',
+														'&:hover': {
+															backgroundColor: 'unset',
+															border: `2px solid ${theme.palette.primary.main}`
+														}
+													}}
+												>
+													<Grid
+														container
+														direction={'column'}
+														justifyContent={'center'}
+														spacing={'8px'}
+														sx={{ padding: '16px' }}
+														gap={'8px'}
+													>
+														<Grid sx={{ fontSize: '14px' }}>
+															<span> {t('sayadNumber')}:</span>
+															<span>{` ${sheet.sayadNo}`}</span>
+														</Grid>
+														<Grid sx={{ fontSize: '10px' }}>
+															<span>{t('series')}:</span>
+															<span>{` ${sheet.chequeFrom} | `}</span>
+															<span>{t('serial')}:</span>
+															<span>{` ${sheet.chequeTo}`}</span>
+														</Grid>
+													</Grid>
+												</MenuItem>
+											);
+										})}
 									</SelectAdapter>
 								</Grid>
 								<Grid
@@ -167,22 +227,55 @@ export default function SelectAccount() {
 									sx={{ order: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 } }}
 								>
 									<SelectAdapter
-										disabled={!isVisibleAccountData}
-										onChange={(a) => {}}
+										disabled={!selectedAccountNumber}
+										onChange={() => {}}
 										label={t('checkbook')}
 									>
-										<MenuItemAdapter
-											value={'1'}
-											title="1"
-											subtitle="11"
-											type="bordred"
-										/>
-										<MenuItemAdapter
-											value={'2'}
-											title="12"
-											subtitle="12"
-											type="bordred"
-										/>
+										{checkbooks?.map((checkbook) => {
+											return (
+												<MenuItem
+													value={checkbook.chequeTo}
+													onClick={(e) => {
+														const selectedCheckbook = {
+															accountNumber: selectedAccountNumber,
+															startChequeNo: checkbook.chequeFrom,
+															endChequeNo: checkbook.chequeTo
+														};
+														setSelectedCheckbook(selectedCheckbook);
+														getChecksheets(selectedCheckbook);
+													}}
+													sx={{
+														border: `1px solid ${theme.palette.grey[50]}`,
+														borderRadius: '16px',
+														margin: '16px',
+														'&:hover': {
+															backgroundColor: 'unset',
+															border: `2px solid ${theme.palette.primary.main}`
+														}
+													}}
+												>
+													<Grid
+														container
+														direction={'column'}
+														justifyContent={'center'}
+														spacing={'8px'}
+														sx={{ padding: '16px' }}
+														gap={'8px'}
+													>
+														<Grid sx={{ fontSize: '14px' }}>
+															<span> {t('checkbookNumber')}:</span>
+															<span>{` ${checkbook.chequeTo}`}</span>
+														</Grid>
+														<Grid sx={{ fontSize: '10px' }}>
+															<span>{t('issueDate')}:</span>
+															<span>{` ${checkbook.issueDate} | `}</span>
+															<span>{t('expireDate')}:</span>
+															<span>{` ${checkbook.expiryDate}`}</span>
+														</Grid>
+													</Grid>
+												</MenuItem>
+											);
+										})}
 									</SelectAdapter>
 								</Grid>
 							</Grid>

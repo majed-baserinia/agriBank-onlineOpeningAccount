@@ -23,16 +23,9 @@ export default function SelectAdapter(props: Props) {
 	//const handleChange = (event:ChangeEvent<{ value: unknown}>) => {
 
 	const handleChange = (e: SelectChangeEvent<unknown>, child: ReactNode) => {
-		console.log('eeee', e);
-		console.log(child);
-		// setSelectedValue(event.target.value as string);
-		// }
 		if ((child as ReactElement).type == 'div') {
 			setOpen(true);
 		} else {
-			console.log(e);
-			console.log(child);
-
 			setSelectedValue(e.target.value as string);
 			onChange(e.target.value as string);
 		}
@@ -43,7 +36,7 @@ export default function SelectAdapter(props: Props) {
 		const clickedItemTagName = e.currentTarget.tagName.toLowerCase();
 		const clickedItemClassName = e.currentTarget.className;
 
-		if (clickedItemTagName == 'div' && clickedItemClassName === 'clickedNotClose') {
+		if (clickedItemTagName === 'div' && clickedItemClassName === 'clickedNotClose') {
 			setOpen(true);
 		} else {
 			setOpen(false);
@@ -101,6 +94,9 @@ export default function SelectAdapter(props: Props) {
 					IconComponent={KeyboardArrowDownIcon}
 					error={error}
 					startAdornment={icon ? <InputAdornment position="start">{icon}</InputAdornment> : undefined}
+					inputProps={{
+						renderValue: (option: string) => option
+					}}
 					MenuProps={{
 						dir: theme.direction,
 						sx: matches ? menuStyle : null,

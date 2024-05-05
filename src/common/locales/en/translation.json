@@ -89,5 +89,12 @@
 	"register": "register",
 	"edit": "Edit",
 	"reason": "Reason",
-	"date": "Date"
+	"date": "Date",
+	"curentAccountP": "(Curent Account)",
+	"all": "all",
+	"whiteCheck" : "White Check",
+	"issuedCheck": "Issued Check",
+	"sayadNumber": "Sayad Number",
+	"series": "Series",
+	"serial":"Serial"
 }
