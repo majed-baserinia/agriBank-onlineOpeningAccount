@@ -6,8 +6,8 @@ import { GetCodeResponse } from 'common/entities/cheque/Digital Cheque/GetCodesR
 const mediator = new Mediator();
 
 export default function useGetReasonCodes() {
-	useQuery({
-		queryKey: ['currentAccouns'],
+	return useQuery({
+		queryKey: ['reasonsCode'],
 		queryFn: () => mediator.send<GetCodeResponse>(new GetCodesQuery()),
 		staleTime: 0, //ms('30m')
 		retry: false

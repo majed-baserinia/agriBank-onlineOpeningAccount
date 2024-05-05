@@ -9,20 +9,19 @@ import InputAdapter from 'ui/htsc-components/InputAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 
+import useGetReasonCodes from 'business/hooks/cheque/Digital Cheque/useGetReasonCodes';
 import { Controller, useForm } from 'react-hook-form';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
 import { menuList } from '../../HomePage/menuList';
-import useGetReasonCodes from 'business/hooks/cheque/Digital Cheque/useGetReasonCodes';
 
 export default function CheckInfo() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const data = useGetReasonCodes();
-	console.log(data);
-	
+	const { data: reasonCodes, isLoading: isPendingtoGetReasons } = useGetReasonCodes();
+
 	const { control, formState } = useForm();
 
 	const handleNextStep = () => {
@@ -121,10 +120,14 @@ export default function CheckInfo() {
 											<BottomSheetSelect
 												isRequired
 												label={t('reason')}
-												list={[
-													{ value: '1', name: '0' },
-													{ value: '2', name: '1' }
-												]}
+												list={
+													isPendingtoGetReasons
+														? []
+														: reasonCodes!.map((reason) => ({
+																value: reason.reasonCode,
+																name: reason.description
+															}))
+												}
 												onChange={(item) => {
 													field.onChange(item);
 												}}

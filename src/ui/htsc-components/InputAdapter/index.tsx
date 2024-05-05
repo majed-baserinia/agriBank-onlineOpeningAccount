@@ -163,7 +163,7 @@ export default function InputAdapter(props: InputAdapterProps) {
         inputMode:
           type == "cart" || type == "money" || type == "number" ? "numeric" : undefined,
         dir: theme.direction,
-        sx: { input: { color: theme.palette.grey[200] } },
+        sx: { input: { color: theme.palette.grey[400] } },
         startAdornment: icon ? (
           <InputAdornment position="start">{icon}</InputAdornment>
         ) : null,
