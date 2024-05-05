@@ -71,4 +71,3 @@ export default function MenuItemAdapter(props: Props) {
 
 	return type === 'bordred' ? bordered : defaultItem;
 }
-

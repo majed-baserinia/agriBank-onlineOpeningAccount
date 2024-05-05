@@ -6,9 +6,7 @@ import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
-
 import { menuList } from '../../HomePage/menuList';
-
 import infoIcon from 'assets/icon/info-circle.svg';
 import { useState } from 'react';
 import DraggableList from 'ui/components/DraggableList';

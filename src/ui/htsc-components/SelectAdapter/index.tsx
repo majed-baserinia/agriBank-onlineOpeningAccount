@@ -17,10 +17,16 @@ export default function SelectAdapter(props: Props) {
 	const { onChange, label, error, disabled, icon, children, defaultValue = '', muiSelectProps } = props;
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
-	const [selectedValue, setSelectedValue] = useState(defaultValue);
+	const [selectedValue, setSelectedValue] = useState<string>(defaultValue);
 	const [open, setOpen] = useState(false);
 
+	//const handleChange = (event:ChangeEvent<{ value: unknown}>) => {
+
 	const handleChange = (e: SelectChangeEvent<unknown>, child: ReactNode) => {
+		console.log('eeee', e);
+		console.log(child);
+		// setSelectedValue(event.target.value as string);
+		// }
 		if ((child as ReactElement).type == 'div') {
 			setOpen(true);
 		} else {
@@ -90,7 +96,7 @@ export default function SelectAdapter(props: Props) {
 					onClose={(e) => handleClickedItem(e)}
 					value={selectedValue}
 					label={label}
-					onChange={handleChange}
+					onChange={(e, child) => handleChange(e, child)}
 					sx={{ '& .MuiSvgIcon-root': { color: theme.palette.grey[400] } }}
 					IconComponent={KeyboardArrowDownIcon}
 					error={error}

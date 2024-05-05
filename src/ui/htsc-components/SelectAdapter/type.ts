@@ -6,7 +6,7 @@ export type Props = {
   error?: boolean;
   disabled?: boolean;
   icon?: ReactNode;
-  children: ReactNode[];
+  children: ReactNode[] | ReactNode;
   onChange: (value: string) => void;
   muiSelectProps?: SelectProps;
   defaultValue?: string;

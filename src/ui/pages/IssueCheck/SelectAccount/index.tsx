@@ -8,16 +8,25 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import SelectAdapter from 'ui/htsc-components/SelectAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
+import useAccounts from 'business/hooks/cheque/Digital Cheque/useAccounts';
+import { useState } from 'react';
 import ChipWrapperForSelect from 'ui/htsc-components/ChipWrapperForSelect';
 import MenuItemAdapter from 'ui/htsc-components/MenuItemAdapter';
 import ChipAdapter from 'ui/htsc-components/chipAdapter';
 import { menuList } from '../../HomePage/menuList';
 
+export interface option {
+	value: string;
+	iconImg: string;
+	label: string;
+}
 export default function SelectAccount() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const AccountData = useAccounts().data;
+	const [isVisibleAccountData, setIsVisibleAccountData] = useState(false); // State to manage visibility
 
 	return (
 		<Grid
@@ -75,31 +84,33 @@ export default function SelectAccount() {
 									sx={{ order: { xs: 1, sm: 1, md: 1, lg: 1, xl: 1 } }}
 								>
 									<SelectAdapter
-										onChange={(a) => {}}
+										onChange={(a) => {
+											setIsVisibleAccountData(true);
+										}}
 										label={t('accountsList')}
 									>
-										<MenuItemAdapter type="default">
-											{/* <span
-												style={{
-													fontSize: '10px',
-													color: theme.palette.grey[200]
-												}}
-											>
-												{option.label + ' (' + option.nameIcon + ')'}
-											</span>
-											<span style={{ fontSize: '14px' }}>{formatToCart(option.value)}</span> */}
-										</MenuItemAdapter>
-										<MenuItemAdapter type="default">
-											{/* <span
-												style={{
-													fontSize: '10px',
-													color: theme.palette.grey[200]
-												}}
-											>
-												{option.label + ' (' + option.nameIcon + ')'}
-											</span>
-											<span style={{ fontSize: '14px' }}>{formatToCart(option.value)}</span> */}
-										</MenuItemAdapter>
+										{AccountData?.map((item, index) => {
+											return (
+												<MenuItemAdapter
+													type="default"
+													key={index}
+													value={item.accountNumber}
+												>
+													<span
+														style={{
+															fontSize: '10px',
+															color: theme.palette.grey[200]
+														}}
+													>
+														{...item.owners?.map(
+															(owner) =>
+																`${owner.firstName} ${owner.lastName} ${item.accountTypeName}`
+														)}
+													</span>
+													<span style={{ fontSize: '14px' }}>{item.accountNumber}</span>
+												</MenuItemAdapter>
+											);
+										})}
 									</SelectAdapter>
 								</Grid>
 								<Grid
@@ -112,6 +123,7 @@ export default function SelectAccount() {
 									sx={{ order: { xs: 3, sm: 3, md: 3, lg: 3, xl: 3 } }}
 								>
 									<SelectAdapter
+										disabled={!isVisibleAccountData}
 										onChange={(a) => {}}
 										label={t('checkSheet')}
 									>
@@ -155,6 +167,7 @@ export default function SelectAccount() {
 									sx={{ order: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 } }}
 								>
 									<SelectAdapter
+										disabled={!isVisibleAccountData}
 										onChange={(a) => {}}
 										label={t('checkbook')}
 									>
