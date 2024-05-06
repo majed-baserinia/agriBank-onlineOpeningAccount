@@ -39,7 +39,8 @@ export default function DatePickerAdapter(props: Props) {
 				className="primary"
 				style={{ width: '100%' }}
 				// className="primary rmdp-mobile"
-				inputClass="datepickerInput"
+
+				inputClass={`${error ? 'error' : ''} datepickerInput`}
 				hideOnScroll
 				calendarPosition={'top-right'}
 				placeholder={placeHolder}

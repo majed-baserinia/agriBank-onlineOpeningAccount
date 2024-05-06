@@ -150,8 +150,8 @@ export default function CheckInfo() {
 												onChange={(item) => {
 													field.onChange(item);
 												}}
-												error={!!formState?.errors?.checkAmount}
-												helperText={formState?.errors?.checkAmount?.message}
+												error={!!formState?.errors?.reason}
+												helperText={formState?.errors?.reason?.message}
 											/>
 										)}
 									/>
@@ -168,6 +168,8 @@ export default function CheckInfo() {
 												onChange={(value) => field.onChange(value)}
 												isRequired
 												label={t('description')}
+												error={!!formState?.errors?.description}
+												helperText={formState?.errors?.description?.message}
 											/>
 										)}
 									/>
