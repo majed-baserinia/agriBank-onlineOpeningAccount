@@ -1,6 +1,7 @@
 import { Mediator } from '@Mediatr/index';
 import { useQuery } from '@tanstack/react-query';
 import CurrentAccountsQuery from 'business/application/cheque/Digital Cheque/Accounts/CurrentAccountsQuery';
+import { ErrorType } from 'common/entities/ErrorType';
 import CurrentAccountResponse from 'common/entities/cheque/Digital Cheque/AccountResponse';
 
 const mediator = new Mediator();
@@ -10,7 +11,7 @@ const useAccounts = () =>
 		queryKey: ['currentAccouns'],
 		queryFn: () => mediator.send<CurrentAccountResponse[]>(new CurrentAccountsQuery()),
 		staleTime: 0, //ms('30m')
-		retry: false
+		retry: false,
 	});
 
 export default useAccounts;

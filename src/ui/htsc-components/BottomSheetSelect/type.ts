@@ -5,4 +5,6 @@ export type Props = {
 	defaultValue?: string;
 	onChange: (item: { value: string; name: string }) => void;
 	isRequired?: boolean;
+	error?: boolean;
+	helperText?: string;
 };

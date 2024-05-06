@@ -1,4 +1,4 @@
-import { FormHelperText, useTheme } from '@mui/material';
+import { FormHelperText } from '@mui/material';
 import { useRef, useState } from 'react';
 import persian_ca from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
@@ -17,8 +17,9 @@ import { Props } from './type';
 export default function DatePickerAdapter(props: Props) {
 	const { t } = useTranslation();
 	const appLanguage = useInitialSettingStore((store) => store.settings.language);
-	const { placeHolder = t('date'), helperText, onChange } = props;
-	const theme = useTheme();
+	const { placeHolder = t('date'), helperText, onChange, error } = props;
+	const { settings } = useInitialSettingStore((s) => s);
+
 	const [value, setValue] = useState<DateObject | DateObject[] | null>(null);
 	const datepicker = useRef();
 
@@ -43,8 +44,18 @@ export default function DatePickerAdapter(props: Props) {
 				calendarPosition={'top-right'}
 				placeholder={placeHolder}
 				onChange={(value) => handleChange(value)}
+				format={appLanguage === 'en-GB' ? 'MM/DD/YYYY' : 'YYYY/MM/DD'}
 			/>
-			<FormHelperText sx={{ marginTop: '-10px' }}>{helperText}</FormHelperText>
+			<FormHelperText
+				error={error}
+				sx={{
+					marginTop: '10px',
+					paddingRight: settings.language === 'fa-IR' ? '16px' : 'unset',
+					paddingLeft: settings.language === 'en-GB' ? '16px' : 'unset'
+				}}
+			>
+				{helperText}
+			</FormHelperText>
 		</div>
 	);
 }

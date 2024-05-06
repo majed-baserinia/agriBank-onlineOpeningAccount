@@ -1,10 +1,20 @@
-import { Divider, FormControl, Grid, InputLabel, MenuItem, Select, useMediaQuery, useTheme } from '@mui/material';
+import {
+	Divider,
+	FormControl,
+	FormHelperText,
+	Grid,
+	InputLabel,
+	MenuItem,
+	Select,
+	useMediaQuery,
+	useTheme
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import Sheet from 'react-modal-sheet';
 import { Props } from './type';
 
 export default function BottomSheetSelect(props: Props) {
-	const { list, label, breackpoint = 'sm', defaultValue = '', onChange, isRequired } = props;
+	const { list, label, breackpoint = 'sm', defaultValue = '', onChange, isRequired, error, helperText } = props;
 
 	const theme = useTheme();
 	const isMatched = useMediaQuery(theme.breakpoints.down(breackpoint));
@@ -52,10 +62,12 @@ export default function BottomSheetSelect(props: Props) {
 					open={open}
 					onOpen={() => setOpen(true)}
 					onClose={() => setOpen(false)}
+					error={error}
 				>
 					{list.map((item) => {
 						return (
 							<MenuItem
+								key={item.value}
 								value={item.value}
 								onClick={() => handlClickItem(item)}
 							>
@@ -64,6 +76,7 @@ export default function BottomSheetSelect(props: Props) {
 						);
 					})}
 				</Select>
+				{helperText ? <FormHelperText error={error}>{helperText}</FormHelperText> : null}
 			</FormControl>
 			{isMatched ? (
 				<Sheet
@@ -80,6 +93,7 @@ export default function BottomSheetSelect(props: Props) {
 										return (
 											<>
 												<MenuItem
+													key={item.value}
 													value={item.value}
 													onClick={() => handlClickItem(item)}
 												>

@@ -10,6 +10,7 @@ import Stepper from 'ui/htsc-components/Stepper';
 import { createContext, useState } from 'react';
 import CheckRecivers from 'ui/components/CheckRecivers';
 import { menuList } from '../../HomePage/menuList';
+import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 
 export const ReciversContext = createContext({});
 
@@ -19,6 +20,9 @@ export default function AddRecievers() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const [recivers, setRecivers] = useState([]);
+	const data = useDataSteps((store) => store);
+
+console.log(data);
 
 	return (
 		<ReciversContext.Provider value={{ recivers, setRecivers }}>

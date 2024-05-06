@@ -12,25 +12,53 @@ import keshavarzi from 'assets/icon/Banks/Color/Keshavarzi.svg';
 import useAccounts from 'business/hooks/cheque/Digital Cheque/useAccounts';
 import useGetCheckbooks from 'business/hooks/cheque/Digital Cheque/useGetCheckbooks';
 import useGetChecksheets from 'business/hooks/cheque/Digital Cheque/useGetChecksheets';
-import { useState } from 'react';
+import { pushAlert } from 'business/stores/AppAlertsStore';
+import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
+import { CheckSheet } from 'common/entities/cheque/Digital Cheque/GetChecksheets/GetChecksheetsResponse';
+import { useEffect, useState } from 'react';
 import ChipWrapperForSelect from 'ui/htsc-components/ChipWrapperForSelect';
 import ChipAdapter from 'ui/htsc-components/chipAdapter';
+import Loader from 'ui/htsc-components/loader/Loader';
+import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
-export interface item {
-	value: string;
-	iconImg: string;
-	label: string;
-}
+
 export default function SelectAccount() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { data: AccountData } = useAccounts();
-	const { data: checkbooks, mutate: getCheckbooks } = useGetCheckbooks();
-	const { data: checksheets, mutate: getChecksheets } = useGetChecksheets();
+	const setDataForNextStep = useDataSteps((store) => store.setStepData);
+
+	const { data: AccountData, isLoading } = useAccounts();
+	const { data: checkbooks, mutate: getCheckbooks, error: checkbooksError } = useGetCheckbooks();
+	const { data: checksheets, mutate: getChecksheets, error: checksheetsError } = useGetChecksheets();
+
 	const [selectedAccountNumber, setSelectedAccountNumber] = useState('');
 	const [selectedCheckbook, setSelectedCheckbook] = useState<null | {}>(null);
+	const [selectedChecksheet, setSelectedChecksheet] = useState<null | CheckSheet>(null);
+
+	useEffect(() => {
+		if (checkbooksError) {
+			pushAlert({ type: 'error', messageText: checkbooksError.detail, hasConfirmAction: true });
+		}
+		if (checksheetsError) {
+			pushAlert({ type: 'error', messageText: checksheetsError.detail, hasConfirmAction: true });
+		}
+	}, [checkbooksError, checksheetsError]);
+
+	const handleNextStep = () => {
+		//save the needed data for next page
+		setDataForNextStep({
+			firstStep: {
+				selectdCheckSheet: selectedChecksheet
+			}
+		});
+
+		//navigate next page
+		navigate(paths.IssueCheck.CheckInfoPath);
+	};
+
+	if (isLoading) return <Loader showLoader />;
 
 	return (
 		<Grid
@@ -151,7 +179,7 @@ export default function SelectAccount() {
 								>
 									<SelectAdapter
 										disabled={!selectedCheckbook}
-										onChange={(a) => {}}
+										onChange={() => {}}
 										label={t('checkSheet')}
 									>
 										<ChipWrapperForSelect>
@@ -167,21 +195,15 @@ export default function SelectAccount() {
 											<ChipAdapter
 												label={t('issuedCheck')}
 												onClick={(e) => {}}
-												
 											/>
 										</ChipWrapperForSelect>
-										{checksheets?.map((sheet) => {
+										{checksheets?.map((sheet, index) => {
 											return (
 												<MenuItem
-													value={sheet.amount}
+													key={index}
+													value={sheet.sayadNo}
 													onClick={(e) => {
-														// const selectedCheckbook = {
-														// 	accountNumber: selectedAccountNumber,
-														// 	startChequeNo: checkbook.chequeFrom,
-														// 	endChequeNo: checkbook.chequeTo
-														// };
-														// setSelectedCheckbook(selectedCheckbook);
-														// getChecksheets(selectedCheckbook);
+														setSelectedChecksheet(sheet);
 													}}
 													sx={{
 														border: `1px solid ${theme.palette.grey[50]}`,
@@ -287,7 +309,7 @@ export default function SelectAccount() {
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%' } }}
 								forwardIcon
-								onClick={() => console.log()}
+								onClick={() => handleNextStep()}
 							>
 								{t('continue')}
 							</ButtonAdapter>

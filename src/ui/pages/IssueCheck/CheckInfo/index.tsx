@@ -1,3 +1,4 @@
+import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -9,10 +10,13 @@ import InputAdapter from 'ui/htsc-components/InputAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 
+import CheckInfoFormValidatorCommand from 'business/application/cheque/Digital Cheque/CheckInfoFormValidator/CheckInfoFormValidatorCommand';
 import useGetReasonCodes from 'business/hooks/cheque/Digital Cheque/useGetReasonCodes';
+import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 import { Controller, useForm } from 'react-hook-form';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
+import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
 
 export default function CheckInfo() {
@@ -21,12 +25,23 @@ export default function CheckInfo() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { data: reasonCodes, isLoading: isPendingtoGetReasons } = useGetReasonCodes();
+	const setDataForNextStep = useDataSteps((store) => store.setStepData);
 
-	const { control, formState } = useForm();
+	const { control, formState, getValues, handleSubmit } = useForm<CheckInfoFormValidatorCommand>({
+		resolver: (values, context, options) => {
+			return validator(values, context, options);
+		},
+		context: CheckInfoFormValidatorCommand
+	});
 
 	const handleNextStep = () => {
-		//set the data in local storage
-		//navigate to add recievers
+		setDataForNextStep({
+			secondStep: {
+				issueCheckDetail: getValues()
+			}
+		});
+
+		navigate(paths.IssueCheck.addRecieversPath);
 	};
 
 	return (
@@ -88,6 +103,8 @@ export default function CheckInfo() {
 												label={t('checkAmount')}
 												onChange={(value) => field.onChange(value)}
 												type="money"
+												error={!!formState?.errors?.checkAmount}
+												helperText={formState?.errors?.checkAmount?.message}
 											/>
 										)}
 									/>
@@ -104,6 +121,8 @@ export default function CheckInfo() {
 											<DatePickerAdapter
 												placeHolder={t('date')}
 												onChange={(date) => field.onChange(date)}
+												error={!!formState?.errors?.date}
+												helperText={formState?.errors?.date?.message}
 											/>
 										)}
 									/>
@@ -131,6 +150,8 @@ export default function CheckInfo() {
 												onChange={(item) => {
 													field.onChange(item);
 												}}
+												error={!!formState?.errors?.checkAmount}
+												helperText={formState?.errors?.checkAmount?.message}
 											/>
 										)}
 									/>
@@ -159,7 +180,7 @@ export default function CheckInfo() {
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%' } }}
 								forwardIcon
-								onClick={() => handleNextStep()}
+								onClick={handleSubmit(handleNextStep)}
 							>
 								{t('continue')}
 							</ButtonAdapter>

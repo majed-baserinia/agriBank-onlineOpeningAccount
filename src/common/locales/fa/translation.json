@@ -96,5 +96,10 @@
 	"issuedCheck": "چک صادر شده",
 	"sayadNumber": "شماره صیادی",
 	"series": "سری",
-	"serial": "سریال"
+	"serial": "سریال",
+	"notEmptyCheckAmountText": "مبلغ چک نمی تواند خالی باشد",
+	"ONLY_DIGITS_ARE_ALLOWED": "مقدار ورودی باید عددی باشد",
+	"DATE_MUST_HAVE_A_VALUE": "تاریخ نمیتواند خالی باشد",
+	"description_MUST_HAVE_A_VALUE": "شرح نمیتواند خالی باشد",
+	"reason_MUST_HAVE_A_VALUE": "بابت نمیتواند خالی باشد"
 }

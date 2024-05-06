@@ -12,3 +12,6 @@ export * from './cheque/Digital Cheque/GetCheckbooks/GetCheckbooksQueryHandler';
 
 export * from './cheque/Digital Cheque/GetCheckSheets/GetCheckSheetsCommand';
 export * from './cheque/Digital Cheque/GetCheckSheets/GetCheckSheetsCommandHandler';
+
+export * from './cheque/Digital Cheque/CheckInfoFormValidator/CheckInfoFormValidatorCommand';
+export * from './cheque/Digital Cheque/CheckInfoFormValidator/CheckInfoFormValidatorCommandValidator';
