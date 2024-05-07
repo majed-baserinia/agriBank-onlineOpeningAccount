@@ -59,13 +59,12 @@ export default function AddReceivers() {
 		const preparedData: IssueChequeInitiateRequest = {
 			sayadNo: selectedCheckSheet?.sayadNo,
 			amount: Number(issueCheckDetail?.checkAmount),
-			dueDate: issueCheckDetail?.date.toLocaleString("en-US"),
+			dueDate: issueCheckDetail?.date,
 			description: issueCheckDetail?.description,
 			reason: issueCheckDetail?.reason.value,
 			recievers: receivers
 		};
 
-		
 		issueChequeInitiate(preparedData, {
 			onError: (err) => {
 				//TODO: navigate the user if need to

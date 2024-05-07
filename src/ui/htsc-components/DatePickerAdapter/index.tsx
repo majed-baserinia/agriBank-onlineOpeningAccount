@@ -1,11 +1,10 @@
 import { FormHelperText } from '@mui/material';
 import { useRef, useState } from 'react';
-import persian_ca from 'react-date-object/calendars/persian';
+import { default as persian, default as persian_ca } from 'react-date-object/calendars/persian';
+import persian_en from 'react-date-object/locales/persian_en';
 import persian_fa from 'react-date-object/locales/persian_fa';
-import persian from "react-date-object/calendars/persian";
-import persian_en from "react-date-object/locales/persian_en";
 import { useTranslation } from 'react-i18next';
-import DatePicker,{DateObject} from 'react-multi-date-picker';
+import DatePicker, { DateObject } from 'react-multi-date-picker';
 import 'react-multi-date-picker/styles/backgrounds/bg-brown.css';
 import 'react-multi-date-picker/styles/backgrounds/bg-dark.css';
 import 'react-multi-date-picker/styles/backgrounds/bg-gray.css';
@@ -25,10 +24,11 @@ export default function DatePickerAdapter(props: Props) {
 	const [value, setValue] = useState<DateObject | DateObject[] | null>(null);
 	const datepicker = useRef();
 
-	const handleChange = (data:  DateObject | DateObject[] | null) => {
+	const handleChange = (date: DateObject | DateObject[] | null) => {
+		const val = new DateObject(date as DateObject).convert(persian, persian_en).format();
 
-		setValue(data);
-		onChange(data);
+		setValue(date);
+		onChange(val);
 	};
 
 	return (
@@ -36,7 +36,7 @@ export default function DatePickerAdapter(props: Props) {
 			<DatePicker
 				ref={datepicker}
 				calendar={appLanguage === 'fa-IR' ? persian_ca : undefined}
-				locale={appLanguage === 'fa-IR' ? persian_en : undefined}
+				locale={appLanguage === 'fa-IR' ? persian_fa : undefined}
 				value={value}
 				monthYearSeparator=" "
 				className="primary"

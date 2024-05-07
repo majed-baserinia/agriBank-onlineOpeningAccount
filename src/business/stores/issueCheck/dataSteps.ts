@@ -10,7 +10,7 @@ interface DataSteps {
 		secondStep?: {
 			issueCheckDetail: {
 				checkAmount: string;
-				date: Date;
+				date: string;
 				reason: { name: string; value: string };
 				description: string;
 			};
