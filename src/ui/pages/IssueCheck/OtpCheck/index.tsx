@@ -32,7 +32,9 @@ export default function OtpCheck() {
 	const [open, setOpen] = useState(false);
 	const [IsSendAgain, setSendAgain] = useState(false);
 
-	const activationKey = '3fa85f64-5717-4562-b3fc-2c963f66afa6'; // useAccountChargeStore((s) => s.activationKeyStore.ActivationKey);
+	const GetStepData = useDataSteps((s) => s.steps.signitureRequirementData);
+	const { setStepData, steps } = useDataSteps((store) => store);
+	//const activationKey = '3fa85f64-5717-4562-b3fc-2c963f66afa6'; // useAccountChargeStore((s) => s.activationKeyStore.ActivationKey);
 	const { mutate: sendAgain } = useSecondStepCall();
 	//const { mutate: CheckInitiateOtpMutate, handleSubmit } = useCheckInitiateOtp();
 	const {
@@ -56,7 +58,7 @@ export default function OtpCheck() {
 
 	useEffect(() => {
 		CheckInitiateOtpMutate(
-			{ issueChequeKey: activationKey },
+			{ issueChequeKey: GetStepData?.issueChequeKey },
 			{
 				onError: (err) => {
 					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
@@ -97,7 +99,7 @@ export default function OtpCheck() {
 	};
 	const handleSendAgain = () => {
 		CheckInitiateOtpMutate(
-			{ issueChequeKey: activationKey },
+			{ issueChequeKey: GetStepData?.issueChequeKey },
 			{
 				onSuccess: (response) => {
 					pushAlert({
@@ -172,7 +174,9 @@ export default function OtpCheck() {
 									control={control}
 									render={({ field }) => (
 										<InputAdapter
-											inputProps={max}
+											muiTextFieldProps={{
+												inputProps: { maxLength: CheckInitiateOtpData?.codeLength }
+											}}
 											isRequired
 											label={t('activationCodeOtp')}
 											onChange={(value) => field.onChange(value)}
