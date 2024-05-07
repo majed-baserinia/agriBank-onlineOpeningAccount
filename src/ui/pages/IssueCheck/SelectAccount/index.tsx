@@ -310,6 +310,7 @@ export default function SelectAccount() {
 								muiButtonProps={{ sx: { width: '100%' } }}
 								forwardIcon
 								onClick={() => handleNextStep()}
+								disabled={!selectedChecksheet}
 							>
 								{t('continue')}
 							</ButtonAdapter>
