@@ -253,9 +253,10 @@ export default function SelectAccount() {
 										onChange={() => {}}
 										label={t('checkbook')}
 									>
-										{checkbooks?.map((checkbook) => {
+										{checkbooks?.map((checkbook, index) => {
 											return (
 												<MenuItem
+													key={index}
 													value={checkbook.chequeTo}
 													onClick={(e) => {
 														const selectedCheckbook = {

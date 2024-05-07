@@ -5,3 +5,4 @@ export const InquiryActiveDigitalChequeLists = '/Cheque/InquiryActiveDigitalCheq
 export const getCheckbooks = '/cheque/DigitalCheque/InquiryActiveDigitalChequeLists';
 export const getChecksheets = '/cheque/DigitalCheque/InquiryActiveDigitalListDetails';
 export const VerifyOtp = '/cheque/DigitalCheque/issuechequeverifyinitiate';
+export const issuechequeinitiate = '/cheque/DigitalCheque/issuechequeinitiate';

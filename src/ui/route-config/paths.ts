@@ -6,7 +6,7 @@ export const paths = {
 	IssueCheck: {
 		SelectAccountPath: '/cheque/Issue/SelectAccount',
 		CheckInfoPath: '/cheque/Issue/CheckInfo',
-		addRecieversPath: '/cheque/Issue/addRecievers',
+		addReceiversPath: '/cheque/Issue/addReceivers',
 		SignatureRegistrationPath: '/cheque/Issue/SignatureRegistration',
 		SignatureGroupPath: '/cheque/Issue/SignatureGroup',
 		OverViewPath: '/cheque/Issue/OverView',

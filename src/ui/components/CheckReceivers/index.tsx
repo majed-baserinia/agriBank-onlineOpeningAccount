@@ -6,7 +6,7 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import AddForm from './AddForm';
 import List from './List';
 
-export default function CheckRecivers() {
+export default function CheckReceivers() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const isDownSm = useMediaQuery(theme.breakpoints.down('sm'));
@@ -34,7 +34,7 @@ export default function CheckRecivers() {
 					<Sheet.Container>
 						<Sheet.Header />
 						<Sheet.Content>
-							<AddForm></AddForm>
+							<AddForm setOpen={setOpen}/>
 						</Sheet.Content>
 					</Sheet.Container>
 					<Sheet.Backdrop />
@@ -44,7 +44,7 @@ export default function CheckRecivers() {
 					open={open}
 					onClose={() => setOpen(false)}
 				>
-					<AddForm></AddForm>
+					<AddForm setOpen={setOpen}/>
 				</Dialog>
 			)}
 		</>

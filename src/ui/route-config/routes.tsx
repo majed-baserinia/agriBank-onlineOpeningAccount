@@ -3,9 +3,8 @@ import CheckInfo from 'ui/pages/IssueCheck/CheckInfo';
 import SelectAccount from 'ui/pages/IssueCheck/SelectAccount';
 import ActivationFirstStep from 'ui/pages/activation/ActivationFirstStep';
 import ActivationSecondStep from 'ui/pages/activation/ActivationSecondStep';
-
-import AddRecievers from 'ui/pages/IssueCheck/AddRecievers';
 import OtpCheck from 'ui/pages/IssueCheck/OtpCheck';
+import AddReceivers from 'ui/pages/IssueCheck/AddRecievers';
 import OverView from 'ui/pages/IssueCheck/OverView';
 import SignatureGroup from 'ui/pages/IssueCheck/SignatureGroup';
 import SignatureRegistration from 'ui/pages/IssueCheck/SignatureRegistration';
@@ -38,8 +37,8 @@ const router = createBrowserRouter([
 				element: <CheckInfo />
 			},
 			{
-				path: paths.IssueCheck.addRecieversPath,
-				element: <AddRecievers />
+				path: paths.IssueCheck.addReceiversPath,
+				element: <AddReceivers />
 			},
 			{
 				path: paths.IssueCheck.SignatureRegistrationPath,

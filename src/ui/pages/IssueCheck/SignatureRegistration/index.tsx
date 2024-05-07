@@ -18,6 +18,7 @@ import sendAaginIcon from 'assets/icon/refresh-alert.svg';
 import SelectSignature from 'ui/components/SelectSignature';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import { menuList } from '../../HomePage/menuList';
+import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 
 export default function SignatureRegistration() {
 	const theme = useTheme();
@@ -27,31 +28,34 @@ export default function SignatureRegistration() {
 
 	const [open, setOpen] = useState(false);
 
-	const activationKey = useAccountChargeStore((s) => s.activationKeyStore.ActivationKey);
+	const { steps, setStepData } = useDataSteps((store) => store);
+
 	const { mutate: sendAgain } = useSecondStepCall();
 	const { mutate: submition } = useThirdStepCall();
 
 	useEffect(() => {
-		sendAgain(activationKey, {
-			onError: (err) => {
-				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-			}
-		});
+		console.log({steps});
+		
+		// sendAgain(activationKey, {
+		// 	onError: (err) => {
+		// 		pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+		// 	}
+		// });
 	}, []);
 
 	const handleSendAgain = () => {
-		sendAgain(activationKey, {
-			onSuccess: (response) => {
-				pushAlert({
-					type: 'info',
-					messageText: response.message,
-					hasConfirmAction: true
-				});
-			},
-			onError: (err) => {
-				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-			}
-		});
+		// sendAgain(activationKey, {
+		// 	onSuccess: (response) => {
+		// 		pushAlert({
+		// 			type: 'info',
+		// 			messageText: response.message,
+		// 			hasConfirmAction: true
+		// 		});
+		// 	},
+		// 	onError: (err) => {
+		// 		pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+		// 	}
+		// });
 	};
 
 	const handleSubmit = () => {

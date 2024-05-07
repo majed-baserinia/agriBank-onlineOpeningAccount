@@ -105,5 +105,9 @@
 	"ONLY_DIGITS_ARE_ALLOWED": "Only digits are allowed",
 	"DATE_MUST_HAVE_A_VALUE": "Date must have a value",
 	"description_MUST_HAVE_A_VALUE": "Description must have a value",
-	"reason_MUST_HAVE_A_VALUE": "Reason must have a value"
+	"reason_MUST_HAVE_A_VALUE": "Reason must have a value",
+	"notEmptyRecieverNameText": "Name must have a value",
+	"nationalNo_MUST_HAVE_A_VALUE": "ID must have a value",
+	"addReceiversText": "Add check recipients",
+	"failedToGetDateFromStoreText": "There is no data. please try again"
 }

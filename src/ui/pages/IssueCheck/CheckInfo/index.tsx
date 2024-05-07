@@ -41,7 +41,7 @@ export default function CheckInfo() {
 			}
 		});
 
-		navigate(paths.IssueCheck.addRecieversPath);
+		navigate(paths.IssueCheck.addReceiversPath);
 	};
 
 	return (

@@ -21,7 +21,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 		isRequired = false,
 		label,
 		icon,
-		type,
+		type = 'text',
 		defaultValue = '',
 		onChange,
 		muiTextFieldProps,
@@ -121,7 +121,6 @@ export default function InputAdapter(props: InputAdapterProps) {
 			onBlur={() => (value ? setShrink(true) : setShrink(false))}
 			disabled={disabled}
 			type={type == 'password' ? 'password' : 'text'}
-			
 			label={
 				<>
 					{isRequired ? (
