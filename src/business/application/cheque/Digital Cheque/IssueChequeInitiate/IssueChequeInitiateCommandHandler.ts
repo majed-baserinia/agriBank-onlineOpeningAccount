@@ -18,7 +18,7 @@ export class IssueChequeInitiateCommandHandler
 			dueDate: value.dueDate,
 			description: value.description,
 			reason: value.reason,
-			receivers: value.receivers
+			recievers: value.recievers
 		});
 	}
 }

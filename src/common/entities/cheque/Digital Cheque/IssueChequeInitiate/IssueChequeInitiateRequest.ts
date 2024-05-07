@@ -4,7 +4,7 @@ export interface IssueChequeInitiateRequest {
     dueDate: string;
     description: string;
     reason: string;
-    receivers: Reciever[];
+    recievers: Reciever[];
 }
 
 

@@ -8,7 +8,7 @@ export default class IssueChequeInitiateCommand implements IRequest<IssueChequeI
 	dueDate: string;
 	description: string;
 	reason: string;
-	receivers: Reciever[];
+	recievers: Reciever[];
 
 	constructor(InqueryNationalIdCommand: IssueChequeInitiateCommand) {
 		this.sayadNo = InqueryNationalIdCommand.sayadNo;
@@ -16,6 +16,6 @@ export default class IssueChequeInitiateCommand implements IRequest<IssueChequeI
 		this.dueDate = InqueryNationalIdCommand.dueDate;
 		this.description = InqueryNationalIdCommand.description;
 		this.reason = InqueryNationalIdCommand.reason;
-		this.receivers = InqueryNationalIdCommand.receivers;
+		this.recievers = InqueryNationalIdCommand.recievers;
 	}
 }

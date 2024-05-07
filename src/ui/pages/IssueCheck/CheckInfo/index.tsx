@@ -120,7 +120,9 @@ export default function CheckInfo() {
 										render={({ field }) => (
 											<DatePickerAdapter
 												placeHolder={t('date')}
-												onChange={(date) => field.onChange(date)}
+												onChange={(date) => {
+													field.onChange(date?.toString());
+												}}
 												error={!!formState?.errors?.date}
 												helperText={formState?.errors?.date?.message}
 											/>
