@@ -56,7 +56,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 				/>
 			) : null
 		);
-	}, [success, error]);
+	}, [success, error,defaultValue]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const originalValue = event.target.value;

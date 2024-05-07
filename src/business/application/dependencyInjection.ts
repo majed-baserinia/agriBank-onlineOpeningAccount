@@ -34,3 +34,6 @@ export * from './cheque/Digital Cheque/Verify Otp/VerifyOtpCommandValidator';
 
 export * from './cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateCommand';
 export * from './cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateCommandHandler';
+
+export * from './cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommand';
+export * from './cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommandValidator';

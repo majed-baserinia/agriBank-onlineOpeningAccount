@@ -109,5 +109,6 @@
 	"notEmptyRecieverNameText": "نام نمیتواند خالی باشد",
 	"nationalNo_MUST_HAVE_A_VALUE": "شناسه نمیتواند خالی باشد",
 	"addReceiversText": "دریافت‌کنندگان چک را اضافه کنید.",
-	"failedToGetDateFromStoreText": "اطلاعات یافت نشد. لطفا دوباره تلاش کنید"
+	"failedToGetDateFromStoreText": "اطلاعات یافت نشد. لطفا دوباره تلاش کنید",
+	"IdmaxLengthErrorText": "کدز 13 کاراکتر باشد."
 }

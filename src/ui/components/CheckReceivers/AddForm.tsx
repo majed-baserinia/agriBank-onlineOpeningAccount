@@ -2,6 +2,7 @@ import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, Typography, useTheme } from '@mui/material';
 import AddReceiversformValidationCommand from 'business/application/cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommand';
 import useInqueryNationalId from 'business/hooks/cheque/Digital Cheque/useInqueryNationalId';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 import { SetStateAction, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -31,8 +32,6 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 	});
 
 	const handleAdd = () => {
-		console.log(getValues());
-
 		//save the data of the person
 		addReceiver({ ...getValues(), customerType: personal ? 1 : 2 });
 
@@ -46,9 +45,17 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 	const handleInquery = () => {
 		//call api for inquery
 		const { nationalNo } = getValues();
-		inqueryNationalId({ nationalId: nationalNo });
-
-		//set the response to form
+		inqueryNationalId(
+			{ nationalId: nationalNo },
+			{
+				onError: (err) => {
+					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+				},
+				onSuccess: () => {
+					//set the response to form
+				}
+			}
+		);
 	};
 
 	const activeButtonStyle = {
@@ -111,7 +118,7 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 						container
 						gap={'8px'}
 						justifyContent={'center'}
-						alignItems={'center'}
+						alignItems={'baseline'}
 					>
 						<Controller
 							control={control}
@@ -124,7 +131,13 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 										isRequired
 										type="number"
 										defaultValue={field.value}
-										onChange={(value) => field.onChange(value)}
+										onChange={(value) => {
+											console.log(field.value);
+
+											field.onChange(value);
+										}}
+										error={!!formState.errors.nationalNo?.message}
+										helperText={formState.errors.nationalNo?.message}
 									/>
 								);
 							}}
@@ -148,7 +161,10 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 									type="text"
 									label={personal ? t('first&lastName') : t('companyName')}
 									isRequired
+									defaultValue={field.value}
 									onChange={(value) => field.onChange(value)}
+									error={!!formState.errors.name?.message}
+									helperText={formState.errors.name?.message}
 								/>
 							);
 						}}
@@ -159,10 +175,13 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 						render={({ field }) => {
 							return (
 								<InputAdapter
-									type="text"
+									type="number"
 									sx={{ flex: 1 }}
 									label={t('optionalShahab')}
+									defaultValue={field.value}
 									onChange={(value) => field.onChange(value)}
+									error={!!formState.errors.shahabNo?.message}
+									helperText={formState.errors.shahabNo?.message}
 								/>
 							);
 						}}
