@@ -1,6 +1,8 @@
 import RegisterChakadCustomerResponse from "common/entities/cheque/activation/firstStep/FirstStepResponse";
 import { create } from "zustand";
 
+
+
  interface RegisterChakadCustomer {
     ActivationKey: RegisterChakadCustomerResponse;
 }

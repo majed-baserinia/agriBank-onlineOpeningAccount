@@ -5,6 +5,7 @@ import ActivationFirstStep from 'ui/pages/activation/ActivationFirstStep';
 import ActivationSecondStep from 'ui/pages/activation/ActivationSecondStep';
 
 import AddRecievers from 'ui/pages/IssueCheck/AddRecievers';
+import OtpCheck from 'ui/pages/IssueCheck/OtpCheck';
 import OverView from 'ui/pages/IssueCheck/OverView';
 import SignatureGroup from 'ui/pages/IssueCheck/SignatureGroup';
 import SignatureRegistration from 'ui/pages/IssueCheck/SignatureRegistration';
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
 			{
 				path: paths.IssueCheck.OverViewPath,
 				element: <OverView />
+			},
+			{
+				path: paths.IssueCheck.OtpCheckPath,
+				element: <OtpCheck />
 			}
 		]
 	}

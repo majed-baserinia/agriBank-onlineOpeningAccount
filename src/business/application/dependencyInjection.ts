@@ -15,3 +15,8 @@ export * from './cheque/Digital Cheque/GetCheckSheets/GetCheckSheetsCommandHandl
 
 export * from './cheque/Digital Cheque/CheckInfoFormValidator/CheckInfoFormValidatorCommand';
 export * from './cheque/Digital Cheque/CheckInfoFormValidator/CheckInfoFormValidatorCommandValidator';
+
+export * from './cheque/Digital Cheque/Send Otp/CheckInitiateOtpCommand';
+
+export * from './cheque/Digital Cheque/Verify Otp/VerifyOtpCommand';
+export * from './cheque/Digital Cheque/Verify Otp/VerifyOtpCommandValidator';

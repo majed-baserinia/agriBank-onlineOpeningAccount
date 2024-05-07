@@ -13,10 +13,10 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 
-import SelectSignature from 'ui/components/SelectSignature';
-import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import infoIcon from 'assets/icon/info-circle.svg';
 import sendAaginIcon from 'assets/icon/refresh-alert.svg';
+import SelectSignature from 'ui/components/SelectSignature';
+import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import { menuList } from '../../HomePage/menuList';
 
 export default function SignatureRegistration() {
@@ -175,7 +175,10 @@ export default function SignatureRegistration() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<ModalOrBottomSheet breackpoint="sm" snapPoints={[400, 0]} >
+			<ModalOrBottomSheet
+				breackpoint="sm"
+				snapPoints={[400, 0]}
+			>
 				<SelectSignature />
 			</ModalOrBottomSheet>
 		</Grid>

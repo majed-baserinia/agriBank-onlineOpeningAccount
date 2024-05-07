@@ -9,6 +9,7 @@ export const paths = {
 		addRecieversPath: '/cheque/Issue/addRecievers',
 		SignatureRegistrationPath: '/cheque/Issue/SignatureRegistration',
 		SignatureGroupPath: '/cheque/Issue/SignatureGroup',
-		OverViewPath: '/cheque/Issue/OverView'
+		OverViewPath: '/cheque/Issue/OverView',
+		OtpCheckPath: '/cheque/Issue/OtpCheck'
 	}
 };
