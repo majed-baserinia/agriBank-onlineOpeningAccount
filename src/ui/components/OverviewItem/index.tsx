@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material';
 
 type Props = {
-	title: string;
-	value: string | number;
+	title?: string;
+	value?: string | number;
 };
 
 export default function OverviewItem(props: Props) {

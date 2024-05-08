@@ -112,5 +112,11 @@
 	"failedToGetDateFromStoreText": "اطلاعات یافت نشد. لطفا دوباره تلاش کنید",
 	"IdmaxLengthErrorText": "کد ملی یا شناسه نباید بیشتر از 13 کاراکتر باشد.",
 	"IdminLengthErrorText": "کد ملی یا شناسه باید بیشتر یا مساوی 10 کاراکتر باشد.",
-	"freignerLable": "اتباع هستم"
+	"freignerLable": "اتباع هستم",
+	"sayadNo": "شناسه صیاد",
+	"checkNo": "شماره چک",
+	"shebaOrigin": "شماره شبا مبدا",
+	"dueDate": "تاریخ سر رسید",
+	"amount": "مبلغ",
+	"signers": "امضا کنندگان"
 }

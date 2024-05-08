@@ -7,16 +7,19 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
+import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
+import { Fragment } from 'react';
 import OverviewItem from 'ui/components/OverviewItem';
 import OverviewParts from 'ui/components/OverviewParts';
+import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from '../../HomePage/menuList';
-import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 
 export default function OverView() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const overviewData = useDataSteps((store) => store.steps.overviewData);
 
 	return (
 		<Grid
@@ -32,7 +35,6 @@ export default function OverView() {
 				md={8}
 			>
 				<BoxAdapter fullWidth={matches}>
-				
 					<Grid
 						minHeight={matches ? 'calc(100vh - 64px)' : 'calc(100vh - 192px)'}
 						container
@@ -65,62 +67,77 @@ export default function OverView() {
 								gap={'16px'}
 							>
 								<OverviewItem
-									title="test"
-									value={'ssdfasd'}
+									title={t('sayadNo')}
+									value={overviewData?.sayadNo}
 								/>
 								<OverviewItem
-									title="test"
-									value={'ssdfasd'}
+									title={t('checkNo')}
+									value={overviewData?.sayadNo}
 								/>
 								<Divider />
 								<OverviewItem
-									title="test"
-									value={'ssdfasd'}
+									title={t('shebaOrigin')}
+									value={overviewData?.sayadNo}
 								/>
 								<OverviewItem
-									title="test"
-									value={'ssdfasd'}
+									title={t('amount')}
+									value={overviewData?.amount}
 								/>
 								<OverviewItem
-									title="test"
-									value={'ssdfasd'}
+									title={t('amount')}
+									value={overviewData?.dueDate}
 								/>
 								<OverviewItem
-									title="test"
-									value={'ssdfasd'}
+									title={t('reason')}
+									value={overviewData?.reason}
 								/>
 								<Divider />
 							</Grid>
 							<Grid>
-								<Typography>sharh</Typography>
-								<Typography>text</Typography>
+								<Typography>{t('description')}</Typography>
+								<Typography>{overviewData?.description}</Typography>
 							</Grid>
 							<Grid
 								sx={{
 									border: `1px solid ${theme.palette.divider}`,
 									borderRadius: '16px',
 									padding: '16px',
-                                    margin:"16px 0"
+									margin: '16px 0'
 								}}
 							>
-								<Typography>دریافت کنندکان</Typography>
-								<OverviewParts
-									name="afasdf"
-									IDCode={'2012311321'}
-									shahabCode={21214}
-								/>
-                                <Divider />
-								<OverviewParts
-									name="afasdf"
-									comprehensiveCode={'2012311321'}
-								/>
+								<Typography>{t('recivers')}</Typography>
+								{overviewData?.recievers?.map((receiver, index) => {
+									return (
+										<Fragment key={receiver.name}>
+											<OverviewParts
+												name={receiver.name}
+												IDCode={receiver.nationalNo}
+												shahabCode={receiver.shahabNo}
+											/>
+											{overviewData.recievers.length - 1 === index ? <Divider /> : null}
+										</Fragment>
+									);
+								})}
+
+								<Typography sx={{ marginTop: '16px' }}>{t('signers')}</Typography>
 								
-								<Typography sx={{marginTop: "16px"}}>امضا کنندکان</Typography>
+								{/* {overviewData?.signers?.map((signer, index) => {
+									return (
+										<Fragment key={signer.groupNumber}>
+											<OverviewParts
+												name={receiver.name}
+												IDCode={receiver.nationalNo}
+												
+											/>
+											{overviewData.recievers.length - 1 === index ? <Divider /> : null}
+										</Fragment>
+									);
+								})} */}
 								<OverviewParts
 									name="afasdf"
 									IDCode={'2012311321'}
 								/>
-                                <Divider />
+								<Divider />
 								<OverviewParts
 									name="afasdf"
 									IDCode={'2012311321'}
@@ -140,7 +157,6 @@ export default function OverView() {
 							</ButtonAdapter>
 						</Grid>
 					</Grid>
-		
 				</BoxAdapter>
 			</Grid>
 			{matches ? null : (
@@ -154,6 +170,7 @@ export default function OverView() {
 					</BoxAdapter>
 				</Grid>
 			)}
+			<Loader showLoader={!overviewData} />
 		</Grid>
 	);
 }
