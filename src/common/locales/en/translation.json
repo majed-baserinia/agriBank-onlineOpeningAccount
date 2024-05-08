@@ -111,5 +111,6 @@
 	"addReceiversText": "Add check recipients",
 	"failedToGetDateFromStoreText": "There is no data. please try again",
 	"IdmaxLengthErrorText": "National ID or Universal ID should not be less than 13 character",
-	"IdminLengthErrorText": "National ID or Universal ID should not be equal or more than 10 character"
+	"IdminLengthErrorText": "National ID or Universal ID should not be equal or more than 10 character",
+	"freignerLable": "i am Citizen"
 }

@@ -8,16 +8,17 @@ import { SetStateAction, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
+import CheckboxAdapter from 'ui/htsc-components/CheckboxAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
 
 export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<boolean>) => void }) {
 	const theme = useTheme();
 	const { t } = useTranslation();
-	const { addReceiver, steps } = useDataSteps((store) => store);
-
+	const { addReceiver } = useDataSteps((store) => store);
 	const { data: inqueriedData, isLoading, mutate: inqueryNationalId } = useInqueryNationalId();
 
 	const [personal, setPersonal] = useState(true);
+	const [checkedForeigner, setCheckedForeigner] = useState(false);
 
 	const { control, formState, getValues, handleSubmit, reset } = useForm<AddReceiversformValidationCommand>({
 		resolver: (values, context, options) => {
@@ -33,7 +34,7 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 
 	const handleAdd = () => {
 		//save the data of the person
-		addReceiver({ ...getValues(), customerType: personal ? 1 : 2 });
+		addReceiver({ ...getValues(), customerType: detectCustomerType(personal, checkedForeigner) });
 
 		//reset the form
 		reset();
@@ -186,6 +187,13 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 							);
 						}}
 					/>
+
+					<CheckboxAdapter
+						label={t('freignerLable')}
+						onChange={(checked) => setCheckedForeigner(checked)}
+						checked={checkedForeigner}
+					/>
+
 					<ButtonAdapter
 						variant="contained"
 						onClick={handleSubmit(handleAdd)}
@@ -197,3 +205,11 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 		</Grid>
 	);
 }
+
+const detectCustomerType = (personal: boolean, checkedForeigner: boolean): 1 | 2 | 3 | 4 => {
+	if (personal) {
+		return checkedForeigner ? 3 : 1;
+	} else {
+		return checkedForeigner ? 4 : 2;
+	}
+};

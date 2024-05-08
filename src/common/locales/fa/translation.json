@@ -111,5 +111,6 @@
 	"addReceiversText": "دریافت‌کنندگان چک را اضافه کنید.",
 	"failedToGetDateFromStoreText": "اطلاعات یافت نشد. لطفا دوباره تلاش کنید",
 	"IdmaxLengthErrorText": "کد ملی یا شناسه نباید بیشتر از 13 کاراکتر باشد.",
-	"IdminLengthErrorText": "کد ملی یا شناسه باید بیشتر یا مساوی 10 کاراکتر باشد."
+	"IdminLengthErrorText": "کد ملی یا شناسه باید بیشتر یا مساوی 10 کاراکتر باشد.",
+	"freignerLable": "اتباع هستم"
 }
