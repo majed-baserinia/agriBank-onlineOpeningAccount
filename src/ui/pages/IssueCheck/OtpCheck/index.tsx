@@ -5,7 +5,6 @@ import sendAaginIcon from 'assets/icon/refresh-alert.svg';
 import CheckInitiateOtpCommand from 'business/application/cheque/Digital Cheque/Send Otp/CheckInitiateOtpCommand';
 import VerifyOtpCommand from 'business/application/cheque/Digital Cheque/Verify Otp/VerifyOtpCommand';
 import useCheckInitiateOtp from 'business/hooks/cheque/Digital Cheque/useCheckInitiateOtp';
-import useSecondStepCall from 'business/hooks/cheque/activation/useSecondStepCall';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 import { useEffect, useState } from 'react';
@@ -33,10 +32,6 @@ export default function OtpCheck() {
 	const [IsSendAgain, setSendAgain] = useState(false);
 
 	const GetStepData = useDataSteps((s) => s.steps.signitureRequirementData);
-	const { setStepData, steps } = useDataSteps((store) => store);
-	//const activationKey = '3fa85f64-5717-4562-b3fc-2c963f66afa6'; // useAccountChargeStore((s) => s.activationKeyStore.ActivationKey);
-	const { mutate: sendAgain } = useSecondStepCall();
-	//const { mutate: CheckInitiateOtpMutate, handleSubmit } = useCheckInitiateOtp();
 	const {
 		data: CheckInitiateOtpData,
 		mutate: CheckInitiateOtpMutate,
@@ -150,6 +145,7 @@ export default function OtpCheck() {
 							) : null}
 
 							<Grid
+								minHeight={matches ? 'calc(20vh - 4px)' : 'calc(20vh - 50px)'}
 								container
 								flexWrap={'nowrap'}
 								gap={'8px'}
@@ -166,8 +162,13 @@ export default function OtpCheck() {
 								</Typography>
 							</Grid>
 							<Grid
-								container
-								alignItems={'baseline'}
+								item
+								xs={12}
+								sm={12}
+								md={6}
+								lg={6}
+								xl={6}
+								sx={{ order: { xs: 1, sm: 1, md: 1, lg: 1, xl: 1 } }}
 							>
 								<Controller
 									name="otpCode"
@@ -190,6 +191,7 @@ export default function OtpCheck() {
 							<Grid
 								container
 								alignItems={'baseline'}
+								gap={8}
 							>
 								{/* TODO add timer */}
 								<Typography

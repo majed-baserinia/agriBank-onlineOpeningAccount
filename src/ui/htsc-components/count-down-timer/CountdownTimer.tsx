@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material';
 import { useEffect } from 'react';
 import { useCountDownTimer } from 'ui/htsc-components/count-down-timer/useCountDownTimer';
 
@@ -13,7 +14,7 @@ const CountDownTimer = ({ timerInSeconds, onCountDownStarted, onCountDownEnded }
 		onCountDownStarted: onCountDownStarted,
 		onCountDownEnded: onCountDownEnded
 	});
-
+	const theme = useTheme();
 	useEffect(() => {
 		if (timerInSeconds === undefined) {
 			return;
@@ -23,7 +24,7 @@ const CountDownTimer = ({ timerInSeconds, onCountDownStarted, onCountDownEnded }
 
 	return (
 		<span
-			style={{ color: 'black' }}
+			style={{ color: theme.palette.text.secondary }}
 			className={`px-2 ${!isTimerCounting ? 'hidden' : ''}`}
 		>
 			{beautifyTime(countDownTimer ?? 0)}

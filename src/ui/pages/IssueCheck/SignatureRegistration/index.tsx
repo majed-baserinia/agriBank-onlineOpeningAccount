@@ -1,8 +1,6 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import useSecondStepCall from 'business/hooks/cheque/activation/useSecondStepCall';
 import useThirdStepCall from 'business/hooks/cheque/activation/useThirdStepCall';
-import { pushAlert } from 'business/stores/AppAlertsStore';
-import { useAccountChargeStore } from 'business/stores/Chakad/ChakadQueryStore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -15,10 +13,10 @@ import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 
 import infoIcon from 'assets/icon/info-circle.svg';
 import sendAaginIcon from 'assets/icon/refresh-alert.svg';
+import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 import SelectSignature from 'ui/components/SelectSignature';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import { menuList } from '../../HomePage/menuList';
-import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 
 export default function SignatureRegistration() {
 	const theme = useTheme();
@@ -34,8 +32,8 @@ export default function SignatureRegistration() {
 	const { mutate: submition } = useThirdStepCall();
 
 	useEffect(() => {
-		console.log({steps});
-		
+		console.log({ steps });
+
 		// sendAgain(activationKey, {
 		// 	onError: (err) => {
 		// 		pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
