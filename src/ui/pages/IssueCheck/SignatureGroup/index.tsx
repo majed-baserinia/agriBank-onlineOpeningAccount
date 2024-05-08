@@ -8,7 +8,7 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import { menuList } from '../../HomePage/menuList';
 import infoIcon from 'assets/icon/info-circle.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DraggableList from 'ui/components/DraggableList';
 import RadioButtonOpenable from 'ui/components/RadioButtonOpenable';
 import ModalOrPage from 'ui/htsc-components/ModalOrPage';
@@ -22,6 +22,10 @@ export default function SignatureGroup() {
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 	const [value, setValue] = useState('q');
 
+	const{data}=use
+	useEffect(() => {
+
+	})
 	return (
 		<Grid
 			container
