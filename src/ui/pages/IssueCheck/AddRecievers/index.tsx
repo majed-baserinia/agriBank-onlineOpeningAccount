@@ -26,7 +26,7 @@ export default function AddReceivers() {
 	const { isLoading, mutate: issueChequeInitiate } = useIssueChequeInitiate();
 
 	useEffect(() => {
-		if (!steps.firstStep) {
+		if (!steps.selectdCheckSheet) {
 			pushAlert({
 				type: 'error',
 				hasConfirmAction: true,
@@ -35,7 +35,7 @@ export default function AddReceivers() {
 			});
 		}
 
-		if (!steps.secondStep) {
+		if (!steps.issueCheckDetail) {
 			pushAlert({
 				type: 'error',
 				hasConfirmAction: true,
@@ -46,18 +46,15 @@ export default function AddReceivers() {
 	}, []);
 
 	const handleSubmitToNextLevel = () => {
-		const { firstStep, secondStep, receivers } = steps;
+		const { selectdCheckSheet, issueCheckDetail, receivers } = steps;
 
 		// Check if all necessary steps and data exist
-		if (!firstStep || !firstStep.selectdCheckSheet || !secondStep || !secondStep.issueCheckDetail) {
+		if (!selectdCheckSheet || !issueCheckDetail) {
 			return null;
 		}
 
-		const selectedCheckSheet = firstStep?.selectdCheckSheet;
-		const issueCheckDetail = secondStep?.issueCheckDetail;
-
 		const preparedData: IssueChequeInitiateRequest = {
-			sayadNo: selectedCheckSheet?.sayadNo,
+			sayadNo: selectdCheckSheet?.sayadNo,
 			amount: Number(issueCheckDetail?.checkAmount),
 			dueDate: issueCheckDetail?.date,
 			description: issueCheckDetail?.description,

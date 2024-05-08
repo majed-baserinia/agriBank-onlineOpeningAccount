@@ -36,9 +36,7 @@ export default function CheckInfo() {
 
 	const handleNextStep = () => {
 		setDataForNextStep({
-			secondStep: {
-				issueCheckDetail: getValues()
-			}
+			issueCheckDetail: getValues()
 		});
 
 		navigate(paths.IssueCheck.addReceiversPath);

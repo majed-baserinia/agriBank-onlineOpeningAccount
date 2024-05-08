@@ -1,20 +1,22 @@
 import { Dialog, PaperProps, useMediaQuery, useTheme } from '@mui/material';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import Sheet from 'react-modal-sheet';
 
 type Props = {
 	breackpoint: 'md' | 'sm' | 'lg' | 'xs';
 	children: ReactNode;
-    snapPoints?: number[]
-	ModalpaperProps?: PaperProps
+	snapPoints?: number[];
+	ModalpaperProps?: PaperProps;
+	open: boolean;
+	setOpen: (value: boolean) => void;
 };
 
 export default function ModalOrBottomSheet(props: Props) {
-	const { breackpoint, children, snapPoints =  [450, 0], ModalpaperProps} = props;
+	const { breackpoint, children, snapPoints = [450, 0], ModalpaperProps, open, setOpen } = props;
 	const theme = useTheme();
 	const isMatched = useMediaQuery(theme.breakpoints.down(breackpoint));
 
-	const [open, setOpen] = useState(true);
+	//const [open, setOpen] = useState(true);
 
 	return isMatched ? (
 		<Sheet

@@ -13,6 +13,7 @@ import DraggableList from 'ui/components/DraggableList';
 import RadioButtonOpenable from 'ui/components/RadioButtonOpenable';
 import ModalOrPage from 'ui/htsc-components/ModalOrPage';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
+import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 
 export default function SignatureGroup() {
 	const navigate = useNavigate();
@@ -21,8 +22,10 @@ export default function SignatureGroup() {
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 	const [value, setValue] = useState('q');
+	const { steps, setStepData } = useDataSteps((store) => store);
 
-	const{data}=use
+	console.log(steps);
+	
 	useEffect(() => {
 
 	})

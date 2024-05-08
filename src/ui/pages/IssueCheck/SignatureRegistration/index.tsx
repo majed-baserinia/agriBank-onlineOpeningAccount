@@ -1,6 +1,4 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
-import useSecondStepCall from 'business/hooks/cheque/activation/useSecondStepCall';
-import useThirdStepCall from 'business/hooks/cheque/activation/useThirdStepCall';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -13,79 +11,73 @@ import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 
 import infoIcon from 'assets/icon/info-circle.svg';
 import sendAaginIcon from 'assets/icon/refresh-alert.svg';
+import useIssueChequeInitiateSignature from 'business/hooks/cheque/Digital Cheque/useIssueChequeInitiateSignature';
+import useIssueChequeVerifyInitiate from 'business/hooks/cheque/Digital Cheque/useIssueChequeVerifyInitiate';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 import SelectSignature from 'ui/components/SelectSignature';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
+import Loader from 'ui/htsc-components/loader/Loader';
+import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
 
 export default function SignatureRegistration() {
 	const theme = useTheme();
-	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { t } = useTranslation();
 	const navigate = useNavigate();
-
-	const [open, setOpen] = useState(false);
-
+	const { t } = useTranslation();
+	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { steps, setStepData } = useDataSteps((store) => store);
 
-	const { mutate: sendAgain } = useSecondStepCall();
-	const { mutate: submition } = useThirdStepCall();
+	const [openModal, setOpenModal] = useState(false);
+	const [selectedSigniture, setSelectedSigniture] = useState<'group' | 'myslef'>();
+	const { mutate: issueChequeInitiateSignature } = useIssueChequeInitiateSignature();
+	const { mutate: issueChequeVerifyInitiate, isLoading } = useIssueChequeVerifyInitiate();
 
 	useEffect(() => {
-		console.log({ steps });
-
-		// sendAgain(activationKey, {
-		// 	onError: (err) => {
-		// 		pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-		// 	}
-		// });
+		handleIssueChequeInitiateSignature();
 	}, []);
 
-	const handleSendAgain = () => {
-		// sendAgain(activationKey, {
-		// 	onSuccess: (response) => {
-		// 		pushAlert({
-		// 			type: 'info',
-		// 			messageText: response.message,
-		// 			hasConfirmAction: true
-		// 		});
-		// 	},
-		// 	onError: (err) => {
-		// 		pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-		// 	}
-		// });
+	const handleIssueChequeInitiateSignature = () => {
+		issueChequeInitiateSignature(
+			{ issueChequeKey: steps.signitureRequirementData?.issueChequeKey! },
+			{
+				onError: (err) => {
+					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+				},
+				onSuccess: (res) => {
+					pushAlert({ type: 'info', messageText: res.message, hasConfirmAction: true });
+				}
+			}
+		);
 	};
 
-	const handleSubmit = () => {
-		// submition(activationKey, {
-		//   onSuccess: (response) => {
-		//     setIsThirdStep(true);
-		//     pushAlert({
-		//       type: "success",
-		//       messageText: response.message,
-		//       hasConfirmAction: true,
-		//       actions: {
-		//         onCloseModal: () => navigate("/cheque"),
-		//         onConfirm: () => navigate("/cheque")
-		//       }
-		//     });
-		//   },
-		//   onError: (err) => {
-		//     if (err.status == 453) {
-		//       pushAlert({
-		//         type: "error",
-		//         messageText: err.detail,
-		//         hasConfirmAction: true,
-		//         actions: {
-		//           onCloseModal: () => navigate("/cheque"),
-		//           onConfirm: () => navigate("/cheque")
-		//         }
-		//       });
-		//     }
-		//     pushAlert({ type: "error", messageText: err.detail, hasConfirmAction: true });
-		//   }
-		// });
-	};
+	useEffect(() => {
+		if (selectedSigniture) {
+			const requestData = {
+				issueChequeKey: steps.signitureRequirementData?.issueChequeKey!,
+				otpCode: '',
+				signSingleSignatureLegal: selectedSigniture === 'myslef'
+			};
+
+			issueChequeVerifyInitiate(requestData, {
+				onError: (err) => {
+					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+				},
+				onSuccess: (res) => {
+					if (res.needInquiryWithDrawalGroup) {
+						if (selectedSigniture === 'myslef') {
+							setStepData({ overviewData: res.issueChequeOverView });
+						}
+						navigate(paths.IssueCheck.OverViewPath);
+					} else {
+						navigate(paths.IssueCheck.SignatureGroupPath);
+					}
+				}
+			});
+		}
+	}, [selectedSigniture]);
+
+	console.log(selectedSigniture);
 
 	return (
 		<Grid
@@ -143,7 +135,7 @@ export default function SignatureRegistration() {
 								alignItems={'baseline'}
 							>
 								<Typography sx={{ margin: '0 24px' }}>{t('dontRecieveMessage')}</Typography>
-								<ButtonAdapter onClick={handleSendAgain}>
+								<ButtonAdapter onClick={handleIssueChequeInitiateSignature}>
 									{t('sendAgain')}
 									<span>
 										<SvgToIcon
@@ -159,7 +151,7 @@ export default function SignatureRegistration() {
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%' } }}
-								onClick={handleSubmit}
+								onClick={() => setOpenModal(true)}
 							>
 								{t('FinalSignatureRegistration')}
 							</ButtonAdapter>
@@ -180,9 +172,12 @@ export default function SignatureRegistration() {
 			<ModalOrBottomSheet
 				breackpoint="sm"
 				snapPoints={[400, 0]}
+				open={openModal}
+				setOpen={setOpenModal}
 			>
-				<SelectSignature />
+				<SelectSignature setSelectedSigniture={setSelectedSigniture} />
 			</ModalOrBottomSheet>
+			<Loader showLoader={isLoading} />
 		</Grid>
 	);
 }

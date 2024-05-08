@@ -1,22 +1,21 @@
 import { CheckSheet } from 'common/entities/cheque/Digital Cheque/GetChecksheets/GetChecksheetsResponse';
 import { Reciever } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
+import { issueChequeOverView } from 'common/entities/cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVerifyInitiateResponse';
 import { create } from 'zustand';
 
 interface DataSteps {
 	steps: {
-		firstStep?: {
-			selectdCheckSheet: CheckSheet;
+		selectdCheckSheet?: CheckSheet;
+		issueCheckDetail?: {
+			checkAmount: string;
+			date: string;
+			reason: { name: string; value: string };
+			description: string;
 		};
-		secondStep?: {
-			issueCheckDetail: {
-				checkAmount: string;
-				date: string;
-				reason: { name: string; value: string };
-				description: string;
-			};
-		};
+
 		receivers: Reciever[];
 		signitureRequirementData?: { issueChequeKey: string; isSingleSignatureLegal: boolean };
+		overviewData?: issueChequeOverView;
 	};
 	addReceiver: (receiver: Reciever) => void;
 	removeReceiver: (nationalNo: string) => void;

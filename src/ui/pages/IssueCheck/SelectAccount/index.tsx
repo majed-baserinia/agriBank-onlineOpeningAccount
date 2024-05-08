@@ -49,9 +49,7 @@ export default function SelectAccount() {
 	const handleNextStep = () => {
 		//save the needed data for next page
 		setDataForNextStep({
-			firstStep: {
-				selectdCheckSheet: selectedChecksheet
-			}
+			selectdCheckSheet: selectedChecksheet
 		});
 
 		//navigate next page
