@@ -37,3 +37,6 @@ export * from './cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateCo
 
 export * from './cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommand';
 export * from './cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommandValidator';
+
+export * from './cheque/Digital Cheque/Inquiry With drawal groups/InquiryWithDrawalGroupsCommand';
+export * from './cheque/Digital Cheque/Inquiry With drawal groups/InquiryWithDrawalGroupsCommandHandler';
