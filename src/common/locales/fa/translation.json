@@ -118,5 +118,9 @@
 	"shebaOrigin": "شماره شبا مبدا",
 	"dueDate": "تاریخ سر رسید",
 	"amount": "مبلغ",
-	"signers": "امضا کنندگان"
+	"signers": "امضا کنندگان",
+	"universalIDCol": "شناسه فراگیر:" ,
+	"ShahabCodeTCol": " | کد شهاب:",
+	"nationalIdCol": "کد ملی:",
+	"iDCodeCol": "کد شناسه:"
 }

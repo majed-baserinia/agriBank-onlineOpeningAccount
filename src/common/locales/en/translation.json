@@ -118,5 +118,9 @@
 	"shebaOrigin": "Origin Sheba Number",
 	"dueDate": "Due Date",
 	"amount": "Amount",
-	"signers": "signers"
+	"signers": "signers",
+	"universalIDCol": "Universal ID",
+	"ShahabCodeTCol": " | Shahab Number:",
+	"nationalIdCol": "National Id:",
+	"iDCodeCol": "ID Code :"
 }

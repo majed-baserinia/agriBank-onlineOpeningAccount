@@ -1,21 +1,41 @@
 import { Grid, Typography } from '@mui/material';
+import { t } from 'i18next';
+import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+
+type SignerData = {
+	customerNumber: number;
+	name: string;
+};
+
+type ReceiverData = {
+	name: string;
+	shahabNo: string;
+	nationalNo: string;
+	customerType: 1 | 2 | 3 | 4;
+};
 
 type Props =
 	| {
-			name: string;
-			shahabCode?: string | number;
-			IDCode: string | number;
-			comprehensiveCode?: never;
+			type: 'receiver';
+			receiverData: ReceiverData;
 	  }
 	| {
-			name: string;
-			shahabCode?: string | number;
-			comprehensiveCode: string | number;
-			IDCode?: never;
+			type: 'signer';
+			signerData: SignerData;
 	  };
 
 export default function OverviewParts(props: Props) {
-	const { name, shahabCode, IDCode, comprehensiveCode } = props;
+	const { type } = props;
+	const data = useRef<ReceiverData | SignerData>();
+
+	if (type === 'signer') {
+		data.current = props.signerData;
+	}
+
+	if (type === 'receiver') {
+		data.current = props.receiverData;
+	}
 
 	return (
 		<Grid
@@ -25,31 +45,53 @@ export default function OverviewParts(props: Props) {
 			alignItems={'start'}
 			sx={{ padding: '16px' }}
 		>
-			<Grid>{name}</Grid>
+			<Grid>{data?.current?.name}</Grid>
 			<Grid
 				container
 				gap={'4px'}
 				justifyContent={'start'}
 			>
-				{IDCode ? (
-					<>
-						<Typography variant="body2">IDCode:</Typography>
-						<Typography variant="body2">{IDCode}</Typography>
-					</>
-				) : null}
-				{comprehensiveCode ? (
-					<>
-						<Typography variant="body2">comprehensiveCode:</Typography>
-						<Typography variant="body2">{comprehensiveCode}</Typography>
-					</>
-				) : null}
-				{shahabCode ? (
-					<>
-						<Typography variant="body2"> | shahab:</Typography>
-						<Typography variant="body2">{shahabCode}</Typography>{' '}
-					</>
-				) : null}
+				{type === 'receiver' ? (
+					<ReceiverComp {...(data.current as ReceiverData)} />
+				) : (
+					<SignerComp {...(data.current as SignerData)} />
+				)}
 			</Grid>
 		</Grid>
 	);
 }
+
+const SignerComp = (props: SignerData) => {
+	const { customerNumber } = props;
+	return (
+		<>
+			<Typography variant="body2">{t('iDCodeCol')}</Typography>
+			<Typography variant="body2">{customerNumber}</Typography>
+		</>
+	);
+};
+
+const ReceiverComp = (props: ReceiverData) => {
+	const { customerType, nationalNo, shahabNo } = props;
+	const { t } = useTranslation();
+
+	const customerTypeMap: { [key: number]: string } = {
+		1: t('nationalIdCol'),
+		2: t('nationalIdCol'),
+		3: t('universalIDCol'),
+		4: t('nationalIdCol')
+	};
+
+	return (
+		<>
+			<Typography variant="body2">{customerTypeMap?.[customerType]}</Typography>
+			<Typography variant="body2">{nationalNo}</Typography>
+			{shahabNo && (
+				<>
+					<Typography variant="body2">{t('ShahabCodeTCol')}</Typography>
+					<Typography variant="body2">{shahabNo}</Typography>{' '}
+				</>
+			)}
+		</>
+	);
+};

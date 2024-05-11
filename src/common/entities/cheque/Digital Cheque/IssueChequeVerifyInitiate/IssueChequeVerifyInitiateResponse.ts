@@ -29,5 +29,5 @@ type Recievers = {
 	name: string;
 	shahabNo: string;
 	nationalNo: string;
-	customerTypeDescription: string;
+	customerType: 1 | 2 | 3 | 4;
 }[];

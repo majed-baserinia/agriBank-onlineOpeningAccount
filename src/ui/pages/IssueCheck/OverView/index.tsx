@@ -7,7 +7,7 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
-import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
+import { issueChequeOverView } from 'common/entities/cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVerifyInitiateResponse';
 import { Fragment } from 'react';
 import OverviewItem from 'ui/components/OverviewItem';
 import OverviewParts from 'ui/components/OverviewParts';
@@ -19,8 +19,67 @@ export default function OverView() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const overviewData = useDataSteps((store) => store.steps.overviewData);
+	//const overviewData = useDataSteps((store) => store.steps.overviewData);
 
+	const overviewData: issueChequeOverView = {
+		amount: 212,
+		description: 'advdsvds',
+		dueDate: '222222',
+		reason: 'dsv dsvds',
+		recievers: [
+			{
+				customerType:4,
+				name: 'name',
+				nationalNo: '321123123',
+				shahabNo: ''
+			},
+			{
+				customerType: 3,
+				name: 'name',
+				nationalNo: '321123123',
+				shahabNo: '4142'
+			},
+			{
+				customerType: 2,
+				name: 'name',
+				nationalNo: '321123123',
+				shahabNo: '4142'
+			},
+			{
+				customerType: 1,
+				name: 'name',
+				nationalNo: '321123123',
+				shahabNo: '4142'
+			}
+		],
+		sayadNo: 3232413.2,
+		seri: '21321',
+		serial: '324324',
+		signers: [
+			{
+				withdrawalGroups: [
+					{
+						customerNumber: 3241534135,
+						name: 'name'
+					},
+					{
+						customerNumber: 3241534135,
+						name: 'name'
+					},
+					{
+						customerNumber: 3241534135,
+						name: 'name'
+					},
+					{
+						customerNumber: 3241534135,
+						name: 'name'
+					}
+				],
+				groupNumber: 'grupnumber'
+			}
+		],
+		toIBAN: '463543'
+	};
 	return (
 		<Grid
 			container
@@ -84,7 +143,7 @@ export default function OverView() {
 									value={overviewData?.amount}
 								/>
 								<OverviewItem
-									title={t('amount')}
+									title={t('dueDate')}
 									value={overviewData?.dueDate}
 								/>
 								<OverviewItem
@@ -110,38 +169,27 @@ export default function OverView() {
 									return (
 										<Fragment key={receiver.name}>
 											<OverviewParts
-												name={receiver.name}
-												IDCode={receiver.nationalNo}
-												shahabCode={receiver.shahabNo}
+												type="receiver"
+												receiverData={{ ...receiver }}
 											/>
-											{overviewData.recievers.length - 1 === index ? <Divider /> : null}
+											{overviewData.recievers.length - 1 != index ? <Divider /> : null}
 										</Fragment>
 									);
 								})}
 
 								<Typography sx={{ marginTop: '16px' }}>{t('signers')}</Typography>
-								
-								{/* {overviewData?.signers?.map((signer, index) => {
+
+								{overviewData?.signers[0].withdrawalGroups?.map((signer, index) => {
 									return (
-										<Fragment key={signer.groupNumber}>
+										<Fragment key={index}>
 											<OverviewParts
-												name={receiver.name}
-												IDCode={receiver.nationalNo}
-												
+												type="signer"
+												signerData={{ ...signer }}
 											/>
-											{overviewData.recievers.length - 1 === index ? <Divider /> : null}
+											{overviewData.recievers.length - 1 != index ? <Divider /> : null}
 										</Fragment>
 									);
-								})} */}
-								<OverviewParts
-									name="afasdf"
-									IDCode={'2012311321'}
-								/>
-								<Divider />
-								<OverviewParts
-									name="afasdf"
-									IDCode={'2012311321'}
-								/>
+								})}
 							</Grid>
 						</Grid>
 
