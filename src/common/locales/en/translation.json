@@ -122,5 +122,6 @@
 	"universalIDCol": "Universal ID",
 	"ShahabCodeTCol": " | Shahab Number:",
 	"nationalIdCol": "National Id:",
-	"iDCodeCol": "ID Code :"
+	"iDCodeCol": "ID Code :",
+	"Internal Error":"Internal Error"
 }

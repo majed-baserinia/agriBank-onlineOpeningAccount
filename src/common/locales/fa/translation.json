@@ -122,5 +122,6 @@
 	"universalIDCol": "شناسه فراگیر:" ,
 	"ShahabCodeTCol": " | کد شهاب:",
 	"nationalIdCol": "کد ملی:",
-	"iDCodeCol": "کد شناسه:"
+	"iDCodeCol": "کد شناسه:",
+	"Internal Error": "خطای داخلی"
 }

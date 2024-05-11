@@ -40,7 +40,7 @@ const refreshToken = async (refreshToken: string): Promise<string | undefined> =
     return newIdToken;
   } catch (error) {
     clearAuth();
-    window.location.href = "/login";
+    window.location.href = "/";    
     // throw error;
   }
 };
