@@ -4,6 +4,7 @@ export interface IssueChequeInitiateRequest {
     dueDate: string;
     description: string;
     reason: string;
+    toIban?: string;
     recievers: Reciever[];
 }
 

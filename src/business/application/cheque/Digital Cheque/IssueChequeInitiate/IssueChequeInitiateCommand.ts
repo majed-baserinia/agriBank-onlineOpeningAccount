@@ -8,6 +8,7 @@ export default class IssueChequeInitiateCommand implements IRequest<IssueChequeI
 	dueDate: string;
 	description: string;
 	reason: string;
+	toIban?: string;
 	recievers: Reciever[];
 
 	constructor(InqueryNationalIdCommand: IssueChequeInitiateCommand) {
@@ -17,5 +18,6 @@ export default class IssueChequeInitiateCommand implements IRequest<IssueChequeI
 		this.description = InqueryNationalIdCommand.description;
 		this.reason = InqueryNationalIdCommand.reason;
 		this.recievers = InqueryNationalIdCommand.recievers;
+		this.toIban = InqueryNationalIdCommand.toIban;
 	}
 }

@@ -18,7 +18,8 @@ export class IssueChequeInitiateCommandHandler
 			dueDate: value.dueDate,
 			description: value.description,
 			reason: value.reason,
-			recievers: value.recievers
+			recievers: value.recievers,
+			toIban: value.toIban
 		});
 	}
 }
