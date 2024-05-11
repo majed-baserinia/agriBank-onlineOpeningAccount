@@ -18,6 +18,7 @@ import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
 import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
+import Loader from 'ui/htsc-components/loader/Loader';
 
 export default function CheckInfo() {
 	const navigate = useNavigate();
@@ -202,6 +203,7 @@ export default function CheckInfo() {
 					</BoxAdapter>
 				</Grid>
 			)}
+			<Loader showLoader={isPendingtoGetReasons}/>
 		</Grid>
 	);
 }

@@ -77,7 +77,6 @@ export default function SignatureRegistration() {
 		}
 	}, [selectedSigniture]);
 
-	console.log(selectedSigniture);
 
 	return (
 		<Grid

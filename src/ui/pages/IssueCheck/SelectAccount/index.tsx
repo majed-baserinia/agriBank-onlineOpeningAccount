@@ -32,6 +32,7 @@ export default function SelectAccount() {
 	const { data: AccountData, isLoading } = useAccounts();
 	const { data: checkbooks, mutate: getCheckbooks, error: checkbooksError } = useGetCheckbooks();
 	const { data: checksheets, mutate: getChecksheets, error: checksheetsError } = useGetChecksheets();
+	console.log(isLoading);
 
 	const [selectedAccountNumber, setSelectedAccountNumber] = useState('');
 	const [selectedCheckbook, setSelectedCheckbook] = useState<null | {}>(null);
@@ -55,8 +56,6 @@ export default function SelectAccount() {
 		//navigate next page
 		navigate(paths.IssueCheck.CheckInfoPath);
 	};
-
-	if (isLoading) return <Loader showLoader />;
 
 	return (
 		<Grid
@@ -329,6 +328,7 @@ export default function SelectAccount() {
 					</BoxAdapter>
 				</Grid>
 			)}
+			<Loader showLoader={isLoading} />
 		</Grid>
 	);
 }
