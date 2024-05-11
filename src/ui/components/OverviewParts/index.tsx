@@ -2,28 +2,7 @@ import { Grid, Typography } from '@mui/material';
 import { t } from 'i18next';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-
-type SignerData = {
-	customerNumber: number;
-	name: string;
-};
-
-type ReceiverData = {
-	name: string;
-	shahabNo: string;
-	nationalNo: string;
-	customerType: 1 | 2 | 3 | 4;
-};
-
-type Props =
-	| {
-			type: 'receiver';
-			receiverData: ReceiverData;
-	  }
-	| {
-			type: 'signer';
-			signerData: SignerData;
-	  };
+import { Props, ReceiverData, SignerData } from './type';
 
 export default function OverviewParts(props: Props) {
 	const { type } = props;

@@ -7,11 +7,14 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
-import { issueChequeOverView } from 'common/entities/cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVerifyInitiateResponse';
+import useIssueChequeFinalize from 'business/hooks/cheque/Digital Cheque/useIssueChequeFinalize';
+import { pushAlert } from 'business/stores/AppAlertsStore';
+import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 import { Fragment } from 'react';
 import OverviewItem from 'ui/components/OverviewItem';
 import OverviewParts from 'ui/components/OverviewParts';
 import Loader from 'ui/htsc-components/loader/Loader';
+import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
 
 export default function OverView() {
@@ -19,67 +22,94 @@ export default function OverView() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	//const overviewData = useDataSteps((store) => store.steps.overviewData);
+	const { isLoading, mutate: finalSubmit } = useIssueChequeFinalize();
+	const { overviewData, signitureRequirementData } = useDataSteps((store) => store.steps);
 
-	const overviewData: issueChequeOverView = {
-		amount: 212,
-		description: 'advdsvds',
-		dueDate: '222222',
-		reason: 'dsv dsvds',
-		recievers: [
+	const handleSubmit = () => {
+		finalSubmit(
 			{
-				customerType:4,
-				name: 'name',
-				nationalNo: '321123123',
-				shahabNo: ''
+				issueChequeKey: signitureRequirementData?.issueChequeKey!
 			},
 			{
-				customerType: 3,
-				name: 'name',
-				nationalNo: '321123123',
-				shahabNo: '4142'
-			},
-			{
-				customerType: 2,
-				name: 'name',
-				nationalNo: '321123123',
-				shahabNo: '4142'
-			},
-			{
-				customerType: 1,
-				name: 'name',
-				nationalNo: '321123123',
-				shahabNo: '4142'
+				onError: (err) => {
+					pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail });
+				},
+				onSuccess(res) {
+					pushAlert({
+						type: 'success',
+						hasConfirmAction: true,
+						messageText: 'l,tr',
+						actions: {
+							onCloseModal: () => {
+								navigate(paths.Home);
+							}
+						}
+					});
+				}
 			}
-		],
-		sayadNo: 3232413.2,
-		seri: '21321',
-		serial: '324324',
-		signers: [
-			{
-				withdrawalGroups: [
-					{
-						customerNumber: 3241534135,
-						name: 'name'
-					},
-					{
-						customerNumber: 3241534135,
-						name: 'name'
-					},
-					{
-						customerNumber: 3241534135,
-						name: 'name'
-					},
-					{
-						customerNumber: 3241534135,
-						name: 'name'
-					}
-				],
-				groupNumber: 'grupnumber'
-			}
-		],
-		toIBAN: '463543'
+		);
 	};
+
+	// const overviewData: issueChequeOverView = {
+	// 	amount: 212,
+	// 	description: 'advdsvds',
+	// 	dueDate: '222222',
+	// 	reason: 'dsv dsvds',
+	// 	recievers: [
+	// 		{
+	// 			customerType:4,
+	// 			name: 'name',
+	// 			nationalNo: '321123123',
+	// 			shahabNo: ''
+	// 		},
+	// 		{
+	// 			customerType: 3,
+	// 			name: 'name',
+	// 			nationalNo: '321123123',
+	// 			shahabNo: '4142'
+	// 		},
+	// 		{
+	// 			customerType: 2,
+	// 			name: 'name',
+	// 			nationalNo: '321123123',
+	// 			shahabNo: '4142'
+	// 		},
+	// 		{
+	// 			customerType: 1,
+	// 			name: 'name',
+	// 			nationalNo: '321123123',
+	// 			shahabNo: '4142'
+	// 		}
+	// 	],
+	// 	sayadNo: 3232413.2,
+	// 	seri: '21321',
+	// 	serial: '324324',
+	// 	signers: [
+	// 		{
+	// 			withdrawalGroups: [
+	// 				{
+	// 					customerNumber: 3241534135,
+	// 					name: 'name'
+	// 				},
+	// 				{
+	// 					customerNumber: 3241534135,
+	// 					name: 'name'
+	// 				},
+	// 				{
+	// 					customerNumber: 3241534135,
+	// 					name: 'name'
+	// 				},
+	// 				{
+	// 					customerNumber: 3241534135,
+	// 					name: 'name'
+	// 				}
+	// 			],
+	// 			groupNumber: 'grupnumber'
+	// 		}
+	// 	],
+	// 	toIBAN: '463543'
+	// };
+
 	return (
 		<Grid
 			container
@@ -199,7 +229,7 @@ export default function OverView() {
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%' } }}
 								forwardIcon
-								onClick={() => console.log()}
+								onClick={() => handleSubmit()}
 							>
 								{t('continue')}
 							</ButtonAdapter>
@@ -218,7 +248,7 @@ export default function OverView() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={!overviewData} />
+			<Loader showLoader={!overviewData || isLoading} />
 		</Grid>
 	);
 }

@@ -8,3 +8,4 @@ export const VerifyOtp = '/cheque/DigitalCheque/issuechequeverifyinitiate';
 export const issuechequeinitiate = '/cheque/DigitalCheque/issuechequeinitiate';
 export const IssueChequeInitiateSignature = '/cheque/DigitalCheque/IssueChequeInitiateSignature';
 export const IssueChequeVerifyInitiate = '/cheque/DigitalCheque/IssueChequeVerifyInitiate';
+export const IssueChequeFinalize = '/cheque/DigitalCheque/IssueChequeFinalize';

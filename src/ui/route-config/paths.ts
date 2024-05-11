@@ -1,4 +1,5 @@
 export const paths = {
+	Home: '/cheque',
 	Activation: {
 		firstStepPath: '/cheque/activation/firstStep',
 		secondStepPath: '/cheque/activation/secondStep'
