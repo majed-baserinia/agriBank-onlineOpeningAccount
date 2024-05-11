@@ -1,4 +1,5 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Divider, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
 import { Dispatch, SetStateAction } from 'react';
@@ -10,7 +11,7 @@ export default function SelectSignature({
 }: {
 	setSelectedSigniture: Dispatch<SetStateAction<'group' | 'myslef' | undefined>>;
 }) {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const theme = useTheme();
 	const isMatched = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -49,9 +50,8 @@ export default function SelectSignature({
 						<Typography>{t('mySignature')}</Typography>
 						<Typography variant="body2">{t('mySignatureSubText')}</Typography>
 					</Grid>
-					{/* TODO: change the icon on ltr to  ArrowForwardIosIcon  */}
 
-					<ArrowBackIosNewIcon />
+					{i18n.dir() === 'ltr' ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}
 				</Grid>
 				<Divider />
 				<Grid
@@ -64,9 +64,8 @@ export default function SelectSignature({
 						<Typography>{t('selectSignatureGroup')}</Typography>
 						<Typography variant="body2">{t('selectSignatureGroupSubText')}</Typography>
 					</Grid>
-					{/* TODO: change the icon on ltr to  ArrowForwardIosIcon  */}
 
-					<ArrowBackIosNewIcon />
+					{i18n.dir() === 'ltr' ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}
 				</Grid>
 			</Grid>
 		</Grid>
