@@ -1,13 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
-import CheckInfo from 'ui/pages/IssueCheck/CheckInfo';
-import SelectAccount from 'ui/pages/IssueCheck/SelectAccount';
-import ActivationFirstStep from 'ui/pages/activation/ActivationFirstStep';
-import ActivationSecondStep from 'ui/pages/activation/ActivationSecondStep';
-import OtpCheck from 'ui/pages/IssueCheck/OtpCheck';
 import AddReceivers from 'ui/pages/IssueCheck/AddRecievers';
+import CheckInfo from 'ui/pages/IssueCheck/CheckInfo';
+import OtpCheck from 'ui/pages/IssueCheck/OtpCheck';
 import OverView from 'ui/pages/IssueCheck/OverView';
+import SelectAccount from 'ui/pages/IssueCheck/SelectAccount';
 import SignatureGroup from 'ui/pages/IssueCheck/SignatureGroup';
 import SignatureRegistration from 'ui/pages/IssueCheck/SignatureRegistration';
+import ActivationFirstStep from 'ui/pages/activation/ActivationFirstStep';
+import ActivationSecondStep from 'ui/pages/activation/ActivationSecondStep';
 import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
 import Layout from '../pages/Layout';
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
 		element: <Layout />,
 		errorElement: <ErrorPage />,
 		children: [
-			{ index: true, path: '/cheque', element: <HomePage /> },
+			{ index: true, path: paths.Home, element: <HomePage /> },
 			{
 				path: paths.Activation.firstStepPath,
 				element: <ActivationFirstStep />

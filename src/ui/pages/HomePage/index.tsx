@@ -1,10 +1,10 @@
-import BreadcrumbsAdapter from 'ui/htsc-components/BreadcrumbsAdapter';
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
-import BoxAdapter from 'ui/htsc-components/BoxAdapter';
-import { useTranslation } from 'react-i18next';
-import Title from 'ui/components/Title';
-import Menu from 'ui/components/Menu';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import Menu from 'ui/components/Menu';
+import Title from 'ui/components/Title';
+import BoxAdapter from 'ui/htsc-components/BoxAdapter';
+import BreadcrumbsAdapter from 'ui/htsc-components/BreadcrumbsAdapter';
 
 import { menuList } from './menuList';
 
@@ -33,7 +33,12 @@ export default function HomePage() {
 			<BoxAdapter>
 				<BreadcrumbsAdapter breadcrumbs={breadcrumbs} />
 				<Title>{t('chequeMenu')}</Title>
-				<Grid dir={theme.direction}>
+				<Grid
+					dir={theme.direction}
+					container
+					direction={'column'}
+					gap={'56px'}
+				>
 					<Menu list={menuList} />
 				</Grid>
 			</BoxAdapter>

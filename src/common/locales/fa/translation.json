@@ -119,11 +119,14 @@
 	"dueDate": "تاریخ سر رسید",
 	"amount": "مبلغ",
 	"signers": "امضا کنندگان",
-	"universalIDCol": "شناسه فراگیر:" ,
+	"universalIDCol": "شناسه فراگیر:",
 	"ShahabCodeTCol": " | کد شهاب:",
 	"nationalIdCol": "کد ملی:",
 	"iDCodeCol": "کد شناسه:",
 	"Internal Error": "خطای داخلی",
 	"maxlengthamount": "مبلغ باید کمتر از 13 رقم باشد",
-	"maxlengthdescription": "شرح باید کمتر از 250 کاراکتر باشد"
+	"maxlengthdescription": "شرح باید کمتر از 250 کاراکتر باشد",
+	"incomimgCheckList": "لیست چک‌های دریافتی",
+	"menuTitleServices": "خدمات",
+	"menuTitleManagement": "مدیریت مجوزها"
 }
