@@ -123,5 +123,7 @@
 	"ShahabCodeTCol": " | Shahab Number:",
 	"nationalIdCol": "National Id:",
 	"iDCodeCol": "ID Code :",
-	"Internal Error":"Internal Error"
+	"Internal Error":"Internal Error",
+	"maxlengthamount": "Amount should not be more than 13 character",
+	"maxlengthdescription": "Amount should not be more than 250 character"
 }

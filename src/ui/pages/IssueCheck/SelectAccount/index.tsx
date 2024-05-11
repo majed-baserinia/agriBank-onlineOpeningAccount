@@ -32,7 +32,6 @@ export default function SelectAccount() {
 	const { data: AccountData, isLoading } = useAccounts();
 	const { data: checkbooks, mutate: getCheckbooks, error: checkbooksError } = useGetCheckbooks();
 	const { data: checksheets, mutate: getChecksheets, error: checksheetsError } = useGetChecksheets();
-	console.log(isLoading);
 
 	const [selectedAccountNumber, setSelectedAccountNumber] = useState('');
 	const [selectedCheckbook, setSelectedCheckbook] = useState<null | {}>(null);
@@ -179,7 +178,7 @@ export default function SelectAccount() {
 										onChange={() => {}}
 										label={t('checkSheet')}
 									>
-										<ChipWrapperForSelect>
+										{/* <ChipWrapperForSelect>
 											<ChipAdapter
 												label={t('all')}
 												onClick={(e) => {}}
@@ -193,7 +192,7 @@ export default function SelectAccount() {
 												label={t('issuedCheck')}
 												onClick={(e) => {}}
 											/>
-										</ChipWrapperForSelect>
+										</ChipWrapperForSelect> */}
 										{checksheets?.map((sheet, index) => {
 											return (
 												<MenuItem
@@ -305,7 +304,7 @@ export default function SelectAccount() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%' } }}
+								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
 								forwardIcon
 								onClick={() => handleNextStep()}
 								disabled={!selectedChecksheet}

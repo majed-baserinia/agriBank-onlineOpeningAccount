@@ -133,8 +133,6 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 										type="number"
 										defaultValue={field.value}
 										onChange={(value) => {
-											console.log(field.value);
-
 											field.onChange(value);
 										}}
 										error={!!formState.errors.nationalNo?.message}

@@ -15,7 +15,7 @@ export default function List() {
 		//or implement the delete function in the store itself
 	};
 
-	return steps?.receivers?.map((reciever) => {
+	return steps?.receivers?.map((reciever, index) => {
 		return (
 			<Fragment key={reciever.nationalNo}>
 				<Grid
@@ -53,7 +53,7 @@ export default function List() {
 					</Grid>
 				</Grid>
 
-				<Divider />
+				{steps?.receivers.length - 1 != index ?  <Divider /> : null}
 			</Fragment>
 		);
 	});

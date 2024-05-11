@@ -108,7 +108,7 @@
 	font-size: 20px;
 	transition: 0.1s var(--main-ease);
 } */
-.rmdp-input::placeholder {
+input::placeholder {
 	font-size: 16px;
 	color: #828282;
 }

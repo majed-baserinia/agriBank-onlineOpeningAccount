@@ -123,5 +123,7 @@
 	"ShahabCodeTCol": " | کد شهاب:",
 	"nationalIdCol": "کد ملی:",
 	"iDCodeCol": "کد شناسه:",
-	"Internal Error": "خطای داخلی"
+	"Internal Error": "خطای داخلی",
+	"maxlengthamount": "مبلغ باید کمتر از 13 رقم باشد",
+	"maxlengthdescription": "شرح باید کمتر از 250 کاراکتر باشد"
 }

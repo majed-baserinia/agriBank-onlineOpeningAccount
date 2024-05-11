@@ -16,6 +16,8 @@ export class AddReceiversformValidationCommandValidator extends Validator<AddRec
 			.matches(new RegExp('^[0-9]+$'))
 			.withMessage(i18next.t('ONLY_DIGITS_ARE_ALLOWED').toString())
 			.maxLength(13)
-			.withMessage(i18next.t('IdmaxLengthErrorText').toString()).minLength(10).withMessage(i18next.t('IdminLengthErrorText'))
+			.withMessage(i18next.t('IdmaxLengthErrorText').toString())
+			.minLength(8)
+			.withMessage(i18next.t('IdminLengthErrorText'));
 	}
 }

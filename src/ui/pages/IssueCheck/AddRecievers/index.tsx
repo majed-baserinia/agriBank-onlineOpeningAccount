@@ -90,7 +90,6 @@ export default function AddReceivers() {
 		});
 	};
 
-	if (isLoading) return <Loader showLoader />;
 
 	return (
 		<Grid
@@ -139,7 +138,7 @@ export default function AddReceivers() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%' } }}
+								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
 								forwardIcon
 								onClick={() => handleSubmitToNextLevel()}
 							>
@@ -161,6 +160,7 @@ export default function AddReceivers() {
 					</BoxAdapter>
 				</Grid>
 			)}
+			<Loader showLoader={isLoading} />
 		</Grid>
 	);
 }

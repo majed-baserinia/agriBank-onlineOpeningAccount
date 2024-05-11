@@ -227,7 +227,7 @@ export default function OtpCheck() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%' } }}
+								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
 								onClick={handleSubmitForVerifyOtp(CheckInitiateOtp)}
 							>
 								{t('continue')}

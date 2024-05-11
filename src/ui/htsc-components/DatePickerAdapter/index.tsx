@@ -53,9 +53,8 @@ export default function DatePickerAdapter(props: Props) {
 			<FormHelperText
 				error={error}
 				sx={{
-					marginTop: '10px',
-					paddingRight: settings.language === 'fa-IR' ? '16px' : 'unset',
-					paddingLeft: settings.language === 'en-GB' ? '16px' : 'unset'
+					paddingRight: settings.language === 'en-GB' ? '16px' : 'unset',
+					paddingLeft: settings.language === 'fa-IR' ? '16px' : 'unset'
 				}}
 			>
 				{helperText}

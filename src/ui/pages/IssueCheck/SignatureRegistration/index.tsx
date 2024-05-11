@@ -149,7 +149,7 @@ export default function SignatureRegistration() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%' } }}
+								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
 								onClick={() => setOpenModal(true)}
 							>
 								{t('FinalSignatureRegistration')}

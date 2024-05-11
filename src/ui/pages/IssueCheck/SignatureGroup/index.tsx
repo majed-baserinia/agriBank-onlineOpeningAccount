@@ -179,7 +179,7 @@ export default function SignatureGroup() {
 					<ButtonAdapter
 						variant="contained"
 						size="medium"
-						muiButtonProps={{ sx: { width: '100%' } }}
+						muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
 						onClick={() => console.log()}
 					>
 						{t('register')}
