@@ -1,19 +1,19 @@
 import { Grid, RadioGroup, Typography, useMediaQuery, useTheme } from '@mui/material';
+import infoIcon from 'assets/icon/info-circle.svg';
+import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import DraggableList from 'ui/components/DraggableList';
 import Menu from 'ui/components/Menu';
+import RadioButtonOpenable from 'ui/components/RadioButtonOpenable';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import Stepper from 'ui/htsc-components/Stepper';
-import { menuList } from '../../HomePage/menuList';
-import infoIcon from 'assets/icon/info-circle.svg';
-import { useEffect, useState } from 'react';
-import DraggableList from 'ui/components/DraggableList';
-import RadioButtonOpenable from 'ui/components/RadioButtonOpenable';
 import ModalOrPage from 'ui/htsc-components/ModalOrPage';
+import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
-import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
+import { menuList } from '../../HomePage/menuList';
 
 export default function SignatureGroup() {
 	const navigate = useNavigate();
@@ -25,10 +25,8 @@ export default function SignatureGroup() {
 	const { steps, setStepData } = useDataSteps((store) => store);
 
 	console.log(steps);
-	
-	useEffect(() => {
 
-	})
+	useEffect(() => {});
 	return (
 		<Grid
 			container
@@ -140,7 +138,8 @@ export default function SignatureGroup() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList} />
+						<Menu list={menuList.management} />
+						<Menu list={menuList.services} />{' '}
 					</BoxAdapter>
 				</Grid>
 			)}
@@ -179,7 +178,7 @@ export default function SignatureGroup() {
 					<ButtonAdapter
 						variant="contained"
 						size="medium"
-						muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
+						muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 						onClick={() => console.log()}
 					>
 						{t('register')}

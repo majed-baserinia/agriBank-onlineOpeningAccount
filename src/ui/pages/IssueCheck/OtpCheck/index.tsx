@@ -227,7 +227,7 @@ export default function OtpCheck() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 								onClick={handleSubmitForVerifyOtp(CheckInitiateOtp)}
 							>
 								{t('continue')}
@@ -242,7 +242,8 @@ export default function OtpCheck() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList} />
+						<Menu list={menuList.management} />
+						<Menu list={menuList.services} />{' '}
 					</BoxAdapter>
 				</Grid>
 			)}

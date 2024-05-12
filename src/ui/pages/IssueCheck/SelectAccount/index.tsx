@@ -16,8 +16,6 @@ import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 import { CheckSheet } from 'common/entities/cheque/Digital Cheque/GetChecksheets/GetChecksheetsResponse';
 import { useEffect, useState } from 'react';
-import ChipWrapperForSelect from 'ui/htsc-components/ChipWrapperForSelect';
-import ChipAdapter from 'ui/htsc-components/chipAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
@@ -304,7 +302,7 @@ export default function SelectAccount() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 								forwardIcon
 								onClick={() => handleNextStep()}
 								disabled={!selectedChecksheet}
@@ -323,7 +321,8 @@ export default function SelectAccount() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList} />
+						<Menu list={menuList.management} />
+						<Menu list={menuList.services} />
 					</BoxAdapter>
 				</Grid>
 			)}

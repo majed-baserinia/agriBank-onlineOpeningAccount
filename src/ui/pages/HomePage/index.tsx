@@ -39,7 +39,14 @@ export default function HomePage() {
 					direction={'column'}
 					gap={'56px'}
 				>
-					<Menu list={menuList} />
+					<Menu
+						list={menuList.services}
+						menuTitle={'menuTitleManagement'}
+					/>
+					<Menu
+						list={menuList.management}
+						menuTitle={'menuTitleServices'}
+					/>
 				</Grid>
 			</BoxAdapter>
 		</div>

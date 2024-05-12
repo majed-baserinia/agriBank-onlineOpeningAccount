@@ -77,7 +77,6 @@ export default function SignatureRegistration() {
 		}
 	}, [selectedSigniture]);
 
-
 	return (
 		<Grid
 			container
@@ -149,7 +148,7 @@ export default function SignatureRegistration() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 								onClick={() => setOpenModal(true)}
 							>
 								{t('FinalSignatureRegistration')}
@@ -164,7 +163,8 @@ export default function SignatureRegistration() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList} />
+						<Menu list={menuList.management} />
+						<Menu list={menuList.services} />{' '}
 					</BoxAdapter>
 				</Grid>
 			)}

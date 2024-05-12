@@ -199,8 +199,8 @@ export default function CheckInfo() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList} />
-					</BoxAdapter>
+						<Menu list={menuList.management} />
+						<Menu list={menuList.services} />				</BoxAdapter>
 				</Grid>
 			)}
 			<Loader showLoader={isPendingtoGetReasons}/>

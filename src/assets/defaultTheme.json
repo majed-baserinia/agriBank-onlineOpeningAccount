@@ -119,8 +119,8 @@
     "contrastThreshold": 3,
     "tonalOffset": 0.2,
     "text": {
-      "primary": "#6a6a6a",
-      "secondary": "rgba(0, 0, 0, 0.6)",
+      "primary": "#444444",
+      "secondary": "#696969",
       "disabled": "rgba(0, 0, 0, 0.38)"
     },
     "divider": "rgba(0, 0, 0, 0.12)",

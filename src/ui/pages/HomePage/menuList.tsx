@@ -50,7 +50,8 @@ export const menuList = {
 					icon={deactivation}
 					alt="deactivation"
 				/>
-			)
+			),
+			routeTo: paths.Activation.firstStepPath
 		}
 	]
 };

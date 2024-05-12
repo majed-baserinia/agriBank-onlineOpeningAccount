@@ -90,7 +90,6 @@ export default function AddReceivers() {
 		});
 	};
 
-
 	return (
 		<Grid
 			container
@@ -138,7 +137,7 @@ export default function AddReceivers() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 								forwardIcon
 								onClick={() => handleSubmitToNextLevel()}
 							>
@@ -156,7 +155,8 @@ export default function AddReceivers() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList} />
+						<Menu list={menuList.management} />
+						<Menu list={menuList.services} />
 					</BoxAdapter>
 				</Grid>
 			)}

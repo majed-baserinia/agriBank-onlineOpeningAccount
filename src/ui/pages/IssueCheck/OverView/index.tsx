@@ -227,7 +227,7 @@ export default function OverView() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 								forwardIcon
 								onClick={() => handleSubmit()}
 							>
@@ -244,7 +244,8 @@ export default function OverView() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList} />
+						<Menu list={menuList.management} />
+						<Menu list={menuList.services} />{' '}
 					</BoxAdapter>
 				</Grid>
 			)}
