@@ -126,7 +126,11 @@
 	"Internal Error": "خطای داخلی",
 	"maxlengthamount": "مبلغ باید کمتر از 13 رقم باشد",
 	"maxlengthdescription": "شرح باید کمتر از 250 کاراکتر باشد",
-	"receivedCheckList": "لیست چک‌های دریافتی",
+	"receivedCheckList": "لیست چک‌ های دریافتی",
 	"menuTitleServices": "خدمات",
-	"menuTitleManagement": "مدیریت مجوزها"
+	"menuTitleManagement": "مدیریت مجوزها",
+	"checkListsMenuText": "جهت نمایش لیست چک ها دسته‌بندی مدنظر را انتخاب کنید.",
+	"myChecks": "چک های خودم",
+	"myChecksSubtitle": "چک هایی که در وجه شما است.",
+	"othersChecksSubtitle":"چک هایی که نماینده یا امضا دارشان هستید."
 }

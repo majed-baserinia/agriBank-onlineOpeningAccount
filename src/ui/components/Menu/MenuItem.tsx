@@ -24,6 +24,7 @@ export default function MenuItem(props: Props) {
 			<Grid
 				container
 				justifyContent={'space-between'}
+				alignItems={'center'}
 				sx={{ padding: matches ? '16px 0' : '24px 0', cursor: 'pointer' }}
 				onClick={(e) => {
 					navigate(routeTo);

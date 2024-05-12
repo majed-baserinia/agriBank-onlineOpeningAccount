@@ -123,10 +123,14 @@
 	"ShahabCodeTCol": " | Shahab Number:",
 	"nationalIdCol": "National Id:",
 	"iDCodeCol": "ID Code :",
-	"Internal Error":"Internal Error",
+	"Internal Error": "Internal Error",
 	"maxlengthamount": "Amount should not be more than 13 character",
 	"maxlengthdescription": "Amount should not be more than 250 character",
 	"receivedCheckList": "Incomimg Checks List",
-	"menuTitleServices" :"Services",
-	"menuTitleManagement" :"Manage permissions"
+	"menuTitleServices": "Services",
+	"menuTitleManagement": "Manage permissions",
+	"checkListsMenuText": "Select the desired category to display the list of checks.",
+	"myChecks": "My Checks",
+	"myChecksSubtitle": "Checks in your account.",
+	"othersChecksSubtitle": "Checks that you represent or sign."
 }

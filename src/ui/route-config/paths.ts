@@ -14,6 +14,7 @@ export const paths = {
 		OtpCheckPath: '/cheque/Issue/OtpCheck'
 	},
 	ReceivedChecksList: {
+		SelectCheckList: '/cheque/ReceivedChecksList/SelectCheckList',
 		ChecksList: '/cheque/ReceivedChecksList/ChecksList'
 	}
 };
