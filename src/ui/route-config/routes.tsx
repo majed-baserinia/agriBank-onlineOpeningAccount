@@ -8,6 +8,7 @@ import SignatureGroup from 'ui/pages/IssueCheck/SignatureGroup';
 import SignatureRegistration from 'ui/pages/IssueCheck/SignatureRegistration';
 import ActivationFirstStep from 'ui/pages/activation/ActivationFirstStep';
 import ActivationSecondStep from 'ui/pages/activation/ActivationSecondStep';
+import ChecksList from 'ui/pages/receivedChecksList/ChecksList';
 import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
 import Layout from '../pages/Layout';
@@ -55,6 +56,11 @@ const router = createBrowserRouter([
 			{
 				path: paths.IssueCheck.OtpCheckPath,
 				element: <OtpCheck />
+			},
+
+			{
+				path: paths.ReceivedChecksList.ChecksList,
+				element: <ChecksList />
 			}
 		]
 	}

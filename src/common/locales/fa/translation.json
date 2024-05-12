@@ -126,7 +126,7 @@
 	"Internal Error": "خطای داخلی",
 	"maxlengthamount": "مبلغ باید کمتر از 13 رقم باشد",
 	"maxlengthdescription": "شرح باید کمتر از 250 کاراکتر باشد",
-	"incomimgCheckList": "لیست چک‌های دریافتی",
+	"receivedCheckList": "لیست چک‌های دریافتی",
 	"menuTitleServices": "خدمات",
 	"menuTitleManagement": "مدیریت مجوزها"
 }

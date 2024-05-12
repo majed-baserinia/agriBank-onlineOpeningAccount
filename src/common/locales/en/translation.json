@@ -126,7 +126,7 @@
 	"Internal Error":"Internal Error",
 	"maxlengthamount": "Amount should not be more than 13 character",
 	"maxlengthdescription": "Amount should not be more than 250 character",
-	"incomimgCheckList": "Incomimg Checks List",
+	"receivedCheckList": "Incomimg Checks List",
 	"menuTitleServices" :"Services",
 	"menuTitleManagement" :"Manage permissions"
 }

@@ -20,14 +20,14 @@ export const menuList = {
 		},
 		{
 			id: '2',
-			title: 'incomimgCheckList',
+			title: 'receivedCheckList',
 			icon: (
 				<SvgToIcon
 					icon={list}
 					alt="list check"
 				/>
 			),
-			routeTo: paths.IssueCheck.SelectAccountPath
+			routeTo: paths.ReceivedChecksList.ChecksList
 		}
 	],
 	management: [

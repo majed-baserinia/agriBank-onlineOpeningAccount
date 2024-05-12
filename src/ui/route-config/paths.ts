@@ -12,5 +12,8 @@ export const paths = {
 		SignatureGroupPath: '/cheque/Issue/SignatureGroup',
 		OverViewPath: '/cheque/Issue/OverView',
 		OtpCheckPath: '/cheque/Issue/OtpCheck'
+	},
+	ReceivedChecksList: {
+		ChecksList: '/cheque/ReceivedChecksList/ChecksList'
 	}
 };
