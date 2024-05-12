@@ -1,6 +1,6 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Menu from 'ui/components/Menu';
@@ -9,6 +9,24 @@ import BreadcrumbsAdapter from 'ui/htsc-components/BreadcrumbsAdapter';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
+
+export const breadcrumbs = [
+	{
+		title: 'accountServices',
+		key: '1',
+		href: '/'
+	},
+	{
+		title: 'electronicCheck',
+		key: '2',
+		href: '/'
+	},
+	{
+		title: 'receivedCheckList',
+		key: '3',
+		href: '/'
+	}
+];
 
 export default function SelectCheckList() {
 	const { t } = useTranslation();
@@ -36,26 +54,6 @@ export default function SelectCheckList() {
 		//call the api
 		//add the response to the menu items if there is
 		//if there is not  navigate the user by default to the other page
-	}, []);
-
-	const breadcrumbs = useMemo(() => {
-		return [
-			{
-				title: t('accountServices'),
-				key: '1',
-				href: '/'
-			},
-			{
-				title: t('electronicCheck'),
-				key: '2',
-				href: '/'
-			},
-			{
-				title: t('receivedCheckList'),
-				key: '3',
-				href: '/'
-			}
-		];
 	}, []);
 
 	//display the loader this way to user becouse user shouldn't see the page if there is no Checks that user represent or sign.
