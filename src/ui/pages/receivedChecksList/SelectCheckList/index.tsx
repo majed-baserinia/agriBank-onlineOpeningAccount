@@ -54,6 +54,8 @@ export default function SelectCheckList() {
 		//call the api
 		//add the response to the menu items if there is
 		//if there is not  navigate the user by default to the other page
+
+        //use replace state for navigation
 	}, []);
 
 	//display the loader this way to user becouse user shouldn't see the page if there is no Checks that user represent or sign.
