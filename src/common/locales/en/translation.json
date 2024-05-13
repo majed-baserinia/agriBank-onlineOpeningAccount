@@ -132,5 +132,7 @@
 	"checkListsMenuText": "Select the desired category to display the list of checks.",
 	"myChecks": "My Checks",
 	"myChecksSubtitle": "Checks in your account.",
-	"othersChecksSubtitle": "Checks that you represent or sign."
+	"othersChecksSubtitle": "Checks that you represent or sign.",
+	"status": "Status",
+	"serieAndSerial": "Serie And Serial"
 }

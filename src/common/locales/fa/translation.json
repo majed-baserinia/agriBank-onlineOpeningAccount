@@ -132,5 +132,7 @@
 	"checkListsMenuText": "جهت نمایش لیست چک ها دسته‌بندی مدنظر را انتخاب کنید.",
 	"myChecks": "چک های خودم",
 	"myChecksSubtitle": "چک هایی که در وجه شما است.",
-	"othersChecksSubtitle":"چک هایی که نماینده یا امضا دارشان هستید."
+	"othersChecksSubtitle": "چک هایی که نماینده یا امضا دارشان هستید.",
+	"status": "وضعیت",
+	"serieAndSerial": "سری و سریال"
 }

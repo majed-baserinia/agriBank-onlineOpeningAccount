@@ -4,7 +4,7 @@ import { Chip, useTheme } from "@mui/material";
 import CounterIcon from "./CounterIcon";
 import { Props } from "./type";
 
-export default function ChipAdapter(props: Props) {
+export default function ChipsAdapter(props: Props) {
   const {
     label,
     size = "medium",
@@ -48,7 +48,7 @@ export default function ChipAdapter(props: Props) {
       size={size}
       label={label}
       variant="outlined"
-      onClick={(e) => onClick(e)}
+      onClick={(e) => onClick?.(e)}
       onDelete={count ? () => {} : undefined}
       deleteIcon={count ? <CounterIcon count={count} /> : undefined}
       sx={sx}

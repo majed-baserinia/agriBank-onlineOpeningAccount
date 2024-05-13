@@ -1,0 +1,83 @@
+import { TableCell, TableRow } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import { ChangeEvent, ReactNode, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Props } from './type';
+
+export default function TableAdapter<TColumnNames extends string>({ columns, rowsData }: Props<TColumnNames>) {
+	const { t } = useTranslation();
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(10);
+
+	const handleChangePage = (event: unknown, newPage: number) => {
+		setPage(newPage);
+	};
+
+	const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
+		setRowsPerPage(+event.target.value);
+		setPage(0);
+	};
+
+	return (
+		<Paper sx={{ width: '100%', overflow: 'hidden' }}>
+			<TableContainer sx={{ maxHeight: 590 }}>
+				<Table
+					stickyHeader
+					aria-label="sticky table"
+				>
+					<TableHead>
+						<TableRow>
+							{columns.map((column, index) => (
+								<TableCell
+									key={index}
+									align={column.align}
+									style={{ minWidth: column.minWidth }}
+								>
+									{column.label != '' ? t(column.label, 'unknown') : ''}
+								</TableCell>
+							))}
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+							return (
+								<TableRow
+									tabIndex={-1}
+									key={index}
+								>
+									{columns.map((column, index) => {
+										const value = row[column.id];
+										return (
+											<TableCell
+												key={index}
+												align={column.align}
+											>
+												{value as ReactNode}
+											</TableCell>
+										);
+									})}
+								</TableRow>
+							);
+						})}
+					</TableBody>
+				</Table>
+			</TableContainer>
+			{rowsData.length > 10 ? (
+				<TablePagination
+					rowsPerPageOptions={[10]}
+					component="div"
+					count={rowsData.length}
+					rowsPerPage={rowsPerPage}
+					page={page}
+					onPageChange={handleChangePage}
+					onRowsPerPageChange={handleChangeRowsPerPage}
+				/>
+			) : null}
+		</Paper>
+	);
+}

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export default function ChipWrapperForSelect(props: { children: ReactNode[] }) {
+export default function ChipsWrapperForSelect(props: { children: ReactNode[] }) {
 	const { children } = props;
 	return (
 		<div
