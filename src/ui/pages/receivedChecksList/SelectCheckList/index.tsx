@@ -53,6 +53,7 @@ export default function SelectCheckList() {
 	useEffect(() => {
 		//call the api
 		//add the response to the menu items if there is
+		//and set it to store 
 		//if there is not  navigate the user by default to the other page
 
         //use replace state for navigation

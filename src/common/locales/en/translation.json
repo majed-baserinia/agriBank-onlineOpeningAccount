@@ -134,5 +134,15 @@
 	"myChecksSubtitle": "Checks in your account.",
 	"othersChecksSubtitle": "Checks that you represent or sign.",
 	"status": "Status",
-	"serieAndSerial": "Serie And Serial"
+	"serieAndSerial": "Serie And Serial",
+	"selectAction": "Select Action",
+	"selectActionText": "For the desired check, choose an option from the operations below",
+	"transferCheck": "Check Transfer",
+	"CashingCheck": "Check Cashing",
+	"Conf/rej": "Confirmation/rejection of received check",
+	"regressCheck": "Check return",
+	"rejectTransfer": "Rejection of check transfer",
+	"rejectRegress": "Rejection of check return",
+	"you": "You",
+	"payTo": "Pay To "
 }

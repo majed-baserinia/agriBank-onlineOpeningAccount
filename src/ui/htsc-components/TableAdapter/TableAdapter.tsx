@@ -1,4 +1,4 @@
-import { TableCell, TableRow } from '@mui/material';
+import { CircularProgress, Grid, TableCell, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -66,6 +66,16 @@ export default function TableAdapter<TColumnNames extends string>({ columns, row
 						})}
 					</TableBody>
 				</Table>
+				{!rowsData ? (
+					<Grid
+						sx={{ width: '100%' }}
+						container
+						alignContent={'center'}
+						justifyContent={'center'}
+					>
+						<CircularProgress size={'32px'} />
+					</Grid>
+				) : null}
 			</TableContainer>
 			{rowsData.length > 10 ? (
 				<TablePagination

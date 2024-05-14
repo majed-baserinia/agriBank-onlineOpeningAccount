@@ -1,13 +1,15 @@
-import { SelectProps } from "@mui/material";
-import { ReactNode } from "react";
+import { SelectProps } from '@mui/material';
+import { ReactNode } from 'react';
 
 export type Props = {
-  label: string;
-  error?: boolean;
-  disabled?: boolean;
-  icon?: ReactNode;
-  children: ReactNode[] | ReactNode;
-  onChange: (value: string) => void;
-  muiSelectProps?: SelectProps;
-  defaultValue?: string;
+	label: string;
+	error?: boolean;
+	disabled?: boolean;
+	renderValue?: boolean;
+	icon?: ReactNode;
+	children: ReactNode[] | ReactNode;
+	onChange: (value: string) => void;
+	muiSelectProps?: SelectProps;
+	defaultValue?: string;
+	size?: 'small' | 'medium';
 };

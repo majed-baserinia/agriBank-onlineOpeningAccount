@@ -14,7 +14,18 @@ import { ReactElement, ReactNode, SyntheticEvent, useState } from 'react';
 import { Props } from './type';
 
 export default function SelectAdapter(props: Props) {
-	const { onChange, label, error, disabled, icon, children, defaultValue = '', muiSelectProps } = props;
+	const {
+		onChange,
+		label,
+		error,
+		disabled,
+		icon,
+		children,
+		defaultValue = '',
+		muiSelectProps,
+		size = 'medium',
+		renderValue = false
+	} = props;
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const [selectedValue, setSelectedValue] = useState<string>(defaultValue);
@@ -77,9 +88,13 @@ export default function SelectAdapter(props: Props) {
 			justifyContent={'space-between'}
 			sx={open && matches ? { ...gridStyle } : null}
 		>
-			<FormControl fullWidth>
+			<FormControl
+				fullWidth
+				size={size}
+			>
 				<InputLabel id="label">{label}</InputLabel>
 				<Select
+					size={size}
 					labelId="label"
 					{...muiSelectProps}
 					disabled={disabled}
@@ -95,7 +110,7 @@ export default function SelectAdapter(props: Props) {
 					error={error}
 					startAdornment={icon ? <InputAdornment position="start">{icon}</InputAdornment> : undefined}
 					inputProps={{
-						renderValue: (option: string) => option
+						renderValue: renderValue ? (option: string) => option : undefined
 					}}
 					MenuProps={{
 						dir: theme.direction,
