@@ -9,3 +9,5 @@ export const issuechequeinitiate = '/cheque/DigitalCheque/issuechequeinitiate';
 export const IssueChequeInitiateSignature = '/cheque/DigitalCheque/IssueChequeInitiateSignature';
 export const IssueChequeVerifyInitiate = '/cheque/DigitalCheque/IssueChequeVerifyInitiate';
 export const IssueChequeFinalize = '/cheque/DigitalCheque/IssueChequeFinalize';
+export const IssueInquiryWithDrawalGroup = '/cheque/DigitalCheque/issuechequeinquirywithdrawalgroup';
+export const IssueChequeIssueWithDrawalGroup = '/cheque/DigitalCheque/issuechequeissuewithdrawalgroup';

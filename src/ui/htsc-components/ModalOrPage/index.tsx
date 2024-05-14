@@ -1,18 +1,20 @@
 import { Dialog, Grid, PaperProps, useMediaQuery, useTheme } from '@mui/material';
-import { ReactNode, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
 type Props = {
 	breackpoint: 'md' | 'sm' | 'lg' | 'xs';
 	children: ReactNode;
 	ModalpaperProps?: PaperProps;
+	open: boolean
+	setOpen:	 Dispatch<SetStateAction<boolean>>
+
 };
 
 export default function ModalOrPage(props: Props) {
-	const { breackpoint, children, ModalpaperProps } = props;
+	const { breackpoint, children, ModalpaperProps ,open, setOpen} = props;
 	const theme = useTheme();
 	const isMatched = useMediaQuery(theme.breakpoints.down(breackpoint));
 
-	const [open, setOpen] = useState(true);
 
 	const gridStyle = {
 		position: 'absolute',

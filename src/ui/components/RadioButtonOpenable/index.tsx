@@ -1,7 +1,7 @@
 import { FormControlLabel, Grid, Radio, useTheme } from '@mui/material';
 import editIcon from 'assets/icon/edit.svg';
 import userIcon from 'assets/icon/user.svg';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
@@ -13,12 +13,14 @@ type Props = {
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	groupParts: string[];
 	label: string;
+	onEditClick: () => void;
 };
 
 export default function RadioButtonOpenable(props: Props) {
-	const { value, checked, onChange, groupParts, label } = props;
+	const { value, checked, onChange, groupParts, label, onEditClick } = props;
 	const theme = useTheme();
 	const { t, i18n } = useTranslation();
+	const [isOrder, setIsOrder] = useState(false);
 
 	const mapNumbers: { [key: number]: string } = {
 		0: t('first'),
@@ -96,7 +98,7 @@ export default function RadioButtonOpenable(props: Props) {
 								container
 								gap={'4px'}
 								alignItems={'center'}
-								fontSize={"12px"}
+								fontSize={'12px'}
 							>
 								<SvgToIcon
 									icon={userIcon}
@@ -120,21 +122,24 @@ export default function RadioButtonOpenable(props: Props) {
 					alignItems={'center'}
 				>
 					<ButtonAdapter
+						disabled={!isOrder}
 						endIcon={
 							<SvgToIcon
 								icon={editIcon}
 								alt="edit"
 							/>
 						}
-						onClick={() => {}}
+						onClick={() => onEditClick()}
 					>
 						{t('edit')}
 					</ButtonAdapter>
 					<SwitchAdapter
 						type="small"
-						label="avasdv"
-						checked={true}
-						onChange={() => {}}
+						label="بدون ترتیب امضا"
+						checked={isOrder}
+						onChange={(e) => {
+							setIsOrder(e.target.checked);
+						}}
 					/>
 				</Grid>
 			</Grid>

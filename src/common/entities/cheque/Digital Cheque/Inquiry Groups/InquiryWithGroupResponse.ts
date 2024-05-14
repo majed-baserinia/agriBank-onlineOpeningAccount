@@ -1,10 +1,10 @@
 export interface InquiryWithGroupResponse {
 	issueChequeKey: string;
-	withdrawalGroup: WithdrawalDetails;
+	withdrawalGroup: WithdrawalDetails[];
 }
 interface WithdrawalDetails {
 	groupNumber: string;
-	withdrawalGroups: withdrawalGroups;
+	withdrawalGroups: withdrawalGroups[];
 }
 interface withdrawalGroups {
 	customerNumber: number;

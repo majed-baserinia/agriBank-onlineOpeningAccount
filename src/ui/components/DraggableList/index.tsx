@@ -19,6 +19,7 @@ export default function DraggableList(props: Props) {
 		setItems(newItems);
 		getData(newItems);
 	};
+	console.log({ list });
 
 	const mapNumbers: { [key: number]: string } = {
 		0: t('first'),

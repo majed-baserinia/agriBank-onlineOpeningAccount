@@ -2,7 +2,7 @@ import { OnDragEndResponder } from "react-beautiful-dnd";
 
 export type Item = {
 	id: string;
-	[key: string]: any;
+	text: any;
 };
 
 export type DraggableListProps = {
@@ -11,6 +11,6 @@ export type DraggableListProps = {
 };
 
 export type Props = {
-	list: Item[];
+	list: Item[] | [];
 	getData: (list: Item[]) => void;
 };
