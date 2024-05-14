@@ -32,7 +32,7 @@ export default function SelectCheckList() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const navigate = useNavigate();
-	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const [loading, setLoading] = useState(false);
 	const [menuItems, setMenuItems] = useState([
 		{
@@ -63,9 +63,13 @@ export default function SelectCheckList() {
 	if (loading) return <Loader showLoader />;
 
 	return (
-		<div style={{ minHeight: 'calc(100% - 128px)', padding: matches ? '16px' : '64px' }}>
-			<BoxAdapter>
+		<Grid sx={{ padding: matches ? '0' : '64px' }}>
+			<BoxAdapter fullWidth={matches}>
 				<Grid
+					sx={{
+						minHeight: matches ? '100vh' : 'calc(100% - 128px)',
+						padding: matches ? '0' : '16px'
+					}}
 					container
 					direction={'column'}
 					gap={'24px'}
@@ -91,6 +95,6 @@ export default function SelectCheckList() {
 					</Grid>
 				</Grid>
 			</BoxAdapter>
-		</div>
+		</Grid>
 	);
 }

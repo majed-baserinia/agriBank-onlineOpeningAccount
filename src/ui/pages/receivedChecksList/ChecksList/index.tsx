@@ -21,9 +21,13 @@ export default function ChecksList() {
 	}, [selectedBeneficiary]);
 
 	return (
-		<div style={{ minHeight: 'calc(100% - 128px)', padding: matches ? '16px' : '64px' }}>
-			<BoxAdapter>
+		<Grid sx={{ padding: matches ? '0' : '64px' }}>
+			<BoxAdapter fullWidth={matches}>
 				<Grid
+					sx={{
+						minHeight: matches ? '100vh' : 'calc(100% - 128px)',
+						padding: matches ? '0' : '16px'
+					}}
 					container
 					direction={'column'}
 					gap={'16px'}
@@ -42,7 +46,7 @@ export default function ChecksList() {
 							<SelectAdapter
 								size="small"
 								label=""
-								onChange={(e) => console.log(e)}
+								onChange={(value) => setSelectedBeneficiary(value)}
 							>
 								<MenuItem value={1}>asfvfred</MenuItem>
 								<MenuItem value={2}>as</MenuItem>
@@ -52,6 +56,6 @@ export default function ChecksList() {
 					{matches ? <MobileView /> : <DesktopView />}
 				</Grid>
 			</BoxAdapter>
-		</div>
+		</Grid>
 	);
 }

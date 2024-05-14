@@ -19,7 +19,7 @@ export default function CheckItemCard() {
 				border: `1px solid ${theme.palette.grey[50]}`,
 				borderRadius: '16px',
 				//TODO: fix the width on mediaquery
-				maxWidth: matchesSmall ? 'unset' : '200px'
+				maxWidth: matchesSmall ? 'unset' : '285px'
 			}}
 			gap={'16px'}
 			wrap="nowrap"
