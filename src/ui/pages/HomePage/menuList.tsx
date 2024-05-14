@@ -27,7 +27,7 @@ export const menuList = {
 					alt="list check"
 				/>
 			),
-			routeTo: paths.ReceivedChecksList.ChecksList
+			routeTo: paths.ReceivedChecksList.SelectCheckList
 		}
 	],
 	management: [

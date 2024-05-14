@@ -244,8 +244,8 @@ export default function OverView() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList.management} />
-						<Menu list={menuList.services} />{' '}
+						<Menu divider={false} list={menuList.management} />
+						<Menu divider={false} list={menuList.services} />{' '}
 					</BoxAdapter>
 				</Grid>
 			)}

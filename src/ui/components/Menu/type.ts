@@ -1,15 +1,13 @@
 import { ReactNode } from 'react';
 
-export type Props = {
-	list: {
-		services: Item[];
-		management: Item[];
-	};
-};
-
-export type Item = {
+type Item = {
 	title: string;
-	icon: ReactNode;
-	onClick?: (e: React.SyntheticEvent) => void;
-	routeTo?: string;
+	subtitle?: string;
+	icon?: ReactNode;
+	routeTo: string;
 };
+export interface Props {
+	list: Item[];
+	menuTitle?: string;
+	divider?: boolean;
+}

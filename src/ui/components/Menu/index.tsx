@@ -1,23 +1,11 @@
-import { Divider, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { ReactNode } from 'react';
+import { Divider, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import MenuItem from './MenuItem';
+import { Props } from './type';
 
-type Item = {
-	title: string;
-	subtitle?: string;
-	icon?: ReactNode;
-	routeTo: string;
-};
-interface Props {
-	list: Item[];
-	menuTitle?: string;
-}
 export default function Menu(props: Props) {
-	const { list, menuTitle } = props;
-	const theme = useTheme();
+	const { list, menuTitle, divider = true } = props;
 	const { t } = useTranslation();
-	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
 	return (
 		<Grid>
@@ -29,35 +17,11 @@ export default function Menu(props: Props) {
 							{...item}
 							key={index}
 						/>
-						{!matches ? (
-							list?.length - 1 == index ? null : (
-								<Divider sx={{ width: 'calc(100% - 32px)', margin: 'auto' }} />
-							)
-						) : null}
+
+						{divider ? list?.length - 1 == index ? null : <Divider /> : null}
 					</>
 				);
 			})}
 		</Grid>
 	);
-}
-
-{
-	/* <Grid>
-					<Typography variant="h6">{t('menuTitleManagement')}</Typography>
-					{list?.management?.map((item, index) => {
-						return (
-							<>
-								<MenuItem
-									item={item}
-									index={index}
-								/>
-								{!matches ? (
-									list?.management.length - 1 == index ? null : (
-										<Divider sx={{ width: 'calc(100% - 32px)', margin: 'auto' }} />
-									)
-								) : null}
-							</>
-						);
-					})}
-				</Grid> */
 }
