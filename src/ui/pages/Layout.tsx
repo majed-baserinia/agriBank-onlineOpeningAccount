@@ -1,6 +1,6 @@
 import useInitPostMessage from 'business/hooks/postMessage/useInitPostMessage';
 import { changeLanguage } from 'i18next';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import MaterialThemeProvider from 'ui/components/MaterialThemeProvider';
@@ -12,7 +12,7 @@ import ApiConfigSingleton from '../../business/stores/api-config-singleton';
 import useInitialSettingStore, { InitialSetting } from '../../business/stores/initial-setting-store';
 
 const Layout = () => {
-	 useInitPostMessage();
+	useInitPostMessage();
 	const { settings, setSettings } = useInitialSettingStore((s) => s);
 	const [configReady, seConfigReady] = useState(false);
 
@@ -23,7 +23,7 @@ const Layout = () => {
       }
     `;
 
-	const getConfig = useCallback(async () => {
+	const getConfig = async () => {
 		try {
 			const res = await fetch('/cheque/api-config.json');
 			const apiConf = await res.json();
@@ -36,12 +36,12 @@ const Layout = () => {
 
 			//get the theme and set the language
 			const theme = await themeInitializer(themeName, apiConf?.ThemeRoute);
+			
 			changeLanguage(language ? language : 'fa-IR');
 
 			//set the settings {theme, language, idToken, refreshToken} to store
-			
+
 			setSettings({
-				
 				theme: theme,
 				language: language ? language : 'fa-IR'
 			} as InitialSetting);
@@ -51,7 +51,7 @@ const Layout = () => {
 			//TODO: add a convinent alert for this
 			//probaly send a postmessage to parent
 		}
-	}, []);
+	};
 
 	useEffect(() => {
 		getConfig();
