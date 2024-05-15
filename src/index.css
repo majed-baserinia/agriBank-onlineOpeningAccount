@@ -3,67 +3,80 @@
 @tailwind utilities;
 
 html {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: 'IRANSans';
+	src: url('assets/fonts/IranSasnWeb/IRANSansWeb.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
 }
 @font-face {
-  font-family: "IRANSans";
-  src:
-    url("assets/fonts/IRANSansWeb_Medium.woff2") format("woff2"),
-    url("assets/fonts/IRANSansWeb_Medium.woff") format("woff"),
-    url("assets/fonts/IRANSansWeb_Medium.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'IRANSans';
+	src: url('assets/fonts/IranSasnWeb/IRANSansWeb_Bold.ttf') format('truetype');
+	font-weight: 700;
+}
+@font-face {
+	font-family: 'IRANSans';
+	src: url('assets/fonts/IranSasnWeb/IRANSansWeb_Medium.ttf') format('truetype');
+	font-weight: 500;
+}
+@font-face {
+	font-family: 'IRANSans';
+	src: url('assets/fonts/IranSasnWeb/IRANSansWeb_Light.ttf') format('truetype');
+	font-weight: 300;
 }
 
 form {
-  width: 100%;
+	width: 100%;
 }
 
 .hstack-direction {
-  direction: initial;
+	direction: initial;
 }
 .SanitizeHTML {
-  height: 30em;
-  padding: 3em;
-  padding-top: 0em;
-  line-height: 1.7em;
+	height: 30em;
+	padding: 3em;
+	padding-top: 0em;
+	line-height: 1.7em;
 }
 .SanitizeHTML h2 {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .SanitizeHTML div li {
-  margin-right: 2em;
-  margin-left: 2em;
-  margin-top: 1em;
+	margin-right: 2em;
+	margin-left: 2em;
+	margin-top: 1em;
 }
 
 .SanitizeHTML div {
-  margin-top: 2em;
+	margin-top: 2em;
 }
 
-.MuiPopper-root[role="presentation"] {
-  z-index: 10 !important;
-  /* max-height: calc(85vh - 50px); */
-  overflow: auto;
+.MuiPopper-root[role='presentation'] {
+	z-index: 10 !important;
+	/* max-height: calc(85vh - 50px); */
+	overflow: auto;
 }
 
-.MuiPopper-root[role="presentation"]::-webkit-scrollbar {
-  display: none;
+.MuiPopper-root[role='presentation']::-webkit-scrollbar {
+	display: none;
 }
 .MuiAutocomplete-listbox::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
-.muirtl-zbanjl-MuiAutocomplete-listbox .MuiAutocomplete-option[aria-selected="true"]{
-  background-color: #fff  !important;
+.muirtl-zbanjl-MuiAutocomplete-listbox .MuiAutocomplete-option[aria-selected='true'] {
+	background-color: #fff !important;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
