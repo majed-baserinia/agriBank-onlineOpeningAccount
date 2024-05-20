@@ -8,16 +8,12 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
 import useIssueChequeInitiate from 'business/hooks/cheque/Digital Cheque/useIssueChequeInitiate';
-import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
-import { IssueChequeInitiateRequest } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
-import { useEffect } from 'react';
 import CheckReceivers from 'ui/components/CheckReceivers';
 import Loader from 'ui/htsc-components/loader/Loader';
-import { paths } from 'ui/route-config/paths';
-import { menuList } from '../../HomePage/menuList';
+import { menuList } from 'ui/pages/HomePage/menuList';
 
-export default function AddReceivers() {
+export default function AddNewReceivers() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
@@ -25,70 +21,70 @@ export default function AddReceivers() {
 	const { steps, setStepData } = useDataSteps((store) => store);
 	const { isLoading, mutate: issueChequeInitiate } = useIssueChequeInitiate();
 
-	useEffect(() => {
-		if (!steps.selectdCheckSheet) {
-			pushAlert({
-				type: 'error',
-				hasConfirmAction: true,
-				messageText: t('failedToGetDateFromStoreText'),
-				actions: { onConfirm: () => navigate(paths.IssueCheck.SelectAccountPath) }
-			});
-		}
+	// useEffect(() => {
+	// 	if (!steps.selectdCheckSheet) {
+	// 		pushAlert({
+	// 			type: 'error',
+	// 			hasConfirmAction: true,
+	// 			messageText: t('failedToGetDateFromStoreText'),
+	// 			actions: { onConfirm: () => navigate(paths.IssueCheck.SelectAccountPath) }
+	// 		});
+	// 	}
 
-		if (!steps.issueCheckDetail) {
-			pushAlert({
-				type: 'error',
-				hasConfirmAction: true,
-				messageText: t('failedToGetDateFromStoreText'),
-				actions: { onConfirm: () => navigate(paths.IssueCheck.CheckInfoPath) }
-			});
-		}
-	}, []);
+	// 	if (!steps.issueCheckDetail) {
+	// 		pushAlert({
+	// 			type: 'error',
+	// 			hasConfirmAction: true,
+	// 			messageText: t('failedToGetDateFromStoreText'),
+	// 			actions: { onConfirm: () => navigate(paths.IssueCheck.CheckInfoPath) }
+	// 		});
+	// 	}
+	// }, []);
 
-	const handleSubmitToNextLevel = () => {
-		const { selectdCheckSheet, issueCheckDetail, receivers } = steps;
+	// const handleSubmitToNextLevel = () => {
+	// 	const { selectdCheckSheet, issueCheckDetail, receivers } = steps;
 
-		// Check if all necessary steps and data exist
-		if (!selectdCheckSheet || !issueCheckDetail) {
-			return null;
-		}
+	// 	// Check if all necessary steps and data exist
+	// 	if (!selectdCheckSheet || !issueCheckDetail) {
+	// 		return null;
+	// 	}
 
-		const preparedData: IssueChequeInitiateRequest = {
-			sayadNo: selectdCheckSheet?.sayadNo,
-			amount: Number(issueCheckDetail?.checkAmount),
-			dueDate: issueCheckDetail?.date,
-			description: issueCheckDetail?.description,
-			reason: issueCheckDetail?.reason.value,
-			recievers: receivers
-		};
+	// 	const preparedData: IssueChequeInitiateRequest = {
+	// 		sayadNo: selectdCheckSheet?.sayadNo,
+	// 		amount: Number(issueCheckDetail?.checkAmount),
+	// 		dueDate: issueCheckDetail?.date,
+	// 		description: issueCheckDetail?.description,
+	// 		reason: issueCheckDetail?.reason.value,
+	// 		recievers: receivers
+	// 	};
 
-		issueChequeInitiate(preparedData, {
-			onError: (err) => {
-				//TODO: navigate the user if need to
-				pushAlert({
-					type: 'error',
-					hasConfirmAction: true,
-					messageText: err.detail
-				});
-			},
-			onSuccess: (res) => {
-				//save the data
-				setStepData({
-					signitureRequirementData: {
-						issueChequeKey: res.issueChequeKey,
-						isSingleSignatureLegal: res.isSingleSignatureLegal
-					}
-				});
+	// 	issueChequeInitiate(preparedData, {
+	// 		onError: (err) => {
+	// 			//TODO: navigate the user if need to
+	// 			pushAlert({
+	// 				type: 'error',
+	// 				hasConfirmAction: true,
+	// 				messageText: err.detail
+	// 			});
+	// 		},
+	// 		onSuccess: (res) => {
+	// 			//save the data
+	// 			setStepData({
+	// 				signitureRequirementData: {
+	// 					issueChequeKey: res.issueChequeKey,
+	// 					isSingleSignatureLegal: res.isSingleSignatureLegal
+	// 				}
+	// 			});
 
-				//check the res and navigate based on it
-				if (res.isNeedOtp) {
-					navigate(paths.IssueCheck.OtpCheckPath);
-				} else {
-					navigate(paths.IssueCheck.SignatureRegistrationPath);
-				}
-			}
-		});
-	};
+	// 			//check the res and navigate based on it
+	// 			if (res.isNeedOtp) {
+	// 				navigate(paths.IssueCheck.OtpCheckPath);
+	// 			} else {
+	// 				navigate(paths.IssueCheck.SignatureRegistrationPath);
+	// 			}
+	// 		}
+	// 	});
+	// };
 
 	return (
 		<Grid
@@ -121,16 +117,16 @@ export default function AddReceivers() {
 								// TODO: check if selected compony or homself acocunt and add one more step if it is compony
 								<Stepper
 									list={[
-										t('selectCheck'),
 										t('checkInfo'),
 										t('recivers'),
-										t('issueSignature'),
+										t('verificationCode'),
+										t('selectSignatureGroup'),
 										t('end')
 									]}
-									active={2}
+									active={1}
 								/>
 							) : null}
-							<Typography variant="bodyMd">{t('addReceiversText')}</Typography>
+							<Typography variant="bodyMd">{t('addNewReceiversText')}</Typography>
 							<CheckReceivers
 								getRceivers={(receiversList) => setStepData({ receivers: receiversList })}
 							/>
@@ -141,7 +137,7 @@ export default function AddReceivers() {
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 								forwardIcon
-								onClick={() => handleSubmitToNextLevel()}
+								onClick={() => console.log()}
 							>
 								{t('continue')}
 							</ButtonAdapter>

@@ -149,7 +149,10 @@
 	"checkDetailPageTitle": "نمایش جزئیات چک",
 	"checkStatus": "وضعیت چک",
 	"sayadCheckInquery": "استعلام چک صیادی",
-	"checkGuaranteeStatus":"وضعیت ضمانت چک",
-	"checkBlocking":"مسدودی چک",
-	"checkIssueDate":"تاریخ ثبت چک"
+	"checkGuaranteeStatus": "وضعیت ضمانت چک",
+	"checkBlocking": "مسدودی چک",
+	"checkIssueDate": "تاریخ ثبت چک",
+	"verificationCode": "کد تایید",
+	"receiver" :"دریافت کننده",
+	"addNewReceiversText": "لیست دریافت‌کنندگان جدید چک  مدنظر را اضافه کنید."
 }

@@ -151,5 +151,8 @@
 	"sayadCheckInquery": "Sayad check inquiry",
 	"checkGuaranteeStatus" :"Check guarantee status",
 	"checkBlocking": "Check blocking",
-	"checkIssueDate": "Check Issue Date"
+	"checkIssueDate": "Check Issue Date",
+	"verificationCode": "Verification Code",
+	"receiver": "Receiver",
+	"addNewReceiversText": "Add the list of new recipients of the intended check."
 }

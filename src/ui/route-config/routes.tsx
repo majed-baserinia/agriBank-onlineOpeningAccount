@@ -15,6 +15,8 @@ import HomePage from '../pages/HomePage';
 import Layout from '../pages/Layout';
 import { paths } from './paths';
 import Details from 'ui/pages/receivedChecksList/Details';
+import CheckNewInfo from 'ui/pages/receivedChecksList/TransferCheck/CheckNewInfo';
+import AddNewReceivers from 'ui/pages/receivedChecksList/TransferCheck/AddNewReceivers';
 
 const router = createBrowserRouter([
 	{
@@ -71,6 +73,14 @@ const router = createBrowserRouter([
 			{
 				path: paths.ReceivedChecksList.Detail,
 				element: <Details />
+			},
+			{
+				path: paths.ReceivedChecksList.TransferCheck,
+				element: <CheckNewInfo />
+			},
+			{
+				path: paths.ReceivedChecksList.AddNewReceivers,
+				element: <AddNewReceivers />
 			}
 		]
 	}

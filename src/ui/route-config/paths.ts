@@ -16,6 +16,8 @@ export const paths = {
 	ReceivedChecksList: {
 		SelectCheckList: '/cheque/ReceivedChecksList/SelectCheckList',
 		ChecksList: '/cheque/ReceivedChecksList/ChecksList',
-		Detail: '/cheque/ReceivedChecksList/detail'
+		Detail: '/cheque/ReceivedChecksList/detail',
+		TransferCheck: '/cheque/ReceivedChecksList/transferCheck',
+		AddNewReceivers: '/cheque/ReceivedChecksList/transferCheck/AddNewReceivers'
 	}
 };
