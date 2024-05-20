@@ -18,50 +18,49 @@ const MaterialThemeProvider = ({ children }: Props) => {
 		direction: settings.language === 'fa-IR' ? 'rtl' : 'ltr',
 		typography: {
 			//...settings.theme.typography,
-      fontFamily: settings.language === 'fa-IR' ? 'IRANSans' : 'Roboto , sans-serif',
+			fontFamily: settings.language === 'fa-IR' ? 'IRANSans' : 'Roboto , sans-serif',
 			h1Sm: {
-        fontFamily: "inherit",
+				fontFamily: 'inherit',
 				fontWeight: 400,
 				fontSize: '24px',
 				lineHeight: '38.09px'
 			},
 			h1Md: {
-        fontFamily: "inherit",
+				fontFamily: 'inherit',
 				fontWeight: 400,
 				fontSize: '32px',
 				lineHeight: '50.78px'
 			},
 			h1Lg: {
-        fontFamily: "inherit",
+				fontFamily: 'inherit',
 				fontWeight: 400,
 				fontSize: '40px',
 				lineHeight: '63.48px'
 			},
 			bodyXs: {
-        fontFamily: "inherit",
+				fontFamily: 'inherit',
 				fontWeight: 400,
 				fontSize: '10px',
 				lineHeight: '15.87px'
 			},
 			bodySm: {
-        fontFamily: "inherit",
+				fontFamily: 'inherit',
 				fontWeight: 400,
 				fontSize: '12px',
 				lineHeight: '19.04px'
 			},
 			bodyMd: {
-        fontFamily: "inherit",
+				fontFamily: 'inherit',
 				fontWeight: 400,
 				fontSize: '14px',
 				lineHeight: '22.22px'
 			},
 			bodyLg: {
-        fontFamily: "inherit",
+				fontFamily: 'inherit',
 				fontWeight: 400,
 				fontSize: '16px',
 				lineHeight: '25.39px'
-			},
-     
+			}
 		},
 
 		components: {

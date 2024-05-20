@@ -131,7 +131,7 @@ export default function AddReceivers() {
 								/>
 							) : null}
 							<Typography variant="body1">{t('addReceiversText')}</Typography>
-							<CheckReceivers />
+							<CheckReceivers getRceivers={(a) => setStepData({ receivers: a })} />
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
@@ -155,8 +155,14 @@ export default function AddReceivers() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu divider={false} list={menuList.management} />
-						<Menu divider={false} list={menuList.services} />
+						<Menu
+							divider={false}
+							list={menuList.management}
+						/>
+						<Menu
+							divider={false}
+							list={menuList.services}
+						/>
 					</BoxAdapter>
 				</Grid>
 			)}

@@ -17,8 +17,7 @@ interface DataSteps {
 		signitureRequirementData?: { issueChequeKey: string; isSingleSignatureLegal: boolean };
 		overviewData?: issueChequeOverView;
 	};
-	addReceiver: (receiver: Reciever) => void;
-	removeReceiver: (nationalNo: string) => void;
+
 	setStepData: (data: {}) => void;
 }
 
@@ -27,16 +26,5 @@ export const useDataSteps = create<DataSteps>((set) => ({
 	setStepData: (data) =>
 		set((store) => ({
 			steps: { ...store.steps, ...data }
-		})),
-	addReceiver: (receiver) =>
-		set((store) => ({
-			steps: { ...store.steps, receivers: [...store.steps.receivers, receiver] }
-		})),
-	removeReceiver: (nationalNo) =>
-		set((store) => ({
-			steps: {
-				...store.steps,
-				receivers: store.steps.receivers.filter((reciever) => reciever.nationalNo !== nationalNo)
-			}
 		}))
 }));

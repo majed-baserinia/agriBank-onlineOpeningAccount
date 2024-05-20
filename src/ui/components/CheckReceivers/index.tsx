@@ -1,16 +1,24 @@
 import { Dialog, useMediaQuery, useTheme } from '@mui/material';
-import { useState } from 'react';
+import { Reciever } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Sheet from 'react-modal-sheet';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import AddForm from './AddForm';
 import List from './List';
+import { CheckReceiversProps } from './type';
 
-export default function CheckReceivers() {
+export default function CheckReceivers(props: CheckReceiversProps) {
+	const { getRceivers } = props;
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const isDownSm = useMediaQuery(theme.breakpoints.down('sm'));
 	const [open, setOpen] = useState(false);
+	const [receivers, setReceivers] = useState<Reciever[]>([]);
+
+	useEffect(() => {
+		getRceivers(receivers);
+	}, [receivers]);
 
 	return (
 		<>
@@ -23,7 +31,10 @@ export default function CheckReceivers() {
 				{t('add')}
 			</ButtonAdapter>
 
-			<List />
+			<List
+				receivers={receivers}
+				setReceivers={setReceivers}
+			/>
 
 			{isDownSm ? (
 				<Sheet
@@ -34,7 +45,10 @@ export default function CheckReceivers() {
 					<Sheet.Container>
 						<Sheet.Header />
 						<Sheet.Content>
-							<AddForm setOpen={setOpen}/>
+							<AddForm
+								setOpen={setOpen}
+								setReceivers={setReceivers}
+							/>
 						</Sheet.Content>
 					</Sheet.Container>
 					<Sheet.Backdrop />
@@ -44,7 +58,10 @@ export default function CheckReceivers() {
 					open={open}
 					onClose={() => setOpen(false)}
 				>
-					<AddForm setOpen={setOpen}/>
+					<AddForm
+						setOpen={setOpen}
+						setReceivers={setReceivers}
+					/>
 				</Dialog>
 			)}
 		</>

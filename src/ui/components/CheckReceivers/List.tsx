@@ -1,21 +1,19 @@
 import { Divider, Grid, useTheme } from '@mui/material';
 import trashIcon from 'assets/icon/trash.svg';
-import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 import { Fragment } from 'react';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
+import { ListProps } from './type';
 
-export default function List() {
+export default function List({ receivers, setReceivers }: ListProps) {
 	const theme = useTheme();
-	const { steps,removeReceiver } = useDataSteps((store) => store);
 
-	const handleDeleteReciever = (id: string) => {
-		removeReceiver(id)
-		//fined the person
-		//delete it
-		//or implement the delete function in the store itself
+	const handleDeleteReciever = (nationalNo: string) => {
+		setReceivers((prev) => {
+			return prev.filter((reciever) => reciever.nationalNo !== nationalNo);
+		});
 	};
 
-	return steps?.receivers?.map((reciever, index) => {
+	return receivers?.map((reciever, index) => {
 		return (
 			<Fragment key={reciever.nationalNo}>
 				<Grid
@@ -53,7 +51,7 @@ export default function List() {
 					</Grid>
 				</Grid>
 
-				{steps?.receivers.length - 1 != index ?  <Divider /> : null}
+				{receivers.length - 1 != index ? <Divider /> : null}
 			</Fragment>
 		);
 	});

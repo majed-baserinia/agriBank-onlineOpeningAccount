@@ -3,20 +3,19 @@ import { Grid, Typography, useTheme } from '@mui/material';
 import AddReceiversformValidationCommand from 'business/application/cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommand';
 import useInqueryNationalId from 'business/hooks/cheque/Digital Cheque/useInqueryNationalId';
 import { pushAlert } from 'business/stores/AppAlertsStore';
-import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import CheckboxAdapter from 'ui/htsc-components/CheckboxAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
+import { AddFormProps } from './type';
 
-export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<boolean>) => void }) {
+export default function AddForm(props: AddFormProps) {
+	const { setOpen, setReceivers } = props;
 	const theme = useTheme();
 	const { t } = useTranslation();
-	const { addReceiver } = useDataSteps((store) => store);
 	const { data: inqueriedData, isLoading, mutate: inqueryNationalId } = useInqueryNationalId();
-
 	const [personal, setPersonal] = useState(true);
 	const [checkedForeigner, setCheckedForeigner] = useState(false);
 
@@ -34,7 +33,9 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 
 	const handleAdd = () => {
 		//save data of the person
-		addReceiver({ ...getValues(), customerType: detectCustomerType(personal, checkedForeigner) });
+		setReceivers((prev) => {
+			return [...prev, { ...getValues(), customerType: detectCustomerType(personal, checkedForeigner) }];
+		});
 
 		//reset the form
 		reset();
