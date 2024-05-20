@@ -112,7 +112,7 @@
 	"failedToGetDateFromStoreText": "اطلاعات یافت نشد. لطفا دوباره تلاش کنید",
 	"IdmaxLengthErrorText": "کد ملی یا شناسه نباید بیشتر از 13 کاراکتر باشد.",
 	"IdminLengthErrorText": "کد ملی یا شناسه باید بیشتر یا مساوی 10 کاراکتر باشد.",
-	"freignerLable": "اتباع هستم",
+	"freignerLable": "دریافت کننده اتباع خارجی است.",
 	"sayadNo": "شناسه صیاد",
 	"checkNo": "شماره چک",
 	"shebaOrigin": "شماره شبا مبدا",

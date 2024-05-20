@@ -72,7 +72,7 @@ export default function AddForm(props: AddFormProps) {
 			direction={'column'}
 			gap={'16px'}
 		>
-			<Typography variant="body2">{t('addRecieverDataText')}</Typography>
+			<Typography variant="bodyMd">{t('addRecieverDataText')}</Typography>
 			<Grid
 				container
 				sx={{
@@ -94,7 +94,12 @@ export default function AddForm(props: AddFormProps) {
 					}}
 					onClick={() => setPersonal(true)}
 				>
-					{t('personal')}
+					<Typography
+						variant="bodySm"
+						fontWeight={'bold'}
+					>
+						{t('personal')}
+					</Typography>
 				</Grid>
 				<Grid
 					sx={{
@@ -107,7 +112,12 @@ export default function AddForm(props: AddFormProps) {
 					}}
 					onClick={() => setPersonal(false)}
 				>
-					{t('corporate')}
+					<Typography
+						variant="bodySm"
+						fontWeight={'bold'}
+					>
+						{t('corporate')}
+					</Typography>
 				</Grid>
 			</Grid>
 			<Grid>
@@ -146,11 +156,17 @@ export default function AddForm(props: AddFormProps) {
 							variant="outlined"
 							onClick={() => handleInquery()}
 							muiButtonProps={{ sx: { borderRadius: '16px' } }}
-							disabled={isLoading}
+							//disabled={isLoading}
+							disabled
 						>
 							{t('inquiry')}
 						</ButtonAdapter>
 					</Grid>
+					<CheckboxAdapter
+						label={t('freignerLable')}
+						onChange={(checked) => setCheckedForeigner(checked)}
+						checked={checkedForeigner}
+					/>
 					<Controller
 						control={control}
 						name="name"
@@ -185,12 +201,6 @@ export default function AddForm(props: AddFormProps) {
 								/>
 							);
 						}}
-					/>
-
-					<CheckboxAdapter
-						label={t('freignerLable')}
-						onChange={(checked) => setCheckedForeigner(checked)}
-						checked={checkedForeigner}
 					/>
 
 					<ButtonAdapter

@@ -130,7 +130,7 @@ export default function AddReceivers() {
 									active={2}
 								/>
 							) : null}
-							<Typography variant="body1">{t('addReceiversText')}</Typography>
+							<Typography variant="bodyMd">{t('addReceiversText')}</Typography>
 							<CheckReceivers getRceivers={(a) => setStepData({ receivers: a })} />
 						</Grid>
 						<Grid container>

@@ -1,6 +1,6 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { useTheme } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
 import Button from '@mui/material/Button';
 
 import { ButtonAdapterProps } from './type';
@@ -41,7 +41,12 @@ export default function ButtonAdapter(props: ButtonAdapterProps) {
 			}
 			{...muiButtonProps}
 		>
-			{children}
+			<Typography
+				variant="bodyMd"
+				fontWeight={'medium'}
+			>
+				{children}
+			</Typography>
 		</Button>
 	);
 }

@@ -1,4 +1,4 @@
-import { Divider, Grid, useTheme } from '@mui/material';
+import { Divider, Grid, Typography, useTheme } from '@mui/material';
 import trashIcon from 'assets/icon/trash.svg';
 import { Fragment } from 'react';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
@@ -30,15 +30,15 @@ export default function List({ receivers, setReceivers }: ListProps) {
 						alignItems="flex-start"
 						gap={'5px'}
 					>
-						<span style={{ fontSize: '14px' }}>{reciever.name}</span>
-						<span
-							style={{
-								fontSize: '10px',
+						<Typography variant="bodyMd">{reciever.name}</Typography>
+						<Typography
+							variant="bodySm"
+							sx={{
 								color: theme.palette.grey[200]
 							}}
 						>
 							{reciever.nationalNo}
-						</span>
+						</Typography>
 					</Grid>
 					<Grid
 						sx={{ cursor: 'pointer' }}
