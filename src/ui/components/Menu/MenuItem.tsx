@@ -34,16 +34,26 @@ export default function MenuItem(props: Props) {
 					<Grid
 						container
 						gap={'8px'}
+						alignItems={'center'}
+						justifyContent={'center'}
 					>
 						<Grid item> {icon ? icon : null}</Grid>
 						<Grid>
-							<Typography sx={{ marginBottom: '8px' }}> {t(title, 'unknown')}</Typography>
 							<Typography
-								variant="body2"
-								sx={{ color: theme.palette.text.secondary }}
+								variant="bodyMd"
+								fontWeight={'medium'}
 							>
-								{subtitle ? t(subtitle, 'unknown') : null}
+								{t(title, 'unknown')}
 							</Typography>
+							{subtitle ? (
+								<Typography
+									variant="bodyXs"
+									fontWeight={'medium'}
+									sx={{ color: theme.palette.text.secondary, marginTop: "8px" }}
+								>
+									{t(subtitle, 'unknown')}
+								</Typography>
+							) : null}
 						</Grid>
 					</Grid>
 				</Grid>

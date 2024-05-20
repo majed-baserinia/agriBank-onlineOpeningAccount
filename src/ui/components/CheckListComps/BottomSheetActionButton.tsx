@@ -54,14 +54,14 @@ export default function BottomSheetActionButton() {
 						<Typography variant="h6">{t('selectAction')}</Typography>
 					</Grid>
 					<Typography>{t('selectActionText')}</Typography>
-					<Menu  list={menuList} />
+					<Menu  list={checkActionsMenuList} />
 				</Grid>
 			</BottomSheetAdapter>
 		</>
 	);
 }
 
-export const menuList = [
+export const  checkActionsMenuList = [
 	{
 		id: '1',
 		title: 'transferCheck',

@@ -9,7 +9,12 @@ export default function Menu(props: Props) {
 
 	return (
 		<Grid>
-			<Typography variant="h6">{menuTitle ? t(menuTitle, 'unknown') : null}</Typography>
+			<Typography
+				variant="bodyLg"
+				fontWeight={'bold'}
+			>
+				{menuTitle ? t(menuTitle, 'unknown') : null}
+			</Typography>
 			{list?.map((item, index) => {
 				return (
 					<>

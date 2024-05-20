@@ -1,9 +1,15 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import ChipStatusAdapter from 'ui/htsc-components/ChipStatusAdapter';
 import TableAdapter from 'ui/htsc-components/TableAdapter/TableAdapter';
+import { paths } from 'ui/route-config/paths';
 
 export default function DesktopView() {
+	const navigate = useNavigate();
+	const { t } = useTranslation();
+
 	useEffect(() => {
 		//get the data of the table from the props
 	}, []);
@@ -67,11 +73,11 @@ export default function DesktopView() {
 							size="small"
 							variant="text"
 							onClick={() => {
-								console.log('sdfs');
+								navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=123`);
 							}}
 							forwardIcon
 						>
-							Detail
+							{t('details')}
 						</ButtonAdapter>
 					)
 				}

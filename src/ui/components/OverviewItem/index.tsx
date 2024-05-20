@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 type Props = {
 	title?: string;
@@ -13,8 +13,13 @@ export default function OverviewItem(props: Props) {
 			justifyContent={'space-between'}
 			alignItems={'center'}
 		>
-			<Grid>{title}</Grid>
-			<Grid>{value}</Grid>
+			<Typography
+				variant="bodySm"
+				fontWeight={'medium'}
+			>
+				{title}
+			</Typography>
+			<Typography variant="bodySm">{value}</Typography>
 		</Grid>
 	);
 }

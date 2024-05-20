@@ -144,5 +144,12 @@
 	"rejectTransfer": "رد انتقال چک",
 	"rejectRegress": "رد عودت چک",
 	"you": "شما",
-	"payTo": "در وجه "
+	"payTo": "در وجه ",
+	"details": "جزئیات",
+	"checkDetailPageTitle": "نمایش جزئیات چک",
+	"checkStatus": "وضعیت چک",
+	"sayadCheckInquery": "استعلام چک صیادی",
+	"checkGuaranteeStatus":"وضعیت ضمانت چک",
+	"checkBlocking":"مسدودی چک",
+	"checkIssueDate":"تاریخ ثبت چک"
 }

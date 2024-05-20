@@ -1,8 +1,8 @@
 import { Chip, useTheme } from '@mui/material';
-import { Props } from "./type";
+import { Props } from './type';
 
-export default function ChipStatusAdapter(props:Props) {
-	const { type, label } = props;
+export default function ChipStatusAdapter(props: Props) {
+	const { type, label, size } = props;
 	const theme = useTheme();
 
 	const types = {
@@ -31,6 +31,7 @@ export default function ChipStatusAdapter(props:Props) {
 
 	return (
 		<Chip
+			size={size}
 			variant="filled"
 			sx={{ ...types[type], padding: '8px' }}
 			label={label}

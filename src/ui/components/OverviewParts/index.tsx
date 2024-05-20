@@ -24,7 +24,7 @@ export default function OverviewParts(props: Props) {
 			alignItems={'start'}
 			sx={{ padding: '16px' }}
 		>
-			<Grid>{data?.current?.name}</Grid>
+			<Typography variant="bodyMd">{data?.current?.name}</Typography>
 			<Grid
 				container
 				gap={'4px'}
@@ -44,8 +44,8 @@ const SignerComp = (props: SignerData) => {
 	const { customerNumber } = props;
 	return (
 		<>
-			<Typography variant="body2">{t('iDCodeCol')}</Typography>
-			<Typography variant="body2">{customerNumber}</Typography>
+			<Typography variant="bodyXs">{t('iDCodeCol')}</Typography>
+			<Typography variant="bodyXs">{customerNumber}</Typography>
 		</>
 	);
 };
@@ -63,12 +63,12 @@ const ReceiverComp = (props: ReceiverData) => {
 
 	return (
 		<>
-			<Typography variant="body2">{customerTypeMap?.[customerType]}</Typography>
-			<Typography variant="body2">{nationalNo}</Typography>
+			<Typography variant="bodyXs">{customerTypeMap?.[customerType]}</Typography>
+			<Typography variant="bodyXs">{nationalNo}</Typography>
 			{shahabNo && (
 				<>
-					<Typography variant="body2">{t('ShahabCodeTCol')}</Typography>
-					<Typography variant="body2">{shahabNo}</Typography>{' '}
+					<Typography variant="bodyXs">{t('ShahabCodeTCol')}</Typography>
+					<Typography variant="bodyXs">{shahabNo}</Typography>{' '}
 				</>
 			)}
 		</>

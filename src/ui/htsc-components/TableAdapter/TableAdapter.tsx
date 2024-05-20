@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, TableCell, TableRow } from '@mui/material';
+import { CircularProgress, Grid, TableCell, TableRow, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -38,7 +38,12 @@ export default function TableAdapter<TColumnNames extends string>({ columns, row
 									align={column.align}
 									style={{ minWidth: column.minWidth }}
 								>
-									{column.label != '' ? t(column.label, 'unknown') : ''}
+									<Typography
+										variant="bodyMd"
+										fontWeight={'bold'}
+									>
+										{column.label != '' ? t(column.label, 'unknown') : ''}
+									</Typography>
 								</TableCell>
 							))}
 						</TableRow>
@@ -57,7 +62,7 @@ export default function TableAdapter<TColumnNames extends string>({ columns, row
 												key={index}
 												align={column.align}
 											>
-												{value as ReactNode}
+												<Typography variant="bodyMd">{value as ReactNode}</Typography>
 											</TableCell>
 										);
 									})}

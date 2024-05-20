@@ -33,13 +33,13 @@ export default function AddForm({ setOpen }: { setOpen: (value: SetStateAction<b
 	});
 
 	const handleAdd = () => {
-		//save the data of the person
+		//save data of the person
 		addReceiver({ ...getValues(), customerType: detectCustomerType(personal, checkedForeigner) });
 
 		//reset the form
 		reset();
 
-		//clode the modal
+		//close the modal
 		setOpen(false);
 	};
 

@@ -144,5 +144,12 @@
 	"rejectTransfer": "Rejection of check transfer",
 	"rejectRegress": "Rejection of check return",
 	"you": "You",
-	"payTo": "Pay To "
+	"payTo": "Pay To ",
+	"details": "Details",
+	"checkDetailPageTitle": "View check details",
+	"checkStatus": "Check Status",
+	"sayadCheckInquery": "Sayad check inquiry",
+	"checkGuaranteeStatus" :"Check guarantee status",
+	"checkBlocking": "Check blocking",
+	"checkIssueDate": "Check Issue Date"
 }

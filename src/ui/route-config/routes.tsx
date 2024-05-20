@@ -14,6 +14,7 @@ import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
 import Layout from '../pages/Layout';
 import { paths } from './paths';
+import Details from 'ui/pages/receivedChecksList/Details';
 
 const router = createBrowserRouter([
 	{
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
 			{
 				path: paths.ReceivedChecksList.ChecksList,
 				element: <ChecksList />
+			},
+			{
+				path: paths.ReceivedChecksList.Detail,
+				element: <Details />
 			}
 		]
 	}
