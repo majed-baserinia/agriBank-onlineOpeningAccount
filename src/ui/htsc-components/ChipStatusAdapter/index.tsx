@@ -1,4 +1,4 @@
-import { Chip, useTheme } from '@mui/material';
+import { Chip, Typography, useTheme } from '@mui/material';
 import { Props } from './type';
 
 export default function ChipStatusAdapter(props: Props) {
@@ -34,7 +34,14 @@ export default function ChipStatusAdapter(props: Props) {
 			size={size}
 			variant="filled"
 			sx={{ ...types[type], padding: '8px' }}
-			label={label}
+			label={
+				<Typography
+					variant="bodySm"
+					fontWeight={'medium'}
+				>
+					{label}
+				</Typography>
+			}
 		/>
 	);
 }

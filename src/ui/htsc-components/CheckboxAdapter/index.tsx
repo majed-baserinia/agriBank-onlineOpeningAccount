@@ -1,12 +1,12 @@
-import { Checkbox, FormControlLabel, FormGroup, Typography, useTheme } from '@mui/material';
-import { ChangeEvent } from 'react';
+import { Checkbox, FormControlLabel, FormGroup, useTheme } from '@mui/material';
+import { ChangeEvent, ReactNode } from 'react';
 
 interface Props {
 	disabled?: boolean;
 	required?: boolean;
 	defaultChecked?: boolean;
 	checked: boolean;
-	label?: string;
+	label?: ReactNode;
 	onChange: (checked: boolean) => void;
 }
 export default function CheckboxAdapter(props: Props) {
@@ -31,14 +31,7 @@ export default function CheckboxAdapter(props: Props) {
 						defaultChecked={defaultChecked}
 					/>
 				}
-				label={
-					<Typography
-						variant="body2"
-						color="textSecondary"
-					>
-						{label}
-					</Typography>
-				}
+				label={label}
 				sx={{
 					color: theme.palette.primary.main,
 					'&.Mui-checked': {

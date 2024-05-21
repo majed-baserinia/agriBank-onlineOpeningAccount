@@ -157,5 +157,6 @@
 	"addNewReceiversText": "Add the list of new recipients of the intended check.",
 	"timer": "remaining time",
 	"transferOtpText": "To transfer the check, after receiving the 6-digit code, enter it in the box below.",
-	"registerAndConfirm": "Register And Confirm"
+	"registerAndConfirm": "Register And Confirm",
+	"noSignatureArrangement": "No Signature Arrangement"
 }

@@ -172,7 +172,7 @@ export default function TransferSignatureGroup() {
 								/>
 							) : null}
 							<Typography
-								variant="body1"
+								variant="bodyMd"
 								sx={{ marginBottom: '16px' }}
 							>
 								{t('signatureGroupText')}
@@ -245,7 +245,7 @@ export default function TransferSignatureGroup() {
 						<Menu
 							divider={false}
 							list={menuList.services}
-						/>{' '}
+						/>\
 					</BoxAdapter>
 				</Grid>
 			)}
@@ -271,7 +271,7 @@ export default function TransferSignatureGroup() {
 								icon={infoIcon}
 								alt="info"
 							/>
-							<Typography textOverflow={'ellipsis'}>{t('draggableListText')}</Typography>
+							<Typography variant='bodyMd' textOverflow={'ellipsis'}>{t('draggableListText')}</Typography>
 						</Grid>
 						<DraggableList
 							list={

@@ -6,6 +6,7 @@ import {
 	InputLabel,
 	MenuItem,
 	Select,
+	Typography,
 	useMediaQuery,
 	useTheme
 } from '@mui/material';
@@ -71,7 +72,12 @@ export default function BottomSheetSelect(props: Props) {
 								value={item.value}
 								onClick={() => handlClickItem(item)}
 							>
-								{item.name}
+								<Typography
+									variant="bodyMd"
+									fontWeight={'medium'}
+								>
+									{item.name}
+								</Typography>
 							</MenuItem>
 						);
 					})}
@@ -97,7 +103,12 @@ export default function BottomSheetSelect(props: Props) {
 													value={item.value}
 													onClick={() => handlClickItem(item)}
 												>
-													{item.name}
+													<Typography
+														variant="bodyMd"
+														fontWeight={'medium'}
+													>
+														{item.name}
+													</Typography>
 												</MenuItem>
 												<Divider />
 											</>

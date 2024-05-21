@@ -1,4 +1,4 @@
-import { FormLabel, Grid } from '@mui/material';
+import { FormLabel, Grid, Typography } from '@mui/material';
 import { LargeSwitch } from './LargeSwitch';
 import { SmallSwitch } from './SmallSwitch';
 import { Props } from './type';
@@ -13,7 +13,8 @@ export default function SwitchAdapter(props: Props) {
 				alignItems={'center'}
 				gap={'8px'}
 			>
-				<FormLabel>{label}</FormLabel>
+				<FormLabel>
+					<Typography variant='bodySm'>{label}</Typography></FormLabel>
 				{type === 'large' ? (
 					<LargeSwitch
 						checked={checked}

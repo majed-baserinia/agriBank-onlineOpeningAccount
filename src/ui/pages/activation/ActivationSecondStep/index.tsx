@@ -123,7 +123,7 @@ export default function ActivationSecondStep() {
 									alt="info"
 								/>
 								<Typography
-									variant="body1"
+									variant="bodyMd"
 									sx={{ marginBottom: '8px' }}
 								>
 									{t('activationSecondStepText')}
@@ -133,7 +133,12 @@ export default function ActivationSecondStep() {
 								container
 								alignItems={'baseline'}
 							>
-								<Typography sx={{ margin: '0 24px' }}>{t('dontRecieveMessage')}</Typography>
+								<Typography
+									variant="bodyMd"
+									sx={{ margin: '0 24px' }}
+								>
+									{t('dontRecieveMessage')}
+								</Typography>
 								<ButtonAdapter onClick={handleSendAgain}>
 									{t('sendAgain')}
 									<span>

@@ -83,7 +83,7 @@ export default function CheckInfo() {
 									active={1}
 								/>
 							) : null}
-							<Typography variant="body1">{t('infoCheckText')}</Typography>
+							<Typography variant="bodyMd">{t('infoCheckText')}</Typography>
 							<Grid
 								container
 								spacing={'16px'}

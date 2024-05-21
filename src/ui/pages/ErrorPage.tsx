@@ -7,8 +7,8 @@ const ErrorPage = () => {
   return (
     <>
       <Box padding={5}>
-        <Typography variant="h1">Oops</Typography>
-        <Typography>
+        <Typography variant="h1Md">Oops</Typography>
+        <Typography variant="bodyLg">
           {isRouteErrorResponse(error)
             ? "This page does not exist."
             : "An unexpected error occurred."}

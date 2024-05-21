@@ -157,5 +157,6 @@
 	"addNewReceiversText": "لیست دریافت‌کنندگان جدید چک  مدنظر را اضافه کنید.",
 	"timer": "زمان باقی مانده",
 	"transferOtpText": "جهت انتقال چک، پس از دریافت کد۶ رقمی آن را در کادر زیر وارد نمایید.",
-	"registerAndConfirm": "ثبت و تایید"
+	"registerAndConfirm": "ثبت و تایید",
+	"noSignatureArrangement": "بدون ترتیب امضا"
 }

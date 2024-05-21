@@ -53,10 +53,9 @@ export default function SelectCheckList() {
 	useEffect(() => {
 		//call the api
 		//add the response to the menu items if there is
-		//and set it to store 
+		//and set it to store
 		//if there is not  navigate the user by default to the other page
-
-        //use replace state for navigation
+		//use replace state for navigation
 	}, []);
 
 	//display the loader this way to user becouse user shouldn't see the page if there is no Checks that user represent or sign.
@@ -83,7 +82,12 @@ export default function SelectCheckList() {
 							icon={infoIcon}
 							alt="info"
 						/>
-						<Typography sx={{ color: theme.palette.text.secondary }}>{t('checkListsMenuText')}</Typography>
+						<Typography
+							variant="bodyMd"
+							sx={{ color: theme.palette.text.secondary }}
+						>
+							{t('checkListsMenuText')}
+						</Typography>
 					</Grid>
 					<Grid
 						dir={theme.direction}

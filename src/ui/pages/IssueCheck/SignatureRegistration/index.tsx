@@ -122,7 +122,7 @@ export default function SignatureRegistration() {
 									alt="info"
 								/>
 								<Typography
-									variant="body1"
+									variant="bodyMd"
 									sx={{ marginBottom: '8px' }}
 								>
 									{t('activationSecondStepText')}
@@ -132,15 +132,22 @@ export default function SignatureRegistration() {
 								container
 								alignItems={'baseline'}
 							>
-								<Typography sx={{ margin: '0 24px' }}>{t('dontRecieveMessage')}</Typography>
-								<ButtonAdapter onClick={handleIssueChequeInitiateSignature}>
-									{t('sendAgain')}
-									<span>
+								<Typography
+									variant="bodySm"
+									sx={{ margin: '0 24px' }}
+								>
+									{t('dontRecieveMessage')}
+								</Typography>
+								<ButtonAdapter
+									endIcon={
 										<SvgToIcon
 											icon={sendAaginIcon}
 											alt="send again"
 										/>
-									</span>
+									}
+									onClick={handleIssueChequeInitiateSignature}
+								>
+									{t('sendAgain')}
 								</ButtonAdapter>
 							</Grid>
 						</Grid>
@@ -163,8 +170,14 @@ export default function SignatureRegistration() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu divider={false} list={menuList.management} />
-						<Menu divider={false} list={menuList.services} />{' '}
+						<Menu
+							divider={false}
+							list={menuList.management}
+						/>
+						<Menu
+							divider={false}
+							list={menuList.services}
+						/>{' '}
 					</BoxAdapter>
 				</Grid>
 			)}

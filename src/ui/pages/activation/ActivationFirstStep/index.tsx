@@ -80,7 +80,7 @@ export default function ActivationFirstStep() {
 								/>
 							) : null}
 							<Typography
-								variant="body1"
+								variant="bodyMd"
 								sx={{ marginBottom: '8px' }}
 							>
 								{t('activationFirstStepText')}

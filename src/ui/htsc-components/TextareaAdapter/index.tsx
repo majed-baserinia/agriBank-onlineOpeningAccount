@@ -1,4 +1,4 @@
-import { TextField, useTheme } from '@mui/material';
+import { TextField, Typography, useTheme } from '@mui/material';
 import { useState } from 'react';
 
 import { TextareaAdapterProps } from "./type";
@@ -66,7 +66,7 @@ export default function TextareaAdapter(props: TextareaAdapterProps) {
 				...sx
 			}}
 			error={error}
-			helperText={helperText}
+			helperText={<Typography variant="bodySm">{helperText}</Typography>}
 			InputProps={{
 				dir: theme.direction,
 				sx: { input: { color: theme.palette.grey[200] } },

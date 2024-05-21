@@ -173,7 +173,7 @@ export default function SignatureGroup() {
 								/>
 							) : null}
 							<Typography
-								variant="body1"
+								variant="bodyMd"
 								sx={{ marginBottom: '16px' }}
 							>
 								{t('signatureGroupText')}
@@ -246,7 +246,7 @@ export default function SignatureGroup() {
 						<Menu
 							divider={false}
 							list={menuList.services}
-						/>{' '}
+						/>
 					</BoxAdapter>
 				</Grid>
 			)}
@@ -272,7 +272,7 @@ export default function SignatureGroup() {
 								icon={infoIcon}
 								alt="info"
 							/>
-							<Typography textOverflow={'ellipsis'}>{t('draggableListText')}</Typography>
+							<Typography variant='bodyMd' textOverflow={'ellipsis'}>{t('draggableListText')}</Typography>
 						</Grid>
 						<DraggableList
 							list={
@@ -280,8 +280,8 @@ export default function SignatureGroup() {
 									return { id: item.customerNumber.toString(), text: item.name };
 								}) || []
 							}
-							getData={(a) => {
-								const list = a.map((i) => ({ customerNumber: Number(i.id), name: i.text as string }));
+							getData={(newList) => {
+								const list = newList.map((i) => ({ customerNumber: Number(i.id), name: i.text as string }));
 								setListOrder(list);
 							}}
 						/>

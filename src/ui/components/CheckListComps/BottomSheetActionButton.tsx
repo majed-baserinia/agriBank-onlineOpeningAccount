@@ -51,17 +51,22 @@ export default function BottomSheetActionButton() {
 							icon={infoIcon}
 							alt="info"
 						/>
-						<Typography variant="h6">{t('selectAction')}</Typography>
+						<Typography
+							variant="bodyLg"
+							fontWeight={'bold'}
+						>
+							{t('selectAction')}
+						</Typography>
 					</Grid>
-					<Typography>{t('selectActionText')}</Typography>
-					<Menu  list={checkActionsMenuList} />
+					<Typography variant="bodySm">{t('selectActionText')}</Typography>
+					<Menu list={checkActionsMenuList} />
 				</Grid>
 			</BottomSheetAdapter>
 		</>
 	);
 }
 
-export const  checkActionsMenuList = [
+export const checkActionsMenuList = [
 	{
 		id: '1',
 		title: 'transferCheck',

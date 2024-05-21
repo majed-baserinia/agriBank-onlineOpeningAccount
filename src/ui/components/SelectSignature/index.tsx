@@ -35,9 +35,9 @@ export default function SelectSignature({
 						icon={infoIcon}
 						alt="info"
 					/>
-					<Typography>{t('IssuerSignature')}</Typography>
+					<Typography variant='bodyLg' fontWeight={"bold"}>{t('IssuerSignature')}</Typography>
 				</Grid>
-				<Typography variant="body2">{t('selectSignatureText')}</Typography>
+				<Typography variant="bodySm" fontWeight={"medium"}>{t('selectSignatureText')}</Typography>
 			</Grid>
 			<Grid>
 				<Grid
@@ -47,8 +47,8 @@ export default function SelectSignature({
 					onClick={() => setSelectedSigniture('myslef')}
 				>
 					<Grid>
-						<Typography>{t('mySignature')}</Typography>
-						<Typography variant="body2">{t('mySignatureSubText')}</Typography>
+						<Typography variant='bodyMd' fontWeight={"medium"}>{t('mySignature')}</Typography>
+						<Typography variant='bodyXs' fontWeight={"medium"}>{t('mySignatureSubText')}</Typography>
 					</Grid>
 
 					{i18n.dir() === 'ltr' ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}
@@ -61,8 +61,8 @@ export default function SelectSignature({
 					onClick={() => setSelectedSigniture('group')}
 				>
 					<Grid>
-						<Typography>{t('selectSignatureGroup')}</Typography>
-						<Typography variant="body2">{t('selectSignatureGroupSubText')}</Typography>
+						<Typography variant='bodyMd' fontWeight={'medium'}>{t('selectSignatureGroup')}</Typography>
+						<Typography variant='bodyXs' fontWeight={"medium"}>{t('selectSignatureGroupSubText')}</Typography>
 					</Grid>
 
 					{i18n.dir() === 'ltr' ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}

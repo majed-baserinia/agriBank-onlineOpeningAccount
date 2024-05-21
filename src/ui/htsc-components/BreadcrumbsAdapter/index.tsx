@@ -32,6 +32,7 @@ export default function BreadcrumbsAdapter(props: Props) {
 						<Typography
 							key={item.key}
 							color="primary"
+							variant="bodyMd"
 							fontWeight={'bold'}
 						>
 							{t(item.title, 'unknown')}
@@ -46,7 +47,7 @@ export default function BreadcrumbsAdapter(props: Props) {
 						href={item.href}
 						onClick={(e) => item.onClick?.(e)}
 					>
-						{t(item.title, 'unknown')}
+						<Typography variant="bodyMd">{t(item.title, 'unknown')}</Typography>
 					</Link>
 				);
 			})}

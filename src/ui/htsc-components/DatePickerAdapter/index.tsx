@@ -1,4 +1,4 @@
-import { FormHelperText } from '@mui/material';
+import { FormHelperText, Typography } from '@mui/material';
 import { useRef, useState } from 'react';
 import { default as persian, default as persian_ca } from 'react-date-object/calendars/persian';
 import persian_en from 'react-date-object/locales/persian_en';
@@ -57,7 +57,7 @@ export default function DatePickerAdapter(props: Props) {
 					paddingLeft: settings.language === 'fa-IR' ? '16px' : 'unset'
 				}}
 			>
-				{helperText}
+				<Typography variant='bodySm'>{helperText}</Typography>
 			</FormHelperText>
 		</div>
 	);

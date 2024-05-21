@@ -1,11 +1,13 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {
 	FormControl,
+	FormHelperText,
 	Grid,
 	InputAdornment,
 	InputLabel,
 	Select,
 	SelectChangeEvent,
+	Typography,
 	useMediaQuery,
 	useTheme
 } from '@mui/material';
@@ -18,6 +20,7 @@ export default function SelectAdapter(props: Props) {
 		onChange,
 		label,
 		error,
+		helperText,
 		disabled,
 		icon,
 		children,
@@ -122,6 +125,9 @@ export default function SelectAdapter(props: Props) {
 				>
 					{children}
 				</Select>
+				<FormHelperText error={error}>
+					<Typography variant="bodySm">{helperText}</Typography>
+				</FormHelperText>
 			</FormControl>
 		</Grid>
 	);

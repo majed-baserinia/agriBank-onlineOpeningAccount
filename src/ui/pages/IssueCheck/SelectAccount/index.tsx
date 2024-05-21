@@ -90,7 +90,7 @@ export default function SelectAccount() {
 								/>
 							) : null}
 							<Typography
-								variant="body1"
+								variant="bodyMd"
 								sx={{ marginBottom: '16px' }}
 							>
 								{t('selectAaccountText')}
@@ -143,18 +143,17 @@ export default function SelectAccount() {
 															alignItems="flex-start"
 															gap={'5px'}
 														>
-															<span
-																style={{
-																	fontSize: '10px',
-																	color: theme.palette.grey[200]
-																}}
+															<Typography
+																variant="bodyXs"
+																color={theme.palette.grey[200]}
 															>
 																{`${item.owners[0]?.firstName} ${item.owners[0]
 																	?.lastName} ${t('curentAccountP')}`}
-															</span>
-															<span style={{ fontSize: '14px' }}>
+															</Typography>
+
+															<Typography variant="bodyMd">
 																{item.accountNumber}
-															</span>
+															</Typography>
 														</Grid>
 													</Grid>
 												</MenuItem>
@@ -217,16 +216,19 @@ export default function SelectAccount() {
 														sx={{ padding: '16px' }}
 														gap={'8px'}
 													>
-														<Grid sx={{ fontSize: '14px' }}>
-															<span> {t('sayadNumber')}:</span>
-															<span>{` ${sheet.sayadNo}`}</span>
-														</Grid>
-														<Grid sx={{ fontSize: '10px' }}>
-															<span>{t('series')}:</span>
-															<span>{` ${sheet.chequeFrom} | `}</span>
-															<span>{t('serial')}:</span>
-															<span>{` ${sheet.chequeTo}`}</span>
-														</Grid>
+														<Typography
+															variant="bodyMd"
+															fontWeight={'bold'}
+														>
+															{t('sayadNumber')}:{sheet.sayadNo}
+														</Typography>
+														<Typography
+															variant="bodyXs"
+															fontWeight={'medium'}
+														>
+															{t('series')}:{sheet.chequeFrom} | {t('serial')}:
+															{sheet.chequeTo}
+														</Typography>
 													</Grid>
 												</MenuItem>
 											);
@@ -279,16 +281,19 @@ export default function SelectAccount() {
 														sx={{ padding: '16px' }}
 														gap={'8px'}
 													>
-														<Grid sx={{ fontSize: '14px' }}>
-															<span> {t('checkbookNumber')}:</span>
-															<span>{` ${checkbook.chequeTo}`}</span>
-														</Grid>
-														<Grid sx={{ fontSize: '10px' }}>
-															<span>{t('issueDate')}:</span>
-															<span>{` ${checkbook.issueDate} | `}</span>
-															<span>{t('expireDate')}:</span>
-															<span>{` ${checkbook.expiryDate}`}</span>
-														</Grid>
+														<Typography
+															variant="bodyMd"
+															fontWeight={'bold'}
+														>
+															{t('checkbookNumber')}:{checkbook.chequeTo}
+														</Typography>
+														<Typography
+															variant="bodyXs"
+															fontWeight={'medium'}
+														>
+															{t('issueDate')}:{checkbook.issueDate} | {t('expireDate')}:
+															{checkbook.expiryDate}
+														</Typography>
 													</Grid>
 												</MenuItem>
 											);
@@ -321,8 +326,14 @@ export default function SelectAccount() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu divider={false} list={menuList.management} />
-						<Menu divider={false} list={menuList.services} />
+						<Menu
+							divider={false}
+							list={menuList.management}
+						/>
+						<Menu
+							divider={false}
+							list={menuList.services}
+						/>
 					</BoxAdapter>
 				</Grid>
 			)}

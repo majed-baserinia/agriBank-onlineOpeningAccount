@@ -163,7 +163,7 @@ export default function AddForm(props: AddFormProps) {
 						</ButtonAdapter>
 					</Grid>
 					<CheckboxAdapter
-						label={t('freignerLable')}
+						label={<Typography variant='bodySm'>{t('freignerLable')}</Typography>}
 						onChange={(checked) => setCheckedForeigner(checked)}
 						checked={checkedForeigner}
 					/>

@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 
 export type Props = {
 	label: string;
+	helperText?: string;
 	error?: boolean;
 	disabled?: boolean;
 	renderValue?: boolean;

@@ -1,4 +1,4 @@
-import { InputAdornment, TextField, useTheme } from '@mui/material';
+import { InputAdornment, TextField, Typography, useTheme } from '@mui/material';
 import { formatToCart, formatToMoney } from 'common/utils/formatInput';
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -56,7 +56,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 				/>
 			) : null
 		);
-	}, [success, error,defaultValue]);
+	}, [success, error, defaultValue]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const originalValue = event.target.value;
@@ -147,7 +147,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 				...sx
 			}}
 			error={error}
-			helperText={helperText}
+			helperText={<Typography variant="bodySm">{helperText}</Typography>}
 			InputProps={{
 				inputMode: type == 'cart' || type == 'money' || type == 'number' ? 'numeric' : undefined,
 				dir: theme.direction,

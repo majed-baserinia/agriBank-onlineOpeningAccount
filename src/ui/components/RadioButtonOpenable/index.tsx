@@ -1,4 +1,4 @@
-import { FormControlLabel, Grid, Radio, useTheme } from '@mui/material';
+import { FormControlLabel, Grid, Radio, Typography, useTheme } from '@mui/material';
 import editIcon from 'assets/icon/edit.svg';
 import userIcon from 'assets/icon/user.svg';
 import { ChangeEvent, useState } from 'react';
@@ -74,7 +74,12 @@ export default function RadioButtonOpenable(props: Props) {
 							value={value}
 						/>
 						<Grid sx={{ margin: '16px 0', color: checked ? theme.palette.primary.main : 'unset' }}>
-							{label}
+							<Typography
+								variant="bodySm"
+								fontWeight={checked ? 'bold' : undefined}
+							>
+								{label}
+							</Typography>
 						</Grid>
 					</Grid>
 				}
@@ -95,23 +100,19 @@ export default function RadioButtonOpenable(props: Props) {
 					{groupParts.map((part, index) => {
 						return (
 							<Grid
+								direction={i18n.dir() === 'rtl' ? 'row' : 'row-reverse'}
+								sx={{ marginBottom: '4px' }}
 								container
-								gap={'4px'}
 								alignItems={'center'}
-								fontSize={'12px'}
+								gap={'3px'}
 							>
 								<SvgToIcon
 									icon={userIcon}
 									alt="user icon"
 								/>
-								<Grid
-									direction={i18n.dir() === 'rtl' ? 'row' : 'row-reverse'}
-									sx={{ marginBottom: '2px' }}
-								>
-									<span>{t('signatory')} </span>
-									<span>{mapNumbers[index]} </span>
-									<span>{part} </span>
-								</Grid>
+								<Typography variant="bodyXs">{t('signatory')} </Typography>
+								<Typography variant="bodyXs">{mapNumbers[index]} </Typography>{' '}
+								<Typography variant="bodyXs">{part} </Typography>
 							</Grid>
 						);
 					})}
@@ -135,10 +136,10 @@ export default function RadioButtonOpenable(props: Props) {
 					</ButtonAdapter>
 					<SwitchAdapter
 						type="small"
-						label="بدون ترتیب امضا"
+						label={t('noSignatureArrangement')}
 						checked={isOrder}
-						onChange={(e) => {
-							setIsOrder(e.target.checked);
+						onChange={(e, checked) => {
+							setIsOrder(checked);
 						}}
 					/>
 				</Grid>

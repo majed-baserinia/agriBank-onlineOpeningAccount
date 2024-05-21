@@ -19,7 +19,6 @@ export default function DraggableList(props: Props) {
 		setItems(newItems);
 		getData(newItems);
 	};
-	console.log({ list });
 
 	const mapNumbers: { [key: number]: string } = {
 		0: t('first'),
@@ -73,8 +72,22 @@ export default function DraggableList(props: Props) {
 													justifyContent={'start'}
 													gap={'6px'}
 												>
-													<span>{t('signatory')} </span>
-													<span>{mapNumbers[index]} </span>
+													<span>
+														<Typography
+															variant="bodyXs"
+															fontWeight={'medium'}
+														>
+															{t('signatory')}
+														</Typography>{' '}
+													</span>
+													<span>
+														<Typography
+															variant="bodyXs"
+															fontWeight={'medium'}
+														>
+															{mapNumbers[index]}
+														</Typography>{' '}
+													</span>
 												</Grid>
 											}
 											secondary={
@@ -83,7 +96,7 @@ export default function DraggableList(props: Props) {
 													gap={'8px'}
 												>
 													<DragHandleIcon />
-													<Typography>{item.text}</Typography>
+													<Typography variant="bodySm">{item.text}</Typography>
 												</Grid>
 											}
 										/>

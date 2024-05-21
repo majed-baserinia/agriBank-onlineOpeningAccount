@@ -38,7 +38,10 @@ export default function ChecksList() {
 						justifyContent={'space-between'}
 						alignItems={'center'}
 					>
-						<Typography>
+						<Typography
+							variant="bodyMd"
+							fontWeight={'medium'}
+						>
 							{t('payTo')}
 							{listOfBeneficiaries.length === 1 ? t('you') : selectedBeneficiary}
 						</Typography>

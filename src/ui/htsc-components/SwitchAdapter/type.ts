@@ -1,6 +1,8 @@
+import { ChangeEvent } from "react";
+
 export type Props = {
 	type?: 'small' | 'large';
 	checked: boolean;
-	onChange: () => void;
+	onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
 	label: string;
 };
