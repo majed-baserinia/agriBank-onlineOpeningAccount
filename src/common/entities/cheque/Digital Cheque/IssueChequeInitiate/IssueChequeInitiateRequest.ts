@@ -14,4 +14,5 @@ export type Reciever = {
 	shahabNo: string;
 	nationalNo: string;
 	customerType: 1 | 2 | 3 | 4;
+    customerTypeDescription: string;
 };

@@ -1,4 +1,4 @@
-import { Divider, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Menu from 'ui/components/Menu';
@@ -10,9 +10,7 @@ import Stepper from 'ui/htsc-components/Stepper';
 import useIssueChequeFinalize from 'business/hooks/cheque/Digital Cheque/useIssueChequeFinalize';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
-import { Fragment } from 'react';
-import OverviewItem from 'ui/components/OverviewItem';
-import OverviewParts from 'ui/components/OverviewParts';
+import CheckOverview from 'ui/components/CheckOverview';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
@@ -150,77 +148,7 @@ export default function OverView() {
 									active={5}
 								/>
 							) : null}
-							<Grid
-								container
-								direction={'column'}
-								gap={'16px'}
-							>
-								<OverviewItem
-									title={t('sayadNo')}
-									value={overviewData?.sayadNo}
-								/>
-								<OverviewItem
-									title={t('checkNo')}
-									value={overviewData?.sayadNo}
-								/>
-								<Divider />
-								<OverviewItem
-									title={t('shebaOrigin')}
-									value={overviewData?.sayadNo}
-								/>
-								<OverviewItem
-									title={t('amount')}
-									value={overviewData?.amount}
-								/>
-								<OverviewItem
-									title={t('dueDate')}
-									value={overviewData?.dueDate}
-								/>
-								<OverviewItem
-									title={t('reason')}
-									value={overviewData?.reason}
-								/>
-								<Divider />
-							</Grid>
-							<Grid>
-								<Typography>{t('description')}</Typography>
-								<Typography>{overviewData?.description}</Typography>
-							</Grid>
-							<Grid
-								sx={{
-									border: `1px solid ${theme.palette.divider}`,
-									borderRadius: '16px',
-									padding: '16px',
-									margin: '16px 0'
-								}}
-							>
-								<Typography>{t('recivers')}</Typography>
-								{overviewData?.recievers?.map((receiver, index) => {
-									return (
-										<Fragment key={receiver.name}>
-											<OverviewParts
-												type="receiver"
-												receiverData={{ ...receiver }}
-											/>
-											{overviewData.recievers.length - 1 != index ? <Divider /> : null}
-										</Fragment>
-									);
-								})}
-
-								<Typography sx={{ marginTop: '16px' }}>{t('signers')}</Typography>
-
-								{overviewData?.signers[0].withdrawalGroups?.map((signer, index) => {
-									return (
-										<Fragment key={index}>
-											<OverviewParts
-												type="signer"
-												signerData={{ ...signer }}
-											/>
-											{overviewData.recievers.length - 1 != index ? <Divider /> : null}
-										</Fragment>
-									);
-								})}
-							</Grid>
+							<CheckOverview overviewData={overviewData} />
 						</Grid>
 
 						<Grid container>
@@ -228,10 +156,9 @@ export default function OverView() {
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
-								forwardIcon
 								onClick={() => handleSubmit()}
 							>
-								{t('continue')}
+								{t('register')}
 							</ButtonAdapter>
 						</Grid>
 					</Grid>
@@ -244,8 +171,14 @@ export default function OverView() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu divider={false} list={menuList.management} />
-						<Menu divider={false} list={menuList.services} />{' '}
+						<Menu
+							divider={false}
+							list={menuList.management}
+						/>
+						<Menu
+							divider={false}
+							list={menuList.services}
+						/>{' '}
 					</BoxAdapter>
 				</Grid>
 			)}

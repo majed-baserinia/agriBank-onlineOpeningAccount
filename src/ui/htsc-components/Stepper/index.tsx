@@ -49,7 +49,15 @@ export default function Stepper(props: Props) {
 										</span>
 									</span>
 								)}
-								<span className="min-w-20 text-center text-sm font-medium">{item}</span>
+								<span className="min-w-20 text-center text-sm font-medium">
+									<Typography
+										color={theme.palette.primary.main}
+										variant="bodySm"
+										fontWeight={index === active ? 'bold' : undefined}
+									>
+										{item}
+									</Typography>
+								</span>
 							</span>
 							<div
 								className=" mb-8 w-full flex-1 rounded  group-last:hidden"
