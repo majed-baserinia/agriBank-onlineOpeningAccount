@@ -18,6 +18,9 @@ export const paths = {
 		ChecksList: '/cheque/ReceivedChecksList/ChecksList',
 		Detail: '/cheque/ReceivedChecksList/detail',
 		TransferCheck: '/cheque/ReceivedChecksList/transferCheck',
-		AddNewReceivers: '/cheque/ReceivedChecksList/transferCheck/AddNewReceivers'
+		AddNewReceivers: '/cheque/ReceivedChecksList/transferCheck/AddNewReceivers',
+		OtpTransferConfirmation: '/cheque/ReceivedChecksList/transferCheck/OtpTransferConfirmation',
+		TransferSignatureGroup: '/cheque/ReceivedChecksList/transferCheck/TransferSignatureGroup',
+		TransferOverView: '/cheque/ReceivedChecksList/transferCheck/TransferOverView'
 	}
 };

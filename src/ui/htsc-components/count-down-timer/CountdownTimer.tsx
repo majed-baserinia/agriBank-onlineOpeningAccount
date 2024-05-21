@@ -1,4 +1,4 @@
-import { useTheme } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
 import { useEffect } from 'react';
 import { useCountDownTimer } from 'ui/htsc-components/count-down-timer/useCountDownTimer';
 
@@ -24,10 +24,10 @@ const CountDownTimer = ({ timerInSeconds, onCountDownStarted, onCountDownEnded }
 
 	return (
 		<span
-			style={{ color: theme.palette.text.secondary }}
 			className={`px-2 ${!isTimerCounting ? 'hidden' : ''}`}
+			style={{ color: theme.palette.text.secondary }}
 		>
-			{beautifyTime(countDownTimer ?? 0)}
+			<Typography variant="bodySm">{beautifyTime(countDownTimer ?? 0)}</Typography>
 		</span>
 	);
 };

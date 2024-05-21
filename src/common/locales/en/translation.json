@@ -149,10 +149,12 @@
 	"checkDetailPageTitle": "View check details",
 	"checkStatus": "Check Status",
 	"sayadCheckInquery": "Sayad check inquiry",
-	"checkGuaranteeStatus" :"Check guarantee status",
+	"checkGuaranteeStatus": "Check guarantee status",
 	"checkBlocking": "Check blocking",
 	"checkIssueDate": "Check Issue Date",
 	"verificationCode": "Verification Code",
 	"receiver": "Receiver",
-	"addNewReceiversText": "Add the list of new recipients of the intended check."
+	"addNewReceiversText": "Add the list of new recipients of the intended check.",
+	"timer": "remaining time",
+	"transferOtpText": "To transfer the check, after receiving the 6-digit code, enter it in the box below."
 }

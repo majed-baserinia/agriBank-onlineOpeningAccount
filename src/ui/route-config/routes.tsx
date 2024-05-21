@@ -17,6 +17,9 @@ import { paths } from './paths';
 import Details from 'ui/pages/receivedChecksList/Details';
 import CheckNewInfo from 'ui/pages/receivedChecksList/TransferCheck/CheckNewInfo';
 import AddNewReceivers from 'ui/pages/receivedChecksList/TransferCheck/AddNewReceivers';
+import OtpTransferConfirmation from 'ui/pages/receivedChecksList/TransferCheck/OtpTransferConfirmation';
+import TransferSignatureGroup from 'ui/pages/receivedChecksList/TransferCheck/TransferSignatureGroup';
+import TransferOverView from 'ui/pages/receivedChecksList/TransferCheck/TransferOverView';
 
 const router = createBrowserRouter([
 	{
@@ -81,7 +84,19 @@ const router = createBrowserRouter([
 			{
 				path: paths.ReceivedChecksList.AddNewReceivers,
 				element: <AddNewReceivers />
-			}
+			},
+			{
+				path: paths.ReceivedChecksList.OtpTransferConfirmation,
+				element: <OtpTransferConfirmation />
+			},
+			{
+				path: paths.ReceivedChecksList.TransferSignatureGroup,
+				element: <TransferSignatureGroup />
+			},
+			{
+				path: paths.ReceivedChecksList.TransferOverView,
+				element: <TransferOverView />
+			},
 		]
 	}
 ]);

@@ -46,3 +46,6 @@ export * from './cheque/Digital Cheque/Issuechequeinitiatesignature/Issuechequei
 
 export * from './cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVerifyInitiateCommand';
 export * from './cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVerifyInitiateCommandHandler';
+
+export * from './cheque/Digital Cheque/Send Otp/CheckInitiateOtpCommand';
+export * from './cheque/Digital Cheque/Send Otp/CheckInitiateOtpCommandHandler';

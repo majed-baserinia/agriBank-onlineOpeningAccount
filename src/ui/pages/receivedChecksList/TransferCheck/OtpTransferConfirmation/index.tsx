@@ -17,15 +17,15 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Otp from 'ui/htsc-components/Otp';
 import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
-import { menuList } from '../../HomePage/menuList';
+import { menuList } from 'ui/pages/HomePage/menuList';
 
-export default function OtpCheck() {
+
+export default function OtpTransferConfirmation() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
 	const navigate = useNavigate();
-
-	const GetStepData = useDataSteps((s) => s.steps.signitureRequirementData);
+const GetStepData = useDataSteps((s) => s.steps.signitureRequirementData);
 	const {
 		data: CheckInitiateOtpData,
 		mutate: CheckInitiateOtpMutate,
@@ -126,15 +126,15 @@ export default function OtpCheck() {
 							<Title>{t('activationElCheck')}</Title>
 							{!matches ? (
 								<Stepper
-									list={[
-										t('selectCheck'),
-										t('checkInfo'),
-										t('recivers'),
-										t('activationCode'),
-										t('end')
-									]}
-									active={3}
-								/>
+								list={[
+									t('checkInfo'),
+									t('recivers'),
+									t('verificationCode'),
+									t('selectSignatureGroup'),
+									t('end')
+								]}
+								active={2}
+							/>
 							) : null}
 
 							<Grid
@@ -151,7 +151,7 @@ export default function OtpCheck() {
 									variant="bodyMd"
 									sx={{ marginBottom: '8px' }}
 								>
-									{t('reciveOptText')}
+									{t('transferOtpText')}
 								</Typography>
 							</Grid>
 
