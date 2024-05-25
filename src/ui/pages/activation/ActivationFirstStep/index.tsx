@@ -51,6 +51,7 @@ export default function ActivationFirstStep() {
 			}
 		);
 	};
+	
 	return (
 		<Grid
 			container
@@ -60,6 +61,7 @@ export default function ActivationFirstStep() {
 			dir={theme.direction}
 		>
 			<Grid
+			item
 				xs={12}
 				md={8}
 			>

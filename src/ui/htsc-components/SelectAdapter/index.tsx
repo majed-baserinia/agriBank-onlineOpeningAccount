@@ -126,7 +126,7 @@ export default function SelectAdapter(props: Props) {
 					{children}
 				</Select>
 				<FormHelperText error={error}>
-					<Typography variant="bodySm">{helperText}</Typography>
+					{helperText}
 				</FormHelperText>
 			</FormControl>
 		</Grid>

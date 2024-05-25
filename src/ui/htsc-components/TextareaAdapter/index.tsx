@@ -66,7 +66,7 @@ export default function TextareaAdapter(props: TextareaAdapterProps) {
 				...sx
 			}}
 			error={error}
-			helperText={<Typography variant="bodySm">{helperText}</Typography>}
+			helperText={helperText}
 			InputProps={{
 				dir: theme.direction,
 				sx: { input: { color: theme.palette.grey[200] } },

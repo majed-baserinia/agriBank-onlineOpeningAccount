@@ -147,7 +147,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 				...sx
 			}}
 			error={error}
-			helperText={<Typography variant="bodySm">{helperText}</Typography>}
+			helperText={helperText}
 			InputProps={{
 				inputMode: type == 'cart' || type == 'money' || type == 'number' ? 'numeric' : undefined,
 				dir: theme.direction,

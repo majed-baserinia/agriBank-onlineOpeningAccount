@@ -57,7 +57,7 @@ export default function DatePickerAdapter(props: Props) {
 					paddingLeft: settings.language === 'fa-IR' ? '16px' : 'unset'
 				}}
 			>
-				<Typography variant='bodySm'>{helperText}</Typography>
+				{helperText}
 			</FormHelperText>
 		</div>
 	);
