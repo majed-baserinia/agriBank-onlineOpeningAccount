@@ -13,11 +13,12 @@ interface Props {
 const MaterialThemeProvider = ({ children }: Props) => {
 	const settings = useInitialSettingStore((s) => s.settings);
 
+
+	
 	const themeTemplate = createTheme({
 		...settings.theme,
 		direction: settings.language === 'fa-IR' ? 'rtl' : 'ltr',
 		typography: {
-			//...settings.theme.typography,
 			fontFamily: settings.language === 'fa-IR' ? 'IRANSans' : 'Roboto , sans-serif',
 			h1Sm: {
 				fontFamily: 'inherit',
@@ -60,6 +61,19 @@ const MaterialThemeProvider = ({ children }: Props) => {
 				fontWeight: 400,
 				fontSize: '16px',
 				lineHeight: '25.39px'
+			},
+
+			body1: {
+				fontFamily: 'inherit',
+				fontSize: '14px',
+				fontWeight: 400,
+				lineHeight: 'normal'
+			},
+
+			caption: {
+				fontFamily: 'inherit',
+				fontSize: '14px',
+				lineHeight: '19.04px'
 			}
 		},
 
@@ -175,6 +189,9 @@ const MaterialThemeProvider = ({ children }: Props) => {
 			}
 		}
 	});
+
+	console.log(themeTemplate);
+	
 
 	const emotionCache = useMemo(() => {
 		if (settings.language === 'fa-IR') {
