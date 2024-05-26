@@ -42,45 +42,33 @@ export default function SelectCheckList() {
 	const navigate = useNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const addNewDataToStore = useChecklistData((store) => store.addNewData);
-	const { data: listItems } = useGetAllRelatedCustomers('test');
+	const { data: listItems, isLoading } = useGetAllRelatedCustomers('test');
 
-	const [loading, setLoading] = useState(false);
 	const [menuItems, setMenuItems] = useState<MenuItems>([]);
 
 	useEffect(() => {
 		const newList = listItems?.map((item, index) => {
-			if (index === 0) {
-				return {
-					id: item.customerNumber,
-					title: 'myChecks',
-					subtitle: 'myChecksSubtitle',
-					routeTo: `${paths.ReceivedChecksList.ChecksList}?cif=${item.customerNumber}`
-				};
-			}
 			return {
 				id: item.customerNumber,
-				title: item.fullName,
-				subtitle: 'othersChecksSubtitle',
+				title: index === 0 ? 'myChecks' : item.fullName,
+				subtitle: index === 0 ? 'myChecksSubtitle' : 'othersChecksSubtitle',
 				routeTo: `${paths.ReceivedChecksList.ChecksList}?cif=${item.customerNumber}`
 			};
 		});
 
-		if (!newList) return;
-		setMenuItems((prev) => {
-			return [...prev, ...newList];
-		});
+		if (newList) {
+			setMenuItems(newList);
+		}
 
 		//set the new list to the store
 		addNewDataToStore({ allRelatedCustomers: listItems });
 
 		if (listItems?.length === 1)
 			navigate(paths.ReceivedChecksList.ChecksList + '?cif=' + listItems[0].customerNumber, { replace: true });
-
-		//use replace state for navigation
-	}, []);
+	}, [listItems]);
 
 	//display the loader this way to user becouse user shouldn't see the page if there is no Checks that user represent or sign.
-	if (loading) return <Loader showLoader />;
+	if (isLoading) return <Loader showLoader />;
 
 	return (
 		<Grid sx={{ padding: matches ? '0' : '64px' }}>
