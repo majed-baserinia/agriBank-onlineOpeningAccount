@@ -1,8 +1,8 @@
 import { Divider, Grid, Typography } from '@mui/material';
+import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import MenuItem from './MenuItem';
 import { Props } from './type';
-import { Fragment } from 'react';
 
 export default function Menu(props: Props) {
 	const { list, menuTitle, divider = true } = props;
@@ -14,7 +14,7 @@ export default function Menu(props: Props) {
 				variant="bodyLg"
 				fontWeight={'bold'}
 			>
-				{menuTitle ? t(menuTitle, 'unknown') : null}
+				{t(menuTitle!, menuTitle as string)}
 			</Typography>
 			{list?.map((item, index) => {
 				return (

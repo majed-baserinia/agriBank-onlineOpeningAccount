@@ -1,5 +1,7 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
+import useGetAllRelatedCustomers from 'business/hooks/cheque/checklist/useGetAllRelatedCustomers';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +12,12 @@ import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 
+type MenuItems = {
+	id: number;
+	title: string;
+	subtitle: string;
+	routeTo: string;
+}[];
 export const breadcrumbs = [
 	{
 		title: 'accountServices',
@@ -33,28 +41,41 @@ export default function SelectCheckList() {
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
+	const addNewDataToStore = useChecklistData((store) => store.addNewData);
+	const { data: listItems } = useGetAllRelatedCustomers('test');
+
 	const [loading, setLoading] = useState(false);
-	const [menuItems, setMenuItems] = useState([
-		{
-			id: '1',
-			title: 'myChecks',
-			subtitle: 'myChecksSubtitle',
-			//we don't send the user cif to backend (if it is null it means it is the user ifself)
-			routeTo: paths.ReceivedChecksList.ChecksList
-		},
-		{
-			id: '1',
-			title: 'should be generate',
-			subtitle: 'othersChecksSubtitle',
-			routeTo: `${paths.ReceivedChecksList.ChecksList}?cif=companyorotherCif`
-		}
-	]);
+	const [menuItems, setMenuItems] = useState<MenuItems>([]);
 
 	useEffect(() => {
-		//call the api
-		//add the response to the menu items if there is
-		//and set it to store
-		//if there is not  navigate the user by default to the other page
+		const newList = listItems?.map((item, index) => {
+			if (index === 0) {
+				return {
+					id: item.customerNumber,
+					title: 'myChecks',
+					subtitle: 'myChecksSubtitle',
+					routeTo: `${paths.ReceivedChecksList.ChecksList}?cif=${item.customerNumber}`
+				};
+			}
+			return {
+				id: item.customerNumber,
+				title: item.fullName,
+				subtitle: 'othersChecksSubtitle',
+				routeTo: `${paths.ReceivedChecksList.ChecksList}?cif=${item.customerNumber}`
+			};
+		});
+
+		if (!newList) return;
+		setMenuItems((prev) => {
+			return [...prev, ...newList];
+		});
+
+		//set the new list to the store
+		addNewDataToStore({ allRelatedCustomers: listItems });
+
+		if (listItems?.length === 1)
+			navigate(paths.ReceivedChecksList.ChecksList + '?cif=' + listItems[0].customerNumber, { replace: true });
+
 		//use replace state for navigation
 	}, []);
 

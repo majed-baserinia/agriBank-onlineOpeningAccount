@@ -190,7 +190,6 @@ const MaterialThemeProvider = ({ children }: Props) => {
 		}
 	});
 
-	console.log(themeTemplate);
 	
 
 	const emotionCache = useMemo(() => {

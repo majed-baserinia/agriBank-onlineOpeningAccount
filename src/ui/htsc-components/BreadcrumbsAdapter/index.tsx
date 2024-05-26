@@ -35,7 +35,7 @@ export default function BreadcrumbsAdapter(props: Props) {
 							variant="bodyMd"
 							fontWeight={'bold'}
 						>
-							{t(item.title, 'unknown')}
+							{t(item.title, item.title)}
 						</Typography>
 					);
 				}
@@ -47,7 +47,7 @@ export default function BreadcrumbsAdapter(props: Props) {
 						href={item.href}
 						onClick={(e) => item.onClick?.(e)}
 					>
-						<Typography variant="bodyMd">{t(item.title, 'unknown')}</Typography>
+						<Typography variant="bodyMd">{t(item.title, item.title)}</Typography>
 					</Link>
 				);
 			})}

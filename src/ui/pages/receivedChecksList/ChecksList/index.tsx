@@ -1,4 +1,7 @@
 import { Grid, MenuItem, Typography, useMediaQuery, useTheme } from '@mui/material';
+import useCartableInquiryCommand from 'business/hooks/cheque/checklist/useCartableInquiryCommand';
+import { pushAlert } from 'business/stores/AppAlertsStore';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -13,10 +16,21 @@ export default function ChecksList() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('tablet'));
+	const relatedCustomers = useChecklistData((store) => store.relatedCustomers);
+	const { mutate: getCartableInquiry, isLoading } = useCartableInquiryCommand();
+
 	const [listOfBeneficiaries, setListOfBeneficiaries] = useState([]);
 	const [selectedBeneficiary, setSelectedBeneficiary] = useState(cif);
 
+	const getBeneficiariesCheckLists = () => {
+		getCartableInquiry(
+			{ customerNumber: Number(selectedBeneficiary) },
+			{ onError: (err) => pushAlert({ type: 'error', messageText: err.detail }) }
+		);
+	};
+
 	useEffect(() => {
+		getBeneficiariesCheckLists();
 		//call the api by the cif that is received from url query if there is any
 	}, [selectedBeneficiary]);
 
@@ -51,8 +65,14 @@ export default function ChecksList() {
 								label=""
 								onChange={(value) => setSelectedBeneficiary(value)}
 							>
-								<MenuItem value={1}>asfvfred</MenuItem>
-								<MenuItem value={2}>as</MenuItem>
+								{relatedCustomers?.map((item) => (
+									<MenuItem
+										value={item.customerNumber}
+										key={item.customerNumber}
+									>
+										{item.fullName}
+									</MenuItem>
+								))}
 							</SelectAdapter>
 						</Grid>
 					</Grid>

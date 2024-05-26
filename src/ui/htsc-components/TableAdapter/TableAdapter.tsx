@@ -42,7 +42,7 @@ export default function TableAdapter<TColumnNames extends string>({ columns, row
 										variant="bodyMd"
 										fontWeight={'bold'}
 									>
-										{column.label != '' ? t(column.label, 'unknown') : ''}
+										{column.label != '' ? t(column.label, column.label) : ''}
 									</Typography>
 								</TableCell>
 							))}

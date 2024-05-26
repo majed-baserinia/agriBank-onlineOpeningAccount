@@ -11,3 +11,5 @@ export const IssueChequeVerifyInitiate = '/cheque/DigitalCheque/IssueChequeVerif
 export const IssueChequeFinalize = '/cheque/DigitalCheque/IssueChequeFinalize';
 export const IssueInquiryWithDrawalGroup = '/cheque/DigitalCheque/issuechequeinquirywithdrawalgroup';
 export const IssueChequeIssueWithDrawalGroup = '/cheque/DigitalCheque/issuechequeissuewithdrawalgroup';
+export const CartableInquiry = '/cheque/DigitalCheque/cartableinquiry';
+export const GetAllRelatedCustomers = '/CustomerManager/getallrelatedcustomers';

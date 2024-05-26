@@ -43,7 +43,7 @@ export default function MenuItem(props: Props) {
 								variant="bodyMd"
 								fontWeight={'medium'}
 							>
-								{t(title, 'unknown')}
+								{t(title, title)}
 							</Typography>
 							{subtitle ? (
 								<Typography
@@ -51,7 +51,7 @@ export default function MenuItem(props: Props) {
 									fontWeight={'medium'}
 									sx={{ color: theme.palette.text.secondary, marginTop: "8px" }}
 								>
-									{t(subtitle, 'unknown')}
+									{t(subtitle, subtitle)}
 								</Typography>
 							) : null}
 						</Grid>

@@ -49,3 +49,9 @@ export * from './cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVeri
 
 export * from './cheque/Digital Cheque/Send Otp/CheckInitiateOtpCommand';
 export * from './cheque/Digital Cheque/Send Otp/CheckInitiateOtpCommandHandler';
+
+export * from './cheque/checkList/GetAllRelatedCustomers/GetAllRelatedCustomersQuery';
+export * from './cheque/checkList/GetAllRelatedCustomers/GetAllRelatedCustomersQueryHandler';
+
+export * from './cheque/checkList/CartableInquiry/CartableInquiryCommand';
+export * from './cheque/checkList/CartableInquiry/CartableInquiryCommandHandler';
