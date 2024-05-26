@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { CartableInquiryResponse } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
@@ -6,12 +7,43 @@ import ChipStatusAdapter from 'ui/htsc-components/ChipStatusAdapter';
 import TableAdapter from 'ui/htsc-components/TableAdapter/TableAdapter';
 import { paths } from 'ui/route-config/paths';
 
-export default function DesktopView() {
+export default function DesktopView({ cartableList }: { cartableList?: CartableInquiryResponse }) {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
+	const [checkRows, setCheckRows] = useState()
 
 	useEffect(() => {
 		//get the data of the table from the props
+
+		const rows = cartableList?.cheques.map((check) => {
+			return {
+				sayadNumber: check.sayadNo,
+				status: (
+					<>
+						<ChipStatusAdapter
+							type="success"
+							label="test"
+						/>
+					</>
+				),
+				serieAndSerial: check.serialNo + '/' + check.seriesNo,
+				amount: check.amount,
+				reason: check.reason,
+				date: check.dueDate,
+				action: (
+					<ButtonAdapter
+						size="small"
+						variant="text"
+						onClick={() => {
+							navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=123`);
+						}}
+						forwardIcon
+					>
+						{t('details')}
+					</ButtonAdapter>
+				)
+			};
+		});
 	}, []);
 
 	return (
@@ -25,63 +57,7 @@ export default function DesktopView() {
 				{ id: 'date', label: 'date', minWidth: 70 },
 				{ id: 'action', label: '', minWidth: 70, align: 'right' }
 			]}
-			rowsData={[
-				{
-					sayadNumber: 'asdfas',
-					status: (
-						<>
-							<ChipStatusAdapter
-								type="success"
-								label="test"
-							/>
-						</>
-					),
-					serieAndSerial: 'dssdf',
-					amount: '234324',
-					reason: '234234',
-					date: '234234',
-					action: (
-						<ButtonAdapter
-							size="small"
-							variant="text"
-							onClick={() => {
-								console.log('sdfs');
-							}}
-							forwardIcon
-						>
-							Detail
-						</ButtonAdapter>
-					)
-				},
-				{
-					sayadNumber: 'asdfas',
-					status: 'SD;LVMS',
-					serieAndSerial: 'dssdf',
-					amount: '234324',
-					reason: '234234',
-					date: '234234'
-				},
-				{
-					sayadNumber: 'asdfas',
-					status: 'SD;LVMS',
-					serieAndSerial: 'dssdf',
-					amount: '234324',
-					reason: '234234',
-					date: '234234',
-					action: (
-						<ButtonAdapter
-							size="small"
-							variant="text"
-							onClick={() => {
-								navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=123`);
-							}}
-							forwardIcon
-						>
-							{t('details')}
-						</ButtonAdapter>
-					)
-				}
-			]}
+			rowsData={checkRows}
 		/>
 	);
 }

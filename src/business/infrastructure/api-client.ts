@@ -2,22 +2,20 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axiosRetry from 'axios-retry';
 import { sendPostmessage } from 'business/hooks/postMessage/useInitPostMessage';
 import ApiConfigSingleton from 'business/stores/api-config-singleton';
-import { settings } from 'business/stores/initial-setting-store';
+import useInitialSettingStore from 'business/stores/initial-setting-store';
 import { ErrorType } from 'common/entities/ErrorType';
 import i18n from 'i18n';
 import { clearAuth, getAuthTokens, saveAuthTokens } from './auth-service';
 
 const axiosInstance = axios.create({
 	headers: {
-		'Content-Type': 'application/json',
-		'os-type': settings?.osType
+		'Content-Type': 'application/json'
 	}
 });
 
 const axiosForLogin = axios.create({
 	headers: {
-		'Content-Type': 'application/json',
-		'os-type': settings?.osType
+		'Content-Type': 'application/json'
 	}
 });
 
@@ -49,6 +47,8 @@ const refreshToken = async (refreshToken: string): Promise<string | undefined> =
 
 axiosForLogin.interceptors.request.use((config) => {
 	config.headers['accept-language'] = i18n.language;
+	config.headers['os-type'] = useInitialSettingStore.getState().settings.osType;
+
 	return config;
 });
 
@@ -59,6 +59,7 @@ axiosInstance.interceptors.request.use((config) => {
 		config.headers.Authorization = `Bearer ${idToken}`;
 	}
 	config.headers['accept-language'] = i18n.language;
+	config.headers['os-type'] = useInitialSettingStore.getState().settings.osType;
 	return config;
 });
 
@@ -81,7 +82,7 @@ axiosInstance.interceptors.response.use(
 		} else if (error.response?.status == 400 && error?.response?.data) {
 			throw prepareErrorType(<ErrorType<TResponse>>error?.response?.data);
 		}
-		return Promise.reject(error);
+		return Promise.reject(prepareErrorType(<ErrorType<TResponse>>error?.response?.data));
 	}
 );
 

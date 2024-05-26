@@ -11,5 +11,5 @@ type Row<TColumnNames extends string> = Partial<Record<TColumnNames, string | Re
 
 export type Props<TColumnNames extends string> = {
 	columns: Column<TColumnNames>[];
-	rowsData: Row<TColumnNames>[];
+	rowsData?: Row<TColumnNames>[];
 };

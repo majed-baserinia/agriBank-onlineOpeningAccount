@@ -4,6 +4,7 @@ import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import BreadcrumbsAdapter from 'ui/htsc-components/BreadcrumbsAdapter';
 import SelectAdapter from 'ui/htsc-components/SelectAdapter';
@@ -14,10 +15,11 @@ import { breadcrumbs } from '../SelectCheckList';
 export default function ChecksList() {
 	const cif = new URLSearchParams(window.location.search).get('cif');
 	const { t } = useTranslation();
+	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('tablet'));
 	const relatedCustomers = useChecklistData((store) => store.relatedCustomers);
-	const { mutate: getCartableInquiry, isLoading } = useCartableInquiryCommand();
+	const { mutate: getCartableInquiry, isLoading , data: cartableList} = useCartableInquiryCommand();
 
 	const [listOfBeneficiaries, setListOfBeneficiaries] = useState([]);
 	const [selectedBeneficiary, setSelectedBeneficiary] = useState(cif);
@@ -25,7 +27,15 @@ export default function ChecksList() {
 	const getBeneficiariesCheckLists = () => {
 		getCartableInquiry(
 			{ customerNumber: Number(selectedBeneficiary) },
-			{ onError: (err) => pushAlert({ type: 'error', messageText: err.detail }) }
+			{
+				onError: (err) =>
+					pushAlert({
+						type: 'error',
+						messageText: err.detail,
+						hasConfirmAction: true,
+						actions: { onConfirm: () => navigate(-1) }
+					})
+			}
 		);
 	};
 
@@ -76,7 +86,7 @@ export default function ChecksList() {
 							</SelectAdapter>
 						</Grid>
 					</Grid>
-					{matches ? <MobileView /> : <DesktopView />}
+					{matches ? <MobileView /> : <DesktopView cartableList={cartableList} />}
 				</Grid>
 			</BoxAdapter>
 		</Grid>

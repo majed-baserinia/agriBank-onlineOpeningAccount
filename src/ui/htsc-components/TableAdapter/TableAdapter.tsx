@@ -49,7 +49,7 @@ export default function TableAdapter<TColumnNames extends string>({ columns, row
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+						{rowsData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
 							return (
 								<TableRow
 									tabIndex={-1}
@@ -82,7 +82,7 @@ export default function TableAdapter<TColumnNames extends string>({ columns, row
 					</Grid>
 				) : null}
 			</TableContainer>
-			{rowsData.length > 10 ? (
+			{rowsData && rowsData.length > 10 ? (
 				<TablePagination
 					rowsPerPageOptions={[10]}
 					component="div"
@@ -92,7 +92,7 @@ export default function TableAdapter<TColumnNames extends string>({ columns, row
 					onPageChange={handleChangePage}
 					onRowsPerPageChange={handleChangeRowsPerPage}
 				/>
-			) : null}
+			) : null }
 		</Paper>
 	);
 }

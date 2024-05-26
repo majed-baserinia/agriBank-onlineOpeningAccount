@@ -42,9 +42,10 @@ const Layout = () => {
 			//set the settings {theme, language, idToken, refreshToken} to store
 
 			setSettings({
+				...settings,
 				theme: theme,
 				language: language ? language : 'fa-IR'
-			} as InitialSetting);
+			} );
 
 			seConfigReady(true);
 		} catch (err) {

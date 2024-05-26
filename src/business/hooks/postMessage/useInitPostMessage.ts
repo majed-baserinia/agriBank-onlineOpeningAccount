@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { initialData, postMessageTypes } from './types';
 import useInitialSettingStore, { InitialSetting } from 'business/stores/initial-setting-store';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { postMessageTypes } from './types';
 
 const checkIsInIframe = () => {
 	return !(window.self === window.top);
@@ -14,8 +14,7 @@ export const sendPostmessage = (type: postMessageTypes, data: string) => {
 
 const useInitPostMessage = () => {
 	const navigate = useNavigate();
-  const { settings, setSettings } = useInitialSettingStore((s) => s);
-
+	const { settings, setSettings } = useInitialSettingStore((s) => s);
 
 	useEffect(() => {
 		window.addEventListener('message', onRecievePostMessage);
@@ -34,7 +33,7 @@ const useInitPostMessage = () => {
 	};
 
 	const initiateIFrameHadnler = (data: InitialSetting) => {
-    setSettings(data)
+		setSettings(data);
 	};
 
 	const goBackHandler = () => {
@@ -47,7 +46,7 @@ const useInitPostMessage = () => {
 		}
 	};
 
-	return [ checkIsInIframe()];
+	return [checkIsInIframe()];
 };
 
 export default useInitPostMessage;
