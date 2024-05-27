@@ -158,5 +158,15 @@
 	"timer": "remaining time",
 	"transferOtpText": "To transfer the check, after receiving the 6-digit code, enter it in the box below.",
 	"registerAndConfirm": "Register And Confirm",
-	"noSignatureArrangement": "No Signature Arrangement"
+	"noSignatureArrangement": "No Signature Arrangement",
+	"Registered with the recipient's confirmation": "Registered with the recipient's confirmation",
+	"cashed": "Cashed",
+	"voided": "Voided",
+	"returned": "Returned",
+	"partOfReturned": "Part of it Returned",
+	"Awaiting the guarantor's signature": "Awaiting the guarantor's signature",
+	"Waiting for the receiver's approval in withdrawing the check": "Waiting for the receiver's approval in withdrawing the check",
+	"Waiting for the recipient's confirmation on the transfer of the check": "Waiting for the recipient's confirmation on the transfer of the check",
+	"The check is blocked in the system in raw form (not registered).": "The check is blocked in the system in raw form (not registered).",
+	"Check has been issued": "Check has been issued"
 }

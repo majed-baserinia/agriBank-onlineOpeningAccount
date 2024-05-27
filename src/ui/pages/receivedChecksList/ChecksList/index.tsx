@@ -2,6 +2,7 @@ import { Grid, MenuItem, Typography, useMediaQuery, useTheme } from '@mui/materi
 import useCartableInquiryCommand from 'business/hooks/cheque/checklist/useCartableInquiryCommand';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
+import { CartableInquiryResponse } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -19,15 +20,20 @@ export default function ChecksList() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('tablet'));
 	const relatedCustomers = useChecklistData((store) => store.relatedCustomers);
-	const { mutate: getCartableInquiry, isLoading , data: cartableList} = useCartableInquiryCommand();
+	const { mutate: getCartableInquiry, isLoading } = useCartableInquiryCommand();
 
+	const [cartableListData, setCartableListData] = useState<CartableInquiryResponse>();
 	const [listOfBeneficiaries, setListOfBeneficiaries] = useState([]);
 	const [selectedBeneficiary, setSelectedBeneficiary] = useState(cif);
 
 	const getBeneficiariesCheckLists = () => {
 		getCartableInquiry(
 			{ customerNumber: Number(selectedBeneficiary) },
+
 			{
+				onSuccess(data) {
+					setCartableListData(data);
+				},
 				onError: (err) =>
 					pushAlert({
 						type: 'error',
@@ -41,7 +47,6 @@ export default function ChecksList() {
 
 	useEffect(() => {
 		getBeneficiariesCheckLists();
-		//call the api by the cif that is received from url query if there is any
 	}, [selectedBeneficiary]);
 
 	return (
@@ -86,7 +91,11 @@ export default function ChecksList() {
 							</SelectAdapter>
 						</Grid>
 					</Grid>
-					{matches ? <MobileView /> : <DesktopView cartableList={cartableList} />}
+					{matches ? (
+						<MobileView />
+					) : (
+						<DesktopView cartableList={!isLoading ? cartableListData : undefined} />
+					)}
 				</Grid>
 			</BoxAdapter>
 		</Grid>

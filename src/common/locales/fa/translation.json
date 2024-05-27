@@ -158,5 +158,15 @@
 	"timer": "زمان باقی مانده",
 	"transferOtpText": "جهت انتقال چک، پس از دریافت کد۶ رقمی آن را در کادر زیر وارد نمایید.",
 	"registerAndConfirm": "ثبت و تایید",
-	"noSignatureArrangement": "بدون ترتیب امضا"
+	"noSignatureArrangement": "بدون ترتیب امضا",
+	"Registered with the recipient's confirmation": "ثبت شده با تائید گیرنده",
+	"cashed": "نقد شده",
+	"voided": "باطل شده",
+	"returned": "برگشت خورده",
+	"partOfReturned": "بخشی برگشت خورده",
+	"Awaiting the guarantor's signature": "در انتظار امضاء ضامن",
+	"Waiting for the receiver's approval in withdrawing the check": "در انتظار تایید گیرنده در کشیدن چک",
+	"Waiting for the recipient's confirmation on the transfer of the check": "در انتظار تایید گیرنده در انتقال چک",
+	"The check is blocked in the system in raw form (not registered).": "چک به صورت خام(ثبت نشده) در سامانه مسدود شده است.",
+	"Check has been issued": "چک صادر شده است"
 }
