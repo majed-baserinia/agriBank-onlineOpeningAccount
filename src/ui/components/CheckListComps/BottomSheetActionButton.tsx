@@ -6,17 +6,24 @@ import regressCheckIcon from 'assets/icon/menu/regressCheckIcon.svg';
 import rejectRegress from 'assets/icon/menu/rejectRegress.svg';
 import rejectTransfer from 'assets/icon/menu/rejectTransfer.svg';
 import transferCheck from 'assets/icon/menu/transfer-check.svg';
-import { useState } from 'react';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import BottomSheetAdapter from 'ui/htsc-components/BottomSheetAdapter/BottomSheetAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
-import Menu from '../Menu';
 import { paths } from 'ui/route-config/paths';
+import Menu from '../Menu';
 
-export default function BottomSheetActionButton({sayadNo}:{sayadNo?: number}) {
+export default function BottomSheetActionButton({ sayadNo }: { sayadNo?: number }) {
 	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
+	const { addNewData } = useChecklistData((store) => store);
+
+	useEffect(() => {
+		//set sayad number for actions on check 
+		addNewData({ sayadNo: sayadNo });
+	}, []);
 
 	return (
 		<>

@@ -19,10 +19,14 @@ export default function Details() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { cartableListData } = useChecklistData((store) => store);
+	const { cartableListData, addNewData } = useChecklistData((store) => store);
 	const [overViewDate, setOverViewDate] = useState<Check>();
 
 	useEffect(() => {
+		//set sayad number for actions on check 
+		addNewData({ sayadNo: Number(sayadNumber) });
+
+		//find the check from list 
 		const selectedCheckDetail = cartableListData?.cheques.find((item) => item.sayadNo.toString() === sayadNumber);
 		setOverViewDate(selectedCheckDetail);
 	}, []);

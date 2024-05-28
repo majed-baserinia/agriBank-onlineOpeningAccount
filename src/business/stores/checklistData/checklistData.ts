@@ -5,6 +5,7 @@ import { create } from 'zustand';
 interface chekListData {
 	relatedCustomers?: GetAllRelatedCustomersResponse;
 	cartableListData?: CartableInquiryResponse;
+	sayadNo?: number
 	addNewData: (data: {}) => void;
 }
 
