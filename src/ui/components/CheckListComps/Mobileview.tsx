@@ -1,24 +1,20 @@
 import { Grid } from '@mui/material';
-import { useEffect } from 'react';
+import { CartableInquiryResponse } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
 import CheckItemCard from './CheckItemCard';
 
-export default function MobileView() {
-	
-	useEffect(() => {
-		//get the list of checks from props and render the items based on them
-	}, []);
-
+export default function MobileView({ cartableList }: { cartableList?: CartableInquiryResponse }) {
 	return (
 		<Grid
 			container
 			justifyContent={'center'}
 			gap={'16px'}
 		>
-			<CheckItemCard />
-			<CheckItemCard />
-			<CheckItemCard />
-			<CheckItemCard />
-			<CheckItemCard />
+			{cartableList?.cheques.map((check) => (
+				<CheckItemCard
+					key={check.sayadNo}
+					check={check}
+				/>
+			))}
 		</Grid>
 	);
 }

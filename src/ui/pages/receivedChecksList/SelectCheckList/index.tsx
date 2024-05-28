@@ -45,9 +45,9 @@ export default function SelectCheckList() {
 	const { data: listItems, isLoading } = useGetAllRelatedCustomers('checkList');
 	const [menuItems, setMenuItems] = useState<MenuItems>([]);
 
-	useEffect(() => {
+	useEffect(() => {		
 		//set the new list to the store
-		addNewDataToStore({ allRelatedCustomers: listItems });
+		addNewDataToStore({ relatedCustomers: listItems });
 
 		if (listItems?.length === 1)
 			navigate(paths.ReceivedChecksList.ChecksList + '?cif=' + listItems[0].customerNumber, { replace: true });

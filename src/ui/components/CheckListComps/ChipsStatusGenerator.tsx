@@ -1,8 +1,8 @@
-import ChipStatusAdapter from 'ui/htsc-components/ChipStatusAdapter';
+import { Grid } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
-export type AllowedNumbers = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-type LabelListType = Record<AllowedNumbers, string>;
-type TypeListType = Record<keyof LabelListType, 'info' | 'error' | 'warning' | 'success' | 'disabled'>;
+import ChipStatusAdapter from 'ui/htsc-components/ChipStatusAdapter';
+import { AllowedNumbers, LabelListType, TypeListType } from './types';
 
 const labelList: LabelListType = {
 	1: "Registered with the recipient's confirmation",
@@ -21,21 +21,24 @@ const typesList: TypeListType = {
 	1: 'info',
 	2: 'success',
 	3: 'error',
-	4: 'warning',
-	5: 'warning',
-	6: 'warning',
-	7: 'warning',
-	8: 'warning',
-	9: 'error',
+	4: 'info',
+	5: 'info',
+	6: 'info',
+	7: 'info',
+	8: 'info',
+	9: 'info',
 	10: 'info'
 };
 
 export default function ChipsStatusGenerator({ status }: { status: AllowedNumbers }) {
+	const { t } = useTranslation();
 	return (
-		<ChipStatusAdapter
-			type={typesList[status]}
-			label={labelList[status]}
-		/>
+		<Grid sx={{ width: '100px' }}>
+			<ChipStatusAdapter
+				type={typesList[status]}
+				label={t(labelList[status], labelList[status])}
+			/>
+		</Grid>
 	);
 }
 

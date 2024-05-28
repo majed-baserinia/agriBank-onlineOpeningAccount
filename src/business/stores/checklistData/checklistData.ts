@@ -8,9 +8,12 @@ interface chekListData {
 }
 
 export const useChecklistData = create<chekListData>((set) => ({
-	addNewData: (data) =>
+	addNewData: (data) => {
+		console.log(data);
+
 		set((store) => ({
 			...store,
 			...data
-		}))
+		}));
+	}
 }));

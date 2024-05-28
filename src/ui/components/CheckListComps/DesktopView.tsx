@@ -5,19 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import TableAdapter from 'ui/htsc-components/TableAdapter/TableAdapter';
 import { paths } from 'ui/route-config/paths';
-import ChipsStatusGenerator, { AllowedNumbers } from './ChipsStatusGenerator';
+import ChipsStatusGenerator from './ChipsStatusGenerator';
+import { AllowedNumbers, rowType } from './types';
 
-type rowType =
-	| {
-			sayadNumber: number;
-			status: JSX.Element;
-			serieAndSerial: string;
-			amount: number;
-			reason: string;
-			date: string;
-			action: JSX.Element;
-	  }[]
-	| undefined;
+
 
 export default function DesktopView({ cartableList }: { cartableList?: CartableInquiryResponse }) {
 	const navigate = useNavigate();
@@ -38,7 +29,7 @@ export default function DesktopView({ cartableList }: { cartableList?: CartableI
 						size="small"
 						variant="text"
 						onClick={() => {
-							navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=123`);
+							navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=${check.sayadNo}`);
 						}}
 						forwardIcon
 					>
