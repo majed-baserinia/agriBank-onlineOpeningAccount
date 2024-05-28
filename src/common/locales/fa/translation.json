@@ -170,5 +170,7 @@
 	"The check is blocked in the system in raw form (not registered).": "چک به صورت خام(ثبت نشده) در سامانه مسدود شده است.",
 	"Check has been issued": "چک صادر شده است",
 	"cashStatus": "وضعیت نقدکردن",
-	"transferStatus": "وضعیت انتقال"
+	"transferStatus": "وضعیت انتقال",
+	"beneficiary":"ذینفع"
+
 }

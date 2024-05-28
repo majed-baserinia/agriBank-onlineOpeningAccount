@@ -170,5 +170,6 @@
 	"The check is blocked in the system in raw form (not registered).": "The check is blocked in the system in raw form (not registered).",
 	"Check has been issued": "Check has been issued",
 	"cashStatus": "Cash Status",
-	"transferStatus": "transfer status"
+	"transferStatus": "transfer status",
+	"beneficiary":"Beneficiary"
 }

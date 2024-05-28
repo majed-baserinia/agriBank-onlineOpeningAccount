@@ -35,12 +35,12 @@ export default function CheckOverViewBox() {
 			<Divider />
 			<OverviewItem
 				sx={{ marginTop: '8px', marginBottom: '8px' }}
-				title={t('receiver')}
+				title={t('beneficiary')}
 				value={'overviewData?.reason'}
 			/>
 			<OverviewItem
 				sx={{ marginTop: '8px', marginBottom: '8px' }}
-				title={t('receiver')}
+				title={t('beneficiary')}
 				value={'overviewData?.reason'}
 			/>
 		</Grid>

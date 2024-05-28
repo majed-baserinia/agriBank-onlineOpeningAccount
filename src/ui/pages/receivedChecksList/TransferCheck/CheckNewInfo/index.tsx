@@ -7,27 +7,29 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
+import useGetReasonCodes from 'business/hooks/cheque/Digital Cheque/useGetReasonCodes';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import CheckOverViewBox from 'ui/components/CheckOverviewBox';
+import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
+import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from 'ui/pages/HomePage/menuList';
-import { Controller, useForm } from 'react-hook-form';
-import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
-import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
-import useGetReasonCodes from 'business/hooks/cheque/Digital Cheque/useGetReasonCodes';
 
 export default function CheckNewInfo() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const { sayadNo } = useChecklistData((store) => store);
 	const { data: reasonCodes, isLoading: isPendingtoGetReasons } = useGetReasonCodes();
 
-const {control, formState} = useForm()
+	const { control, formState } = useForm();
+	console.log({ sayadNo });
+
 	useEffect(() => {
-		//first check if there is ze naf a
-		//act based on it
-		//get the check data
+		//call an api for checking if it is persional or company and if it is first person or not
 	}, []);
 
 	return (
@@ -72,52 +74,51 @@ const {control, formState} = useForm()
 							) : null}
 							<CheckOverViewBox />
 							<Grid
-									item
-									xs={5}
-									
-								>
-									<Controller
-										name="reason"
-										control={control}
-										render={({ field }) => (
-											<BottomSheetSelect
-												isRequired
-												label={t('reason')}
-												list={[]
-													// isPendingtoGetReasons
-													// 	? []
-													// 	: reasonCodes!?.map((reason) => ({
-													// 			value: reason.reasonCode,
-													// 			name: reason.description
-													// 		}))
-												}
-												onChange={(item) => {
-													field.onChange(item);
-												}}
-												error={!!formState?.errors?.reason}
-												helperText={'formState?.errors?.reason?.message'}
-											/>
-										)}
-									/>
-								</Grid>
-								<Grid
-									item
-									xs={12}
-								>
-									<Controller
-										name="description"
-										control={control}
-										render={({ field }) => (
-											<TextareaAdapter
-												onChange={(value) => field.onChange(value)}
-												isRequired
-												label={t('description')}
-												error={!!formState?.errors?.description}
-												helperText={'formState?.errors?.description?.message'}
-											/>
-										)}
-									/>
-								</Grid>
+								item
+								xs={5}
+							>
+								<Controller
+									name="reason"
+									control={control}
+									render={({ field }) => (
+										<BottomSheetSelect
+											isRequired
+											label={t('reason')}
+											list={
+												isPendingtoGetReasons
+													? []
+													: reasonCodes!.map((reason) => ({
+															value: reason.reasonCode,
+															name: reason.description
+														}))
+											}
+											onChange={(item) => {
+												field.onChange(item);
+											}}
+											error={!!formState?.errors?.reason}
+											helperText={formState?.errors?.reason?.message as string}
+										/>
+									)}
+								/>
+							</Grid>
+							<Grid
+								item
+								xs={12}
+							>
+								<Controller
+									name="description"
+									control={control}
+									render={({ field }) => (
+										<TextareaAdapter
+											onChange={(value) => field.onChange(value)}
+											isRequired
+											label={t('description')}
+											error={!!formState?.errors?.description}
+											helperText={'formState?.errors?.description?.message'}
+										/>
+									)}
+								/>
+							</Grid>
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
