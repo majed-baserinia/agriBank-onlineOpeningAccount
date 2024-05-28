@@ -12,8 +12,9 @@ import BottomSheetAdapter from 'ui/htsc-components/BottomSheetAdapter/BottomShee
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import Menu from '../Menu';
+import { paths } from 'ui/route-config/paths';
 
-export default function BottomSheetActionButton() {
+export default function BottomSheetActionButton({sayadNo}:{sayadNo?: number}) {
 	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
 
@@ -76,7 +77,7 @@ export const checkActionsMenuList = [
 				alt="transferCheck"
 			/>
 		),
-		routeTo: ''
+		routeTo: paths.ReceivedChecksList.TransferCheck
 	},
 	{
 		id: '2',

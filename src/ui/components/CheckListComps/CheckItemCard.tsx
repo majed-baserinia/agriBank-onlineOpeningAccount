@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
-import OverviewItem from '../OverviewItem';
 import BottomSheetActionButton from './BottomSheetActionButton';
 import ChipsStatusGenerator from './ChipsStatusGenerator';
 import { AllowedNumbers } from './types';
+import OverviewItem from '../CheckOverview/OverviewItem';
 
 export default function CheckItemCard({ check }: { check?: Check }) {
 	const { t } = useTranslation();
@@ -72,7 +72,7 @@ export default function CheckItemCard({ check }: { check?: Check }) {
 				gap={'16px'}
 				wrap="nowrap"
 			>
-				<BottomSheetActionButton />
+				<BottomSheetActionButton sayadNo={check?.sayadNo} />
 				<ButtonAdapter
 					muiButtonProps={{
 						sx: {

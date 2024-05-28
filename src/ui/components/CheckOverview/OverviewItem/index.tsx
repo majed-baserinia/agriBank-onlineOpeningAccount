@@ -1,10 +1,6 @@
 import { Grid, SxProps, Typography } from '@mui/material';
+import { Props } from './types';
 
-type Props = {
-	title?: string;
-	value?: string | number;
-	sx?:SxProps
-};
 
 export default function OverviewItem(props: Props) {
 	const { title, value,sx } = props;

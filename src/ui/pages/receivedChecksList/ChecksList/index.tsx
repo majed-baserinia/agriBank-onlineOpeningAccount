@@ -19,7 +19,7 @@ export default function ChecksList() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('tablet'));
-	const relatedCustomers = useChecklistData((store) => store.relatedCustomers);
+	const { relatedCustomers, addNewData } = useChecklistData((store) => store);
 	const { mutate: getCartableInquiry, isLoading } = useCartableInquiryCommand();
 
 	const [cartableListData, setCartableListData] = useState<CartableInquiryResponse>();
@@ -33,6 +33,7 @@ export default function ChecksList() {
 			{
 				onSuccess(data) {
 					setCartableListData(data);
+					addNewData({ cartableListData: data });
 				},
 				onError: (err) =>
 					pushAlert({
@@ -104,7 +105,7 @@ export default function ChecksList() {
 						</Grid>
 					</Grid>
 					{matches ? (
-						<MobileView  cartableList={!isLoading ? cartableListData : undefined}/>
+						<MobileView cartableList={!isLoading ? cartableListData : undefined} />
 					) : (
 						<DesktopView cartableList={!isLoading ? cartableListData : undefined} />
 					)}

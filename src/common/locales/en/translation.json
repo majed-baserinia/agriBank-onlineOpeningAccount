@@ -168,5 +168,7 @@
 	"Waiting for the receiver's approval in withdrawing the check": "Waiting for the receiver's approval in withdrawing the check",
 	"Waiting for the recipient's confirmation on the transfer of the check": "Waiting for the recipient's confirmation on the transfer of the check",
 	"The check is blocked in the system in raw form (not registered).": "The check is blocked in the system in raw form (not registered).",
-	"Check has been issued": "Check has been issued"
+	"Check has been issued": "Check has been issued",
+	"cashStatus": "Cash Status",
+	"transferStatus": "transfer status"
 }

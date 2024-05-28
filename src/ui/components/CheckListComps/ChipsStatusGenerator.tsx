@@ -35,6 +35,7 @@ export default function ChipsStatusGenerator({ status }: { status: AllowedNumber
 	return (
 		<Grid sx={{ width: '100px' }}>
 			<ChipStatusAdapter
+				size="small"
 				type={typesList[status]}
 				label={t(labelList[status], labelList[status])}
 			/>

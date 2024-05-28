@@ -1,6 +1,7 @@
 import { Divider, Grid, Typography, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import OverviewItem from '../OverviewItem';
+import OverviewItem from '../CheckOverview/OverviewItem';
+
 
 export default function CheckOverViewBox() {
 	const theme = useTheme();

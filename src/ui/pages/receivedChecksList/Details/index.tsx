@@ -1,19 +1,31 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
+import { Check } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import BottomSheetActionButton, { checkActionsMenuList } from 'ui/components/CheckListComps/BottomSheetActionButton';
-import CheckOverview from 'ui/components/CheckOverview';
-import CheckStatus from 'ui/components/CheckStatus';
+import { AllowedNumbers } from 'ui/components/CheckListComps/types';
+import BasicCheckDetials from 'ui/components/CheckOverview/BasicCheckDetials';
+import CheckStatus from 'ui/components/CheckOverview/CheckStatus';
 import Menu from 'ui/components/Menu';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 
 export default function Details() {
+	const sayadNumber = new URLSearchParams(window.location.search).get('sayadNo');
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const { cartableListData } = useChecklistData((store) => store);
+	const [overViewDate, setOverViewDate] = useState<Check>();
+
+	useEffect(() => {
+		const selectedCheckDetail = cartableListData?.cheques.find((item) => item.sayadNo.toString() === sayadNumber);
+		setOverViewDate(selectedCheckDetail);
+	}, []);
 
 	return (
 		<Grid
@@ -44,9 +56,9 @@ export default function Details() {
 							<Title>{t('checkDetailPageTitle')}</Title>
 
 							<CheckStatus
-								checkBlockingStatus="ssa"
-								checkGuaranteeStatus="sdvsd"
-								checkStatus="dsvds"
+								checkBlockingStatus={overViewDate?.blockStatusDescription}
+								checkGuaranteeStatus={overViewDate?.guaranteeStatusDescription}
+								checkStatus={overViewDate?.chequeStatus as AllowedNumbers}
 							/>
 							<Typography
 								align={matches ? 'center' : 'inherit'}
@@ -58,7 +70,20 @@ export default function Details() {
 							</Typography>
 
 							{/* //TODO: send the data to overview component */}
-							<CheckOverview />
+							<Grid>
+								<BasicCheckDetials
+									amount={overViewDate?.amount}
+									description={overViewDate?.description}
+									dueDate={overViewDate?.dueDate}
+									sayadNo={overViewDate?.sayadNo}
+									reason={overViewDate?.reasonDescription}
+									serialSerie={overViewDate?.seriesNo + '/' + overViewDate?.serialNo}
+								/>
+								{/* <PersonsList
+									recievers={overViewDate?.}
+									signers={overviewData?.signers}
+								/> */}
+							</Grid>
 						</Grid>
 
 						<Grid container>{matches ? <BottomSheetActionButton /> : null}</Grid>

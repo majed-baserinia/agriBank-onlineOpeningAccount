@@ -10,7 +10,6 @@ import Stepper from 'ui/htsc-components/Stepper';
 import useIssueChequeFinalize from 'business/hooks/cheque/Digital Cheque/useIssueChequeFinalize';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { issueChequeOverView } from 'common/entities/cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVerifyInitiateResponse';
-import CheckOverview from 'ui/components/CheckOverview';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from 'ui/pages/HomePage/menuList';
 import { paths } from 'ui/route-config/paths';
@@ -151,7 +150,8 @@ export default function TransferOverView() {
 									active={4}
 								/>
 							) : null}
-							<CheckOverview overviewData={overviewData} />
+							{/* //TODO:send the data to overview component */}
+							{/* <CheckOverview overviewData={overviewData} /> */}
 						</Grid>
 
 						<Grid container>
