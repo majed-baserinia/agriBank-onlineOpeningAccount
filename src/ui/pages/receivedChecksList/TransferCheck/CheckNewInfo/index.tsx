@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from 'ui/pages/HomePage/menuList';
 import FirstPersonView from '../../../../components/transferCheck/FirstPersonView';
+import SecondOrMoreView from 'ui/components/transferCheck/SecondOrMoreView';
 
 export default function CheckNewInfo() {
 	const navigate = useNavigate();
@@ -32,7 +33,7 @@ export default function CheckNewInfo() {
 				xs={12}
 				md={8}
 			>
-				<FirstPersonView />
+				<SecondOrMoreView />
 			</Grid>
 
 			{matches ? null : (

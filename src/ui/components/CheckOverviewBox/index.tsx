@@ -2,8 +2,13 @@ import { Divider, Grid, Typography, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import OverviewItem from '../CheckOverview/OverviewItem';
 
-
-export default function CheckOverViewBox() {
+type Props = {
+	sayadNo: number;
+	amount: string;
+	beneficiaries?: [];
+};
+export default function CheckOverViewBox(props: Props) {
+	const { beneficiaries, sayadNo, amount } = props;
 	const theme = useTheme();
 	const { t } = useTranslation();
 
@@ -25,24 +30,28 @@ export default function CheckOverViewBox() {
 			<OverviewItem
 				sx={{ marginTop: '8px', marginBottom: '8px' }}
 				title={t('sayadNo')}
-				value={'overviewData?.reason'}
+				value={sayadNo}
 			/>
 			<OverviewItem
 				sx={{ marginTop: '8px', marginBottom: '8px' }}
 				title={t('amount')}
-				value={'overviewData?.reason'}
+				value={amount}
 			/>
-			<Divider />
-			<OverviewItem
-				sx={{ marginTop: '8px', marginBottom: '8px' }}
-				title={t('beneficiary')}
-				value={'overviewData?.reason'}
-			/>
-			<OverviewItem
-				sx={{ marginTop: '8px', marginBottom: '8px' }}
-				title={t('beneficiary')}
-				value={'overviewData?.reason'}
-			/>
+			{beneficiaries ? (
+				<>
+					<Divider />
+					<OverviewItem
+						sx={{ marginTop: '8px', marginBottom: '8px' }}
+						title={t('beneficiary')}
+						value={'overviewData?.reason'}
+					/>
+					<OverviewItem
+						sx={{ marginTop: '8px', marginBottom: '8px' }}
+						title={t('beneficiary')}
+						value={'overviewData?.reason'}
+					/>
+				</>
+			) : null}
 		</Grid>
 	);
 }

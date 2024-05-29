@@ -141,7 +141,9 @@
 	"CashingCheck": "Check Cashing",
 	"Conf/rej": "Confirmation/rejection of received check",
 	"regressCheck": "Check return",
-	"rejectTransfer": "Rejection of check transfer",
+	"rejectTransferCheck": "Rejection of check transfer",
+	"rejectTransfer": "Rejection transfer",
+	"confirmTransfer": "Confirm transfer",
 	"rejectRegress": "Rejection of check return",
 	"you": "You",
 	"payTo": "Pay To ",
@@ -171,6 +173,7 @@
 	"Check has been issued": "Check has been issued",
 	"cashStatus": "Cash Status",
 	"transferStatus": "transfer status",
-	"beneficiary":"Beneficiary",
-	"transferCheckEl":"Transfer Electronic Check"
+	"beneficiary": "Beneficiary",
+	"transferCheckEl": "Transfer Electronic Check",
+	"confirmOrRejectTransferText": "After checking the information, choose the desired operation."
 }

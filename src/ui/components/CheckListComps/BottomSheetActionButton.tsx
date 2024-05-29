@@ -121,7 +121,7 @@ export const checkActionsMenuList = [
 	},
 	{
 		id: '3',
-		title: 'rejectTransfer',
+		title: 'rejectTransferCheck',
 		icon: (
 			<SvgToIcon
 				icon={rejectTransfer}
