@@ -171,6 +171,7 @@
 	"Check has been issued": "چک صادر شده است",
 	"cashStatus": "وضعیت نقدکردن",
 	"transferStatus": "وضعیت انتقال",
-	"beneficiary":"ذینفع"
+	"beneficiary":"ذینفع",
+	"transferCheckEl": "انتقال چک الکترونیک"
 
 }

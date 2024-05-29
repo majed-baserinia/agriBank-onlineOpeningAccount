@@ -171,5 +171,6 @@
 	"Check has been issued": "Check has been issued",
 	"cashStatus": "Cash Status",
 	"transferStatus": "transfer status",
-	"beneficiary":"Beneficiary"
+	"beneficiary":"Beneficiary",
+	"transferCheckEl":"Transfer Electronic Check"
 }
