@@ -72,7 +72,7 @@ export default function CheckItemCard({ check }: { check?: Check }) {
 				gap={'16px'}
 				wrap="nowrap"
 			>
-				<BottomSheetActionButton sayadNo={check?.sayadNo} />
+				<BottomSheetActionButton check={check} />
 				<ButtonAdapter
 					muiButtonProps={{
 						sx: {

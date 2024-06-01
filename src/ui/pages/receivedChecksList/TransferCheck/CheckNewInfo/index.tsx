@@ -4,20 +4,21 @@ import Menu from 'ui/components/Menu';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import SecondOrMoreView from 'ui/components/transferCheck/SecondOrMoreView';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from 'ui/pages/HomePage/menuList';
-import FirstPersonView from '../../../../components/transferCheck/FirstPersonView';
-import SecondOrMoreView from 'ui/components/transferCheck/SecondOrMoreView';
 
 export default function CheckNewInfo() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { sayadNo } = useChecklistData((store) => store);
+	const { selectedCheck } = useChecklistData((store) => store);
+	const [view, setView] = useState<'1' | '2' | '3'>('1');
 
 	useEffect(() => {
 		//call an api for checking if it is persional or company and if it is first person or not
+		//set a time out for the api call and if has no response set the view to 3
 	}, []);
 
 	return (

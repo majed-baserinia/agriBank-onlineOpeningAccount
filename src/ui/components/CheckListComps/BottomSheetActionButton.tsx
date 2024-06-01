@@ -14,15 +14,16 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import { paths } from 'ui/route-config/paths';
 import Menu from '../Menu';
+import { Check } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
 
-export default function BottomSheetActionButton({ sayadNo }: { sayadNo?: number }) {
+export default function BottomSheetActionButton({ check }: { check?: Check }) {
 	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
 	const { addNewData } = useChecklistData((store) => store);
 
 	useEffect(() => {
 		//set sayad number for actions on check 
-		addNewData({ sayadNo: sayadNo });
+		addNewData({ selectedCheck: check });
 	}, []);
 
 	return (

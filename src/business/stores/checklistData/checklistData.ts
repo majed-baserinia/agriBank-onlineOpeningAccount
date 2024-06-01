@@ -1,11 +1,11 @@
-import { CartableInquiryResponse } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
+import { CartableInquiryResponse, Check } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
 import { GetAllRelatedCustomersResponse } from 'common/entities/cheque/chekList/GetAllRelatedCustomers/GetAllRelatedCustomersResponse';
 import { create } from 'zustand';
 
 interface chekListData {
 	relatedCustomers?: GetAllRelatedCustomersResponse;
 	cartableListData?: CartableInquiryResponse;
-	sayadNo?: number
+	selectedCheck?: Check
 	addNewData: (data: {}) => void;
 }
 

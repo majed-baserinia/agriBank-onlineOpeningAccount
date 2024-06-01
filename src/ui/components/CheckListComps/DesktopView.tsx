@@ -7,6 +7,7 @@ import TableAdapter from 'ui/htsc-components/TableAdapter/TableAdapter';
 import { paths } from 'ui/route-config/paths';
 import ChipsStatusGenerator from './ChipsStatusGenerator';
 import { AllowedNumbers, rowType } from './types';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 
 
 
@@ -14,6 +15,7 @@ export default function DesktopView({ cartableList }: { cartableList?: CartableI
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const [checkRows, setCheckRows] = useState<rowType>();
+	const { addNewData } = useChecklistData((store) => store);
 
 	useEffect(() => {
 		const rows = cartableList?.cheques.map((check) => {
@@ -29,6 +31,7 @@ export default function DesktopView({ cartableList }: { cartableList?: CartableI
 						size="small"
 						variant="text"
 						onClick={() => {
+							addNewData({ selectedCheck: check });
 							navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=${check.sayadNo}`);
 						}}
 						forwardIcon
