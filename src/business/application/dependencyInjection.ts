@@ -55,3 +55,6 @@ export * from './cheque/checkList/GetAllRelatedCustomers/GetAllRelatedCustomersQ
 
 export * from './cheque/checkList/CartableInquiry/CartableInquiryCommand';
 export * from './cheque/checkList/CartableInquiry/CartableInquiryCommandHandler';
+
+export * from './cheque/transferCheck/InquiryTransferStatus//InquiryTransferStatusCommand';
+export * from './cheque/transferCheck/InquiryTransferStatus//InquiryTransferStatusCommandHandler';
