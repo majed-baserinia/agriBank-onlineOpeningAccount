@@ -25,9 +25,6 @@ export * from './cheque/Digital Cheque/GetCheckSheets/GetCheckSheetsCommandHandl
 export * from './cheque/Digital Cheque/CheckInfoFormValidator/CheckInfoFormValidatorCommand';
 export * from './cheque/Digital Cheque/CheckInfoFormValidator/CheckInfoFormValidatorCommandValidator';
 
-export * from './cheque/Digital Cheque/InqueryNationalId/InqueryNationalIdCommand';
-export * from './cheque/Digital Cheque/InqueryNationalId/InqueryNationalIdCommandHandler';
-
 export * from './cheque/Digital Cheque/Send Otp/CheckInitiateOtpCommand';
 export * from './cheque/Digital Cheque/Verify Otp/VerifyOtpCommand';
 export * from './cheque/Digital Cheque/Verify Otp/VerifyOtpCommandValidator';
@@ -65,3 +62,6 @@ export * from './cheque/transferCheck/TransferChequeInitiateOtp/TransferChequeIn
 export * from './cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpCommand';
 export * from './cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpCommandHandler';
 export * from './cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpValidator';
+
+export * from './cheque/transferCheck/TransferChequeInitiate/TransferChequeInitiateCommand';
+export * from './cheque/transferCheck/TransferChequeInitiate/TransferChequeInitiateCommandHandler';

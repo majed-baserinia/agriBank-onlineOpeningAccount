@@ -16,3 +16,4 @@ export const GetAllRelatedCustomers = '/CustomerManager/getallrelatedcustomers';
 export const InquiryTransferStatus = '/cheque/InquiryTransferStatus';
 export const Transferchequeinitiateotp = '/cheque/DigitalCheque/transferchequeinitiateotp';
 export const TransferChequeVerifyOtp = '/cheque/DigitalCheque/TransferChequeVerifyOtp';
+export const TransferChequeInitiate = '/cheque/DigitalCheque/TransferChequeInitiate';

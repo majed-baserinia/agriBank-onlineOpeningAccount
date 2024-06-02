@@ -6,10 +6,10 @@ export interface IssueChequeInitiateRequest {
 	description: string;
 	reason: string;
 	toIban?: string;
-	recievers: Reciever[];
+	recievers: RecieverRequest[];
 }
 
-type Reciever = {
+export type RecieverRequest = {
 	name: string;
 	shahabNo: string;
 	nationalNo: string;

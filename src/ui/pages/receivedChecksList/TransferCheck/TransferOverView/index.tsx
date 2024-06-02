@@ -9,6 +9,7 @@ import Stepper from 'ui/htsc-components/Stepper';
 
 import useIssueChequeFinalize from 'business/hooks/cheque/Digital Cheque/useIssueChequeFinalize';
 import { pushAlert } from 'business/stores/AppAlertsStore';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { issueChequeOverView } from 'common/entities/cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVerifyInitiateResponse';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from 'ui/pages/HomePage/menuList';
@@ -20,31 +21,33 @@ export default function TransferOverView() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { isLoading, mutate: finalSubmit } = useIssueChequeFinalize();
-	//const { overviewData, signitureRequirementData } = useDataSteps((store) => store.steps);
+	const { transferOverview, otpTransferRequirments } = useChecklistData((store) => store);
 
 	const handleSubmit = () => {
-		finalSubmit(
-			{
-				issueChequeKey: 'signitureRequirementData?.issueChequeKey!'
-			},
-			{
-				onError: (err) => {
-					pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail });
+		if (otpTransferRequirments?.transferChequeKey) {
+			finalSubmit(
+				{
+					issueChequeKey: otpTransferRequirments?.transferChequeKey
 				},
-				onSuccess(res) {
-					pushAlert({
-						type: 'success',
-						hasConfirmAction: true,
-						messageText: 'l,tr',
-						actions: {
-							onCloseModal: () => {
-								navigate(paths.Home);
+				{
+					onError: (err) => {
+						pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail });
+					},
+					onSuccess(res) {
+						pushAlert({
+							type: 'success',
+							hasConfirmAction: true,
+							messageText: 'l,tr',
+							actions: {
+								onCloseModal: () => {
+									navigate(paths.Home);
+								}
 							}
-						}
-					});
+						});
+					}
 				}
-			}
-		);
+			);
+		}
 	};
 
 	const overviewData: issueChequeOverView = {

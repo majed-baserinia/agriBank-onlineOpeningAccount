@@ -3,7 +3,7 @@ import { WithdrawalDetails } from 'common/entities/cheque/Digital Cheque/Issue G
 import { IssueWithGroupResponse } from 'common/entities/cheque/Digital Cheque/Issue Groups/IssueWithGroupResponse';
 
 export default class IssueWithDrawalGroupsCommand implements IRequest<IssueWithGroupResponse> {
-	issueChequeKey: string;
+	issueChequeKey: boolean;
 	withDrawalGroup: WithdrawalDetails[];
 
 	constructor(IssueWithDrawalGroupsCommand: IssueWithDrawalGroupsCommand) {

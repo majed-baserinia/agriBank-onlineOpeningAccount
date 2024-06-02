@@ -12,8 +12,8 @@ export class IssueWithDrawalGroupsCommandHandler
 	handle(value: IssueWithDrawalGroupsCommand): Promise<IssueWithGroupResponse> {
 		const apiClient = new APIClient<IssueWithGroupRequest, IssueWithGroupResponse>(IssueChequeIssueWithDrawalGroup);
 		return apiClient.post(<IssueWithGroupRequest>{
-			isSequentional: value.isSequentional,
-			withDrawalGroups: value.withDrawalGroups
+			isSequentional: value.issueChequeKey,
+			withDrawalGroup: value.withDrawalGroup
 		});
 	}
 }
