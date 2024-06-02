@@ -58,3 +58,10 @@ export * from './cheque/checkList/CartableInquiry/CartableInquiryCommandHandler'
 
 export * from './cheque/transferCheck/InquiryTransferStatus//InquiryTransferStatusCommand';
 export * from './cheque/transferCheck/InquiryTransferStatus//InquiryTransferStatusCommandHandler';
+
+export * from './cheque/transferCheck/TransferChequeInitiateOtp/TransferChequeInitiateOtpCommand';
+export * from './cheque/transferCheck/TransferChequeInitiateOtp/TransferChequeInitiateOtpCommandHandler';
+
+export * from './cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpCommand';
+export * from './cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpCommandHandler';
+export * from './cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpValidator';

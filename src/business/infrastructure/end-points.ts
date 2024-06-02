@@ -14,3 +14,5 @@ export const IssueChequeIssueWithDrawalGroup = '/cheque/DigitalCheque/issuechequ
 export const CartableInquiry = '/cheque/DigitalCheque/cartableinquiry';
 export const GetAllRelatedCustomers = '/CustomerManager/getallrelatedcustomers';
 export const InquiryTransferStatus = '/cheque/InquiryTransferStatus';
+export const Transferchequeinitiateotp = '/cheque/DigitalCheque/transferchequeinitiateotp';
+export const TransferChequeVerifyOtp = '/cheque/DigitalCheque/TransferChequeVerifyOtp';

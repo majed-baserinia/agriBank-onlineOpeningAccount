@@ -1,11 +1,11 @@
 import resolver from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
-import CheckInitiateOtpCommand from 'business/application/cheque/Digital Cheque/Send Otp/CheckInitiateOtpCommand';
-import VerifyOtpCommand from 'business/application/cheque/Digital Cheque/Verify Otp/VerifyOtpCommand';
-import useCheckInitiateOtp from 'business/hooks/cheque/Digital Cheque/useCheckInitiateOtp';
+import TransferChequeVerifyOtpCommand from 'business/application/cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpCommand';
+import useTransferChequeInitiateOtp from 'business/hooks/cheque/transferCheck/useTransferChequeInitiateOtp';
+import useTransferChequeVerifyOtp from 'business/hooks/cheque/transferCheck/useTransferChequeVerifyOtp';
 import { pushAlert } from 'business/stores/AppAlertsStore';
-import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -18,90 +18,63 @@ import Otp from 'ui/htsc-components/Otp';
 import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import { menuList } from 'ui/pages/HomePage/menuList';
-
+import { paths } from 'ui/route-config/paths';
 
 export default function OtpTransferConfirmation() {
 	const theme = useTheme();
-	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
 	const navigate = useNavigate();
-const GetStepData = useDataSteps((s) => s.steps.signitureRequirementData);
-	const {
-		data: CheckInitiateOtpData,
-		mutate: CheckInitiateOtpMutate,
-		error: CheckInitiateOtpError
-	} = useCheckInitiateOtp();
+	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const { otpTransferRequirments, addNewData } = useChecklistData();
 
-	const {
-		register: VerifyOtpRequest,
-		handleSubmit: handleSubmitForVerifyOtp,
-		formState,
-		control
-	} = useForm<VerifyOtpCommand>({
-		resolver: (values, context, options) => {
-			values = { ...values };
-			return resolver(values, context, options);
-		},
-		context: VerifyOtpCommand
+	const { data: InitiateOtpRes, mutate: initiateOtp } = useTransferChequeInitiateOtp();
+	const { mutate: VerifyOtp } = useTransferChequeVerifyOtp();
+
+	const { handleSubmit, formState, control } = useForm<TransferChequeVerifyOtpCommand>({
+		resolver: (values, context, options) => resolver(values, context, options),
+		context: TransferChequeVerifyOtpCommand
 	});
 
 	useEffect(() => {
-		CheckInitiateOtpMutate(
-			{ issueChequeKey: GetStepData?.issueChequeKey },
-			{
-				onError: (err) => {
-					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-				}
-			}
-		);
+		initiateOtpHandler();
 	}, []);
 
-	const CheckInitiateOtp = (data: CheckInitiateOtpCommand) => {
-		CheckInitiateOtpMutate(data, {
-			onSuccess: (response) => {
-				pushAlert({
-					type: 'success',
-					messageText: response.message,
-					hasConfirmAction: true,
-					actions: {
-						onCloseModal: () => navigate('/cheque'),
-						onConfirm: () => navigate('/cheque')
+	const initiateOtpHandler = () => {
+		if (otpTransferRequirments && otpTransferRequirments.transferChequeKey) {
+			initiateOtp(
+				{ transferChequeKey: otpTransferRequirments.transferChequeKey },
+				{
+					onError: (err) => {
+						pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
 					}
-				});
-			},
-			onError: (err) => {
-				if (err.status == 453) {
-					pushAlert({
-						type: 'error',
-						messageText: err.detail,
-						hasConfirmAction: true,
-						actions: {
-							onCloseModal: () => navigate('/cheque'),
-							onConfirm: () => navigate('/cheque')
-						}
-					});
 				}
-				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-			}
-		});
+			);
+		}
 	};
-	const handleSendAgain = () => {
-		CheckInitiateOtpMutate(
-			{ issueChequeKey: GetStepData?.issueChequeKey },
-			{
-				onSuccess: (response) => {
-					pushAlert({
-						type: 'info',
-						messageText: response.message,
-						hasConfirmAction: true
-					});
+
+	const VerifyOtpHandler = (data: TransferChequeVerifyOtpCommand) => {
+		if (otpTransferRequirments && otpTransferRequirments.transferChequeKey) {
+			VerifyOtp(
+				{
+					otpCode: data.otpCode,
+					selectSingleSignatureLegal: true,
+					transferChequeKey: otpTransferRequirments.transferChequeKey
 				},
-				onError: (err) => {
-					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+				{
+					onError: (err) => {
+						pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+					},
+					onSuccess: (res) => {
+						//TODO:
+						addNewData({transferOverview: res})
+						if("hoghooghi") navigate(paths.ReceivedChecksList.TransferSignatureGroup)
+						if("haghighi") navigate(paths.ReceivedChecksList.Detail)
+					}
 				}
-			}
-		);
+			);
+		}
 	};
+
 	return (
 		<Grid
 			container
@@ -126,15 +99,15 @@ const GetStepData = useDataSteps((s) => s.steps.signitureRequirementData);
 							<Title>{t('activationElCheck')}</Title>
 							{!matches ? (
 								<Stepper
-								list={[
-									t('checkInfo'),
-									t('recivers'),
-									t('verificationCode'),
-									t('selectSignatureGroup'),
-									t('end')
-								]}
-								active={2}
-							/>
+									list={[
+										t('checkInfo'),
+										t('recivers'),
+										t('verificationCode'),
+										t('selectSignatureGroup'),
+										t('end')
+									]}
+									active={2}
+								/>
 							) : null}
 
 							<Grid
@@ -168,13 +141,13 @@ const GetStepData = useDataSteps((s) => s.steps.signitureRequirementData);
 									control={control}
 									render={({ field }) => (
 										<Otp
+											label={t('activationCodeOtp')}
+											maxLength={InitiateOtpRes?.codeLength}
+											timerInSeconds={InitiateOtpRes?.lifeTime}
 											onChange={(value) => field.onChange(value)}
+											handleResend={initiateOtpHandler}
 											error={!!formState?.errors?.otpCode}
 											helperText={formState?.errors?.otpCode?.message}
-											label={t('activationCodeOtp')}
-											maxLength={CheckInitiateOtpData?.codeLength}
-											timerInSeconds={CheckInitiateOtpData?.lifeTime}
-											handleResend={handleSendAgain}
 										/>
 									)}
 								/>
@@ -185,7 +158,7 @@ const GetStepData = useDataSteps((s) => s.steps.signitureRequirementData);
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
-								onClick={handleSubmitForVerifyOtp(CheckInitiateOtp)}
+								onClick={handleSubmit(VerifyOtpHandler)}
 							>
 								{t('continue')}
 							</ButtonAdapter>

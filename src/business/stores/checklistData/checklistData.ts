@@ -1,15 +1,25 @@
-import { CartableInquiryResponse, Check } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
+import {
+	CartableInquiryResponse,
+	Check
+} from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
 import { GetAllRelatedCustomersResponse } from 'common/entities/cheque/chekList/GetAllRelatedCustomers/GetAllRelatedCustomersResponse';
+import { TransferChequeInitiateResponse } from 'common/entities/cheque/transferCheck/TransferChequeInitiate/TransferChequeInitiateResponse';
+import { TransferChequeVerifyOtpResponse } from 'common/entities/cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpResponse';
 import { create } from 'zustand';
+
+interface addFunction {
+	addNewData: <T extends keyof chekListData>(data: Record<T, chekListData[T]>) => void;
+}
 
 interface chekListData {
 	relatedCustomers?: GetAllRelatedCustomersResponse;
 	cartableListData?: CartableInquiryResponse;
-	selectedCheck?: Check
-	addNewData: (data: {}) => void;
+	selectedCheck?: Check;
+	otpTransferRequirments?: TransferChequeInitiateResponse;
+	transferOverview?: TransferChequeVerifyOtpResponse;
 }
 
-export const useChecklistData = create<chekListData>((set) => ({
+export const useChecklistData = create<addFunction & chekListData>((set) => ({
 	addNewData: (data) => {
 		set((store) => ({
 			...store,

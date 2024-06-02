@@ -1,14 +1,10 @@
-
-export interface IssueChequeInitiateRequest {
+export interface TransferChequeInitiateRequest {
 	sayadNo: number;
-	amount: number;
-	dueDate: string;
 	description: string;
 	reason: string;
-	toIban?: string;
+	toIban: string;
 	recievers: Reciever[];
 }
-
 type Reciever = {
 	name: string;
 	shahabNo: string;
