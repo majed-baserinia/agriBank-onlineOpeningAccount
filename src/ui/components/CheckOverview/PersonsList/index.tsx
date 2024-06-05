@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import OverviewParts from '../OverviewParts';
 import { Props } from './types';
 
-export default function PersonsList({ recievers, signers }: Props) {
+export default function PersonsList({ recievers, signers, holders }: Props) {
 	const { t } = useTranslation();
 	const theme = useTheme();
 
@@ -19,7 +19,12 @@ export default function PersonsList({ recievers, signers }: Props) {
 		>
 			{recievers ? (
 				<>
-					<Typography variant='bodyMd' fontWeight={"medium"} >{t('recivers')}</Typography>
+					<Typography
+						variant="bodyMd"
+						fontWeight={'medium'}
+					>
+						{t('recivers')}
+					</Typography>
 					{recievers?.map((receiver, index) => {
 						return (
 							<Fragment key={receiver.name}>
@@ -36,7 +41,13 @@ export default function PersonsList({ recievers, signers }: Props) {
 
 			{signers ? (
 				<>
-					<Typography variant='bodyMd' fontWeight={"medium"} sx={{ marginTop: '16px' }}>{t('signers')}</Typography>
+					<Typography
+						variant="bodyMd"
+						fontWeight={'medium'}
+						sx={{ marginTop: '16px' }}
+					>
+						{t('signers')}
+					</Typography>
 
 					{signers?.[0].withdrawalGroups?.map((signer, index) => {
 						return (
@@ -46,6 +57,30 @@ export default function PersonsList({ recievers, signers }: Props) {
 									signerData={{ ...signer }}
 								/>
 								{signers?.[0].withdrawalGroups.length - 1 != index ? <Divider /> : null}
+							</Fragment>
+						);
+					})}
+				</>
+			) : null}
+
+			{holders ? (
+				<>
+					<Typography
+						variant="bodyMd"
+						fontWeight={'medium'}
+						sx={{ marginTop: '16px' }}
+					>
+						{t('beneficiary')}
+					</Typography>
+
+					{holders?.map((holder, index) => {
+						return (
+							<Fragment key={index}>
+								<OverviewParts
+									type="holder"
+									holderData={{ ...holder }}
+								/>
+								{holders?.length - 1 != index ? <Divider /> : null}
 							</Fragment>
 						);
 					})}

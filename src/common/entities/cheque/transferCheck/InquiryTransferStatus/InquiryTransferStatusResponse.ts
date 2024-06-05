@@ -38,7 +38,7 @@ export interface Holder {
 	customerType: 1 | 2 | 3 | 4;
 	customerTypeDescription: string;
 	lastActionDate: string;
-	acceptTransfer: number;
+	acceptTransfer: 0 | 1;
 	acceptTransferDescription: string;
 }
 

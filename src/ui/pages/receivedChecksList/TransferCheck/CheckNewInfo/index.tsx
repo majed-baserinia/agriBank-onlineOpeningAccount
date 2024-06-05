@@ -1,5 +1,6 @@
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import useFirstPageViewGenerator from 'business/hooks/cheque/transferCheck/useFirstPageViewGenerator';
+import { InquiryTransferStatusRespone } from 'common/entities/cheque/transferCheck/InquiryTransferStatus/InquiryTransferStatusResponse';
 import { useNavigate } from 'react-router-dom';
 import Menu from 'ui/components/Menu';
 import FirstPersonView from 'ui/components/transferCheck/FirstPersonView';
@@ -14,11 +15,11 @@ export default function CheckNewInfo() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { view, isLoading } = useFirstPageViewGenerator();
+	const { view, isLoading, inqueryStatusResponse: checkData } = useFirstPageViewGenerator();
 
-	const handleView = (view: '1' | '2' | '3') => {
+	const handleView = (view: '1' | '2' | '3', checkData?: InquiryTransferStatusRespone) => {
 		if (view === '1') return <FirstPersonView />;
-		if (view === '2') return <SecondOrMoreView />;
+		if (view === '2' && checkData) return <SecondOrMoreView checkData={checkData} />;
 		if (view === '3') return <UnknownView />;
 	};
 
@@ -35,7 +36,7 @@ export default function CheckNewInfo() {
 				xs={12}
 				md={8}
 			>
-				{handleView(view)}
+				{handleView(view, checkData)}
 			</Grid>
 
 			{matches ? null : (

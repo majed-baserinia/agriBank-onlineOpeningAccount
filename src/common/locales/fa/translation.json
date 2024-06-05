@@ -175,6 +175,8 @@
 	"transferStatus": "وضعیت انتقال",
 	"beneficiary":"ذینفع",
 	"transferCheckEl": "انتقال چک الکترونیک",
-	"confirmOrRejectTransferText": "پس از بررسی اطلاعات عملیات مدنظر را انتخاب کنید."
+	"confirmOrRejectTransferText": "پس از بررسی اطلاعات عملیات مدنظر را انتخاب کنید.",
+	"awaitingConfirmation": "در انتظار تایید",
+	"confirmed": "تایید شده"
 
 }

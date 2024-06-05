@@ -31,5 +31,5 @@ export default function useFirstPageViewGenerator() {
 		//set a time out for the api call and if has no response set the view to 3
 	}, []);
 
-	return { view, isLoading };
+	return { view, isLoading, inqueryStatusResponse };
 }

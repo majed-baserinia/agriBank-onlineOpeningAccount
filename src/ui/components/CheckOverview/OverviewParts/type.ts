@@ -10,6 +10,16 @@ export type ReceiverData = {
 	customerType: 1 | 2 | 3 | 4;
 };
 
+export interface HolderData  {
+	name: string;
+	nationalNo: string;
+	customerType: 1 | 2 | 3 | 4;
+	customerTypeDescription: string;
+	lastActionDate: string;
+	acceptTransfer: 0 | 1;
+	acceptTransferDescription: string;
+};
+
 export type Props =
 	| {
 			type: 'receiver';
@@ -18,4 +28,8 @@ export type Props =
 	| {
 			type: 'signer';
 			signerData: SignerData;
+	  }
+	| {
+			type: 'holder';
+			holderData: HolderData;
 	  };

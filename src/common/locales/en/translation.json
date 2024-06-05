@@ -175,5 +175,7 @@
 	"transferStatus": "transfer status",
 	"beneficiary": "Beneficiary",
 	"transferCheckEl": "Transfer Electronic Check",
-	"confirmOrRejectTransferText": "After checking the information, choose the desired operation."
+	"confirmOrRejectTransferText": "After checking the information, choose the desired operation.",
+	"awaitingConfirmation": "Awaiting confirmation",
+	"confirmed": "Confirmed"
 }

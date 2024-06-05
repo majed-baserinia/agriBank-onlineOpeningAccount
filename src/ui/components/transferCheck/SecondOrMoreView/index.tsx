@@ -1,4 +1,5 @@
 import { Grid, RadioGroup, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { InquiryTransferStatusRespone } from 'common/entities/cheque/transferCheck/InquiryTransferStatus/InquiryTransferStatusResponse';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PersonsList from 'ui/components/CheckOverview/PersonsList';
@@ -9,7 +10,7 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import RadioButtonAdapter from 'ui/htsc-components/RadioButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
-export default function SecondOrMoreView() {
+export default function SecondOrMoreView({ checkData }: { checkData: InquiryTransferStatusRespone }) {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
@@ -37,18 +38,20 @@ export default function SecondOrMoreView() {
 					{!matches ? (
 						// TODO: check if selected compony or homself acocunt and add one more step if it is compony
 						<Stepper
-							list={[
-								t('checkInfo'),
-								t('verificationCode'),
-								t('end')
-							]}
+							list={[t('checkInfo'), t('verificationCode'), t('end')]}
 							active={0}
 						/>
 					) : null}
 
-					<CheckOverViewBox amount='12121'  sayadNo={1231}/>
-					<PersonsList />
-					<Typography>{t("confirmOrRejectTransferText")}</Typography>
+					<CheckOverViewBox
+						amount={Number(checkData?.amount)}
+						sayadNo={Number(checkData?.sayadId)}
+					/>
+					<PersonsList
+						recievers={checkData.receivers}
+						holders={checkData.holders}
+					/>
+					<Typography>{t('confirmOrRejectTransferText')}</Typography>
 					<RadioGroup
 						dir={theme.direction}
 						name="confirmOrReject"

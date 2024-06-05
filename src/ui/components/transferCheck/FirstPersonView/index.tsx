@@ -16,6 +16,7 @@ export default function FirstPersonView() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { selectedCheck } = useChecklistData();
+
 	const { data: reasonCodes, isLoading: isPendingtoGetReasons, isError } = useGetReasonCodes();
 
 	const { control, formState } = useForm();
@@ -50,8 +51,8 @@ export default function FirstPersonView() {
 					) : null}
 
 					<CheckOverViewBox
-						amount={selectedCheck?.amount.toString()}
-						sayadNo={selectedCheck?.sayadNo}
+						amount={Number(selectedCheck?.amount)}
+						sayadNo={Number(selectedCheck?.sayadNo)}
 					/>
 					<Grid
 						item

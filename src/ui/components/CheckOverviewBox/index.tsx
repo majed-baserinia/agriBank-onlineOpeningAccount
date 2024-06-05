@@ -4,7 +4,7 @@ import OverviewItem from '../CheckOverview/OverviewItem';
 
 type Props = {
 	sayadNo?: number;
-	amount?: string;
+	amount?: number;
 	beneficiaries?: [];
 };
 export default function CheckOverViewBox(props: Props) {
