@@ -16,6 +16,7 @@ interface chekListData {
 	relatedCustomers?: GetAllRelatedCustomersResponse;
 	cartableListData?: CartableInquiryResponse;
 	selectedCheck?: Check;
+	basicCheckData?: { reason: string; description: string; toIban: string };
 	otpTransferRequirments?: TransferChequeInitiateResponse;
 	transferOverview?: TransferChequeVerifyOtpResponse;
 	receivers?: RecieverRequest[];

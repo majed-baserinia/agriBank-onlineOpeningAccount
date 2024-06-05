@@ -1,8 +1,11 @@
+import fluentValidationResolver from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import TransferBasicCheckDataValidatorCommand from 'business/application/cheque/transferCheck/TransferBasicCheckDataValidator/TransferBasicCheckDataValidatorCommand';
 import useGetReasonCodes from 'business/hooks/cheque/Digital Cheque/useGetReasonCodes';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import CheckOverViewBox from 'ui/components/CheckOverviewBox';
 import Title from 'ui/components/Title';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
@@ -10,16 +13,26 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
+import { paths } from 'ui/route-config/paths';
 
 export default function FirstPersonView() {
-	const { t } = useTranslation();
 	const theme = useTheme();
+	const navigate = useNavigate()
+	const { t } = useTranslation();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { selectedCheck } = useChecklistData();
+	const { selectedCheck, addNewData } = useChecklistData();
 
 	const { data: reasonCodes, isLoading: isPendingtoGetReasons, isError } = useGetReasonCodes();
 
-	const { control, formState } = useForm();
+	const { control, formState, handleSubmit } = useForm<TransferBasicCheckDataValidatorCommand>({
+		resolver: (values, context, options) => fluentValidationResolver(values, context, options),
+		context: TransferBasicCheckDataValidatorCommand
+	});
+
+	const onSubmit = (data: TransferBasicCheckDataValidatorCommand) => {
+		addNewData({ basicCheckData: { ...data } });
+		navigate(paths.ReceivedChecksList.AddNewReceivers);
+	};
 
 	return (
 		<BoxAdapter fullWidth={matches}>
@@ -107,7 +120,7 @@ export default function FirstPersonView() {
 						size="medium"
 						muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 						forwardIcon
-						onClick={() => console.log()}
+						onClick={() => handleSubmit(onSubmit)}
 					>
 						{t('continue')}
 					</ButtonAdapter>
