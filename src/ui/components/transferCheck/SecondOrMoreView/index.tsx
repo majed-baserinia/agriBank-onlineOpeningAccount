@@ -47,8 +47,8 @@ export default function SecondOrMoreView({ checkData }: { checkData: InquiryTran
 			confirmTransfer(preparedData, {
 				onError: (err) => pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail }),
 				onSuccess: (res) => {
-					addNewData({ otpTransferRequirments: res });
-					navigate(paths.ReceivedChecksList.OtpTransferConfirmation + '?type=confirm');
+					addNewData({ otpTransferRequirments: res, transferAction: 'confirm' });
+					navigate(paths.ReceivedChecksList.OtpTransferConfirmation);
 				}
 			});
 
@@ -56,8 +56,8 @@ export default function SecondOrMoreView({ checkData }: { checkData: InquiryTran
 			rejectTransfer(preparedData, {
 				onError: (err) => pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail }),
 				onSuccess: (res) => {
-					addNewData({ otpTransferRequirments: res });
-					navigate(paths.ReceivedChecksList.OtpTransferConfirmation + '?type=reject');
+					addNewData({ otpTransferRequirments: res, transferAction: 'reject' });
+					navigate(paths.ReceivedChecksList.OtpTransferConfirmation);
 				}
 			});
 	};
