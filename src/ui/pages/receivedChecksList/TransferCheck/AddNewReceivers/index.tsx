@@ -37,7 +37,7 @@ export default function AddNewReceivers() {
 					onError: (err) => pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail }),
 					onSuccess: (res) => {
 						addNewData({ otpTransferRequirments: res });
-						navigate(paths.ReceivedChecksList.OtpTransferConfirmation + '?type=confirm');
+						navigate(paths.ReceivedChecksList.OtpTransferConfirmation);
 					}
 				}
 			);

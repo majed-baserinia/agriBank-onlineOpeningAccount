@@ -2,8 +2,7 @@ import resolver from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
 import TransferChequeVerifyOtpCommand from 'business/application/cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpCommand';
-import useTransferChequeInitiateOtp from 'business/hooks/cheque/transferCheck/useTransferChequeInitiateOtp';
-import useTransferChequeVerifyOtp from 'business/hooks/cheque/transferCheck/useTransferChequeVerifyOtp';
+import useDetectOtpType from 'business/hooks/cheque/transferCheck/useDetectOtpType';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { useEffect } from 'react';
@@ -26,9 +25,10 @@ export default function OtpTransferConfirmation() {
 	const navigate = useNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { otpTransferRequirments, addNewData } = useChecklistData();
+	const { initOtp, verifyOtp } = useDetectOtpType();
 
-	const { data: InitiateOtpRes, mutate: initiateOtp } = useTransferChequeInitiateOtp();
-	const { mutate: VerifyOtp } = useTransferChequeVerifyOtp();
+	const { data: InitiateOtpRes, mutate: initiateOtp } = initOtp();
+	const { mutate: VerifyOtp } = verifyOtp();
 
 	const { handleSubmit, formState, control } = useForm<TransferChequeVerifyOtpCommand>({
 		resolver: (values, context, options) => resolver(values, context, options),
@@ -65,10 +65,11 @@ export default function OtpTransferConfirmation() {
 						pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
 					},
 					onSuccess: (res) => {
+						addNewData({ transferOverview: res });
+						navigate(paths.ReceivedChecksList.Detail);
 						//TODO:
-						addNewData({transferOverview: res})
-						if("hoghooghi") navigate(paths.ReceivedChecksList.TransferSignatureGroup)
-						if("haghighi") navigate(paths.ReceivedChecksList.Detail)
+						//if ('hoghooghi') navigate(paths.ReceivedChecksList.TransferSignatureGroup);
+						//if ('haghighi') navigate(paths.ReceivedChecksList.Detail);
 					}
 				}
 			);

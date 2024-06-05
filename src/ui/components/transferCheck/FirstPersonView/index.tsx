@@ -17,7 +17,7 @@ import { paths } from 'ui/route-config/paths';
 
 export default function FirstPersonView() {
 	const theme = useTheme();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { selectedCheck, addNewData } = useChecklistData();
@@ -30,7 +30,7 @@ export default function FirstPersonView() {
 	});
 
 	const onSubmit = (data: TransferBasicCheckDataValidatorCommand) => {
-		addNewData({ basicCheckData: { ...data } });
+		addNewData({ basicCheckData: { ...data }, transferAction: 'confirm' });
 		navigate(paths.ReceivedChecksList.AddNewReceivers);
 	};
 

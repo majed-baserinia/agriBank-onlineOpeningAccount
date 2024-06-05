@@ -13,6 +13,7 @@ interface addFunction {
 }
 
 interface chekListData {
+	transferAction?: 'confirm' | 'reject';
 	relatedCustomers?: GetAllRelatedCustomersResponse;
 	cartableListData?: CartableInquiryResponse;
 	selectedCheck?: Check;
