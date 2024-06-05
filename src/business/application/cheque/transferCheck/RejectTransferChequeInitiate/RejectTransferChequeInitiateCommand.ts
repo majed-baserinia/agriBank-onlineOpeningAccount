@@ -2,7 +2,7 @@ import { IRequest } from '@Mediatr/index';
 import { RecieverRequest } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
 import { TransferChequeInitiateRequest } from 'common/entities/cheque/transferCheck/TransferChequeInitiate/TransferChequeInitiateRequest';
 
-export default class TransferChequeInitiateCommand implements IRequest<TransferChequeInitiateRequest> {
+export default class RejectTransferChequeInitiateCommand implements IRequest<TransferChequeInitiateRequest> {
 	customerNumber: number;
 	sayadNo: number;
 	description: string;
@@ -10,7 +10,7 @@ export default class TransferChequeInitiateCommand implements IRequest<TransferC
 	toIban?: string;
 	recievers: RecieverRequest[];
 
-	constructor(input: TransferChequeInitiateCommand) {
+	constructor(input: RejectTransferChequeInitiateCommand) {
 		this.customerNumber = input.customerNumber;
 		this.sayadNo = input.sayadNo;
 		this.description = input.description;

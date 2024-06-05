@@ -30,11 +30,14 @@ export default function OverviewParts(props: Props) {
 			sx={{ padding: '16px' }}
 		>
 			{props.type === 'holder' && props.holderData ? (
-				<Grid container>
+				<Grid
+					container
+					justifyContent={'space-between'}
+				>
 					<Typography variant="bodyMd">{data?.name}</Typography>
 					<ChipsAdapter
 						label={(data as HolderData).acceptTransfer! === 0 ? t('awaitingConfirmation') : t('confirmed')}
-						color={(data as HolderData).acceptTransfer! === 0 ? "info" : "success"}
+						color={(data as HolderData).acceptTransfer! === 0 ? 'info' : 'success'}
 						size="small"
 					/>
 				</Grid>

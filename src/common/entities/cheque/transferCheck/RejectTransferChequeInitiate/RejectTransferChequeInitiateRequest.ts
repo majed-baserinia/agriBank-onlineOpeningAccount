@@ -1,4 +1,4 @@
-export interface TransferChequeInitiateRequest {
+export interface RejectTransferChequeInitiateRequest {
 	customerNumber: number;
 	sayadNo: number;
 	description: string;
