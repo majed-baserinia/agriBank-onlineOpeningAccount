@@ -1,5 +1,6 @@
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import useGetReasonCodes from 'business/hooks/cheque/Digital Cheque/useGetReasonCodes';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import CheckOverViewBox from 'ui/components/CheckOverviewBox';
@@ -14,7 +15,8 @@ export default function FirstPersonView() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-    const { data: reasonCodes, isLoading: isPendingtoGetReasons } = useGetReasonCodes();
+	const { selectedCheck } = useChecklistData();
+	const { data: reasonCodes, isLoading: isPendingtoGetReasons, isError } = useGetReasonCodes();
 
 	const { control, formState } = useForm();
 
@@ -47,7 +49,10 @@ export default function FirstPersonView() {
 						/>
 					) : null}
 
-					<CheckOverViewBox amount='231321321' sayadNo={213212} />
+					<CheckOverViewBox
+						amount={selectedCheck?.amount.toString()}
+						sayadNo={selectedCheck?.sayadNo}
+					/>
 					<Grid
 						item
 						xs={5}
@@ -60,13 +65,12 @@ export default function FirstPersonView() {
 									isRequired
 									label={t('reason')}
 									list={
-										[]
-										// isPendingtoGetReasons
-										// 	? []
-										// 	: reasonCodes!?.map((reason) => ({
-										// 			value: reason.reasonCode,
-										// 			name: reason.description
-										// 		}))
+										isPendingtoGetReasons || isError
+											? []
+											: reasonCodes.map((reason) => ({
+													value: reason.reasonCode,
+													name: reason.description
+												}))
 									}
 									onChange={(item) => {
 										field.onChange(item);

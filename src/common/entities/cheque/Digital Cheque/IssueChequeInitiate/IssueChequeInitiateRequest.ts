@@ -1,4 +1,3 @@
-
 export interface IssueChequeInitiateRequest {
 	sayadNo: number;
 	amount: number;
@@ -13,5 +12,5 @@ export type RecieverRequest = {
 	name: string;
 	shahabNo: string;
 	nationalNo: string;
-	customerType: number;
+	customerType: 1 | 2 | 3 | 4;
 };

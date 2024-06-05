@@ -14,7 +14,8 @@ export class InquiryTransferStatusCommandHandler
 			InquiryTransferStatus
 		);
 		return apiClient.post(<InquiryTransferStatusRequest>{
-			sayadNo: value.sayadNo
+			sayadNo: value.sayadNo,
+			chequeHolderNationalCode: value.chequeHolderNationalCode
 		});
 	}
 }

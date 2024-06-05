@@ -1,3 +1,4 @@
+import { RecieverRequest } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
 import {
 	CartableInquiryResponse,
 	Check
@@ -17,6 +18,7 @@ interface chekListData {
 	selectedCheck?: Check;
 	otpTransferRequirments?: TransferChequeInitiateResponse;
 	transferOverview?: TransferChequeVerifyOtpResponse;
+	receivers?: RecieverRequest[];
 }
 
 export const useChecklistData = create<addFunction & chekListData>((set) => ({

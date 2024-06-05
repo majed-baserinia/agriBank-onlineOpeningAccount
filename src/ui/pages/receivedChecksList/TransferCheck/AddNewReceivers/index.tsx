@@ -8,7 +8,7 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
 import useIssueChequeInitiate from 'business/hooks/cheque/Digital Cheque/useIssueChequeInitiate';
-import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import CheckReceivers from 'ui/components/CheckReceivers';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from 'ui/pages/HomePage/menuList';
@@ -18,7 +18,7 @@ export default function AddNewReceivers() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { steps, setStepData } = useDataSteps((store) => store);
+	const { addNewData } = useChecklistData((store) => store);
 	const { isLoading, mutate: issueChequeInitiate } = useIssueChequeInitiate();
 
 	// useEffect(() => {
@@ -127,9 +127,7 @@ export default function AddNewReceivers() {
 								/>
 							) : null}
 							<Typography variant="bodyMd">{t('addNewReceiversText')}</Typography>
-							<CheckReceivers
-								getRceivers={(receiversList) => setStepData({ receivers: receiversList })}
-							/>
+							<CheckReceivers getRceivers={(receiversList) => addNewData({ receivers: receiversList })} />
 						</Grid>
 						<Grid container>
 							<ButtonAdapter

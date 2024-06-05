@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import OverviewItem from '../CheckOverview/OverviewItem';
 
 type Props = {
-	sayadNo: number;
-	amount: string;
+	sayadNo?: number;
+	amount?: string;
 	beneficiaries?: [];
 };
 export default function CheckOverViewBox(props: Props) {
