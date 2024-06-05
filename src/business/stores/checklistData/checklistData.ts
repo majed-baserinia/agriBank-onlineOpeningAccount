@@ -8,8 +8,9 @@ import { TransferChequeInitiateResponse } from 'common/entities/cheque/transferC
 import { TransferChequeVerifyOtpResponse } from 'common/entities/cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpResponse';
 import { create } from 'zustand';
 
-interface addFunction {
+interface Functions {
 	addNewData: <T extends keyof chekListData>(data: Record<T, chekListData[T]>) => void;
+	reset: () => void;
 }
 
 interface chekListData {
@@ -23,11 +24,14 @@ interface chekListData {
 	receivers?: RecieverRequest[];
 }
 
-export const useChecklistData = create<addFunction & chekListData>((set) => ({
+export const useChecklistData = create<Functions & chekListData>((set) => ({
 	addNewData: (data) => {
 		set((store) => ({
 			...store,
 			...data
 		}));
+	},
+	reset: () => {
+		set((store) => ({}));
 	}
 }));

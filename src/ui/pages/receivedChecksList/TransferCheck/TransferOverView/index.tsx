@@ -7,7 +7,7 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
-import useIssueChequeFinalize from 'business/hooks/cheque/Digital Cheque/useIssueChequeFinalize';
+import useDetectFinalizeTransfer from 'business/hooks/cheque/transferCheck/useDetectFinalizeTransfer';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import BasicCheckDetials from 'ui/components/CheckOverview/BasicCheckDetials';
@@ -21,18 +21,15 @@ export default function TransferOverView() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const { transferOverview, selectedCheck, otpTransferRequirments, reset } = useChecklistData((store) => store);
 
-	const { transferOverview, selectedCheck, otpTransferRequirments, transferAction } = useChecklistData(
-		(store) => store
-	);
-
-	const { isLoading, mutate: finalSubmit } = useIssueChequeFinalize();
+	const { isLoading, mutate: finalSubmit } = useDetectFinalizeTransfer()();
 
 	const handleSubmit = () => {
 		if (otpTransferRequirments?.transferChequeKey) {
 			finalSubmit(
 				{
-					issueChequeKey: otpTransferRequirments?.transferChequeKey
+					transferChequeKey: otpTransferRequirments?.transferChequeKey
 				},
 				{
 					onError: (err) => {
@@ -42,7 +39,7 @@ export default function TransferOverView() {
 						pushAlert({
 							type: 'success',
 							hasConfirmAction: true,
-							messageText: 'l,tr',
+							messageText: res.message,
 							actions: {
 								onCloseModal: () => {
 									navigate(paths.Home);
@@ -53,6 +50,11 @@ export default function TransferOverView() {
 				}
 			);
 		}
+	};
+
+	const handleCancel = () => {
+		reset();
+		navigate(paths.Home);
 	};
 
 	// const overviewData: issueChequeOverView = {
@@ -189,7 +191,7 @@ export default function TransferOverView() {
 								variant="outlined"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
-								onClick={() => console.log('cancel')}
+								onClick={() => handleCancel()}
 							>
 								{t('cancel')}
 							</ButtonAdapter>
