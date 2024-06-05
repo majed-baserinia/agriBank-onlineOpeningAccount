@@ -40,7 +40,7 @@ export default function SecondOrMoreView({ checkData }: { checkData: InquiryTran
 			reason: checkData.reason,
 			sayadNo: Number(checkData.sayadId),
 			toIban: '',
-			recievers: checkData.receivers
+			receivers: checkData.receivers
 		};
 
 		if (type === 'confirm')

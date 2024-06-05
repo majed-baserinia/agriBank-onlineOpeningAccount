@@ -8,7 +8,7 @@ export default class TransferChequeInitiateCommand implements IRequest<TransferC
 	description: string;
 	reason: string;
 	toIban?: string;
-	recievers: RecieverRequest[];
+	receivers: RecieverRequest[];
 
 	constructor(input: TransferChequeInitiateCommand) {
 		this.customerNumber = input.customerNumber;
@@ -16,6 +16,6 @@ export default class TransferChequeInitiateCommand implements IRequest<TransferC
 		this.description = input.description;
 		this.reason = input.reason;
 		this.toIban = input.toIban;
-		this.recievers = input.recievers;
+		this.receivers = input.receivers;
 	}
 }

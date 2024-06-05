@@ -8,7 +8,7 @@ export default class RejectTransferChequeInitiateCommand implements IRequest<Tra
 	description: string;
 	reason: string;
 	toIban?: string;
-	recievers: RecieverRequest[];
+	receivers: RecieverRequest[];
 
 	constructor(input: RejectTransferChequeInitiateCommand) {
 		this.customerNumber = input.customerNumber;
@@ -16,6 +16,6 @@ export default class RejectTransferChequeInitiateCommand implements IRequest<Tra
 		this.description = input.description;
 		this.reason = input.reason;
 		this.toIban = input.toIban;
-		this.recievers = input.recievers;
+		this.receivers = input.receivers;
 	}
 }

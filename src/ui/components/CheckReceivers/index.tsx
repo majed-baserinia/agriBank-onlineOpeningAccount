@@ -1,5 +1,5 @@
 import { Dialog, useMediaQuery, useTheme } from '@mui/material';
-import { Reciever } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
+import { RecieverRequest } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Sheet from 'react-modal-sheet';
@@ -14,7 +14,7 @@ export default function CheckReceivers(props: CheckReceiversProps) {
 	const theme = useTheme();
 	const isDownSm = useMediaQuery(theme.breakpoints.down('sm'));
 	const [open, setOpen] = useState(false);
-	const [receivers, setReceivers] = useState<Reciever[]>([]);
+	const [receivers, setReceivers] = useState<RecieverRequest[]>([]);
 
 	useEffect(() => {
 		getRceivers(receivers);
