@@ -16,7 +16,7 @@ export default function UnknownView() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-    const { data: reasonCodes, isLoading: isPendingtoGetReasons } = useGetReasonCodes();
+    const { data: reasonCodes, isLoading: isPendingtoGetReasons, isError } = useGetReasonCodes();
     const [value, setValue] = useState('1');
 
 	const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,14 +65,12 @@ export default function UnknownView() {
 								<BottomSheetSelect
 									isRequired
 									label={t('reason')}
-									list={
-										[]
-										// isPendingtoGetReasons
-										// 	? []
-										// 	: reasonCodes!?.map((reason) => ({
-										// 			value: reason.reasonCode,
-										// 			name: reason.description
-										// 		}))
+									list={isPendingtoGetReasons || isError
+										? []
+										: reasonCodes.map((reason) => ({
+												value: reason.reasonCode,
+												name: reason.description
+											}))
 									}
 									onChange={(item) => {
 										field.onChange(item);

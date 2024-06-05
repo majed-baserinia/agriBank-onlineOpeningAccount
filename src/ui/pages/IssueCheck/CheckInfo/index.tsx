@@ -16,16 +16,16 @@ import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
 import { Controller, useForm } from 'react-hook-form';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
+import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
-import Loader from 'ui/htsc-components/loader/Loader';
 
 export default function CheckInfo() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { data: reasonCodes, isLoading: isPendingtoGetReasons } = useGetReasonCodes();
+	const { data: reasonCodes, isLoading: isPendingtoGetReasons, isError } = useGetReasonCodes();
 	const setDataForNextStep = useDataSteps((store) => store.setStepData);
 
 	const { control, formState, getValues, handleSubmit } = useForm<CheckInfoFormValidatorCommand>({
@@ -141,9 +141,9 @@ export default function CheckInfo() {
 												isRequired
 												label={t('reason')}
 												list={
-													isPendingtoGetReasons
+													isPendingtoGetReasons || isError
 														? []
-														: reasonCodes!.map((reason) => ({
+														: reasonCodes.map((reason) => ({
 																value: reason.reasonCode,
 																name: reason.description
 															}))
@@ -181,7 +181,7 @@ export default function CheckInfo() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%',marginTop:"16px" } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 								forwardIcon
 								onClick={handleSubmit(handleNextStep)}
 							>
@@ -199,11 +199,18 @@ export default function CheckInfo() {
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu divider={false} list={menuList.management} />
-						<Menu divider={false} list={menuList.services} />				</BoxAdapter>
+						<Menu
+							divider={false}
+							list={menuList.management}
+						/>
+						<Menu
+							divider={false}
+							list={menuList.services}
+						/>{' '}
+					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isPendingtoGetReasons}/>
+			<Loader showLoader={isPendingtoGetReasons} />
 		</Grid>
 	);
 }
