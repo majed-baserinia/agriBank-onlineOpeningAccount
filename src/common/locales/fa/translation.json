@@ -173,10 +173,10 @@
 	"Check has been issued": "چک صادر شده است",
 	"cashStatus": "وضعیت نقدکردن",
 	"transferStatus": "وضعیت انتقال",
-	"beneficiary":"ذینفع",
+	"beneficiary": "ذینفع",
 	"transferCheckEl": "انتقال چک الکترونیک",
 	"confirmOrRejectTransferText": "پس از بررسی اطلاعات عملیات مدنظر را انتخاب کنید.",
 	"awaitingConfirmation": "در انتظار تایید",
-	"confirmed": "تایید شده"
-
+	"confirmed": "تایید شده",
+	"cancel": "لغو"
 }

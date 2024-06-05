@@ -79,9 +79,8 @@ export * from './cheque/transferCheck/RejectTransferChequeVerifyOtp/RejectTransf
 export * from './cheque/transferCheck/TransferBasicCheckDataValidator/TransferBasicCheckDataValidatorCommand';
 export * from './cheque/transferCheck/TransferBasicCheckDataValidator/TransferBasicCheckDataValidatorCommandValidator';
 
+export * from './cheque/transferCheck/TransferChequeFinalize/TransferChequeFinalizeCommand';
+export * from './cheque/transferCheck/TransferChequeFinalize/TransferChequeFinalizeCommandHandler';
 
-
-
-
-
-
+export * from './cheque/transferCheck/RejectTransfercCequeFinalize/RejectTransfercCequeFinalizeCommand';
+export * from './cheque/transferCheck/RejectTransfercCequeFinalize/RejectTransfercCequeFinalizeCommandHandler';

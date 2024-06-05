@@ -20,3 +20,5 @@ export const TransferChequeInitiate = '/cheque/DigitalCheque/TransferChequeIniti
 export const RejectTransferChequeInitiate = '/cheque/DigitalCheque/rejecttransferchequeinitiate';
 export const RejectTransferChequeInitiateOtp= '/cheque/DigitalCheque/rejecttransferchequeinitiateotp';
 export const RejectTransferChequeVerifyOtp= '/cheque/DigitalCheque/RejectTransferChequeVerifyOtp';
+export const TransferChequeFinalize= '/cheque/DigitalCheque/TransferChequeFinalize';
+export const RejectTransfercCequeFinalize= '/cheque/DigitalCheque/RejectTransfercCequeFinalize';

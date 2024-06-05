@@ -10,7 +10,8 @@ import Stepper from 'ui/htsc-components/Stepper';
 import useIssueChequeFinalize from 'business/hooks/cheque/Digital Cheque/useIssueChequeFinalize';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
-import { issueChequeOverView } from 'common/entities/cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVerifyInitiateResponse';
+import BasicCheckDetials from 'ui/components/CheckOverview/BasicCheckDetials';
+import PersonsList from 'ui/components/CheckOverview/PersonsList';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from 'ui/pages/HomePage/menuList';
 import { paths } from 'ui/route-config/paths';
@@ -20,8 +21,12 @@ export default function TransferOverView() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+
+	const { transferOverview, selectedCheck, otpTransferRequirments, transferAction } = useChecklistData(
+		(store) => store
+	);
+
 	const { isLoading, mutate: finalSubmit } = useIssueChequeFinalize();
-	const { transferOverview, otpTransferRequirments } = useChecklistData((store) => store);
 
 	const handleSubmit = () => {
 		if (otpTransferRequirments?.transferChequeKey) {
@@ -50,69 +55,69 @@ export default function TransferOverView() {
 		}
 	};
 
-	const overviewData: issueChequeOverView = {
-		amount: 212,
-		description: 'advdsvds',
-		dueDate: '222222',
-		reason: 'dsv dsvds',
-		recievers: [
-			{
-				customerType: 4,
-				name: 'name',
-				nationalNo: '321123123',
-				shahabNo: '',
-				customerTypeDescription: 'نامشخص'
-			},
-			{
-				customerType: 3,
-				name: 'name',
-				nationalNo: '321123123',
-				shahabNo: '4142',
-				customerTypeDescription: 'نامشخص'
-			},
-			{
-				customerType: 2,
-				name: 'name',
-				nationalNo: '321123123',
-				shahabNo: '4142',
-				customerTypeDescription: 'نامشخص'
-			},
-			{
-				customerType: 1,
-				name: 'name',
-				nationalNo: '321123123',
-				shahabNo: '4142',
-				customerTypeDescription: 'نامشخص'
-			}
-		],
-		sayadNo: 3232413.2,
-		seri: '21321',
-		serial: '324324',
-		signers: [
-			{
-				withdrawalGroups: [
-					{
-						customerNumber: 3241534135,
-						name: 'name'
-					},
-					{
-						customerNumber: 3241534135,
-						name: 'name'
-					},
-					{
-						customerNumber: 3241534135,
-						name: 'name'
-					},
-					{
-						customerNumber: 3241534135,
-						name: 'name'
-					}
-				],
-				groupNumber: 'grupnumber'
-			}
-		],
-		toIBAN: '463543'
-	};
+	// const overviewData: issueChequeOverView = {
+	// 	amount: 212,
+	// 	description: 'advdsvds',
+	// 	dueDate: '222222',
+	// 	reason: 'dsv dsvds',
+	// 	recievers: [
+	// 		{
+	// 			customerType: 4,
+	// 			name: 'name',
+	// 			nationalNo: '321123123',
+	// 			shahabNo: '',
+	// 			customerTypeDescription: 'نامشخص'
+	// 		},
+	// 		{
+	// 			customerType: 3,
+	// 			name: 'name',
+	// 			nationalNo: '321123123',
+	// 			shahabNo: '4142',
+	// 			customerTypeDescription: 'نامشخص'
+	// 		},
+	// 		{
+	// 			customerType: 2,
+	// 			name: 'name',
+	// 			nationalNo: '321123123',
+	// 			shahabNo: '4142',
+	// 			customerTypeDescription: 'نامشخص'
+	// 		},
+	// 		{
+	// 			customerType: 1,
+	// 			name: 'name',
+	// 			nationalNo: '321123123',
+	// 			shahabNo: '4142',
+	// 			customerTypeDescription: 'نامشخص'
+	// 		}
+	// 	],
+	// 	sayadNo: 3232413.2,
+	// 	seri: '21321',
+	// 	serial: '324324',
+	// 	signers: [
+	// 		{
+	// 			withdrawalGroups: [
+	// 				{
+	// 					customerNumber: 3241534135,
+	// 					name: 'name'
+	// 				},
+	// 				{
+	// 					customerNumber: 3241534135,
+	// 					name: 'name'
+	// 				},
+	// 				{
+	// 					customerNumber: 3241534135,
+	// 					name: 'name'
+	// 				},
+	// 				{
+	// 					customerNumber: 3241534135,
+	// 					name: 'name'
+	// 				}
+	// 			],
+	// 			groupNumber: 'grupnumber'
+	// 		}
+	// 	],
+	// 	toIBAN: '463543'
+	// };
 
 	return (
 		<Grid
@@ -153,11 +158,25 @@ export default function TransferOverView() {
 									active={4}
 								/>
 							) : null}
-							{/* //TODO:send the data to overview component */}
-							{/* <CheckOverview overviewData={overviewData} /> */}
+
+							<BasicCheckDetials
+								amount={selectedCheck?.amount}
+								description={transferOverview?.transferChequeOverView?.description}
+								dueDate={selectedCheck?.dueDate}
+								sayadNo={transferOverview?.transferChequeOverView?.sayadNo}
+								reason={transferOverview?.transferChequeOverView?.reason}
+								serialSerie={selectedCheck?.seriesNo + '/' + selectedCheck?.serialNo}
+							/>
+							<PersonsList
+								recievers={transferOverview?.transferChequeOverView?.recievers}
+								signers={transferOverview?.transferChequeOverView?.signers}
+							/>
 						</Grid>
 
-						<Grid container>
+						<Grid
+							container
+							justifyContent={'space-between'}
+						>
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
@@ -165,6 +184,14 @@ export default function TransferOverView() {
 								onClick={() => handleSubmit()}
 							>
 								{t('registerAndConfirm')}
+							</ButtonAdapter>
+							<ButtonAdapter
+								variant="outlined"
+								size="medium"
+								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
+								onClick={() => console.log('cancel')}
+							>
+								{t('cancel')}
 							</ButtonAdapter>
 						</Grid>
 					</Grid>
@@ -188,7 +215,7 @@ export default function TransferOverView() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={!overviewData || isLoading} />
+			<Loader showLoader={isLoading} />
 		</Grid>
 	);
 }

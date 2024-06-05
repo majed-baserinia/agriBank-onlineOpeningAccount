@@ -177,5 +177,6 @@
 	"transferCheckEl": "Transfer Electronic Check",
 	"confirmOrRejectTransferText": "After checking the information, choose the desired operation.",
 	"awaitingConfirmation": "Awaiting confirmation",
-	"confirmed": "Confirmed"
+	"confirmed": "Confirmed",
+	"cancel": "Cancel"
 }
