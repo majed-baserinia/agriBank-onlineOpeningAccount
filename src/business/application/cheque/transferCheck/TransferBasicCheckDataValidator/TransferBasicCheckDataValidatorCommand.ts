@@ -1,7 +1,7 @@
 import { IRequest } from '@Mediatr/index';
 
 export default class TransferBasicCheckDataValidatorCommand implements IRequest<{}> {
-	reason: string;
+	reason: { value: string; name: string };
 	description: string;
 	toIban: string;
 

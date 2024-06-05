@@ -28,7 +28,9 @@ export default function AddNewReceivers() {
 		if (basicCheckData && receivers && selectedCheck) {
 			transferChequeInitiat(
 				{
-					...basicCheckData,
+					description: basicCheckData.description,
+					toIban: basicCheckData.toIban,
+					reason: basicCheckData.reason.value,
 					receivers: receivers,
 					customerNumber: 0,
 					sayadNo: selectedCheck?.sayadNo

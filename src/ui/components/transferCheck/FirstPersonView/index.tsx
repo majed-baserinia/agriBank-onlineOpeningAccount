@@ -24,8 +24,10 @@ export default function FirstPersonView() {
 
 	const { data: reasonCodes, isLoading: isPendingtoGetReasons, isError } = useGetReasonCodes();
 
-	const { control, formState, handleSubmit } = useForm<TransferBasicCheckDataValidatorCommand>({
-		resolver: (values, context, options) => fluentValidationResolver(values, context, options),
+	const { control, formState, getValues, handleSubmit } = useForm<TransferBasicCheckDataValidatorCommand>({
+		resolver: (values, context, options) => {
+			return fluentValidationResolver(values, context, options);
+		},
 		context: TransferBasicCheckDataValidatorCommand
 	});
 
@@ -108,7 +110,7 @@ export default function FirstPersonView() {
 									isRequired
 									label={t('description')}
 									error={!!formState?.errors?.description}
-									helperText={'formState?.errors?.description?.message'}
+									helperText={formState?.errors?.description?.message}
 								/>
 							)}
 						/>
@@ -120,7 +122,7 @@ export default function FirstPersonView() {
 						size="medium"
 						muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 						forwardIcon
-						onClick={() => handleSubmit(onSubmit)}
+						onClick={handleSubmit(onSubmit)}
 					>
 						{t('continue')}
 					</ButtonAdapter>

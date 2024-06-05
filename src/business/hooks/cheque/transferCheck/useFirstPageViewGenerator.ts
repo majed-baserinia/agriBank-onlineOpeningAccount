@@ -4,7 +4,8 @@ import useInquiryTransferStatus from './useInquiryTransferStatus';
 
 export default function useFirstPageViewGenerator() {
 	const { selectedCheck } = useChecklistData((store) => store);
-	const { data: inqueryStatusResponse, error, mutate: inqueryStatus, isLoading } = useInquiryTransferStatus();
+	const { data: inqueryStatusResponse, mutate: inqueryStatus, isLoading} = useInquiryTransferStatus();
+	
 	const [view, setView] = useState<'1' | '2' | '3'>('1');
 
 	useEffect(() => {
