@@ -1,22 +1,16 @@
-import RegisterChakadCustomerResponse from "common/entities/cheque/activation/firstStep/FirstStepResponse";
-import { create } from "zustand";
-
-
-
- interface RegisterChakadCustomer {
-    ActivationKey: RegisterChakadCustomerResponse;
-}
+import { create } from 'zustand';
 
 interface AccountChargeQueryStore {
-    activationKeyStore: RegisterChakadCustomer
+	activationKey: string;
 
-  setChakad_FirstStep: (activationKey: string) => void;
+	setChakad_FirstStep: (activationKey: string) => void;
 }
 
 export const useAccountChargeStore = create<AccountChargeQueryStore>((set) => ({
-    activationKeyStore: <RegisterChakadCustomer>{},
-    setChakad_FirstStep: (activationKey) =>
-    set((store) => ({
-        activationKeyStore: { ...store.activationKeyStore, activationKey},
-    })),
- }));
+	activationKey: '',
+	setChakad_FirstStep: (activationKey) => {
+		set((store) => ({
+			activationKey: activationKey
+		}));
+	}
+}));

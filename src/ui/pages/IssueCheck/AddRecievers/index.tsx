@@ -89,7 +89,7 @@ export default function AddReceivers() {
 			}
 		});
 	};
-
+	if (!isLoading) return <Loader showLoader />;
 	return (
 		<Grid
 			container
@@ -168,7 +168,6 @@ export default function AddReceivers() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isLoading} />
 		</Grid>
 	);
 }

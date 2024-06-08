@@ -6,12 +6,13 @@ export type Props = {
 	showLoader: boolean;
 };
 
-const Loader = ({ showLoader = false }: Props) => {
-	const [show, setShow] = useState(showLoader);
-	useEffect(() => {
-		setShow(showLoader);
-	}, [showLoader]);
+const Loader = ({ showLoader }: Props) => {
+	// const [show, setShow] = useState<boolean>();
+	// useEffect(() => {
+	// 	setShow(showLoader);
+	// }, [showLoader]);
 
+	if (!showLoader) return null;
 	return (
 		<div
 			id="Loader"
@@ -26,7 +27,7 @@ const Loader = ({ showLoader = false }: Props) => {
 				bottom: '0px',
 				zIndex: '999',
 				backgroundColor: 'rgba(78,78,82,0.85)',
-				display: `${!show ? 'none' : null}`
+				// display: `${!show ? 'none' : null}`
 			}}
 		>
 			<div

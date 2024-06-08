@@ -14,6 +14,8 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import RadioButtonAdapter from 'ui/htsc-components/RadioButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
+import { pushAlert } from 'business/stores/AppAlertsStore';
+import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from '../../HomePage/menuList';
 
 export default function ActivationFirstStep() {
@@ -23,7 +25,7 @@ export default function ActivationFirstStep() {
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const setChakad_FirstStep = useAccountChargeStore((s) => s.setChakad_FirstStep);
 	const [value, setValue] = useState('1');
-	const { error: RegisterChakadCustomerApiErrors, mutate, data } = useFirstStepCall();
+	const { error: RegisterChakadCustomerApiErrors, mutate, data, isLoading } = useFirstStepCall();
 
 	const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setValue((event.target as HTMLInputElement).value);
@@ -37,21 +39,26 @@ export default function ActivationFirstStep() {
 	});
 
 	const submitHandler = (data: FirstStepCommand) => {
-		const usersCustomerNumber = { CustomerNumber: 0 };
+		const usersCustomerNumber = {};
+		console.log({ isLoading });
 
 		mutate(
 			{ ...usersCustomerNumber },
 			{
 				onSuccess: (response) => {
 					setChakad_FirstStep(response.activationKey);
-					console.log(response);
+console.log({response});
 
 					navigate('/cheque/activation/secondStep');
+				},
+				onError: (ex) => {
+					if (ex.status == 453) {
+						pushAlert({ type: 'error', messageText: ex.detail, hasConfirmAction: true });
+					}
 				}
 			}
 		);
 	};
-	
 	return (
 		<Grid
 			container
@@ -61,7 +68,7 @@ export default function ActivationFirstStep() {
 			dir={theme.direction}
 		>
 			<Grid
-			item
+				item
 				xs={12}
 				md={8}
 			>
@@ -105,45 +112,7 @@ export default function ActivationFirstStep() {
 									onChange={handleRadioChange}
 									checked={value == '1'}
 								/>
-								{/* <RadioButtonAdapter
-                  value="2"
-                  label={t("activateForCompany")}
-                  onChange={handleRadioChange}
-                  checked={value == "2"}
-                /> */}
 							</RadioGroup>
-							{/* {value == "2" ? (
-                <Grid
-                  sx={{ marginTop: "48px", marginBottom: "48px" }}
-                  sm={12}
-                  md={9}
-                >
-                  <Typography
-                    variant="body1"
-                    sx={{ marginBottom: "8px" }}
-                  >
-                    {t("selectACompany")}
-                  </Typography>
-                  <Controller
-                    control={control}
-                    name="CustomerNumber"
-                    render={({ field }) => {
-                      return (
-                        <SelectAdapter
-                          label={t("companyList")}
-                          onChange={(e) => {
-                            field.onChange(e);
-                          }}
-                          defaultValue={"10"}
-                        >
-                          <MenuItem value={10}>q</MenuItem>
-                          <MenuItem value={11}>d</MenuItem>
-                        </SelectAdapter>
-                      );
-                    }}
-                  />
-                </Grid>
-              ) : null} */}
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
@@ -170,6 +139,7 @@ export default function ActivationFirstStep() {
 					</BoxAdapter>
 				</Grid>
 			)}
+			<Loader showLoader={isLoading} />
 		</Grid>
 	);
 }

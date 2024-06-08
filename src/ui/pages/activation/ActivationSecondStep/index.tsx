@@ -25,63 +25,81 @@ export default function ActivationSecondStep() {
 
 	const [isThirdStep, setIsThirdStep] = useState(false);
 
-	const activationKey = useAccountChargeStore((s) => s.activationKeyStore.ActivationKey);
+	const activationKey = useAccountChargeStore((s) => s.activationKey);
+	console.log({ activationKey });
+
 	const { mutate: sendAgain } = useSecondStepCall();
 	const { mutate: submition } = useThirdStepCall();
 
 	useEffect(() => {
-		sendAgain(activationKey, {
-			onError: (err) => {
-				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+		sendAgain(
+			{ activationKey: activationKey },
+			{
+				onSuccess: (response) => {
+					pushAlert({
+						type: 'info',
+						messageText: response.message,
+						hasConfirmAction: true
+					});
+				},
+				onError: (err) => {
+					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+				}
 			}
-		});
+		);
 	}, []);
 
 	const handleSendAgain = () => {
-		sendAgain(activationKey, {
-			onSuccess: (response) => {
-				pushAlert({
-					type: 'info',
-					messageText: response.message,
-					hasConfirmAction: true
-				});
-			},
-			onError: (err) => {
-				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+		sendAgain(
+			{ activationKey: activationKey },
+			{
+				onSuccess: (response) => {
+					pushAlert({
+						type: 'info',
+						messageText: response.message,
+						hasConfirmAction: true
+					});
+				},
+				onError: (err) => {
+					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+				}
 			}
-		});
+		);
 	};
 
 	const handleSubmit = () => {
-		submition(activationKey, {
-			onSuccess: (response) => {
-				setIsThirdStep(true);
+		submition(
+			{ activationKey: activationKey },
+			{
+				onSuccess: (response) => {
+					setIsThirdStep(true);
 
-				pushAlert({
-					type: 'success',
-					messageText: response.message,
-					hasConfirmAction: true,
-					actions: {
-						onCloseModal: () => navigate('/cheque'),
-						onConfirm: () => navigate('/cheque')
-					}
-				});
-			},
-			onError: (err) => {
-				if (err.status == 453) {
 					pushAlert({
-						type: 'error',
-						messageText: err.detail,
+						type: 'success',
+						messageText: response.message,
 						hasConfirmAction: true,
 						actions: {
 							onCloseModal: () => navigate('/cheque'),
 							onConfirm: () => navigate('/cheque')
 						}
 					});
+				},
+				onError: (err) => {
+					if (err.status == 453) {
+						pushAlert({
+							type: 'error',
+							messageText: err.detail,
+							hasConfirmAction: true,
+							actions: {
+								onCloseModal: () => navigate('/cheque'),
+								onConfirm: () => navigate('/cheque')
+							}
+						});
+					}
+					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
 				}
-				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
 			}
-		});
+		);
 	};
 
 	return (
@@ -139,14 +157,16 @@ export default function ActivationSecondStep() {
 								>
 									{t('dontRecieveMessage')}
 								</Typography>
-								<ButtonAdapter onClick={handleSendAgain}>
-									{t('sendAgain')}
-									<span>
+								<ButtonAdapter
+									onClick={handleSendAgain}
+									endIcon={
 										<SvgToIcon
 											icon={sendAaginIcon}
 											alt="send again"
 										/>
-									</span>
+									}
+								>
+									{t('sendAgain')}
 								</ButtonAdapter>
 							</Grid>
 						</Grid>
