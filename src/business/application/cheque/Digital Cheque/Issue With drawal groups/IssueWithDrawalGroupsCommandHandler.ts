@@ -4,6 +4,7 @@ import APIClient from 'business/infrastructure/api-client';
 import { IssueChequeIssueWithDrawalGroup } from 'business/infrastructure/end-points';
 import { IssueWithGroupRequest } from 'common/entities/cheque/Digital Cheque/Issue Groups/IssueWithGroupRequest';
 import { IssueWithGroupResponse } from 'common/entities/cheque/Digital Cheque/Issue Groups/IssueWithGroupResponse';
+import acceptOrNotIcon from 'assets/icon/menu/recieve-check-confirm.svg';
 
 @requestHandler(IssueWithDrawalGroupsCommand)
 export class IssueWithDrawalGroupsCommandHandler
@@ -14,6 +15,7 @@ export class IssueWithDrawalGroupsCommandHandler
 		return apiClient.post(<IssueWithGroupRequest>{
 			isSequentional: value.issueChequeKey,
 			withDrawalGroup: value.withDrawalGroup
+			
 		});
 	}
 }

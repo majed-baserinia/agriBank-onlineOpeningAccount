@@ -12,12 +12,6 @@ interface AccountChargeQueryStore {
 }
 
 export const useAccountChargeStore = create<AccountChargeQueryStore>((set) => ({
-	activationKey: '',
-	setChakad_FirstStep: (activationKey) => {
-		set((store) => ({
-			activationKey: activationKey
-		}));
-	}
 	activationKeyStore: <RegisterChakadCustomer>{},
 	setChakad_FirstStep: (activationKey) =>
 		set((store) => ({
