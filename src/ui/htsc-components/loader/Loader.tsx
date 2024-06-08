@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import logoLoader from '../../../assets/images/logo-loader.gif';
 
 export type Props = {
@@ -7,11 +5,6 @@ export type Props = {
 };
 
 const Loader = ({ showLoader }: Props) => {
-	// const [show, setShow] = useState<boolean>();
-	// useEffect(() => {
-	// 	setShow(showLoader);
-	// }, [showLoader]);
-
 	if (!showLoader) return null;
 	return (
 		<div
@@ -26,7 +19,7 @@ const Loader = ({ showLoader }: Props) => {
 				right: '0px',
 				bottom: '0px',
 				zIndex: '999',
-				backgroundColor: 'rgba(78,78,82,0.85)',
+				backgroundColor: 'rgba(78,78,82,0.85)'
 				// display: `${!show ? 'none' : null}`
 			}}
 		>

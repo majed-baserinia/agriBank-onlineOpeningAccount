@@ -13,6 +13,7 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 
+import Loader from 'ui/htsc-components/loader/Loader';
 import infoIcon from '../../../../assets/icon/info-circle.svg';
 import sendAaginIcon from '../../../../assets/icon/refresh-alert.svg';
 import { menuList } from '../../HomePage/menuList';
@@ -26,10 +27,9 @@ export default function ActivationSecondStep() {
 	const [isThirdStep, setIsThirdStep] = useState(false);
 
 	const activationKey = useAccountChargeStore((s) => s.activationKey);
-	console.log({ activationKey });
 
-	const { mutate: sendAgain } = useSecondStepCall();
-	const { mutate: submition } = useThirdStepCall();
+	const { mutate: sendAgain, isLoading } = useSecondStepCall();
+	const { mutate: submition, isLoading: submitLoading } = useThirdStepCall();
 
 	useEffect(() => {
 		sendAgain(
@@ -181,6 +181,7 @@ export default function ActivationSecondStep() {
 							</ButtonAdapter>
 						</Grid>
 					</Grid>
+					<Loader showLoader={submitLoading || isLoading} />
 				</BoxAdapter>
 			</Grid>
 			{matches ? null : (

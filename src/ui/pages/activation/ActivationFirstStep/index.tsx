@@ -25,7 +25,7 @@ export default function ActivationFirstStep() {
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const setChakad_FirstStep = useAccountChargeStore((s) => s.setChakad_FirstStep);
 	const [value, setValue] = useState('1');
-	const { error: RegisterChakadCustomerApiErrors, mutate, data, isLoading } = useFirstStepCall();
+	const { mutate, isLoading } = useFirstStepCall();
 
 	const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setValue((event.target as HTMLInputElement).value);
@@ -40,14 +40,11 @@ export default function ActivationFirstStep() {
 
 	const submitHandler = (data: FirstStepCommand) => {
 		const usersCustomerNumber = {};
-		console.log({ isLoading });
-
 		mutate(
 			{ ...usersCustomerNumber },
 			{
 				onSuccess: (response) => {
 					setChakad_FirstStep(response.activationKey);
-console.log({response});
 
 					navigate('/cheque/activation/secondStep');
 				},
