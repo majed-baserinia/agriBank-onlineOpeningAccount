@@ -1,9 +1,12 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import BottomSheetActionButton, { checkActionsMenuList } from 'ui/components/CheckListComps/BottomSheetActionButton';
-import CheckOverview from 'ui/components/CheckOverview';
-import CheckStatus from 'ui/components/CheckStatus';
+import { AllowedNumbers } from 'ui/components/CheckListComps/types';
+import BasicCheckDetials from 'ui/components/CheckOverview/BasicCheckDetials';
+import CheckStatus from 'ui/components/CheckOverview/CheckStatus';
 import Menu from 'ui/components/Menu';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -14,6 +17,9 @@ export default function Details() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const { selectedCheck } = useChecklistData((store) => store);
+
+	useEffect(() => {}, []);
 
 	return (
 		<Grid
@@ -44,9 +50,9 @@ export default function Details() {
 							<Title>{t('checkDetailPageTitle')}</Title>
 
 							<CheckStatus
-								checkBlockingStatus="ssa"
-								checkGuaranteeStatus="sdvsd"
-								checkStatus="dsvds"
+								checkBlockingStatus={selectedCheck?.blockStatusDescription}
+								checkGuaranteeStatus={selectedCheck?.guaranteeStatusDescription}
+								checkStatus={selectedCheck?.chequeStatus as AllowedNumbers}
 							/>
 							<Typography
 								align={matches ? 'center' : 'inherit'}
@@ -58,7 +64,20 @@ export default function Details() {
 							</Typography>
 
 							{/* //TODO: send the data to overview component */}
-							<CheckOverview />
+							<Grid>
+								<BasicCheckDetials
+									amount={selectedCheck?.amount}
+									description={selectedCheck?.description}
+									dueDate={selectedCheck?.dueDate}
+									sayadNo={selectedCheck?.sayadNo}
+									reason={selectedCheck?.reasonDescription}
+									serialSerie={selectedCheck?.seriesNo + '/' + selectedCheck?.serialNo}
+								/>
+								{/* <PersonsList
+									recievers={selectedCheck?.}
+									signers={overviewData?.signers}
+								/> */}
+							</Grid>
 						</Grid>
 
 						<Grid container>{matches ? <BottomSheetActionButton /> : null}</Grid>

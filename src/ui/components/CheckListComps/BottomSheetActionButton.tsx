@@ -6,16 +6,25 @@ import regressCheckIcon from 'assets/icon/menu/regressCheckIcon.svg';
 import rejectRegress from 'assets/icon/menu/rejectRegress.svg';
 import rejectTransfer from 'assets/icon/menu/rejectTransfer.svg';
 import transferCheck from 'assets/icon/menu/transfer-check.svg';
-import { useState } from 'react';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import BottomSheetAdapter from 'ui/htsc-components/BottomSheetAdapter/BottomSheetAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
+import { paths } from 'ui/route-config/paths';
 import Menu from '../Menu';
+import { Check } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
 
-export default function BottomSheetActionButton() {
+export default function BottomSheetActionButton({ check }: { check?: Check }) {
 	const { t } = useTranslation();
 	const [open, setOpen] = useState(false);
+	const { addNewData } = useChecklistData((store) => store);
+
+	useEffect(() => {
+		//set sayad number for actions on check 
+		addNewData({ selectedCheck: check });
+	}, []);
 
 	return (
 		<>
@@ -76,7 +85,7 @@ export const checkActionsMenuList = [
 				alt="transferCheck"
 			/>
 		),
-		routeTo: ''
+		routeTo: paths.ReceivedChecksList.TransferCheck
 	},
 	{
 		id: '2',
@@ -113,7 +122,7 @@ export const checkActionsMenuList = [
 	},
 	{
 		id: '3',
-		title: 'rejectTransfer',
+		title: 'rejectTransferCheck',
 		icon: (
 			<SvgToIcon
 				icon={rejectTransfer}

@@ -12,7 +12,8 @@ export default function RadioButtonAdapter(props: Props) {
 				border: checked ? `1px solid ${theme.palette.primary.main}` : `1px solid ${theme.palette.grey[200]}`,
 				borderRadius: '16px',
 				marginRight: 'unset',
-				marginLeft: 'unset'
+				marginLeft: 'unset',
+				width:"100%"
 			}}
 			disabled={disabled}
 			value={value}

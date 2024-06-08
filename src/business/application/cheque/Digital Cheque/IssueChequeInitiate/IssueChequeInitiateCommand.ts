@@ -1,5 +1,5 @@
 import { IRequest } from '@Mediatr/index';
-import { Reciever } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
+import { RecieverRequest } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
 import { IssueChequeInitiateResponse } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateResponse';
 
 export default class IssueChequeInitiateCommand implements IRequest<IssueChequeInitiateResponse> {
@@ -9,7 +9,7 @@ export default class IssueChequeInitiateCommand implements IRequest<IssueChequeI
 	description: string;
 	reason: string;
 	toIban?: string;
-	recievers: Reciever[];
+	recievers: RecieverRequest[];
 
 	constructor(InqueryNationalIdCommand: IssueChequeInitiateCommand) {
 		this.sayadNo = InqueryNationalIdCommand.sayadNo;

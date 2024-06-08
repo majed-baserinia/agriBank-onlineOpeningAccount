@@ -1,10 +1,18 @@
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Check } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import ChipStatusAdapter from 'ui/htsc-components/ChipStatusAdapter';
-import OverviewItem from '../OverviewItem';
+import Loader from 'ui/htsc-components/loader/Loader';
+import { paths } from 'ui/route-config/paths';
 import BottomSheetActionButton from './BottomSheetActionButton';
+import ChipsStatusGenerator from './ChipsStatusGenerator';
+import { AllowedNumbers } from './types';
+import OverviewItem from '../CheckOverview/OverviewItem';
 
-export default function CheckItemCard() {
+export default function CheckItemCard({ check }: { check?: Check }) {
+	const { t } = useTranslation();
+	const navigate = useNavigate();
 	const theme = useTheme();
 	const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -24,18 +32,16 @@ export default function CheckItemCard() {
 			gap={'16px'}
 			wrap="nowrap"
 		>
+			<Loader showLoader={!check} />
 			<Grid
 				container
 				item
 				justifyContent={'space-between'}
 				alignItems={'center'}
 			>
-				<Grid>{'saysdnum'}</Grid>
+				<Grid>{check?.sayadNo}</Grid>
 				<Grid>
-					<ChipStatusAdapter
-						label="test"
-						type="info"
-					/>
+					<ChipsStatusGenerator status={check?.chequeStatus as AllowedNumbers} />
 				</Grid>
 			</Grid>
 			<Grid
@@ -44,16 +50,20 @@ export default function CheckItemCard() {
 				justifyContent={'space-between'}
 			>
 				<OverviewItem
-					title="sds"
-					value={'dvsdv'}
+					title={t('serieAndSerial')}
+					value={check?.serialNo + '/' + check?.seriesNo}
 				/>
 				<OverviewItem
-					title="sds"
-					value={'dvsdv'}
+					title={t('amount')}
+					value={check?.amount}
 				/>
 				<OverviewItem
-					title="sds"
-					value={'dvsdv'}
+					title={t('reason')}
+					value={check?.reasonDescription}
+				/>
+				<OverviewItem
+					title={t('date')}
+					value={check?.dueDate}
 				/>
 			</Grid>
 			<Grid
@@ -62,7 +72,7 @@ export default function CheckItemCard() {
 				gap={'16px'}
 				wrap="nowrap"
 			>
-				<BottomSheetActionButton/>
+				<BottomSheetActionButton check={check} />
 				<ButtonAdapter
 					muiButtonProps={{
 						sx: {
@@ -71,9 +81,11 @@ export default function CheckItemCard() {
 					}}
 					variant="outlined"
 					forwardIcon
-					onClick={() => console.log()}
+					onClick={() => {
+						navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=${check?.sayadNo}`);
+					}}
 				>
-					cdhj
+					{t('details')}
 				</ButtonAdapter>
 			</Grid>
 		</Grid>

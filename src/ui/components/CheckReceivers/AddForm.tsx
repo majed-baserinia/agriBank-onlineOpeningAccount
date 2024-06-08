@@ -1,8 +1,7 @@
 import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, Typography, useTheme } from '@mui/material';
 import AddReceiversformValidationCommand from 'business/application/cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommand';
-import useInqueryNationalId from 'business/hooks/cheque/Digital Cheque/useInqueryNationalId';
-import { pushAlert } from 'business/stores/AppAlertsStore';
+//import useInqueryNationalId from 'business/hooks/cheque/Digital Cheque/useInqueryNationalId';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +14,7 @@ export default function AddForm(props: AddFormProps) {
 	const { setOpen, setReceivers } = props;
 	const theme = useTheme();
 	const { t } = useTranslation();
-	const { data: inqueriedData, isLoading, mutate: inqueryNationalId } = useInqueryNationalId();
+	//const { data: inqueriedData, isLoading, mutate: inqueryNationalId } = useInqueryNationalId();
 	const [personal, setPersonal] = useState(true);
 	const [checkedForeigner, setCheckedForeigner] = useState(false);
 
@@ -44,21 +43,21 @@ export default function AddForm(props: AddFormProps) {
 		setOpen(false);
 	};
 
-	const handleInquery = () => {
-		//call api for inquery
-		const { nationalNo } = getValues();
-		inqueryNationalId(
-			{ nationalId: nationalNo },
-			{
-				onError: (err) => {
-					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-				},
-				onSuccess: () => {
-					//set the response to form
-				}
-			}
-		);
-	};
+	// const handleInquery = () => {
+	// 	//call api for inquery
+	// 	const { nationalNo } = getValues();
+	// 	inqueryNationalId(
+	// 		{ nationalId: nationalNo },
+	// 		{
+	// 			onError: (err) => {
+	// 				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+	// 			},
+	// 			onSuccess: () => {
+	// 				//set the response to form
+	// 			}
+	// 		}
+	// 	);
+	// };
 
 	const activeButtonStyle = {
 		backgroundColor: theme.palette.primary.main,
@@ -154,7 +153,8 @@ export default function AddForm(props: AddFormProps) {
 						/>
 						<ButtonAdapter
 							variant="outlined"
-							onClick={() => handleInquery()}
+							//onClick={() => handleInquery()}
+							onClick={() => {}}
 							muiButtonProps={{ sx: { borderRadius: '16px' } }}
 							//disabled={isLoading}
 							disabled
@@ -163,7 +163,7 @@ export default function AddForm(props: AddFormProps) {
 						</ButtonAdapter>
 					</Grid>
 					<CheckboxAdapter
-						label={<Typography variant='bodySm'>{t('freignerLable')}</Typography>}
+						label={<Typography variant="bodySm">{t('freignerLable')}</Typography>}
 						onChange={(checked) => setCheckedForeigner(checked)}
 						checked={checkedForeigner}
 					/>

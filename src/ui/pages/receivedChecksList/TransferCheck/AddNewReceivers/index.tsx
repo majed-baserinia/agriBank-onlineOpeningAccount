@@ -7,84 +7,51 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 
-import useIssueChequeInitiate from 'business/hooks/cheque/Digital Cheque/useIssueChequeInitiate';
-import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
+import useTransferChequeInitiate from 'business/hooks/cheque/transferCheck/useTransferChequeInitiate';
+import { pushAlert } from 'business/stores/AppAlertsStore';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import CheckReceivers from 'ui/components/CheckReceivers';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from 'ui/pages/HomePage/menuList';
+import { paths } from 'ui/route-config/paths';
 
 export default function AddNewReceivers() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { steps, setStepData } = useDataSteps((store) => store);
-	const { isLoading, mutate: issueChequeInitiate } = useIssueChequeInitiate();
 
-	// useEffect(() => {
-	// 	if (!steps.selectdCheckSheet) {
-	// 		pushAlert({
-	// 			type: 'error',
-	// 			hasConfirmAction: true,
-	// 			messageText: t('failedToGetDateFromStoreText'),
-	// 			actions: { onConfirm: () => navigate(paths.IssueCheck.SelectAccountPath) }
-	// 		});
-	// 	}
+	const { addNewData, basicCheckData, selectedCheck, receivers } = useChecklistData((store) => store);
+	const { isLoading, mutate: transferChequeInitiat } = useTransferChequeInitiate();
 
-	// 	if (!steps.issueCheckDetail) {
-	// 		pushAlert({
-	// 			type: 'error',
-	// 			hasConfirmAction: true,
-	// 			messageText: t('failedToGetDateFromStoreText'),
-	// 			actions: { onConfirm: () => navigate(paths.IssueCheck.CheckInfoPath) }
-	// 		});
-	// 	}
-	// }, []);
-
-	// const handleSubmitToNextLevel = () => {
-	// 	const { selectdCheckSheet, issueCheckDetail, receivers } = steps;
-
-	// 	// Check if all necessary steps and data exist
-	// 	if (!selectdCheckSheet || !issueCheckDetail) {
-	// 		return null;
-	// 	}
-
-	// 	const preparedData: IssueChequeInitiateRequest = {
-	// 		sayadNo: selectdCheckSheet?.sayadNo,
-	// 		amount: Number(issueCheckDetail?.checkAmount),
-	// 		dueDate: issueCheckDetail?.date,
-	// 		description: issueCheckDetail?.description,
-	// 		reason: issueCheckDetail?.reason.value,
-	// 		recievers: receivers
-	// 	};
-
-	// 	issueChequeInitiate(preparedData, {
-	// 		onError: (err) => {
-	// 			//TODO: navigate the user if need to
-	// 			pushAlert({
-	// 				type: 'error',
-	// 				hasConfirmAction: true,
-	// 				messageText: err.detail
-	// 			});
-	// 		},
-	// 		onSuccess: (res) => {
-	// 			//save the data
-	// 			setStepData({
-	// 				signitureRequirementData: {
-	// 					issueChequeKey: res.issueChequeKey,
-	// 					isSingleSignatureLegal: res.isSingleSignatureLegal
-	// 				}
-	// 			});
-
-	// 			//check the res and navigate based on it
-	// 			if (res.isNeedOtp) {
-	// 				navigate(paths.IssueCheck.OtpCheckPath);
-	// 			} else {
-	// 				navigate(paths.IssueCheck.SignatureRegistrationPath);
-	// 			}
-	// 		}
-	// 	});
-	// };
+	const handleSubmit = () => {
+		if (basicCheckData && receivers && selectedCheck) {
+			transferChequeInitiat(
+				{
+					description: basicCheckData.description,
+					toIban: basicCheckData.toIban,
+					reason: basicCheckData.reason.value,
+					receivers: receivers,
+					customerNumber: 0,
+					sayadNo: selectedCheck?.sayadNo
+				},
+				{
+					onError: (err) => pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail }),
+					onSuccess: (res) => {
+						addNewData({ otpTransferRequirments: res });
+						navigate(paths.ReceivedChecksList.OtpTransferConfirmation);
+					}
+				}
+			);
+		} else {
+			pushAlert({
+				type: 'error',
+				hasConfirmAction: true,
+				messageText: t('failedToGetDateFromStoreText'),
+				actions: { onConfirm: () => navigate(paths.Home), onCloseModal: () => navigate(paths.Home) }
+			});
+		}
+	};
 
 	return (
 		<Grid
@@ -127,9 +94,7 @@ export default function AddNewReceivers() {
 								/>
 							) : null}
 							<Typography variant="bodyMd">{t('addNewReceiversText')}</Typography>
-							<CheckReceivers
-								getRceivers={(receiversList) => setStepData({ receivers: receiversList })}
-							/>
+							<CheckReceivers getRceivers={(receiversList) => addNewData({ receivers: receiversList })} />
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
@@ -137,7 +102,7 @@ export default function AddNewReceivers() {
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 								forwardIcon
-								onClick={() => console.log()}
+								onClick={() => handleSubmit()}
 							>
 								{t('continue')}
 							</ButtonAdapter>

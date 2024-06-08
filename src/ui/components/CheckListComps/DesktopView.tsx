@@ -3,39 +3,36 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import ChipStatusAdapter from 'ui/htsc-components/ChipStatusAdapter';
 import TableAdapter from 'ui/htsc-components/TableAdapter/TableAdapter';
 import { paths } from 'ui/route-config/paths';
+import ChipsStatusGenerator from './ChipsStatusGenerator';
+import { AllowedNumbers, rowType } from './types';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
+
+
 
 export default function DesktopView({ cartableList }: { cartableList?: CartableInquiryResponse }) {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
-	const [checkRows, setCheckRows] = useState()
+	const [checkRows, setCheckRows] = useState<rowType>();
+	const { addNewData } = useChecklistData((store) => store);
 
 	useEffect(() => {
-		//get the data of the table from the props
-
 		const rows = cartableList?.cheques.map((check) => {
 			return {
 				sayadNumber: check.sayadNo,
-				status: (
-					<>
-						<ChipStatusAdapter
-							type="success"
-							label="test"
-						/>
-					</>
-				),
+				status: <ChipsStatusGenerator status={check.chequeStatus as AllowedNumbers} />,
 				serieAndSerial: check.serialNo + '/' + check.seriesNo,
 				amount: check.amount,
-				reason: check.reason,
+				reason: check.reasonDescription,
 				date: check.dueDate,
 				action: (
 					<ButtonAdapter
 						size="small"
 						variant="text"
 						onClick={() => {
-							navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=123`);
+							addNewData({ selectedCheck: check });
+							navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=${check.sayadNo}`);
 						}}
 						forwardIcon
 					>
@@ -44,7 +41,8 @@ export default function DesktopView({ cartableList }: { cartableList?: CartableI
 				)
 			};
 		});
-	}, []);
+		setCheckRows(rows);
+	}, [cartableList]);
 
 	return (
 		<TableAdapter

@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { AuthTokens, clearAuth, saveAuthTokens } from '../infrastructure/auth-service';
-import { Theme } from '@mui/material';
 
 export interface InitialSetting {
 	language: string;
@@ -20,8 +19,6 @@ interface InitialSettingStore {
 const useInitialSettingStore = create<InitialSettingStore>((set) => ({
 	settings: <InitialSetting>{ language: 'fa-IR', themeName: 'light', theme: {} },
 	setSettings: (newSetting) => {
-		console.log({newSetting});
-		
 		if (newSetting) {
 			if (newSetting.idToken) {
 				saveAuthTokens(<AuthTokens>{
@@ -30,8 +27,8 @@ const useInitialSettingStore = create<InitialSettingStore>((set) => ({
 				});
 			}
 			//set((prev) => ({ settings: { ...prev.settings, ...newSetting } }));
-			set((store)=>{
-				return {settings: {...store.settings, ...newSetting}}
+			set((store) => {
+				return { settings: { ...store.settings, ...newSetting } };
 			});
 		}
 	},
@@ -42,7 +39,5 @@ const useInitialSettingStore = create<InitialSettingStore>((set) => ({
 		}));
 	}
 }));
-
-
 
 export default useInitialSettingStore;

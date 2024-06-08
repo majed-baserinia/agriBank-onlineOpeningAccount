@@ -1,5 +1,5 @@
 import { CheckSheet } from 'common/entities/cheque/Digital Cheque/GetChecksheets/GetChecksheetsResponse';
-import { Reciever } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
+import { Reciever } from 'common/entities/cheque/Digital Cheque/Issue Groups/IssueWithGroupResponse';
 import { issueChequeOverView } from 'common/entities/cheque/Digital Cheque/IssueChequeVerifyInitiate/IssueChequeVerifyInitiateResponse';
 import { create } from 'zustand';
 

@@ -42,11 +42,16 @@ export default function SelectCheckList() {
 	const navigate = useNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const addNewDataToStore = useChecklistData((store) => store.addNewData);
-	const { data: listItems, isLoading } = useGetAllRelatedCustomers('test');
-
+	const { data: listItems, isLoading } = useGetAllRelatedCustomers('checkList');
 	const [menuItems, setMenuItems] = useState<MenuItems>([]);
 
-	useEffect(() => {
+	useEffect(() => {		
+		//set the new list to the store
+		addNewDataToStore({ relatedCustomers: listItems });
+
+		if (listItems?.length === 1)
+			navigate(paths.ReceivedChecksList.ChecksList + '?cif=' + listItems[0].customerNumber, { replace: true });
+
 		const newList = listItems?.map((item, index) => {
 			return {
 				id: item.customerNumber,
@@ -59,12 +64,6 @@ export default function SelectCheckList() {
 		if (newList) {
 			setMenuItems(newList);
 		}
-
-		//set the new list to the store
-		addNewDataToStore({ allRelatedCustomers: listItems });
-
-		if (listItems?.length === 1)
-			navigate(paths.ReceivedChecksList.ChecksList + '?cif=' + listItems[0].customerNumber, { replace: true });
 	}, [listItems]);
 
 	//display the loader this way to user becouse user shouldn't see the page if there is no Checks that user represent or sign.

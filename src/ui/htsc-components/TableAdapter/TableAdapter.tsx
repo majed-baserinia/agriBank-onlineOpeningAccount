@@ -9,7 +9,7 @@ import { ChangeEvent, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Props } from './type';
 
-export default function TableAdapter<TColumnNames extends string>({ columns, rowsData }: Props<TColumnNames>) {
+export default function TableAdapter<TColumnNames extends string>({ columns, rowsData }: Props<TColumnNames>) {	
 	const { t } = useTranslation();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -92,7 +92,7 @@ export default function TableAdapter<TColumnNames extends string>({ columns, row
 					onPageChange={handleChangePage}
 					onRowsPerPageChange={handleChangeRowsPerPage}
 				/>
-			) : null }
+			) : null}
 		</Paper>
 	);
 }

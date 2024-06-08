@@ -10,10 +10,13 @@ import Stepper from 'ui/htsc-components/Stepper';
 import useIssueChequeFinalize from 'business/hooks/cheque/Digital Cheque/useIssueChequeFinalize';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/issueCheck/dataSteps';
-import CheckOverview from 'ui/components/CheckOverview';
+
+import BasicCheckDetials from 'ui/components/CheckOverview/BasicCheckDetials';
+import PersonsList from 'ui/components/CheckOverview/PersonsList';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
+import { IssueChequeOverView } from 'common/entities/cheque/Digital Cheque/Issue Groups/IssueWithGroupResponse';
 
 export default function OverView() {
 	const navigate = useNavigate();
@@ -48,7 +51,7 @@ export default function OverView() {
 		);
 	};
 
-	// const overviewData: issueChequeOverView = {
+	// const overviewData: IssueChequeOverView = {
 	// 	amount: 212,
 	// 	description: 'advdsvds',
 	// 	dueDate: '222222',
@@ -58,21 +61,25 @@ export default function OverView() {
 	// 			customerType:4,
 	// 			name: 'name',
 	// 			nationalNo: '321123123',
-	// 			shahabNo: ''
+	// 			shahabNo: '',
+	// 			customerTypeDescription: ''
 	// 		},
 	// 		{
+	// 			customerTypeDescription: '',
 	// 			customerType: 3,
 	// 			name: 'name',
 	// 			nationalNo: '321123123',
 	// 			shahabNo: '4142'
 	// 		},
 	// 		{
+	// 			customerTypeDescription: '',
 	// 			customerType: 2,
 	// 			name: 'name',
 	// 			nationalNo: '321123123',
 	// 			shahabNo: '4142'
 	// 		},
 	// 		{
+	// 			customerTypeDescription: '',
 	// 			customerType: 1,
 	// 			name: 'name',
 	// 			nationalNo: '321123123',
@@ -148,7 +155,20 @@ export default function OverView() {
 									active={5}
 								/>
 							) : null}
-							<CheckOverview overviewData={overviewData} />
+							{/* //TODO: fix the problem,  */}
+							{/* <CheckOverview overviewData={overviewData} /> */}
+							<BasicCheckDetials
+								amount={overviewData?.amount}
+								description={overviewData?.description}
+								dueDate={overviewData?.dueDate}
+								sayadNo={overviewData?.sayadNo}
+								reason={overviewData?.reason}
+								serialSerie={overviewData?.seri + '/' + overviewData?.serial}
+							/>
+							<PersonsList
+								recievers={overviewData?.recievers}
+								signers={overviewData?.signers}
+							/>
 						</Grid>
 
 						<Grid container>
