@@ -1,6 +1,5 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import BottomSheetActionButton, { checkActionsMenuList } from 'ui/components/CheckListComps/BottomSheetActionButton';
@@ -18,8 +17,6 @@ export default function Details() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { selectedCheck } = useChecklistData((store) => store);
-
-	useEffect(() => {}, []);
 
 	return (
 		<Grid
@@ -80,7 +77,9 @@ export default function Details() {
 							</Grid>
 						</Grid>
 
-						<Grid container>{matches ? <BottomSheetActionButton /> : null}</Grid>
+						<Grid container>
+							{matches && selectedCheck ? <BottomSheetActionButton check={selectedCheck} /> : null}
+						</Grid>
 					</Grid>
 				</BoxAdapter>
 			</Grid>

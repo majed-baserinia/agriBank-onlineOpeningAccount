@@ -1,20 +1,23 @@
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { Check } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
+import OverviewItem from '../CheckOverview/OverviewItem';
 import BottomSheetActionButton from './BottomSheetActionButton';
 import ChipsStatusGenerator from './ChipsStatusGenerator';
 import { AllowedNumbers } from './types';
-import OverviewItem from '../CheckOverview/OverviewItem';
 
-export default function CheckItemCard({ check }: { check?: Check }) {
+export default function CheckItemCard({ check }: { check: Check }) {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
+	const { addNewData } = useChecklistData();
+console.log(check);
 
 	return (
 		<Grid
@@ -82,7 +85,8 @@ export default function CheckItemCard({ check }: { check?: Check }) {
 					variant="outlined"
 					forwardIcon
 					onClick={() => {
-						navigate(`${paths.ReceivedChecksList.Detail}?sayadNo=${check?.sayadNo}`);
+						addNewData({ selectedCheck: check });
+						navigate(paths.ReceivedChecksList.Detail);
 					}}
 				>
 					{t('details')}

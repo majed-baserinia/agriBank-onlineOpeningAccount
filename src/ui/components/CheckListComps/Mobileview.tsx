@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import { CartableInquiryResponse } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
+import Loader from 'ui/htsc-components/loader/Loader';
 import CheckItemCard from './CheckItemCard';
 
 export default function MobileView({ cartableList }: { cartableList?: CartableInquiryResponse }) {
@@ -15,6 +16,7 @@ export default function MobileView({ cartableList }: { cartableList?: CartableIn
 					check={check}
 				/>
 			))}
+			<Loader showLoader={!cartableList} />
 		</Grid>
 	);
 }
