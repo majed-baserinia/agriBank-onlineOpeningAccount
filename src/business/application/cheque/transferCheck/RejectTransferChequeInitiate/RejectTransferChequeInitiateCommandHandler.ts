@@ -18,7 +18,7 @@ export class RejectTransferChequeInitiateCommandHandler
 			sayadNo: value.sayadNo,
 			description: value.description,
 			reason: value.reason,
-			recievers: value.recievers,
+			recievers: value.receivers,
 			toIban: value.toIban
 		});
 	}

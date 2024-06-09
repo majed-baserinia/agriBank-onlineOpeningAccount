@@ -3,11 +3,13 @@ import { WithdrawalDetails } from 'common/entities/cheque/Digital Cheque/Issue G
 import { IssueWithGroupResponse } from 'common/entities/cheque/Digital Cheque/Issue Groups/IssueWithGroupResponse';
 
 export default class IssueWithDrawalGroupsCommand implements IRequest<IssueWithGroupResponse> {
-	issueChequeKey: boolean;
+	issueChequeKey: string;
+	isSequentional: boolean;
 	withDrawalGroup: WithdrawalDetails[];
 
 	constructor(IssueWithDrawalGroupsCommand: IssueWithDrawalGroupsCommand) {
 		this.issueChequeKey = IssueWithDrawalGroupsCommand.issueChequeKey;
+		this.isSequentional = IssueWithDrawalGroupsCommand.isSequentional;
 		this.withDrawalGroup = IssueWithDrawalGroupsCommand.withDrawalGroup;
 	}
 }

@@ -101,6 +101,7 @@ export default function SignatureGroup() {
 
 	const IssueWithDrawalGroupSubmit = () => {
 		const data: IssueWithDrawalGroupsCommand = {
+			isSequentional:false,
 			issueChequeKey: GetStepData?.issueChequeKey!,
 			withDrawalGroup: [
 				{

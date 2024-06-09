@@ -101,6 +101,8 @@ export default function TransferSignatureGroup() {
 
 	const IssueWithDrawalGroupSubmit = () => {
 		const data: IssueWithDrawalGroupsCommand = {
+			isSequentional: false,
+
 			issueChequeKey: GetStepData?.issueChequeKey!,
 			withDrawalGroup: [
 				{
@@ -245,7 +247,8 @@ export default function TransferSignatureGroup() {
 						<Menu
 							divider={false}
 							list={menuList.services}
-						/>\
+						/>
+						\
 					</BoxAdapter>
 				</Grid>
 			)}
@@ -271,7 +274,12 @@ export default function TransferSignatureGroup() {
 								icon={infoIcon}
 								alt="info"
 							/>
-							<Typography variant='bodyMd' textOverflow={'ellipsis'}>{t('draggableListText')}</Typography>
+							<Typography
+								variant="bodyMd"
+								textOverflow={'ellipsis'}
+							>
+								{t('draggableListText')}
+							</Typography>
 						</Grid>
 						<DraggableList
 							list={
