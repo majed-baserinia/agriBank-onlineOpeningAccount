@@ -116,6 +116,7 @@ export default function SelectAccount() {
 											getCheckbooks({ accountNumber: selectedValue });
 										}}
 										label={t('accountsList')}
+										renderValue
 									>
 										{AccountData?.map((item, index) => {
 											return (
@@ -175,6 +176,7 @@ export default function SelectAccount() {
 										disabled={!selectedCheckbook}
 										onChange={() => {}}
 										label={t('checkSheet')}
+										renderValue
 									>
 										{/* <ChipWrapperForSelect>
 											<ChipAdapter
@@ -249,6 +251,7 @@ export default function SelectAccount() {
 										disabled={!selectedAccountNumber}
 										onChange={() => {}}
 										label={t('checkbook')}
+										renderValue
 									>
 										{checkbooks?.map((checkbook, index) => {
 											return (
