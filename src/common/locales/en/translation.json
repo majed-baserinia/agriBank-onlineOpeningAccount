@@ -178,5 +178,7 @@
 	"confirmOrRejectTransferText": "After checking the information, choose the desired operation.",
 	"awaitingConfirmation": "Awaiting confirmation",
 	"confirmed": "Confirmed",
-	"cancel": "Cancel"
+	"cancel": "Cancel",
+	"doneSuccessfully": "Done Successfully",
+	"thereIsNoChecksToShow": "There is no checks to show"
 }

@@ -53,7 +53,7 @@ export default function UnknownView() {
 						/>
 					) : null}
 
-					<CheckOverViewBox amount='231321321' sayadNo={213212} />
+					<CheckOverViewBox amount={231321321} sayadNo={213212} />
 					<Grid
 						item
 						xs={5}

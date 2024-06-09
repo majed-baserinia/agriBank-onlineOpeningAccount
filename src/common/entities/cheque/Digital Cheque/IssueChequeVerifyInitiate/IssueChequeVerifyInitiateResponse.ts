@@ -11,6 +11,7 @@ export interface issueChequeOverView {
 	amount: number;
 	dueDate: string;
 	reason: string;
+	reasonDescription: string;
 	description: string;
 	toIBAN: string;
 	signers: Signers;

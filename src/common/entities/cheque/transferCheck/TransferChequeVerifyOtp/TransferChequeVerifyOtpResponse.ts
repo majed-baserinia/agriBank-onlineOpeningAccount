@@ -6,6 +6,7 @@ export interface TransferChequeVerifyOtpResponse {
 	transferChequeOverView: {
 		sayadNo: number;
 		reason: string;
+		reasonDescription: string;
 		description: string;
 		toIban: string;
 		signers: Signer[];

@@ -36,7 +36,9 @@ export default function AddNewReceivers() {
 					sayadNo: selectedCheck?.sayadNo
 				},
 				{
-					onError: (err) => pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail }),
+					onError: (err) => {
+						pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail });
+					},
 					onSuccess: (res) => {
 						addNewData({ otpTransferRequirments: res });
 						navigate(paths.ReceivedChecksList.OtpTransferConfirmation);
@@ -79,7 +81,7 @@ export default function AddNewReceivers() {
 							direction={'column'}
 							gap={'16px'}
 						>
-							<Title>{t('activationElCheck')}</Title>
+							<Title>{t('transferCheckEl')}</Title>
 							{!matches ? (
 								// TODO: check if selected compony or homself acocunt and add one more step if it is compony
 								<Stepper

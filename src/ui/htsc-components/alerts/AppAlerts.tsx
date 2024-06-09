@@ -81,7 +81,7 @@ export default function AppAlerts() {
 				</Typography>
 			</DialogTitle>
 
-			<DialogContent sx={{ margin: 'auto', direction: theme.direction }}>
+			<DialogContent sx={{ margin: 'auto' }}>
 				<DialogContentText>
 					<Typography variant="bodySm">{capturedAlert?.messageText}</Typography>
 				</DialogContentText>

@@ -29,8 +29,8 @@ export default function SignatureRegistration() {
 	const { steps, setStepData } = useDataSteps((store) => store);
 
 	const [openModal, setOpenModal] = useState(false);
-	const [selectedSigniture, setSelectedSigniture] = useState<'group' | 'myslef'>();
-	const { mutate: issueChequeInitiateSignature } = useIssueChequeInitiateSignature();
+	//const [selectedSigniture, setSelectedSigniture] = useState<'group' | 'myslef'>();
+	const { mutate: issueChequeInitiateSignature, isLoading: initiateLoading } = useIssueChequeInitiateSignature();
 	const { mutate: issueChequeVerifyInitiate, isLoading } = useIssueChequeVerifyInitiate();
 
 	useEffect(() => {
@@ -51,31 +51,48 @@ export default function SignatureRegistration() {
 		);
 	};
 
-	useEffect(() => {
-		if (selectedSigniture) {
-			const requestData = {
-				issueChequeKey: steps.signitureRequirementData?.issueChequeKey!,
-				otpCode: '',
-				signSingleSignatureLegal: selectedSigniture === 'myslef'
-			};
+	const handleSubmitToNextLevel = () => {
+		const requestData = {
+			issueChequeKey: steps.signitureRequirementData?.issueChequeKey!,
+			otpCode: '',
+			signSingleSignatureLegal: true
+		};
+		issueChequeVerifyInitiate(requestData, {
+			onError: (err) => {
+				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+			},
+			onSuccess: (res) => {
+				setStepData({ overviewData: res.issueChequeOverView });
+				navigate(paths.IssueCheck.OverViewPath);
+			}
+		});
+	};
 
-			issueChequeVerifyInitiate(requestData, {
-				onError: (err) => {
-					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-				},
-				onSuccess: (res) => {
-					if (res.needInquiryWithDrawalGroup) {
-						if (selectedSigniture === 'myslef') {
-							setStepData({ overviewData: res.issueChequeOverView });
-						}
-						navigate(paths.IssueCheck.OverViewPath);
-					} else {
-						navigate(paths.IssueCheck.SignatureGroupPath);
-					}
-				}
-			});
-		}
-	}, [selectedSigniture]);
+	// useEffect(() => {
+	// 	if (selectedSigniture) {
+	// 		const requestData = {
+	// 			issueChequeKey: steps.signitureRequirementData?.issueChequeKey!,
+	// 			otpCode: '',
+	// 			signSingleSignatureLegal: selectedSigniture === 'myslef'
+	// 		};
+
+	// 		issueChequeVerifyInitiate(requestData, {
+	// 			onError: (err) => {
+	// 				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+	// 			},
+	// 			onSuccess: (res) => {
+	// 				if (res.needInquiryWithDrawalGroup) {
+	// 					if (selectedSigniture === 'myslef') {
+	// 						setStepData({ overviewData: res.issueChequeOverView });
+	// 					}
+	// 					navigate(paths.IssueCheck.OverViewPath);
+	// 				} else {
+	// 					navigate(paths.IssueCheck.SignatureGroupPath);
+	// 				}
+	// 			}
+	// 		});
+	// 	}
+	// }, [selectedSigniture]);
 
 	return (
 		<Grid
@@ -156,7 +173,8 @@ export default function SignatureRegistration() {
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
-								onClick={() => setOpenModal(true)}
+								//onClick={() => setOpenModal(true)}
+								onClick={() => handleSubmitToNextLevel()}
 							>
 								{t('FinalSignatureRegistration')}
 							</ButtonAdapter>
@@ -181,15 +199,15 @@ export default function SignatureRegistration() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<ModalOrBottomSheet
+			{/* <ModalOrBottomSheet
 				breackpoint="sm"
 				snapPoints={[400, 0]}
 				open={openModal}
 				setOpen={setOpenModal}
 			>
 				<SelectSignature setSelectedSigniture={setSelectedSigniture} />
-			</ModalOrBottomSheet>
-			<Loader showLoader={isLoading} />
+			</ModalOrBottomSheet> */}
+			<Loader showLoader={initiateLoading || isLoading} />
 		</Grid>
 	);
 }

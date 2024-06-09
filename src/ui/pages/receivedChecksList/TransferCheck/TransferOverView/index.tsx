@@ -41,9 +41,8 @@ export default function TransferOverView() {
 							hasConfirmAction: true,
 							messageText: res.message,
 							actions: {
-								onCloseModal: () => {
-									navigate(paths.Home);
-								}
+								onCloseModal: () => navigate(paths.Home),
+								onConfirm: () => navigate(paths.Home)
 							}
 						});
 					}
@@ -166,7 +165,7 @@ export default function TransferOverView() {
 								description={transferOverview?.transferChequeOverView?.description}
 								dueDate={selectedCheck?.dueDate}
 								sayadNo={transferOverview?.transferChequeOverView?.sayadNo}
-								reason={transferOverview?.transferChequeOverView?.reason}
+								reason={transferOverview?.transferChequeOverView?.reasonDescription}
 								serialSerie={selectedCheck?.seriesNo + '/' + selectedCheck?.serialNo}
 							/>
 							<PersonsList
@@ -178,23 +177,28 @@ export default function TransferOverView() {
 						<Grid
 							container
 							justifyContent={'space-between'}
+							gap={'16px'}
 						>
-							<ButtonAdapter
-								variant="contained"
-								size="medium"
-								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
-								onClick={() => handleSubmit()}
-							>
-								{t('registerAndConfirm')}
-							</ButtonAdapter>
-							<ButtonAdapter
-								variant="outlined"
-								size="medium"
-								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
-								onClick={() => handleCancel()}
-							>
-								{t('cancel')}
-							</ButtonAdapter>
+							<Grid sx={{ width: '48%' }}>
+								<ButtonAdapter
+									variant="contained"
+									size="medium"
+									muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
+									onClick={() => handleSubmit()}
+								>
+									{t('registerAndConfirm')}
+								</ButtonAdapter>
+							</Grid>
+							<Grid sx={{ width: '48%' }}>
+								<ButtonAdapter
+									variant="outlined"
+									size="medium"
+									muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
+									onClick={() => handleCancel()}
+								>
+									{t('cancel')}
+								</ButtonAdapter>
+							</Grid>
 						</Grid>
 					</Grid>
 				</BoxAdapter>

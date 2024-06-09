@@ -11,6 +11,8 @@ export class TransferBasicCheckDataValidatorCommandValidator extends Validator<T
 		this.ruleFor('description')
 			.notNull()
 			.withMessage(i18next.t('description_MUST_HAVE_A_VALUE').toString())
+			.notEmpty()
+			.withMessage(i18next.t('description_MUST_HAVE_A_VALUE').toString())
 			.maxLength(250)
 			.withMessage(i18next.t('maxlengthdescription').toString());
 

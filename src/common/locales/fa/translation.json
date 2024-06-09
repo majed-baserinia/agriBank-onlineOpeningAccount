@@ -178,5 +178,7 @@
 	"confirmOrRejectTransferText": "پس از بررسی اطلاعات عملیات مدنظر را انتخاب کنید.",
 	"awaitingConfirmation": "در انتظار تایید",
 	"confirmed": "تایید شده",
-	"cancel": "لغو"
+	"cancel": "لغو",
+	"doneSuccessfully": "با موفقیت انجام شد",
+	"thereIsNoChecksToShow": "هیچ چکی برای نشان دادن وجود ندارد"
 }

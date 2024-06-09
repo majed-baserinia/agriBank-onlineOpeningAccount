@@ -16,7 +16,6 @@ import PersonsList from 'ui/components/CheckOverview/PersonsList';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
-import { IssueChequeOverView } from 'common/entities/cheque/Digital Cheque/Issue Groups/IssueWithGroupResponse';
 
 export default function OverView() {
 	const navigate = useNavigate();
@@ -39,11 +38,10 @@ export default function OverView() {
 					pushAlert({
 						type: 'success',
 						hasConfirmAction: true,
-						messageText: 'l,tr',
+						messageText: res.message,
 						actions: {
-							onCloseModal: () => {
-								navigate(paths.Home);
-							}
+							onCloseModal: () => navigate(paths.Home),
+							onConfirm: () => navigate(paths.Home)
 						}
 					});
 				}
@@ -162,7 +160,7 @@ export default function OverView() {
 								description={overviewData?.description}
 								dueDate={overviewData?.dueDate}
 								sayadNo={overviewData?.sayadNo}
-								reason={overviewData?.reason}
+								reason={overviewData?.reasonDescription}
 								serialSerie={overviewData?.seri + '/' + overviewData?.serial}
 							/>
 							<PersonsList

@@ -32,6 +32,9 @@ export * from './cheque/Digital Cheque/Verify Otp/VerifyOtpCommandValidator';
 export * from './cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateCommand';
 export * from './cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateCommandHandler';
 
+export * from './cheque/Digital Cheque/IssueChequeFinalize/IssueChequeFinalizeCommand';
+export * from './cheque/Digital Cheque/IssueChequeFinalize/IssueChequeFinalizeCommandHandler';
+
 export * from './cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommand';
 export * from './cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommandValidator';
 

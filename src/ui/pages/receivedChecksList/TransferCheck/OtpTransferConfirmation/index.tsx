@@ -66,7 +66,7 @@ export default function OtpTransferConfirmation() {
 					},
 					onSuccess: (res) => {
 						addNewData({ transferOverview: res });
-						navigate(paths.ReceivedChecksList.Detail);
+						navigate(paths.ReceivedChecksList.TransferOverView);
 						//TODO:
 						//if ('hoghooghi') navigate(paths.ReceivedChecksList.TransferSignatureGroup);
 						//if ('haghighi') navigate(paths.ReceivedChecksList.Detail);
@@ -97,7 +97,7 @@ export default function OtpTransferConfirmation() {
 						wrap="nowrap"
 					>
 						<Grid>
-							<Title>{t('activationElCheck')}</Title>
+						<Title>{t('transferCheckEl')}</Title>
 							{!matches ? (
 								<Stepper
 									list={[
