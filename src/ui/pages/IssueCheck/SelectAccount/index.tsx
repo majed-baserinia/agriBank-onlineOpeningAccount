@@ -77,7 +77,7 @@ export default function SelectAccount() {
 						wrap="nowrap"
 					>
 						<Grid>
-							<Title>{t('activationElCheck')}</Title>
+							<Title>{t('issueElCheck')}</Title>
 							{!matches ? (
 								<Stepper
 									list={[
@@ -119,6 +119,7 @@ export default function SelectAccount() {
 										renderValue
 									>
 										{AccountData?.map((item, index) => {
+																		
 											return (
 												<MenuItem
 													key={index}
@@ -149,8 +150,10 @@ export default function SelectAccount() {
 																variant="bodyXs"
 																color={theme.palette.grey[200]}
 															>
-																{`${item.owners[0]?.firstName} ${item.owners[0]
-																	?.lastName} ${t('curentAccountP')}`}
+																{
+																								
+																!item.isShared ?`${item.owners[0]?.firstName} ${item.owners[0]
+																	?.lastName} ${t('curentAccountP')}`:t('sharedAccountP')}
 															</Typography>
 
 															<Typography variant="bodyMd">
