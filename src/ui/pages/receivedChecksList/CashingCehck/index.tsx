@@ -1,5 +1,7 @@
 import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { useNavigate } from 'react-router-dom';
+import CashingCheckOverview from 'ui/components/CashingCheckOverview';
 import Menu from 'ui/components/Menu';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 
@@ -9,6 +11,7 @@ export default function CashingCehck() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const { selectedCheck } = useChecklistData();
 
 	return (
 		<Grid
@@ -22,7 +25,9 @@ export default function CashingCehck() {
 				item
 				xs={12}
 				md={8}
-			></Grid>
+			>
+				<CashingCheckOverview check={selectedCheck!} />
+			</Grid>
 
 			{matches ? null : (
 				<Grid
