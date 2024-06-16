@@ -20,6 +20,7 @@ import AddNewReceivers from 'ui/pages/receivedChecksList/TransferCheck/AddNewRec
 import OtpTransferConfirmation from 'ui/pages/receivedChecksList/TransferCheck/OtpTransferConfirmation';
 import TransferSignatureGroup from 'ui/pages/receivedChecksList/TransferCheck/TransferSignatureGroup';
 import TransferOverView from 'ui/pages/receivedChecksList/TransferCheck/TransferOverView';
+import CashingCehck from 'ui/pages/receivedChecksList/CashingCehck';
 
 const router = createBrowserRouter([
 	{
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
 			{
 				path: paths.ReceivedChecksList.TransferOverView,
 				element: <TransferOverView />
+			},
+			{
+				path: paths.ReceivedChecksList.CashingCehck,
+				element: <CashingCehck />
 			},
 		]
 	}
