@@ -9,7 +9,7 @@ export default function Menu(props: Props) {
 	const { t } = useTranslation();
 
 	return (
-		<Grid>
+		<Grid overflow={"hidden"}>
 			<Typography
 				variant="bodyLg"
 				fontWeight={'bold'}

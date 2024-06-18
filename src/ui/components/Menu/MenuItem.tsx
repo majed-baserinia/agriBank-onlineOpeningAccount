@@ -20,12 +20,13 @@ export default function MenuItem(props: Props) {
 	const navigate = useNavigate();
 
 	return (
-		<div>
+		
 			<Grid
 				container
 				justifyContent={'space-between'}
 				alignItems={'center'}
-				sx={{ padding: matches ? '16px 0' : '24px 0', cursor: 'pointer' }}
+				minWidth={"290px"}
+				sx={{ padding: matches ? '16px 0' : '24px 0', cursor: 'pointer', overflow: 'hidden' }}
 				onClick={(e) => {
 					navigate(routeTo);
 				}}
@@ -42,6 +43,7 @@ export default function MenuItem(props: Props) {
 							<Typography
 								variant="bodyMd"
 								fontWeight={'medium'}
+								noWrap 
 							>
 								{t(title, title)}
 							</Typography>
@@ -59,6 +61,6 @@ export default function MenuItem(props: Props) {
 				</Grid>
 				<Grid>{theme.direction == 'rtl' ? <ArrowBackIosNewIcon /> : <ArrowForwardIosIcon />}</Grid>
 			</Grid>
-		</div>
+		
 	);
 }
