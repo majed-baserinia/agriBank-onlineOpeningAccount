@@ -1,10 +1,10 @@
 import fluentValidationResolver from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
-import GiveBackChequeVerifyOtpCommand from 'business/application/cheque/giveBackCheck/GiveBackChequeVerifyOtp/GiveBackChequeVerifyOtpCommand';
-import useGiveBackChequeFinalize from 'business/hooks/cheque/giveBackCheck/useGiveBackChequeFinalize';
-import useGiveBackChequeInitiateOtp from 'business/hooks/cheque/giveBackCheck/useGiveBackChequeInitiateOtp';
-import useGiveBackChequeVerifyOtp from 'business/hooks/cheque/giveBackCheck/useGiveBackChequeVerifyOtp';
+import RejectGiveBackChequeVerifyOtpCommand from 'business/application/cheque/rejectGiveBackCheck/RejectGiveBackChequeVerifyOtp/RejectGiveBackChequeVerifyOtpCommand';
+import useRejectGiveBackChequeFinalize from 'business/hooks/cheque/rejectGivebackCheque/useRejectGiveBackChequeFinalize';
+import useRejectGiveBackChequeInitiateOtp from 'business/hooks/cheque/rejectGivebackCheque/useRejectGiveBackChequeInitiateOtp';
+import useRejectGiveBackChequeVerifyOtp from 'business/hooks/cheque/rejectGivebackCheque/useRejectGiveBackChequeVerifyOtp';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { useEffect, useState } from 'react';
@@ -22,39 +22,37 @@ import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from 'ui/pages/HomePage/menuList';
 import { paths } from 'ui/route-config/paths';
 
-export default function GiveBackCheckOTP() {
+export default function RejectGiveBackCheckOTP() {
 	const theme = useTheme();
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const [sendAgain, setSendAgain] = useState(false);
-	const { addNewData, giveBackChequeInitiateResponse } = useChecklistData();
+	const { RejectGiveBackChequeInitiateResponse } = useChecklistData();
 
-	const { mutate: initiateOtp, data: initiateOtpRes, isLoading: initLoading } = useGiveBackChequeInitiateOtp();
-	const { mutate: verifyOtp, isLoading: verifyLoading } = useGiveBackChequeVerifyOtp();
-	const { mutate: finalizeGiveBack, data: finalizeRes, isLoading: finalizeLoading } = useGiveBackChequeFinalize();
+	const { mutate: initiateOtp, data: initiateOtpRes, isLoading: initLoading } = useRejectGiveBackChequeInitiateOtp();
+	const { mutate: verifyOtp, isLoading: verifyLoading } = useRejectGiveBackChequeVerifyOtp();
+	const { mutate: finalizeRejectGiveBack, isLoading: finalizeLoading } = useRejectGiveBackChequeFinalize();
 
-	const { handleSubmit, formState, control } = useForm<GiveBackChequeVerifyOtpCommand>({
+	const { handleSubmit, formState, control } = useForm<RejectGiveBackChequeVerifyOtpCommand>({
 		resolver: (values, context, options) => fluentValidationResolver(values, context, options),
-		context: GiveBackChequeVerifyOtpCommand
+		context: RejectGiveBackChequeVerifyOtpCommand
 	});
 
-	const VerifyOtpHandler = (data: GiveBackChequeVerifyOtpCommand) => {
+	const VerifyOtpHandler = (data: RejectGiveBackChequeVerifyOtpCommand) => {
 		verifyOtp(
 			{
 				...data,
 				selectSingleSignatureLegal: true,
-				transferChequeKey: giveBackChequeInitiateResponse?.transferChequeKey!
+				transferChequeKey: RejectGiveBackChequeInitiateResponse?.transferChequeKey!
 			},
 			{
 				onError: (err) => {
 					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
 				},
 				onSuccess: (res) => {
-					// 後で修正する
-
-					finalizeGiveBack(
-						{ transferChequeKey: giveBackChequeInitiateResponse?.transferChequeKey! },
+					finalizeRejectGiveBack(
+						{ transferChequeKey: RejectGiveBackChequeInitiateResponse?.transferChequeKey! },
 						{
 							onError: (err) => {},
 							onSuccess: (res) => {
@@ -81,7 +79,7 @@ export default function GiveBackCheckOTP() {
 
 	useEffect(() => {
 		initiateOtp(
-			{ transferChequeKey: giveBackChequeInitiateResponse?.transferChequeKey! },
+			{ transferChequeKey: RejectGiveBackChequeInitiateResponse?.transferChequeKey! },
 			{
 				onError: () => {},
 				onSuccess: () => {}
@@ -110,7 +108,7 @@ export default function GiveBackCheckOTP() {
 						wrap="nowrap"
 					>
 						<Grid>
-							<Title>{t('ElCheckGiveBack')}</Title>
+							<Title>{t('rejectElCheckGiveBack')}</Title>
 							{!matches ? (
 								<Stepper
 									list={[t('checkInfo'), t('verificationCode'), t('end')]}
@@ -191,7 +189,7 @@ export default function GiveBackCheckOTP() {
 					</BoxAdapter>
 				</Grid>
 			)}
-            <Loader showLoader={initLoading || verifyLoading || finalizeLoading} />
+			<Loader showLoader={initLoading || verifyLoading || finalizeLoading} />
 		</Grid>
 	);
 }

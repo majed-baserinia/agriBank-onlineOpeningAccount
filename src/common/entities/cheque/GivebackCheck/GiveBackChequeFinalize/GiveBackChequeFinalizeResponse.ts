@@ -1,3 +1,3 @@
-interface GiveBackChequeFinalizeResponse {
+export interface GiveBackChequeFinalizeResponse {
 	message: string;
 }

@@ -27,3 +27,6 @@ export const GiveBackChequeInitiateOtp= '/cheque/DigitalCheque/GiveBackChequeIni
 export const GiveBackChequeVerifyOtp= '/cheque/DigitalCheque/GiveBackChequeVerifyOtp';
 export const GiveBackChequeFinalize= '/cheque/DigitalCheque/GiveBackChequeFinalize';
 export const RejectGivebackChequeInitiate= '/cheque/DigitalCheque/RejectGivebackChequeInitiate';
+export const RejectGiveBackChequeInitiateOtp= '/cheque/DigitalCheque/RejectGiveBackChequeInitiateOtp';
+export const RejectGiveBackChequeVerifyOtp= '/cheque/DigitalCheque/RejectGiveBackChequeVerifyOtp';
+export const RejectGiveBackChequeFinalize= '/cheque/DigitalCheque/RejectGiveBackChequeFinalize';

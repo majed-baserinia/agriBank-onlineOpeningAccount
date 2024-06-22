@@ -1,3 +1,3 @@
-interface GiveBackChequeFinalizeRequest {
+export interface GiveBackChequeFinalizeRequest {
 	transferChequeKey: string;
 }

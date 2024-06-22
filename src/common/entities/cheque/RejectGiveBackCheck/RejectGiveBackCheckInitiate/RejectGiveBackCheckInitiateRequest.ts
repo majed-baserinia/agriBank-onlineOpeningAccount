@@ -1,4 +1,4 @@
-interface RejectGivebackChequeInitiateRequest {
+export interface RejectGivebackChequeInitiateRequest {
 	customerNumber: number
 	sayadNo: number
 	description: string

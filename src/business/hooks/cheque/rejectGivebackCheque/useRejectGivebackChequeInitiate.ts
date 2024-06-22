@@ -1,9 +1,9 @@
-
 import { Mediator } from '@Mediatr/index';
 import { useMutation } from '@tanstack/react-query';
-import GivebackChequeInitiateCommand from 'business/application/cheque/giveBackCheck/GivebackChequeInitiate/GivebackChequeInitiateCommand';
 import RejectGivebackChequeInitiateCommand from 'business/application/cheque/rejectGiveBackCheck/RejectGiveBackCheckInitiate/RejectGivebackChequeInitiateCommand';
 import { ErrorType } from 'common/entities/ErrorType';
+import { RejectGivebackChequeInitiateRequest } from 'common/entities/cheque/RejectGiveBackCheck/RejectGiveBackCheckInitiate/RejectGiveBackCheckInitiateRequest';
+import { RejectGivebackChequeInitiateResponse } from 'common/entities/cheque/RejectGiveBackCheck/RejectGiveBackCheckInitiate/RejectGiveBackCheckInitiateResponse';
 
 const mediator = new Mediator();
 

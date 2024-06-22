@@ -2,6 +2,8 @@ import { Mediator } from '@Mediatr/index';
 import { useMutation } from '@tanstack/react-query';
 import GiveBackChequeInitiateOtpCommand from 'business/application/cheque/giveBackCheck/GiveBackChequeInitiateOtp/GiveBackChequeInitiateOtpCommand';
 import { ErrorType } from 'common/entities/ErrorType';
+import { GiveBackChequeInitiateOtpRequest } from 'common/entities/cheque/GivebackCheck/GiveBackChequeInitiateOtp/GiveBackChequeInitiateOtpRequest';
+import { GiveBackChequeInitiateOtpResponse } from 'common/entities/cheque/GivebackCheck/GiveBackChequeInitiateOtp/GiveBackChequeInitiateOtpResponse';
 
 const mediator = new Mediator();
 

@@ -3,6 +3,8 @@ import APIClient from 'business/infrastructure/api-client';
 
 import { GiveBackChequeVerifyOtp } from 'business/infrastructure/end-points';
 import GiveBackChequeVerifyOtpCommand from './GiveBackChequeVerifyOtpCommand';
+import { GiveBackChequeVerifyOtpResponse } from 'common/entities/cheque/GivebackCheck/GiveBackChequeVerifyOtp/GiveBackChequeVerifyOtpResponse';
+import { GiveBackChequeVerifyOtpRequest } from 'common/entities/cheque/GivebackCheck/GiveBackChequeVerifyOtp/GiveBackChequeVerifyOtpRequest';
 
 @requestHandler(GiveBackChequeVerifyOtpCommand)
 export class GiveBackChequeVerifyOtpCommandHandler

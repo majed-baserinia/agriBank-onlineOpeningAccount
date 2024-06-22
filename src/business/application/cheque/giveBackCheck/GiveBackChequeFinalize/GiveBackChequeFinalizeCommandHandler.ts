@@ -3,6 +3,8 @@ import APIClient from 'business/infrastructure/api-client';
 
 import { GiveBackChequeFinalize } from 'business/infrastructure/end-points';
 import GiveBackChequeFinalizeCommand from './GiveBackChequeFinalizeCommand';
+import { GiveBackChequeFinalizeResponse } from 'common/entities/cheque/GivebackCheck/GiveBackChequeFinalize/GiveBackChequeFinalizeResponse';
+import { GiveBackChequeFinalizeRequest } from 'common/entities/cheque/GivebackCheck/GiveBackChequeFinalize/GiveBackChequeFinalizeRequest';
 
 @requestHandler(GiveBackChequeFinalizeCommand)
 export class GiveBackChequeFinalizeCommandHandler

@@ -1,4 +1,4 @@
-export interface GiveBackChequeInitiateOtpResponse {
+export interface RejectGiveBackChequeInitiateOtpResponse {
 	transferChequeKey: string;
 	message: string;
 	lifeTime: number;

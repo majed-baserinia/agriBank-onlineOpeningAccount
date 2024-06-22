@@ -1,4 +1,4 @@
-export interface GiveBackChequeVerifyOtpResponse {
+export interface RejectGiveBackChequeVerifyOtpResponse {
 	transferChequeKey: string;
 	transferChequeOverView: TransferChequeOverView 
 }

@@ -3,6 +3,8 @@ import APIClient from 'business/infrastructure/api-client';
 
 import RejectGivebackChequeInitiateCommand from './RejectGivebackChequeInitiateCommand';
 import { RejectGivebackChequeInitiate } from 'business/infrastructure/end-points';
+import { RejectGivebackChequeInitiateRequest } from 'common/entities/cheque/RejectGiveBackCheck/RejectGiveBackCheckInitiate/RejectGiveBackCheckInitiateRequest';
+import { RejectGivebackChequeInitiateResponse } from 'common/entities/cheque/RejectGiveBackCheck/RejectGiveBackCheckInitiate/RejectGiveBackCheckInitiateResponse';
 
 @requestHandler(RejectGivebackChequeInitiateCommand)
 export class RejectGivebackChequeInitiateCommandHandler
