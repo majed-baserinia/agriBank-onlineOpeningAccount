@@ -1,0 +1,3 @@
+interface GiveBackChequeFinalizeRequest {
+	transferChequeKey: string;
+}

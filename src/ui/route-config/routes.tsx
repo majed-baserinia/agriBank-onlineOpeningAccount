@@ -21,6 +21,13 @@ import OtpTransferConfirmation from 'ui/pages/receivedChecksList/TransferCheck/O
 import TransferSignatureGroup from 'ui/pages/receivedChecksList/TransferCheck/TransferSignatureGroup';
 import TransferOverView from 'ui/pages/receivedChecksList/TransferCheck/TransferOverView';
 import CashingCehck from 'ui/pages/receivedChecksList/CashingCehck';
+import SelectTransferredCheckList from 'ui/pages/transferredChecks/SelectTransferredCheckList';
+import TransferredChecksList from 'ui/pages/transferredChecks/TransferredChecksList';
+import TransferredCheckDetail from 'ui/pages/transferredChecks/TransferredCheckDetail';
+import GiveBackCheck from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckInitiate';
+import GiveBackCheckInitiate from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckInitiate';
+import GiveBackCheckOTP from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckOTP';
+import GiveBackCheckSignature from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckSignature';
 
 const router = createBrowserRouter([
 	{
@@ -101,6 +108,30 @@ const router = createBrowserRouter([
 			{
 				path: paths.ReceivedChecksList.CashingCehck,
 				element: <CashingCehck />
+			},
+			{
+				path: paths.TransferredChecks.SelectTransferredCheckList,
+				element: <SelectTransferredCheckList />
+			},
+			{
+				path: paths.TransferredChecks.TransferredChecksList,
+				element: <TransferredChecksList />
+			},
+			{
+				path: paths.TransferredChecks.TransferredCheckDetail,
+				element: <TransferredCheckDetail />
+			},
+			{
+				path: paths.ReceivedChecksList.GiveBackCheckInitiate,
+				element: <GiveBackCheckInitiate />
+			},
+			{
+				path: paths.ReceivedChecksList.GiveBackCheckOTP,
+				element: <GiveBackCheckOTP />
+			},
+			{
+				path: paths.ReceivedChecksList.GiveBackCheckSignature,
+				element: <GiveBackCheckSignature />
 			},
 		]
 	}

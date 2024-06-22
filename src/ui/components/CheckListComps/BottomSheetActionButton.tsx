@@ -2,8 +2,8 @@ import { Grid, Typography } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
 import TablerMoneybag from 'assets/icon/menu/TablerMoneybag.svg';
 import acceptOrNotIcon from 'assets/icon/menu/recieve-check-confirm.svg';
-import regressCheckIcon from 'assets/icon/menu/regressCheckIcon.svg';
-import rejectRegress from 'assets/icon/menu/rejectRegress.svg';
+import giveBackCheckIcon from 'assets/icon/menu/giveBackCheckIcon.svg';
+import rejectGiveBack from 'assets/icon/menu/rejectGiveBack.svg';
 import rejectTransfer from 'assets/icon/menu/rejectTransfer.svg';
 import transferCheck from 'assets/icon/menu/transfer-check.svg';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
@@ -109,10 +109,10 @@ export const checkActionsMenuList = [
 	},
 	{
 		id: '3',
-		title: 'regressCheck',
+		title: 'giveBacksCheck',
 		icon: (
 			<SvgToIcon
-				icon={regressCheckIcon}
+				icon={giveBackCheckIcon}
 				alt="list check"
 			/>
 		),
@@ -131,10 +131,10 @@ export const checkActionsMenuList = [
 	},
 	{
 		id: '3',
-		title: 'rejectRegress',
+		title: 'rejectGiveBack',
 		icon: (
 			<SvgToIcon
-				icon={rejectRegress}
+				icon={rejectGiveBack}
 				alt="list check"
 			/>
 		),

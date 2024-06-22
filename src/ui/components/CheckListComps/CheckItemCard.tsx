@@ -17,7 +17,6 @@ export default function CheckItemCard({ check }: { check: Check }) {
 	const theme = useTheme();
 	const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
 	const { addNewData } = useChecklistData();
-console.log(check);
 
 	return (
 		<Grid

@@ -175,11 +175,11 @@
 	"transferCheck": "Check Transfer",
 	"CashingCheck": "Check Cashing",
 	"Conf/rej": "Confirmation/rejection of received check",
-	"regressCheck": "Check return",
+	"giveBackCheck": "Check give back",
 	"rejectTransferCheck": "Rejection of check transfer",
 	"rejectTransfer": "Rejection transfer",
 	"confirmTransfer": "Confirm transfer",
-	"rejectRegress": "Rejection of check return",
+	"rejectgiveBack": "Rejection of check give back",
 	"you": "You",
 	"payTo": "Pay To ",
 	"details": "Details",
@@ -215,5 +215,8 @@
 	"confirmed": "Confirmed",
 	"cancel": "Cancel",
 	"doneSuccessfully": "Done Successfully",
-	"thereIsNoChecksToShow": "There is no checks to show"
+	"thereIsNoChecksToShow": "There is no checks to show",
+	"transferedChecksMenuTitle": "Transfered Checks (Waiting to be cashed)",
+	"ElCheckGiveBack": "Electronic check Give Back",
+	"giveBackDescription": "Give Back Description"
 }

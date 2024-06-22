@@ -1,0 +1,4 @@
+interface GiveBackChequeInitiateOtpRequest {
+	transferChequeKey: string
+	
+}

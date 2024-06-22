@@ -175,11 +175,11 @@
 	"transferCheck": "انتقال چک",
 	"CashingCheck": "نقدکردن چک",
 	"Conf/rej": "تایید/ رد چک دریافتی",
-	"regressCheck": "عودت چک",
+	"giveBackCheck": "عودت چک",
 	"rejectTransferCheck": "رد انتقال چک",
 	"rejectTransfer": "رد انتقال",
 	"confirmTransfer": "تایید انتقال",
-	"rejectRegress": "رد عودت چک",
+	"rejectGiveBack": "رد عودت چک",
 	"you": "شما",
 	"payTo": "در وجه ",
 	"details": "جزئیات",
@@ -215,5 +215,8 @@
 	"confirmed": "تایید شده",
 	"cancel": "لغو",
 	"doneSuccessfully": "با موفقیت انجام شد",
-	"thereIsNoChecksToShow": "هیچ چکی برای نشان دادن وجود ندارد"
+	"thereIsNoChecksToShow": "هیچ چکی برای نشان دادن وجود ندارد",
+	"transferedChecksMenuTitle": "چک‌های واگذارشده (در انتظار نقدشدن)",
+	"ElCheckGiveBack": "عودت چک الکترونیک",
+	"giveBackDescription": "شرح عودت"
 }

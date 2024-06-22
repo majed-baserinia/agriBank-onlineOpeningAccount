@@ -23,5 +23,13 @@ export const paths = {
 		TransferSignatureGroup: '/cheque/ReceivedChecksList/transferCheck/TransferSignatureGroup',
 		TransferOverView: '/cheque/ReceivedChecksList/transferCheck/TransferOverView',
 		CashingCehck: '/cheque/ReceivedChecksList/CashingCehck',
+		GiveBackCheckInitiate: '/cheque/ReceivedChecksList/GiveBackCheckInitiate',
+		GiveBackCheckOTP: '/cheque/ReceivedChecksList/GiveBackCheckOTP',
+		GiveBackCheckSignature: '/cheque/ReceivedChecksList/GiveBackCheckSignature'
+	},
+	TransferredChecks: {
+		SelectTransferredCheckList: '/cheque/TransferredChecks/SelectTransferredCheckList',
+		TransferredChecksList: '/cheque/TransferredChecks/TransferredChecksList',
+		TransferredCheckDetail: '/cheque/TransferredChecks/TransferredCheckDetail'
 	}
 };

@@ -2,6 +2,7 @@ import activation from 'assets/icon/menu/active-check.svg';
 import issueCheck from 'assets/icon/menu/check-issue.svg';
 import deactivation from 'assets/icon/menu/deactive-check.svg';
 import list from 'assets/icon/menu/list.svg';
+import transferedCheksIcon from 'assets/icon/menu/transferedCheksIcon.svg';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import { paths } from 'ui/route-config/paths';
 
@@ -28,6 +29,17 @@ export const menuList = {
 				/>
 			),
 			routeTo: paths.ReceivedChecksList.SelectCheckList
+		},
+		{
+			id: '3',
+			title: 'transferedChecksMenuTitle',
+			icon: (
+				<SvgToIcon
+					icon={transferedCheksIcon}
+					alt="transfered Cheks Icon"
+				/>
+			),
+			routeTo: paths.TransferredChecks.SelectTransferredCheckList
 		}
 	],
 	management: [
