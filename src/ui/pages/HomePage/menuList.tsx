@@ -63,7 +63,7 @@ export const menuList = {
 					alt="deactivation"
 				/>
 			),
-			routeTo: paths.Activation.firstStepPath
+			routeTo: paths.Deactivation
 		}
 	]
 };

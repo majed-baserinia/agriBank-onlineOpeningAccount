@@ -4,6 +4,8 @@ export const paths = {
 		firstStepPath: '/cheque/activation/firstStep',
 		secondStepPath: '/cheque/activation/secondStep'
 	},
+
+	Deactivation: '/cheque/Deactivation',
 	IssueCheck: {
 		SelectAccountPath: '/cheque/Issue/SelectAccount',
 		CheckInfoPath: '/cheque/Issue/CheckInfo',
