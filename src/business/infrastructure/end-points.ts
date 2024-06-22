@@ -30,3 +30,4 @@ export const RejectGivebackChequeInitiate= '/cheque/DigitalCheque/RejectGiveback
 export const RejectGiveBackChequeInitiateOtp= '/cheque/DigitalCheque/RejectGiveBackChequeInitiateOtp';
 export const RejectGiveBackChequeVerifyOtp= '/cheque/DigitalCheque/RejectGiveBackChequeVerifyOtp';
 export const RejectGiveBackChequeFinalize= '/cheque/DigitalCheque/RejectGiveBackChequeFinalize';
+export const ChakadDeactivateCustomer= '/cheque/DigitalCheque/ChakadDeactivateCustomer';

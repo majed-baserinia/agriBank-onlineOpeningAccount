@@ -4,7 +4,8 @@ type Item = {
 	title: string;
 	subtitle?: string;
 	icon?: ReactNode;
-	routeTo: string;
+	routeTo?: string;
+	onClick?: () => void;
 };
 export interface Props {
 	list: Item[];

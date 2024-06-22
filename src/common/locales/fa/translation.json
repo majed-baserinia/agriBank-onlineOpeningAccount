@@ -220,5 +220,7 @@
 	"ElCheckGiveBack": "عودت چک الکترونیک",
 	"rejectElCheckGiveBack": "رد عودت چک الکترونیک",
 	"giveBackDescription": "شرح عودت",
-	"rejectGiveBackDescription": "شرح رد عودت"
+	"rejectGiveBackDescription": "شرح رد عودت",
+	"deactivationModalText": "در صورت تایید، مشتری در غیرفعال نخواهد شد.",
+	"refuse":"انصراف"
 }

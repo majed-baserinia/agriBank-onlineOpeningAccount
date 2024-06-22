@@ -1,7 +1,7 @@
 import { IRequest } from '@Mediatr/index';
-import { InquiryTransferStatusRequest } from 'common/entities/cheque/transferCheck/InquiryTransferStatus/InquiryTransferStatusRequest';
+import { InquiryTransferStatusRespone } from 'common/entities/cheque/transferCheck/InquiryTransferStatus/InquiryTransferStatusResponse';
 
-export default class InquiryTransferStatusCommand implements IRequest<InquiryTransferStatusRequest> {
+export default class InquiryTransferStatusCommand implements IRequest<InquiryTransferStatusRespone> {
 	sayadNo: number;
 	chequeHolderNationalCode: string;
 

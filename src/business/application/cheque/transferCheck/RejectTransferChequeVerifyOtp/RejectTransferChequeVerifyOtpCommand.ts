@@ -1,8 +1,7 @@
 import { IRequest } from '@Mediatr/index';
-import { RejectTransferChequeVerifyOtpRequest } from 'common/entities/cheque/transferCheck/RejectTransferChequeVerifyOtp/RejectTransferChequeVerifyOtpRequest';
-import { TransferChequeVerifyOtpRequest } from 'common/entities/cheque/transferCheck/TransferChequeVerifyOtp/TransferChequeVerifyOtpRequest';
+import { RejectTransferChequeVerifyOtpResponse } from 'common/entities/cheque/transferCheck/RejectTransferChequeVerifyOtp/RejectTransferChequeVerifyOtpResponse';
 
-export default class RejectTransferChequeVerifyOtpCommand implements IRequest<RejectTransferChequeVerifyOtpRequest> {
+export default class RejectTransferChequeVerifyOtpCommand implements IRequest<RejectTransferChequeVerifyOtpResponse> {
 	transferChequeKey: string;
 	otpCode: string;
 	selectSingleSignatureLegal: boolean;

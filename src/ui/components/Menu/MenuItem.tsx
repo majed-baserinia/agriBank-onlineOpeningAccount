@@ -10,10 +10,11 @@ interface Props {
 	title: string;
 	subtitle?: string;
 	routeTo: string;
+	onClick?: () => void;
 }
 
 export default function MenuItem(props: Props) {
-	const { icon, title, subtitle, routeTo } = props;
+	const {onClick, icon, title, subtitle, routeTo } = props;
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const { t } = useTranslation();
@@ -29,6 +30,7 @@ export default function MenuItem(props: Props) {
 				sx={{ padding: matches ? '16px 0' : '24px 0', cursor: 'pointer', overflow: 'hidden' }}
 				onClick={(e) => {
 					navigate(routeTo);
+					onClick?.()
 				}}
 			>
 				<Grid>

@@ -1,23 +1,23 @@
+import { ReactNode } from 'react';
+
 export type AppAlert = {
-  type: 
-    | "success"
-    | "info"
-    | "warning"
-    | "error"
-    | "errorWithConfirmation"
-    | "warningWithConfirmation";
-  messageText?: string;
-  hasConfirmAction?: boolean
-  hasContinueAction?: boolean
-  actions?: {  onCloseModal?: () => void; onConfirm?: () => void, onContinue?:()=>void };
+	type: 'success' | 'info' | 'warning' | 'error';
+	messageText?: string;
+	hasConfirmAction?: boolean;
+	hasContinueAction?: boolean;
+	hasRefuseAction?: boolean;
+	actions?: AlertActions
+	overrideActions?: ReactNode;
 };
 
 export type props = {
-  type:
-    | "success"
-    | "info"
-    | "warning"
-    | "error"
-    | "errorWithConfirmation"
-    | "warningWithConfirmation";
+	type: 'success' | 'info' | 'warning' | 'error';
+};
+
+
+type AlertActions = {
+	onRefuse?: () => void; 
+	onCloseModal?: () => void; 
+	onConfirm?: () => void; 
+	onContinue?: () => void 
 };

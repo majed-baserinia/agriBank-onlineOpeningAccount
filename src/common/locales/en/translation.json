@@ -220,5 +220,7 @@
 	"ElCheckGiveBack": "Electronic check Give Back",
 	"rejectElCheckGiveBack": "Reject Electronic check Give Back",
 	"giveBackDescription": "Give Back Description",
-	"rejectGiveBackDescription": "Give Back Description"
+	"rejectGiveBackDescription": "Give Back Description",
+	"deactivationModalText": "If approved, the client will not be disabled.",
+	"refuse": "Refuse"
 }

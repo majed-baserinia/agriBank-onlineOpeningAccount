@@ -1,6 +1,7 @@
 import { IRequest } from '@Mediatr/index';
+import { RejectGivebackChequeInitiateResponse } from 'common/entities/cheque/RejectGiveBackCheck/RejectGiveBackCheckInitiate/RejectGiveBackCheckInitiateResponse';
 
-export default class RejectGivebackChequeInitiateCommand implements IRequest<{}> {
+export default class RejectGivebackChequeInitiateCommand implements IRequest<RejectGivebackChequeInitiateResponse> {
 	customerNumber: number;
 	sayadNo: number;
 	description: string;

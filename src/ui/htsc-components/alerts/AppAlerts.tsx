@@ -31,33 +31,20 @@ export default function AppAlerts() {
 		}
 	}, [alerts]);
 
-	const mappedType =
-		capturedAlert?.type === 'errorWithConfirmation'
-			? 'error'
-			: capturedAlert?.type === 'warningWithConfirmation'
-				? 'warning'
-				: capturedAlert?.type;
+	const clearAlers = () => {
+		clearAlert();
+		setLocalAlerts([]);
+	};
 
-	// const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-	//   if (reason === "clickaway") {
-	//     return;
-	//   }
+	const handleClose = () => {
+		setOpen(false);
+		clearAlers();
+		capturedAlert?.actions?.onCloseModal?.();
+	};
 
-	//   setOpen(false);
-	//   clearApiError();
-	// };
-
-	capturedAlert?.type === 'errorWithConfirmation' || capturedAlert?.type === 'warningWithConfirmation'
-		? capturedAlert.actions?.onConfirm?.()
-		: null;
 	return localAlerts.length > 0 ? (
 		<Dialog
-			onClose={(e) => {
-				setOpen(false);
-				clearAlert();
-				setLocalAlerts([]);
-				capturedAlert?.actions?.onCloseModal?.();
-			}}
+			onClose={(e, reason) => handleClose()}
 			open={open}
 			PaperProps={{
 				sx: { padding: '32px', borderRadius: '24px' }
@@ -70,14 +57,14 @@ export default function AppAlerts() {
 				justifyContent={'center'}
 				alignItems={'center'}
 			>
-				<AlertIcon type={mappedType} />
+				<AlertIcon type={capturedAlert.type} />
 			</Grid>
 			<DialogTitle sx={{ margin: 'auto' }}>
 				<Typography
 					variant="bodyLg"
 					fontWeight={'bold'}
 				>
-					{t(mappedType)}
+					{t(capturedAlert.type)}
 				</Typography>
 			</DialogTitle>
 
@@ -88,32 +75,48 @@ export default function AppAlerts() {
 			</DialogContent>
 
 			<DialogActions sx={{ justifyContent: 'center' }}>
-				{capturedAlert?.hasConfirmAction ? (
-					<ButtonAdapter
-						onClick={() => {
-							setOpen(false);
-							clearAlert();
-							setLocalAlerts([]);
-							capturedAlert?.actions?.onConfirm?.();
-						}}
-						variant={'contained'}
-					>
-						{t('IUnderstand')}
-					</ButtonAdapter>
-				) : null}
-				{capturedAlert?.hasContinueAction ? (
-					<ButtonAdapter
-						onClick={() => {
-							setOpen(false);
-							clearAlert();
-							setLocalAlerts([]);
-							capturedAlert.actions?.onContinue?.();
-						}}
-						variant={'contained'}
-					>
-						{t('continue')}
-					</ButtonAdapter>
-				) : null}
+				{capturedAlert.overrideActions ? (
+					capturedAlert.overrideActions
+				) : (
+					<>
+						{capturedAlert?.hasConfirmAction ? (
+							<ButtonAdapter
+								onClick={() => {
+									setOpen(false);
+									clearAlers();
+									capturedAlert?.actions?.onConfirm?.();
+								}}
+								variant={'contained'}
+							>
+								{t('IUnderstand')}
+							</ButtonAdapter>
+						) : null}
+						{capturedAlert?.hasContinueAction ? (
+							<ButtonAdapter
+								onClick={() => {
+									setOpen(false);
+									clearAlers();
+									capturedAlert.actions?.onContinue?.();
+								}}
+								variant={'contained'}
+							>
+								{t('continue')}
+							</ButtonAdapter>
+						) : null}
+						{capturedAlert?.hasRefuseAction ? (
+							<ButtonAdapter
+								onClick={() => {
+									setOpen(false);
+									clearAlers();
+									capturedAlert.actions?.onRefuse?.();
+								}}
+								variant={'outlined'}
+							>
+								{t('refuse')}
+							</ButtonAdapter>
+						) : null}
+					</>
+				)}
 			</DialogActions>
 		</Dialog>
 	) : undefined;

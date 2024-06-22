@@ -1,8 +1,8 @@
 import { IRequest } from '@Mediatr/index';
 import { RecieverRequest } from 'common/entities/cheque/Digital Cheque/IssueChequeInitiate/IssueChequeInitiateRequest';
-import { TransferChequeInitiateRequest } from 'common/entities/cheque/transferCheck/TransferChequeInitiate/TransferChequeInitiateRequest';
+import { TransferChequeInitiateResponse } from 'common/entities/cheque/transferCheck/TransferChequeInitiate/TransferChequeInitiateResponse';
 
-export default class RejectTransferChequeInitiateCommand implements IRequest<TransferChequeInitiateRequest> {
+export default class RejectTransferChequeInitiateCommand implements IRequest<TransferChequeInitiateResponse> {
 	customerNumber: number;
 	sayadNo: number;
 	description: string;

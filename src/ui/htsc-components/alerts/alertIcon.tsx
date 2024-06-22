@@ -11,8 +11,6 @@ const iconMap = {
   info: infoIcon,
   warning: warningIcon,
   error: errorIcon,
-  errorWithConfirmation: errorIcon,
-  warningWithConfirmation: warningIcon
 };
 
 export default function AlertIcon(props: props) {

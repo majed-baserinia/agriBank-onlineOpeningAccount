@@ -1,7 +1,7 @@
 import { IRequest } from '@Mediatr/index';
-import { TransferChequeInitiateOtpRequest } from 'common/entities/cheque/transferCheck/TransferChequeInitiateOtp/TransferChequeInitiateOtpRequest';
+import { TransferChequeInitiateOtpResponse } from 'common/entities/cheque/transferCheck/TransferChequeInitiateOtp/TransferChequeInitiateOtpResponse';
 
-export default class TransferChequeInitiateOtpCommand implements IRequest<TransferChequeInitiateOtpRequest> {
+export default class TransferChequeInitiateOtpCommand implements IRequest<TransferChequeInitiateOtpResponse> {
 	transferChequeKey: string;
 
 	constructor(input: TransferChequeInitiateOtpCommand) {
