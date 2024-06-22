@@ -29,6 +29,7 @@ import GiveBackCheckInitiate from 'ui/pages/receivedChecksList/GiveBack/GiveBack
 import GiveBackCheckOTP from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckOTP';
 import GiveBackCheckSignature from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckSignature';
 import RejectGiveBackCheckInitiate from 'ui/pages/receivedChecksList/RejectGiveBack/RejectGiveBackCheckInitiate';
+import Deactivation from 'ui/pages/Deactivation';
 
 const router = createBrowserRouter([
 	{
@@ -145,6 +146,10 @@ const router = createBrowserRouter([
 			{
 				path: paths.ReceivedChecksList.RejectGiveBackCheckSignature,
 				element: <GiveBackCheckSignature />
+			},
+			{
+				path: paths.Deactivation,
+				element: <Deactivation />
 			},
 		]
 	}
