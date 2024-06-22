@@ -218,5 +218,7 @@
 	"thereIsNoChecksToShow": "There is no checks to show",
 	"transferedChecksMenuTitle": "Transfered Checks (Waiting to be cashed)",
 	"ElCheckGiveBack": "Electronic check Give Back",
-	"giveBackDescription": "Give Back Description"
+	"rejectElCheckGiveBack": "Reject Electronic check Give Back",
+	"giveBackDescription": "Give Back Description",
+	"rejectGiveBackDescription": "Give Back Description"
 }

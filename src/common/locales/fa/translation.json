@@ -218,5 +218,7 @@
 	"thereIsNoChecksToShow": "هیچ چکی برای نشان دادن وجود ندارد",
 	"transferedChecksMenuTitle": "چک‌های واگذارشده (در انتظار نقدشدن)",
 	"ElCheckGiveBack": "عودت چک الکترونیک",
-	"giveBackDescription": "شرح عودت"
+	"rejectElCheckGiveBack": "رد عودت چک الکترونیک",
+	"giveBackDescription": "شرح عودت",
+	"rejectGiveBackDescription": "شرح رد عودت"
 }

@@ -24,6 +24,7 @@ interface chekListData {
 	receivers?: RecieverRequest[];
 	giveBackChequeInitiateResponse?: GivebackChequeInitiateResponse;
 	GiveBackChequeVerifyOtpResponse?: GiveBackChequeVerifyOtpResponse;
+	RejectGiveBackChequeInitiateResponse?: RejectGivebackChequeInitiateResponse;
 }
 
 export const useChecklistData = create<Functions & chekListData>((set) => ({

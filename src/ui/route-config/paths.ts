@@ -25,7 +25,10 @@ export const paths = {
 		CashingCehck: '/cheque/ReceivedChecksList/CashingCehck',
 		GiveBackCheckInitiate: '/cheque/ReceivedChecksList/GiveBackCheckInitiate',
 		GiveBackCheckOTP: '/cheque/ReceivedChecksList/GiveBackCheckOTP',
-		GiveBackCheckSignature: '/cheque/ReceivedChecksList/GiveBackCheckSignature'
+		GiveBackCheckSignature: '/cheque/ReceivedChecksList/GiveBackCheckSignature',
+		RejectGiveBackCheckInitiate: '/cheque/ReceivedChecksList/RejectGiveBackCheckInitiate',
+		RejectGiveBackCheckOTP: '/cheque/ReceivedChecksList/RejectGiveBackCheckOTP',
+		RejectGiveBackCheckSignature: '/cheque/ReceivedChecksList/RejectGiveBackCheckSignature'
 	},
 	TransferredChecks: {
 		SelectTransferredCheckList: '/cheque/TransferredChecks/SelectTransferredCheckList',
