@@ -9,7 +9,7 @@ interface Props {
 	icon?: ReactNode;
 	title: string;
 	subtitle?: string;
-	routeTo: string;
+	routeTo?: string;
 	onClick?: () => void;
 }
 
@@ -29,7 +29,7 @@ export default function MenuItem(props: Props) {
 				minWidth={"290px"}
 				sx={{ padding: matches ? '16px 0' : '24px 0', cursor: 'pointer', overflow: 'hidden' }}
 				onClick={(e) => {
-					navigate(routeTo);
+					routeTo ? navigate(routeTo) : null
 					onClick?.()
 				}}
 			>
