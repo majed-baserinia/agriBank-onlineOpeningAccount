@@ -20,11 +20,10 @@ import AddNewReceivers from 'ui/pages/receivedChecksList/TransferCheck/AddNewRec
 import OtpTransferConfirmation from 'ui/pages/receivedChecksList/TransferCheck/OtpTransferConfirmation';
 import TransferSignatureGroup from 'ui/pages/receivedChecksList/TransferCheck/TransferSignatureGroup';
 import TransferOverView from 'ui/pages/receivedChecksList/TransferCheck/TransferOverView';
-import CashingCehck from 'ui/pages/receivedChecksList/CashingCehck';
+import CashingCheck from 'ui/pages/receivedChecksList/CashingCheck';
 import SelectTransferredCheckList from 'ui/pages/transferredChecks/SelectTransferredCheckList';
 import TransferredChecksList from 'ui/pages/transferredChecks/TransferredChecksList';
 import TransferredCheckDetail from 'ui/pages/transferredChecks/TransferredCheckDetail';
-import GiveBackCheck from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckInitiate';
 import GiveBackCheckInitiate from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckInitiate';
 import GiveBackCheckOTP from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckOTP';
 import GiveBackCheckSignature from 'ui/pages/receivedChecksList/GiveBack/GiveBackCheckSignature';
@@ -108,8 +107,8 @@ const router = createBrowserRouter([
 				element: <TransferOverView />
 			},
 			{
-				path: paths.ReceivedChecksList.CashingCehck,
-				element: <CashingCehck />
+				path: paths.ReceivedChecksList.CashingCheck,
+				element: <CashingCheck />
 			},
 			{
 				path: paths.TransferredChecks.SelectTransferredCheckList,

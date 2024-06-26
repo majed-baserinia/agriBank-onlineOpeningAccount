@@ -24,7 +24,7 @@ export const paths = {
 		OtpTransferConfirmation: '/cheque/ReceivedChecksList/transferCheck/OtpTransferConfirmation',
 		TransferSignatureGroup: '/cheque/ReceivedChecksList/transferCheck/TransferSignatureGroup',
 		TransferOverView: '/cheque/ReceivedChecksList/transferCheck/TransferOverView',
-		CashingCehck: '/cheque/ReceivedChecksList/CashingCehck',
+		CashingCheck: '/cheque/ReceivedChecksList/CashingCheck',
 		GiveBackCheckInitiate: '/cheque/ReceivedChecksList/GiveBackCheckInitiate',
 		GiveBackCheckOTP: '/cheque/ReceivedChecksList/GiveBackCheckOTP',
 		GiveBackCheckSignature: '/cheque/ReceivedChecksList/GiveBackCheckSignature',

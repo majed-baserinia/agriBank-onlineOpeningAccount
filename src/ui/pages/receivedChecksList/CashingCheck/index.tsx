@@ -12,7 +12,7 @@ import SelectAdapter from 'ui/htsc-components/SelectAdapter';
 
 import { menuList } from 'ui/pages/HomePage/menuList';
 
-export default function CashingCehck() {
+export default function CashingCheck() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
