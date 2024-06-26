@@ -1,7 +1,7 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
 import useGetAllRelatedCustomers from 'business/hooks/cheque/checklist/useGetAllRelatedCustomers';
-import { useChecklistData } from 'business/stores/checklistData/checklistData';
+import { useTransferedChecksStore } from 'business/stores/transferedChecksStore/transferedChecksStore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -41,16 +41,18 @@ export default function SelectTransferredCheckList() {
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
-	const addNewDataToStore = useChecklistData((store) => store.addNewData);
+	const { addNewDataToStore } = useTransferedChecksStore((store) => store);
 	const { data: listItems, isLoading } = useGetAllRelatedCustomers('checkList');
 	const [menuItems, setMenuItems] = useState<MenuItems>([]);
 
-	useEffect(() => {		
+	useEffect(() => {
 		//set the new list to the store
 		addNewDataToStore({ relatedCustomers: listItems });
 
 		if (listItems?.length === 1)
-			navigate(paths.TransferredChecks.TransferredChecksList + '?cif=' + listItems[0].customerNumber, { replace: true });
+			navigate(paths.TransferredChecks.TransferredChecksList + '?cif=' + listItems[0].customerNumber, {
+				replace: true
+			});
 
 		const newList = listItems?.map((item, index) => {
 			return {

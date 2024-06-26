@@ -1,7 +1,6 @@
 import { Grid, MenuItem, Typography, useMediaQuery, useTheme } from '@mui/material';
 import useCartableInquiryCommand from 'business/hooks/cheque/checklist/useCartableInquiryCommand';
 import { pushAlert } from 'business/stores/AppAlertsStore';
-import { useChecklistData } from 'business/stores/checklistData/checklistData';
 import { CartableInquiryResponse } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +11,7 @@ import SelectAdapter from 'ui/htsc-components/SelectAdapter';
 import DesktopView from '../../../components/CheckListComps/DesktopView';
 import MobileView from '../../../components/CheckListComps/Mobileview';
 import { breadcrumbs } from '../SelectTransferredCheckList';
+import { useTransferedChecksStore } from 'business/stores/transferedChecksStore/transferedChecksStore';
 
 export default function TransferredChecksList() {
 	const cif = new URLSearchParams(window.location.search).get('cif');
@@ -19,9 +19,10 @@ export default function TransferredChecksList() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('tablet'));
-	const { relatedCustomers, addNewData } = useChecklistData((store) => store);
+	const { relatedCustomers, addNewDataToStore } = useTransferedChecksStore((store) => store);
 	const { mutate: getCartableInquiry, isLoading } = useCartableInquiryCommand();
 
+// TODO: change the type to the new service
 	const [cartableListData, setCartableListData] = useState<CartableInquiryResponse>();
 	const [selectedBeneficiary, setSelectedBeneficiary] = useState(cif);
 	const [selectedBeneficiaryName, setSelectedBeneficiaryName] = useState<string>();
@@ -33,7 +34,8 @@ export default function TransferredChecksList() {
 			{
 				onSuccess(data) {
 					setCartableListData(data);
-					addNewData({ cartableListData: data });
+					//TODO: add this date to the store 
+					//addNewDataToStore({ cartableListData: data });
 				},
 				onError: (err) =>
 					pushAlert({
