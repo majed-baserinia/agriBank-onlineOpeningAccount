@@ -1,19 +1,18 @@
-import CheckIcon from '@mui/icons-material/Check';
-import { Chip, Typography, useTheme } from '@mui/material';
+import { Chip, Grid, Typography, useTheme } from '@mui/material';
 
 import CounterIcon from './CounterIcon';
 import { Props } from './type';
 
 export default function ChipsAdapter(props: Props) {
-	const { label, size = 'medium', onClick, checked = false, color = 'default', count } = props;
+	const { label, size = 'medium', onClick, icon = false, color = 'default', count, variant } = props;
 	const theme = useTheme();
 
 	const sx = {
-		backgroundColor: checked ? theme.palette.primary[50] : undefined,
-		border: `1px solid ${theme.palette.primary[50]}`,
+		backgroundColor: variant === 'filled' ? theme.palette.primary[50] : 'transparent',
+		border: `1px solid ${theme.palette.grey[200]}`,
 		'&&:hover': {
-			backgroundColor: checked ? theme.palette.primary[50] : 'transparent',
-			border: `1px solid ${checked ? theme.palette.primary.main : theme.palette.grey[200]}`
+			backgroundColor: icon ? theme.palette.primary[50] : 'transparent',
+			border: `1px solid ${icon ? theme.palette.primary.main : theme.palette.grey[200]}`
 		},
 		'.MuiChip-outlined': {
 			'& :hover': {
@@ -43,14 +42,8 @@ export default function ChipsAdapter(props: Props) {
 			onDelete={count ? () => {} : undefined}
 			deleteIcon={count ? <CounterIcon count={count} /> : undefined}
 			sx={sx}
-			icon={
-				checked ? (
-					<CheckIcon
-						color="primary"
-						sx={{ width: '20px', height: '20px', margin: '0' }}
-					/>
-				) : undefined
-			}
+			icon={icon ? <Grid 
+				>{icon}</Grid> : undefined}
 		/>
 	);
 }
