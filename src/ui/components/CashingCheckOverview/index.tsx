@@ -1,13 +1,13 @@
 import { Divider, Grid, Typography, useTheme } from '@mui/material';
-import { Check } from 'common/entities/cheque/chekList/CartableInquiry/CartableInquiryResponse';
+import { ReceiverInquiryChequeResponse } from 'common/entities/cheque/cashCheck/ReceiverInquiryCheque/ReceiverInquiryChequeResponse';
 import { useTranslation } from 'react-i18next';
 import OverviewItem from '../CheckOverview/OverviewItem';
 
 type Props = {
-	check: Check;
+	check: ReceiverInquiryChequeResponse;
 };
 export default function CashingCheckOverview(props: Props) {
-	const { amount, sayadNo, serialNo, seriesNo, chequeStatusDescription, dueDate, reasonDescription, description } =
+	const { amount, sayadId, serialNo, seriesNo, chequeStatusDescription, dueDate, reasonDescription, description } =
 		props.check;
 	const theme = useTheme();
 	const { t } = useTranslation();
@@ -32,7 +32,7 @@ export default function CashingCheckOverview(props: Props) {
 			</Typography>
 			<OverviewItem
 				title={t('sayadNo')}
-				value={sayadNo}
+				value={sayadId}
 			/>
 			<OverviewItem
 				title={t('series')}

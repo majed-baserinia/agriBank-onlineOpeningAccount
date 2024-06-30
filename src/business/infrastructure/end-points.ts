@@ -1,4 +1,5 @@
 export const CurrentAccounts = '/CustomerManager/currentaccounts';
+export const Accounts = '/CustomerManager/accounts';
 export const getCodes = '/Cheque/getreasoncodes';
 export const InquiryListType = '/Cheque/InquiryActiveDigitalListDetails';
 export const InquiryActiveDigitalChequeLists = '/Cheque/InquiryActiveDigitalChequeLists';
@@ -31,3 +32,4 @@ export const RejectGiveBackChequeInitiateOtp= '/cheque/DigitalCheque/RejectGiveB
 export const RejectGiveBackChequeVerifyOtp= '/cheque/DigitalCheque/RejectGiveBackChequeVerifyOtp';
 export const RejectGiveBackChequeFinalize= '/cheque/DigitalCheque/RejectGiveBackChequeFinalize';
 export const ChakadDeactivateCustomer= '/cheque/DigitalCheque/ChakadDeactivateCustomer';
+export const ReceiverInquiryCheque= '/cheque/ReceiverInquiryCheque';

@@ -1,16 +1,19 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import useReceiverInquiryCheque from 'business/hooks/cheque/cashCheque/useReceiverInquiryCheque';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
-import { Controller, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import CashingCheckForm from 'ui/components/CashingCheck/CashingCheckForm';
 import CashingCheckOverview from 'ui/components/CashingCheckOverview';
 import Menu from 'ui/components/Menu';
-import MenuItem from 'ui/components/Menu/MenuItem';
+import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
-import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
-import SelectAdapter from 'ui/htsc-components/SelectAdapter';
+import Loader from 'ui/htsc-components/loader/Loader';
 
 import { menuList } from 'ui/pages/HomePage/menuList';
+import { paths } from 'ui/route-config/paths';
 
 export default function CashingCheck() {
 	const navigate = useNavigate();
@@ -18,8 +21,38 @@ export default function CashingCheck() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { selectedCheck } = useChecklistData();
+	const { data: checkData, mutate: inquiryCheckData, isLoading, isError } = useReceiverInquiryCheque();
 
 
+
+	// useEffect(() => {
+	// 	if (!selectedCheck) {
+	// 		//TODO: maybe show a error modal
+	// 		navigate(paths.Home);
+	// 	} else {
+	// 		inquiryCheckData(
+	// 			{ sayadNo: selectedCheck.sayadNo },
+	// 			{
+	// 				onSuccess: (res) => {},
+	// 				onError: (err) => {
+	// 					pushAlert({
+	// 						type: 'error',
+	// 						messageText: err.detail,
+	// 						hasConfirmAction: true,
+	// 						actions: {
+	// 							onConfirm: () => {
+	// 								navigate(paths.Home);
+	// 							},
+	// 							onCloseModal: () => {
+	// 								navigate(paths.Home);
+	// 							}
+	// 						}
+	// 					});
+	// 				}
+	// 			}
+	// 		);
+	// 	}
+	// }, []);
 
 	return (
 		<Grid
@@ -34,28 +67,32 @@ export default function CashingCheck() {
 				xs={12}
 				md={8}
 			>
-	{/* 			<CashingCheckOverview check={selectedCheck!} />
+				<Title>{t('cashingCheck')}</Title>
+				{/* {checkData ? (
+					<CashingCheckOverview check={checkData} />
+				) : isError ? (
+					<Grid
+						container
+						direction={'column'}
+						gap={'8px'}
+						sx={{
+							backgroundColor: theme.palette.primary[50],
+							padding: '16px',
+							borderRadius: '16px'
+						}}
+					>
+						<Typography
+							variant="bodyMd"
+							fontWeight={'medium'}
+							align="center"
+						>
+							{t('noCheckInfo')}
+						</Typography>{' '}
+					</Grid>
+				) : null} */}
+
+				<CashingCheckForm/>
 				
-				<Grid
-					item
-					xs={12}
-					sm={6}
-				>
-					<Controller
-						name="date"
-						control={control}
-						render={({ field }) => (
-							<DatePickerAdapter
-								placeHolder={t('date')}
-								onChange={(date) => {
-									field.onChange(date?.toString());
-								}}
-								error={!!formState?.errors?.date}
-								//helperText={formState?.errors?.date?.message}
-							/>
-						)}
-					/>
-				</Grid> */}
 			</Grid>
 
 			{matches ? null : (
@@ -76,7 +113,7 @@ export default function CashingCheck() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			{/* <Loader showLoader={isLoading} /> */}
+			<Loader showLoader={isLoading} />
 		</Grid>
 	);
 }

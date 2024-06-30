@@ -222,5 +222,7 @@
 	"giveBackDescription": "Give Back Description",
 	"rejectGiveBackDescription": "Give Back Description",
 	"deactivationModalText": "If approved, the client will not be disabled.",
-	"refuse": "Refuse"
+	"refuse": "Refuse",
+	"cashingCheck": "Cashing Check",
+	"noCheckInfo": "There is no information of check"
 }

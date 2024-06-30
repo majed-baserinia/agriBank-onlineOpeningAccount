@@ -94,29 +94,29 @@ export const checkActionsMenuList = [
 				alt="CashingCheck"
 			/>
 		),
-		routeTo: ''
+		routeTo: paths.ReceivedChecksList.CashingCheck
 	},
+	// {
+	// 	id: '3',
+	// 	title: 'Conf/rej',
+	// 	icon: (
+	// 		<SvgToIcon
+	// 			icon={acceptOrNotIcon}
+	// 			alt="list check"
+	// 		/>
+	// 	),
+	// 	routeTo: paths.ReceivedChecksList.TransferCheck
+	// },
 	{
 		id: '3',
-		title: 'Conf/rej',
-		icon: (
-			<SvgToIcon
-				icon={acceptOrNotIcon}
-				alt="list check"
-			/>
-		),
-		routeTo: ''
-	},
-	{
-		id: '3',
-		title: 'giveBacksCheck',
+		title: 'giveBackCheck',
 		icon: (
 			<SvgToIcon
 				icon={giveBackCheckIcon}
 				alt="list check"
 			/>
 		),
-		routeTo: ''
+		routeTo: paths.ReceivedChecksList.GiveBackCheckInitiate
 	},
 	{
 		id: '3',
@@ -127,7 +127,7 @@ export const checkActionsMenuList = [
 				alt="list check"
 			/>
 		),
-		routeTo: ''
+		routeTo: paths.ReceivedChecksList.TransferCheck
 	},
 	{
 		id: '3',
@@ -138,6 +138,6 @@ export const checkActionsMenuList = [
 				alt="list check"
 			/>
 		),
-		routeTo: ''
+		routeTo: paths.ReceivedChecksList.RejectGiveBackCheckInitiate
 	}
 ];
