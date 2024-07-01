@@ -14,6 +14,7 @@ import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 
 import Loader from 'ui/htsc-components/loader/Loader';
+import { paths } from 'ui/route-config/paths';
 import infoIcon from '../../../../assets/icon/info-circle.svg';
 import sendAaginIcon from '../../../../assets/icon/refresh-alert.svg';
 import { menuList } from '../../HomePage/menuList';
@@ -32,21 +33,7 @@ export default function ActivationSecondStep() {
 	const { mutate: submition, isLoading: submitLoading } = useThirdStepCall();
 
 	useEffect(() => {
-		sendAgain(
-			{ activationKey: activationKey },
-			{
-				onSuccess: (response) => {
-					pushAlert({
-						type: 'info',
-						messageText: response.message,
-						hasConfirmAction: true
-					});
-				},
-				onError: (err) => {
-					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-				}
-			}
-		);
+		handleSendAgain();
 	}, []);
 
 	const handleSendAgain = () => {
@@ -79,8 +66,8 @@ export default function ActivationSecondStep() {
 						messageText: response.message,
 						hasConfirmAction: true,
 						actions: {
-							onCloseModal: () => navigate('/cheque'),
-							onConfirm: () => navigate('/cheque')
+							onCloseModal: () => navigate(paths.Home),
+							onConfirm: () => navigate(paths.Home)
 						}
 					});
 				},
@@ -91,8 +78,8 @@ export default function ActivationSecondStep() {
 							messageText: err.detail,
 							hasConfirmAction: true,
 							actions: {
-								onCloseModal: () => navigate('/cheque'),
-								onConfirm: () => navigate('/cheque')
+								onCloseModal: () => navigate(paths.Home),
+								onConfirm: () => navigate(paths.Home)
 							}
 						});
 					}

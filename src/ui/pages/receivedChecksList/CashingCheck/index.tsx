@@ -1,19 +1,16 @@
-import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import useAccountsQuery from 'business/hooks/cheque/cashCheque/useAccountsQuery';
 import useReceiverInquiryCheque from 'business/hooks/cheque/cashCheque/useReceiverInquiryCheque';
-import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import CashingCheckForm from 'ui/components/CashingCheck/CashingCheckForm';
-import CashingCheckOverview from 'ui/components/CashingCheckOverview';
 import Menu from 'ui/components/Menu';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 
 import { menuList } from 'ui/pages/HomePage/menuList';
-import { paths } from 'ui/route-config/paths';
 
 export default function CashingCheck() {
 	const navigate = useNavigate();
@@ -22,9 +19,7 @@ export default function CashingCheck() {
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { selectedCheck } = useChecklistData();
 	const { data: checkData, mutate: inquiryCheckData, isLoading, isError } = useReceiverInquiryCheque();
-
-
-
+	const { data: AccountData, isLoading: accountsDataLoading } = useAccountsQuery();
 	// useEffect(() => {
 	// 	if (!selectedCheck) {
 	// 		//TODO: maybe show a error modal
@@ -67,8 +62,21 @@ export default function CashingCheck() {
 				xs={12}
 				md={8}
 			>
-				<Title>{t('cashingCheck')}</Title>
-				{/* {checkData ? (
+				<BoxAdapter fullWidth={matches}>
+					<Grid
+						minHeight={matches ? 'calc(100vh - 64px)' : 'calc(100vh - 192px)'}
+						container
+						direction={'column'}
+						justifyContent={'space-between'}
+						wrap="nowrap"
+					>
+						<Grid
+							container
+							direction={'column'}
+							gap={'8px'}
+						>
+							<Title>{t('cashingCheck')}</Title>
+							{/* {checkData ? (
 					<CashingCheckOverview check={checkData} />
 				) : isError ? (
 					<Grid
@@ -91,8 +99,10 @@ export default function CashingCheck() {
 					</Grid>
 				) : null} */}
 
-				<CashingCheckForm/>
-				
+							<CashingCheckForm AccountData={AccountData} />
+						</Grid>
+					</Grid>
+				</BoxAdapter>
 			</Grid>
 
 			{matches ? null : (
@@ -113,7 +123,7 @@ export default function CashingCheck() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isLoading} />
+			<Loader showLoader={isLoading || accountsDataLoading} />
 		</Grid>
 	);
 }

@@ -1,6 +1,7 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
 import useGetAllRelatedCustomers from 'business/hooks/cheque/checklist/useGetAllRelatedCustomers';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useTransferedChecksStore } from 'business/stores/transferedChecksStore/transferedChecksStore';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -42,8 +43,28 @@ export default function SelectTransferredCheckList() {
 	const navigate = useNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const { addNewDataToStore } = useTransferedChecksStore((store) => store);
-	const { data: listItems, isLoading } = useGetAllRelatedCustomers('checkList');
+	const { data: listItems, isLoading, error: GetAllRelatedCustomersError } = useGetAllRelatedCustomers('checkList');
 	const [menuItems, setMenuItems] = useState<MenuItems>([]);
+
+
+	useEffect(() => {
+		if (GetAllRelatedCustomersError) {
+			pushAlert({
+				type: 'error',
+				messageText: GetAllRelatedCustomersError.detail,
+				hasConfirmAction: true,
+				actions: {
+					onCloseModal: () => {
+						navigate(paths.Home);
+					},
+					onConfirm: () => {
+						navigate(paths.Home);
+					}
+				}
+			});
+		}
+	}, [GetAllRelatedCustomersError]);
+
 
 	useEffect(() => {
 		//set the new list to the store

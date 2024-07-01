@@ -27,7 +27,7 @@ export default function SelectAccount() {
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const setDataForNextStep = useDataSteps((store) => store.setStepData);
 
-	const { data: AccountData, isLoading } = useAccounts();
+	const { data: AccountData, isLoading, error: useAccountsError } = useAccounts();
 	const { data: checkbooks, mutate: getCheckbooks, error: checkbooksError } = useGetCheckbooks();
 	const { data: checksheets, mutate: getChecksheets, error: checksheetsError } = useGetChecksheets();
 
@@ -36,13 +36,23 @@ export default function SelectAccount() {
 	const [selectedChecksheet, setSelectedChecksheet] = useState<null | CheckSheet>(null);
 
 	useEffect(() => {
-		if (checkbooksError) {
-			pushAlert({ type: 'error', messageText: checkbooksError.detail, hasConfirmAction: true });
+		let errorMessage;
+		if (checkbooksError) errorMessage = checkbooksError.detail;
+		if (checksheetsError) errorMessage = checksheetsError.detail;
+		if (useAccountsError) errorMessage = useAccountsError.detail;
+
+		if (useAccountsError || checksheetsError || checkbooksError) {
+			pushAlert({
+				type: 'error',
+				messageText: errorMessage,
+				hasConfirmAction: true,
+				actions: {
+					onCloseModal: () => navigate(paths.Home),
+					onConfirm: () => navigate(paths.Home)
+				}
+			});
 		}
-		if (checksheetsError) {
-			pushAlert({ type: 'error', messageText: checksheetsError.detail, hasConfirmAction: true });
-		}
-	}, [checkbooksError, checksheetsError]);
+	}, [checkbooksError, checksheetsError, useAccountsError]);
 
 	const handleNextStep = () => {
 		//save the needed data for next page
@@ -54,7 +64,6 @@ export default function SelectAccount() {
 		navigate(paths.IssueCheck.CheckInfoPath);
 	};
 
-	
 	return (
 		<Grid
 			container
@@ -119,7 +128,6 @@ export default function SelectAccount() {
 										renderValue
 									>
 										{AccountData?.map((item, index) => {
-																		
 											return (
 												<MenuItem
 													key={index}
@@ -150,10 +158,10 @@ export default function SelectAccount() {
 																variant="bodyXs"
 																color={theme.palette.grey[200]}
 															>
-																{
-																								
-																!item.isShared ?`${item.owners[0]?.firstName} ${item.owners[0]
-																	?.lastName} ${t('curentAccountP')}`:t('sharedAccountP')}
+																{!item.isShared
+																	? `${item.owners[0]?.firstName} ${item.owners[0]
+																			?.lastName} ${t('curentAccountP')}`
+																	: t('sharedAccountP')}
 															</Typography>
 
 															<Typography variant="bodyMd">

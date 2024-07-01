@@ -36,7 +36,7 @@ export default function GiveBackCheckInitiate() {
 
 	const handleNextStep = () => {
 		const data = getValues();
-		console.log(data);
+
 		givebackChequeInitiate(
 			{
 				...data,

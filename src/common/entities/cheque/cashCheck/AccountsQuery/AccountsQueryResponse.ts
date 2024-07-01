@@ -11,6 +11,7 @@ export interface Account {
 	isShared: boolean;
 	owners: AccountOwnerDto[];
 	iban: string;
+	accountOwnershipType: OwnerTypeEnum;
 	relationType: RelationTypeEnum;
 }
 export interface AccountOwner {
@@ -26,7 +27,8 @@ export enum RelationTypeEnum {
 interface AccountOwnerDto {
 	firstName: string;
 	lastName: string;
-	ownerType: OwnerTypeEnum;
+	customerNumber: number;
+	nationalCode: string;
 }
 
 enum OwnerTypeEnum {

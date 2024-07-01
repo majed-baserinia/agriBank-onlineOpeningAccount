@@ -83,7 +83,21 @@ export default function GiveBackCheckOTP() {
 		initiateOtp(
 			{ transferChequeKey: giveBackChequeInitiateResponse?.transferChequeKey! },
 			{
-				onError: () => {},
+				onError: (err) => {
+					pushAlert({
+						type: 'error',
+						messageText: err.detail,
+						hasConfirmAction: true,
+						actions: {
+							onCloseModal: () => {
+								navigate(paths.Home);
+							},
+							onConfirm: () => {
+								navigate(paths.Home);
+							}
+						}
+					});
+				},
 				onSuccess: () => {}
 			}
 		);

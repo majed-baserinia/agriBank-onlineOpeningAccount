@@ -17,6 +17,7 @@ import Stepper from 'ui/htsc-components/Stepper';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { menuList } from '../../HomePage/menuList';
+import { paths } from 'ui/route-config/paths';
 
 export default function ActivationFirstStep() {
 	const navigate = useNavigate();
@@ -46,12 +47,21 @@ export default function ActivationFirstStep() {
 				onSuccess: (response) => {
 					setChakad_FirstStep(response.activationKey);
 
-					navigate('/cheque/activation/secondStep');
+					navigate(paths.Activation.secondStepPath);
 				},
-				onError: (ex) => {
-					if (ex.status == 453) {
-						pushAlert({ type: 'error', messageText: ex.detail, hasConfirmAction: true });
+				onError: (err) => {
+					if (err.status == 453) {
+						pushAlert({
+							type: 'error',
+							messageText: err.detail,
+							hasConfirmAction: true,
+							actions: {
+								onCloseModal: () => navigate(paths.Home),
+								onConfirm: () => navigate(paths.Home)
+							}
+						});
 					}
+					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
 				}
 			}
 		);

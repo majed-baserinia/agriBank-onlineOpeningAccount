@@ -224,5 +224,11 @@
 	"deactivationModalText": "If approved, the client will not be disabled.",
 	"refuse": "Refuse",
 	"cashingCheck": "Cashing Check",
-	"noCheckInfo": "There is no information of check"
+	"noCheckInfo": "There is no information of check",
+	"accountNumber": "Account Number",
+	"receiptDate": "Receipt Date",
+	"(optional)": "(Optional)",
+	"depositID":"Deposit ID",
+	"accountselectCashingHelperText": "The account to which you want the desired amount to be deposited",
+	"dateCashingHelperText": "The check will be received on the date you want."
 }

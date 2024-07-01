@@ -27,7 +27,8 @@ export default function SelectAdapter(props: Props) {
 		defaultValue = '',
 		muiSelectProps,
 		size = 'medium',
-		renderValue = false
+		renderValue = false,
+		isRequired = false
 	} = props;
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -106,7 +107,18 @@ export default function SelectAdapter(props: Props) {
 					onOpen={() => setOpen(true)}
 					onClose={(e) => handleClickedItem(e)}
 					value={selectedValue}
-					label={label}
+					label={
+						<>
+							{isRequired ? (
+								<>
+									{label}
+									<span style={{ color: theme.palette.error.main }}> *</span>
+								</>
+							) : (
+								label
+							)}
+						</>
+					}
 					onChange={(e, child) => handleChange(e, child)}
 					sx={{ '& .MuiSvgIcon-root': { color: theme.palette.grey[400] } }}
 					IconComponent={KeyboardArrowDownIcon}

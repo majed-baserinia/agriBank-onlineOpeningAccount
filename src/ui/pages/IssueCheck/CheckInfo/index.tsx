@@ -19,13 +19,15 @@ import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { menuList } from '../../HomePage/menuList';
+import { useEffect } from 'react';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 
 export default function CheckInfo() {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { data: reasonCodes, isLoading: isPendingtoGetReasons, isError } = useGetReasonCodes();
+	const { data: reasonCodes, isLoading: isPendingtoGetReasons, isError, error } = useGetReasonCodes();
 	const setDataForNextStep = useDataSteps((store) => store.setStepData);
 
 	const { control, formState, getValues, handleSubmit } = useForm<CheckInfoFormValidatorCommand>({
@@ -35,6 +37,22 @@ export default function CheckInfo() {
 		context: CheckInfoFormValidatorCommand
 	});
 
+
+	useEffect(()=>{
+		if(error){
+			pushAlert({
+				type: 'error',
+				//TODO: fix the below message 
+				messageText: "error.detail",
+				hasConfirmAction: true,
+				actions: {
+					onCloseModal: () => navigate('/cheque'),
+					onConfirm: () => navigate('/cheque')
+				}
+			});
+		}
+	},[error])
+	
 	const handleNextStep = () => {
 		setDataForNextStep({
 			issueCheckDetail: getValues()

@@ -1,17 +1,17 @@
 import { Grid, MenuItem, Typography, useTheme } from '@mui/material';
 import keshavarzi from 'assets/icon/Banks/Color/Keshavarzi.svg';
-import useAccounts from 'business/hooks/cheque/Digital Cheque/useAccounts';
 import useAccountsQuery from 'business/hooks/cheque/cashCheque/useAccountsQuery';
-import { Controller } from 'react-hook-form';
+import { AccountsQueryResponse } from 'common/entities/cheque/cashCheck/AccountsQuery/AccountsQueryResponse';
 import { useTranslation } from 'react-i18next';
 import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
 import SelectAdapter from 'ui/htsc-components/SelectAdapter';
+import SwitchAdapter from 'ui/htsc-components/SwitchAdapter';
 
-export default function CashingCheckForm() {
+export default function CashingCheckForm({AccountData}:{AccountData?: AccountsQueryResponse}) {
 	const { t } = useTranslation();
 	const theme = useTheme();
-    const { data: AccountData, isLoading} = useAccountsQuery();
+	
 	// const { control, formState, getValues, handleSubmit } = useForm<ReceiverInquiryChequeCommand>({
 	// 	resolver: (values, context, options) => {
 	// 		return fluentValidationResolver(values, context, options);
@@ -19,8 +19,6 @@ export default function CashingCheckForm() {
 	// 	context: ReceiverInquiryChequeCommand
 	// });
 
-
-    
 	return (
 		<Grid
 			container
@@ -40,52 +38,55 @@ export default function CashingCheckForm() {
 					onChange={(selectedValue) => {
 						//setSelectedAccountNumber(selectedValue);
 					}}
-					label={t('accountsList')}
+					label={t('accountNumber')}
 					renderValue
+					helperText={t('accountselectCashingHelperText')}
 				>
 					{AccountData?.map((item, index) => {
-						return (
-							<MenuItem
-								key={index}
-								style={{ margin: '10px 0' }}
-								value={item.accountNumber}
-							>
-								<Grid
-									container
-									justifyContent={'center'}
-									alignItems="Center"
-									gap={'5px'}
-									wrap="nowrap"
+						if (!item.isShared) {
+							return (
+								<MenuItem
+									key={index}
+									style={{ margin: '10px 0' }}
+									value={item.accountNumber}
 								>
-									<Grid sx={{ height: '30px', width: '30px' }}>
-										<img
-											style={{ width: '100%', height: '100%' }}
-											src={keshavarzi}
-											alt={'icon'}
-										/>
-									</Grid>
 									<Grid
 										container
-										direction={'column'}
-										alignItems="flex-start"
+										justifyContent={'center'}
+										alignItems="Center"
 										gap={'5px'}
+										wrap="nowrap"
 									>
-										<Typography
-											variant="bodyXs"
-											color={theme.palette.grey[200]}
+										<Grid sx={{ height: '30px', width: '30px' }}>
+											<img
+												style={{ width: '100%', height: '100%' }}
+												src={keshavarzi}
+												alt={'icon'}
+											/>
+										</Grid>
+										<Grid
+											container
+											direction={'column'}
+											alignItems="flex-start"
+											gap={'5px'}
 										>
-											{!item.isShared
-												? `${item.owners[0]?.firstName} ${item.owners[0]?.lastName} ${t(
-														'curentAccountP'
-													)}`
-												: t('sharedAccountP')}
-										</Typography>
+											<Typography
+												variant="bodyXs"
+												color={theme.palette.grey[200]}
+											>
+												{!item.isShared
+													? `${item.owners[0]?.firstName} ${item.owners[0]?.lastName} ${t(
+															'curentAccountP'
+														)}`
+													: t('sharedAccountP')}
+											</Typography>
 
-										<Typography variant="bodyMd">{item.accountNumber}</Typography>
+											<Typography variant="bodyMd">{item.accountNumber}</Typography>
+										</Grid>
 									</Grid>
-								</Grid>
-							</MenuItem>
-						);
+								</MenuItem>
+							);
+						}
 					})}
 				</SelectAdapter>
 			</Grid>
@@ -98,17 +99,17 @@ export default function CashingCheckForm() {
 				xl={6}
 				sx={{ order: { xs: 3, sm: 3, md: 3, lg: 3, xl: 3 } }}
 			>
+				<InputAdapter
+					label={t('depositID')}
+					onChange={() => {}}
+				/>
 				{/* <Controller
 					name="date"
 					control={control}
 					render={({ field }) => (
-						<DatePickerAdapter
-							placeHolder={t('date')}
-							onChange={(date) => {
-								field.onChange(date?.toString());
-							}}
-							error={!!formState?.errors?.date}
-							//helperText={formState?.errors?.date?.message}
+						<InputAdapter
+							label="askhi"
+							onChange={() => {}}
 						/>
 					)}
 				/> */}
@@ -125,13 +126,21 @@ export default function CashingCheckForm() {
 				{/* <Controller
 					name="date"
 					control={control}
-					render={({ field }) => (
-						<InputAdapter
-							label="askhi"
-							onChange={() => {}}
-						/>
-					)}
-				/> */}
+					render={({ field }) => (*/}
+				<DatePickerAdapter
+					placeHolder={`${t('receiptDate')} ${t('(optional)')} `}
+					onChange={(date) => {
+						//field.onChange(date?.toString());
+					}}
+					helperText={t('dateCashingHelperText')}
+					//error={!!formState?.errors?.date}
+					//helperText={formState?.errors?.date?.message}
+				/>
+				{/* )}
+				/>  */}
+			</Grid>
+			<Grid>
+				<SwitchAdapter type='small' label='rtets' onChange={()=>{}} checked/>
 			</Grid>
 		</Grid>
 	);

@@ -6,6 +6,7 @@ export type Props = {
 	helperText?: string;
 	error?: boolean;
 	disabled?: boolean;
+	isRequired?: boolean;
 	renderValue?: boolean;
 	icon?: ReactNode;
 	children: ReactNode[] | ReactNode;

@@ -224,5 +224,11 @@
 	"deactivationModalText": "در صورت تایید، مشتری در غیرفعال نخواهد شد.",
 	"refuse": "انصراف",
 	"cashingCheck": "نقد کردن چک",
-	"noCheckInfo": "اطلاعاتی از چک یافت نشد"
+	"noCheckInfo": "اطلاعاتی از چک یافت نشد",
+	"accountNumber": "شماره حساب",
+	"receiptDate": "تاریخ وصول",
+	"(optional)": "(اختیاری)",
+	"depositID": "شناسه واریز",
+	"accountselectCashingHelperText": "حسابی که میخواهید مبلغ مدنظر به آن واریز شود",
+	"dateCashingHelperText": "در تاریخ مدنظر شما چک وصول خواهد شد."
 }

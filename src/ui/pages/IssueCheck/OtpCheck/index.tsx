@@ -18,6 +18,7 @@ import Otp from 'ui/htsc-components/Otp';
 import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import { menuList } from '../../HomePage/menuList';
+import { paths } from 'ui/route-config/paths';
 
 export default function OtpCheck() {
 	const theme = useTheme();
@@ -64,8 +65,8 @@ export default function OtpCheck() {
 					messageText: response.message,
 					hasConfirmAction: true,
 					actions: {
-						onCloseModal: () => navigate('/cheque'),
-						onConfirm: () => navigate('/cheque')
+						onCloseModal: () => navigate(paths.Home),
+						onConfirm: () => navigate(paths.Home)
 					}
 				});
 			},
@@ -76,8 +77,8 @@ export default function OtpCheck() {
 						messageText: err.detail,
 						hasConfirmAction: true,
 						actions: {
-							onCloseModal: () => navigate('/cheque'),
-							onConfirm: () => navigate('/cheque')
+							onCloseModal: () => navigate(paths.Home),
+							onConfirm: () => navigate(paths.Home)
 						}
 					});
 				}

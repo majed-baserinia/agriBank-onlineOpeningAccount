@@ -36,7 +36,7 @@ export default function RejectGiveBackCheckInitiate() {
 
 	const handleNextStep = () => {
 		const data = getValues();
-		console.log(data);
+
 		rejectGivebackChequeInitiate(
 			{
 				...data,
