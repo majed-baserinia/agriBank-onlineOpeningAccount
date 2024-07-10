@@ -1,7 +1,8 @@
 import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, Typography, useTheme } from '@mui/material';
 import AddReceiversformValidationCommand from 'business/application/cheque/Digital Cheque/AddReceiversformValidation/AddReceiversformValidationCommand';
-//import useInqueryNationalId from 'business/hooks/cheque/Digital Cheque/useInqueryNationalId';
+import useRecieverNameInquiry from 'business/hooks/cheque/Digital Cheque/useRecieverNameInquiry';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -11,29 +12,31 @@ import InputAdapter from 'ui/htsc-components/InputAdapter';
 import { AddFormProps } from './type';
 
 export default function AddForm(props: AddFormProps) {
-	const { setOpen, setReceivers } = props;
+	const { setOpen, setReceivers, sayad } = props;
 	const theme = useTheme();
 	const { t } = useTranslation();
-	//const { data: inqueriedData, isLoading, mutate: inqueryNationalId } = useInqueryNationalId();
-	const [personal, setPersonal] = useState(true);
+	const { data: inqueriedData, isLoading:  loadingIquiryName, mutate: inqueryRecieverName } = useRecieverNameInquiry();
+	const [tab, setTab] = useState<'personal' | 'corporate'>('personal');
 	const [checkedForeigner, setCheckedForeigner] = useState(false);
 
-	const { control, formState, getValues, handleSubmit, reset } = useForm<AddReceiversformValidationCommand>({
-		resolver: (values, context, options) => {
-			return validator(values, context, options);
-		},
-		defaultValues: {
-			name: '',
-			nationalNo: '',
-			shahabNo: ''
-		},
-		context: AddReceiversformValidationCommand
-	});
+	const { control, formState, getValues, handleSubmit, reset, setValue } = useForm<AddReceiversformValidationCommand>(
+		{
+			resolver: (values, context, options) => {
+				return validator(values, context, options);
+			},
+			defaultValues: {
+				name: '',
+				nationalNo: '',
+				shahabNo: ''
+			},
+			context: AddReceiversformValidationCommand
+		}
+	);
 
 	const handleAdd = () => {
 		//save data of the person
 		setReceivers((prev) => {
-			return [...prev, { ...getValues(), customerType: detectCustomerType(personal, checkedForeigner) }];
+			return [...prev, { ...getValues(), customerType: detectCustomerType(tab, checkedForeigner) }];
 		});
 
 		//reset the form
@@ -43,21 +46,22 @@ export default function AddForm(props: AddFormProps) {
 		setOpen(false);
 	};
 
-	// const handleInquery = () => {
-	// 	//call api for inquery
-	// 	const { nationalNo } = getValues();
-	// 	inqueryNationalId(
-	// 		{ nationalId: nationalNo },
-	// 		{
-	// 			onError: (err) => {
-	// 				pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-	// 			},
-	// 			onSuccess: () => {
-	// 				//set the response to form
-	// 			}
-	// 		}
-	// 	);
-	// };
+	const handleInquery = () => {
+		//call api for inquery
+		const { nationalNo } = getValues();
+
+		inqueryRecieverName(
+			{ IdCode: nationalNo, IdType: 1, SayadId: sayad },
+			{
+				onError: (err) => {
+					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+				},
+				onSuccess: (res) => {
+					setValue('name', res.receiverName);
+				}
+			}
+		);
+	};
 
 	const activeButtonStyle = {
 		backgroundColor: theme.palette.primary.main,
@@ -89,9 +93,9 @@ export default function AddForm(props: AddFormProps) {
 						textAlign: 'center',
 						borderRadius: '8px',
 						color: theme.palette.primary.main,
-						...(personal ? activeButtonStyle : null)
+						...(tab === 'personal' ? activeButtonStyle : null)
 					}}
-					onClick={() => setPersonal(true)}
+					onClick={() => setTab('personal')}
 				>
 					<Typography
 						variant="bodySm"
@@ -107,9 +111,9 @@ export default function AddForm(props: AddFormProps) {
 						padding: '10px 5px',
 						textAlign: 'center',
 						borderRadius: '8px',
-						...(!personal ? activeButtonStyle : null)
+						...(tab === 'corporate' ? activeButtonStyle : null)
 					}}
-					onClick={() => setPersonal(false)}
+					onClick={() => setTab('corporate')}
 				>
 					<Typography
 						variant="bodySm"
@@ -138,7 +142,7 @@ export default function AddForm(props: AddFormProps) {
 								return (
 									<InputAdapter
 										sx={{ flex: 1 }}
-										label={personal ? t('personalIDOrUniversalID') : t('companyLegalID')}
+										label={tab === 'personal' ? t('personalIDOrUniversalID') : t('companyLegalID')}
 										isRequired
 										type="number"
 										defaultValue={field.value}
@@ -153,13 +157,11 @@ export default function AddForm(props: AddFormProps) {
 						/>
 						<ButtonAdapter
 							variant="outlined"
-							//onClick={() => handleInquery()}
-							onClick={() => {}}
+							onClick={() => handleInquery()}
 							muiButtonProps={{ sx: { borderRadius: '16px' } }}
-							//disabled={isLoading}
-							disabled
+							disabled={loadingIquiryName}
 						>
-							{t('inquiry')}
+							{loadingIquiryName ? "..." :t('inquiry')}
 						</ButtonAdapter>
 					</Grid>
 					<CheckboxAdapter
@@ -173,9 +175,10 @@ export default function AddForm(props: AddFormProps) {
 						render={({ field }) => {
 							return (
 								<InputAdapter
+								
 									sx={{ flex: 1 }}
 									type="text"
-									label={personal ? t('first&lastName') : t('companyName')}
+									label={tab === 'personal' ? t('first&lastName') : t('companyName')}
 									isRequired
 									defaultValue={field.value}
 									onChange={(value) => field.onChange(value)}
@@ -215,8 +218,8 @@ export default function AddForm(props: AddFormProps) {
 	);
 }
 
-const detectCustomerType = (personal: boolean, checkedForeigner: boolean): 1 | 2 | 3 | 4 => {
-	if (personal) {
+const detectCustomerType = (tab: 'personal' | 'corporate', checkedForeigner: boolean): 1 | 2 | 3 | 4 => {
+	if (tab === 'personal') {
 		return checkedForeigner ? 3 : 1;
 	} else {
 		return checkedForeigner ? 4 : 2;

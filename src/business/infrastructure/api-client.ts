@@ -1,10 +1,12 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axiosRetry from 'axios-retry';
 import { sendPostmessage } from 'business/hooks/postMessage/useInitPostMessage';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import ApiConfigSingleton from 'business/stores/api-config-singleton';
 import useInitialSettingStore from 'business/stores/initial-setting-store';
 import { ErrorType } from 'common/entities/ErrorType';
 import i18n from 'i18n';
+import { t } from 'i18next';
 import { clearAuth, getAuthTokens, saveAuthTokens } from './auth-service';
 
 const axiosInstance = axios.create({
@@ -81,6 +83,15 @@ axiosInstance.interceptors.response.use(
 			}
 		} else if (error.response?.status == 400 && error?.response?.data) {
 			throw prepareErrorType(<ErrorType<TResponse>>error?.response?.data);
+		}
+console.log({error});
+
+		if (error.message === 'Network Error' && error.response?.status !== 500) {
+			pushAlert({
+				type: 'error',
+				messageText: t('netErr'),
+				hasConfirmAction: true
+			});
 		}
 		return Promise.reject(prepareErrorType(<ErrorType<TResponse>>error?.response?.data));
 	}

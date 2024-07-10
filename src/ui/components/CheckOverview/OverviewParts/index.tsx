@@ -21,6 +21,15 @@ export default function OverviewParts(props: Props) {
 		if (type === 'holder') return <HolderComponent {...(data as HolderData)} />;
 	};
 
+	const holderChiosColorDetector = (value: 0 | 1 | 2) => {
+		const list = {
+			0: 'info',
+			1: 'error',
+			2: 'success'
+		} as const;
+
+		return list[value];
+	};
 	return (
 		<Grid
 			container
@@ -36,8 +45,9 @@ export default function OverviewParts(props: Props) {
 				>
 					<Typography variant="bodyMd">{data?.name}</Typography>
 					<ChipsAdapter
-						label={(data as HolderData).acceptTransfer! === 0 ? t('awaitingConfirmation') : t('confirmed')}
-						color={(data as HolderData).acceptTransfer! === 0 ? 'info' : 'success'}
+						//label={(data as HolderData)?.acceptTransfer! === 0 ? t('awaitingConfirmation') : t('confirmed')}
+						label={(data as HolderData)?.acceptTransferDescription}
+						color={holderChiosColorDetector((data as HolderData)?.acceptTransfer)}
 						size="small"
 					/>
 				</Grid>

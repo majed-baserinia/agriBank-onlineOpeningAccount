@@ -32,7 +32,20 @@ export default function OverView() {
 			},
 			{
 				onError: (err) => {
-					pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail });
+					if (err.status===453 && err.instance === "RemoveRequest") {
+						pushAlert({
+							type: 'error',
+							hasConfirmAction: true,
+							messageText: err.detail,
+							actions: {
+								onCloseModal: () => navigate(paths.Home),
+								onConfirm: () => navigate(paths.Home)
+							}
+						});
+					} else{
+
+						pushAlert({ type: 'error', hasConfirmAction: true, messageText: err.detail });
+					}
 				},
 				onSuccess(res) {
 					pushAlert({
@@ -196,7 +209,7 @@ export default function OverView() {
 						<Menu
 							divider={false}
 							list={menuList.services}
-						/>{' '}
+						/>
 					</BoxAdapter>
 				</Grid>
 			)}

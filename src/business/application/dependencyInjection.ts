@@ -85,8 +85,8 @@ export * from './cheque/transferCheck/TransferBasicCheckDataValidator/TransferBa
 export * from './cheque/transferCheck/TransferChequeFinalize/TransferChequeFinalizeCommand';
 export * from './cheque/transferCheck/TransferChequeFinalize/TransferChequeFinalizeCommandHandler';
 
-export * from './cheque/transferCheck/RejectTransfercCequeFinalize/RejectTransfercCequeFinalizeCommand';
-export * from './cheque/transferCheck/RejectTransfercCequeFinalize/RejectTransfercCequeFinalizeCommandHandler';
+export * from './cheque/transferCheck/RejectTransferChequeFinalize/RejectTransferChequeFinalizeCommand';
+export * from './cheque/transferCheck/RejectTransferChequeFinalize/RejectTransferChequeFinalizeCommandHandler';
 
 export * from './cheque/giveBackCheck/GivebackChequeInitiate/GivebackChequeInitiateCommand';
 export * from './cheque/giveBackCheck/GivebackChequeInitiate/GivebackChequeInitiateCommandHandler';
@@ -124,7 +124,11 @@ export * from './cheque/cashCheck/ReceiverInquiryCheque/ReceiverInquiryChequeCom
 export * from './cheque/cashCheck/Accounts/AccountsQuery'
 export * from './cheque/cashCheck/Accounts/AccountsQueryHandler'
 
+export * from './cheque/deactivation/ChakadDeactivateCustomer/ChakadDeactivateCustomerCommand'
+export * from './cheque/deactivation/ChakadDeactivateCustomer/ChakadDeactivateCustomerCommandHandler'
 
+export * from './cheque/Digital Cheque/RecieverNameInquiry/RecieverNameInquiryCommand'
+export * from './cheque/Digital Cheque/RecieverNameInquiry/RecieverNameInquiryCommandHandler'
 
 
 

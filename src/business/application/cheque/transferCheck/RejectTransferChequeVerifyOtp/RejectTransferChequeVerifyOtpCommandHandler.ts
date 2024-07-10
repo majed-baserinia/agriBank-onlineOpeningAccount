@@ -14,7 +14,9 @@ export class RejectTransferChequeVerifyOtpCommandHandler
 			RejectTransferChequeVerifyOtp
 		);
 		return apiClient.post(<RejectTransferChequeVerifyOtpRequest>{
-			transferChequeKey: value.transferChequeKey
+			transferChequeKey: value.transferChequeKey,
+			otpCode: value.otpCode,
+			selectSingleSignatureLegal: value.selectSingleSignatureLegal,
 		});
 	}
 }

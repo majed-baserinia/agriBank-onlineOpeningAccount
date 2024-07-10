@@ -88,7 +88,7 @@ export default function AppAlerts() {
 								}}
 								variant={'contained'}
 							>
-								{t('IUnderstand')}
+								{capturedAlert.confirmButtonText ? capturedAlert.confirmButtonText : t('IUnderstand')}
 							</ButtonAdapter>
 						) : null}
 						{capturedAlert?.hasContinueAction ? (

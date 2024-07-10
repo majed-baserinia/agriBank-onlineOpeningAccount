@@ -137,6 +137,7 @@ export default function ActivationFirstStep() {
 			</Grid>
 			{matches ? null : (
 				<Grid
+				item
 					md={3}
 					dir={theme.direction}
 				>

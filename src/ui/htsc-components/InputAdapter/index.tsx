@@ -33,7 +33,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 	} = props;
 
 	const theme = useTheme();
-	const [value, setValue] = useState('');
+	const [value, setValue] = useState("");
 	const [shrink, setShrink] = useState(defaultValue ? true : false);
 	const [endIcon, setEndIcon] = useState<ReactNode>(null);
 

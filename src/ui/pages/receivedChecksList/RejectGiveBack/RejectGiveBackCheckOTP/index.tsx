@@ -29,6 +29,7 @@ export default function RejectGiveBackCheckOTP() {
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const [sendAgain, setSendAgain] = useState(false);
 	const { RejectGiveBackChequeInitiateResponse } = useChecklistData();
+console.log({RejectGiveBackChequeInitiateResponse});
 
 	const { mutate: initiateOtp, data: initiateOtpRes, isLoading: initLoading } = useRejectGiveBackChequeInitiateOtp();
 	const { mutate: verifyOtp, isLoading: verifyLoading } = useRejectGiveBackChequeVerifyOtp();
@@ -38,6 +39,33 @@ export default function RejectGiveBackCheckOTP() {
 		resolver: (values, context, options) => fluentValidationResolver(values, context, options),
 		context: RejectGiveBackChequeVerifyOtpCommand
 	});
+
+
+	useEffect(() => {
+		console.log("%c sdklahgjkdssdha;gsdfjsdfhsgh;as", "color:blue;");
+		
+		initiateOtp(
+			{ transferChequeKey: RejectGiveBackChequeInitiateResponse?.transferChequeKey! },
+			{
+				onError: (err) => {
+					pushAlert({
+						type: 'error',
+						messageText: err.detail,
+						hasConfirmAction: true,
+						actions: {
+							onCloseModal: () => {
+								navigate(paths.Home);
+							},
+							onConfirm: () => {
+								navigate(paths.Home);
+							}
+						}
+					});
+				},
+				onSuccess: () => {}
+			}
+		);
+	}, [sendAgain]);
 
 	const VerifyOtpHandler = (data: RejectGiveBackChequeVerifyOtpCommand) => {
 		verifyOtp(
@@ -77,29 +105,7 @@ export default function RejectGiveBackCheckOTP() {
 		);
 	};
 
-	useEffect(() => {
-		initiateOtp(
-			{ transferChequeKey: RejectGiveBackChequeInitiateResponse?.transferChequeKey! },
-			{
-				onError: (err) => {
-					pushAlert({
-						type: 'error',
-						messageText: err.detail,
-						hasConfirmAction: true,
-						actions: {
-							onCloseModal: () => {
-								navigate(paths.Home);
-							},
-							onConfirm: () => {
-								navigate(paths.Home);
-							}
-						}
-					});
-				},
-				onSuccess: () => {}
-			}
-		);
-	}, [sendAgain]);
+	
 
 	return (
 		<Grid
@@ -110,6 +116,7 @@ export default function RejectGiveBackCheckOTP() {
 			dir={theme.direction}
 		>
 			<Grid
+			item
 				xs={12}
 				md={8}
 			>
@@ -188,6 +195,7 @@ export default function RejectGiveBackCheckOTP() {
 			</Grid>
 			{matches ? null : (
 				<Grid
+				item
 					md={3}
 					dir={theme.direction}
 				>

@@ -103,6 +103,7 @@ export default function SignatureRegistration() {
 			dir={theme.direction}
 		>
 			<Grid
+			item
 				xs={12}
 				md={8}
 			>
@@ -184,6 +185,7 @@ export default function SignatureRegistration() {
 			</Grid>
 			{matches ? null : (
 				<Grid
+				item
 					md={3}
 					dir={theme.direction}
 				>

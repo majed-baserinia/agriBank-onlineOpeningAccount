@@ -4,6 +4,7 @@ export type AppAlert = {
 	type: 'success' | 'info' | 'warning' | 'error';
 	messageText?: string;
 	hasConfirmAction?: boolean;
+	confirmButtonText?: string;
 	hasContinueAction?: boolean;
 	hasRefuseAction?: boolean;
 	actions?: AlertActions

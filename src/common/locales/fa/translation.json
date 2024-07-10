@@ -41,7 +41,7 @@
 	"chequeMenu": "خدمات چک الکترونیک",
 	"accountServices": "خدمات حساب",
 	"electronicCheck": "چک الکترونیک",
-	"activationElCheck": "فعالسازی چک الکترونیک",
+	"activationElCheck": "فعالسازی مشتری",
 	"issueElCheck": "ثبت چک الکترونیک",
 	"continue": "ادامه",
 	"activationFirstStepText": "جهت فعالسازی برای دریافت خدمات چک الکترونیک یک گزینه را انتخاب کنید.",
@@ -221,7 +221,7 @@
 	"rejectElCheckGiveBack": "رد عودت چک الکترونیک",
 	"giveBackDescription": "شرح عودت",
 	"rejectGiveBackDescription": "شرح رد عودت",
-	"deactivationModalText": "در صورت تایید، مشتری در غیرفعال نخواهد شد.",
+	"deactivationModalText": "در صورت تایید، مشتری غیرفعال خواهد شد.",
 	"refuse": "انصراف",
 	"cashingCheck": "نقد کردن چک",
 	"noCheckInfo": "اطلاعاتی از چک یافت نشد",
@@ -230,5 +230,9 @@
 	"(optional)": "(اختیاری)",
 	"depositID": "شناسه واریز",
 	"accountselectCashingHelperText": "حسابی که میخواهید مبلغ مدنظر به آن واریز شود",
-	"dateCashingHelperText": "در تاریخ مدنظر شما چک وصول خواهد شد."
+	"dateCashingHelperText": "در تاریخ مدنظر شما چک وصول خواهد شد.",
+	"myself": "خودم",
+	"deactivationSelectText": "جهت غیر فعالسازی، مشتری را انتخاب کنید.",
+	"netErr": "خطای ارتباط. لطفا مجدد تلاش کنید.",
+	"confirm": "تایید"
 }

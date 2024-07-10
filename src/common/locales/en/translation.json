@@ -41,7 +41,7 @@
 	"chequeMenu": "Electronic Check Services",
 	"accountServices": "Account Services",
 	"electronicCheck": "Electronic Check",
-	"activationElCheck": "Activation Electronic Check",
+	"activationElCheck": "Activation User",
 	"issueElCheck": "Issue Electronic Check",
 	"continue": "Continue",
 	"activationFirstStepText": "Select an option to activate to receive electronic check services.",
@@ -179,7 +179,7 @@
 	"rejectTransferCheck": "Rejection of check transfer",
 	"rejectTransfer": "Rejection transfer",
 	"confirmTransfer": "Confirm transfer",
-	"rejectgiveBack": "Rejection of check give back",
+	"rejectGiveBack": "Rejection of check give back",
 	"you": "You",
 	"payTo": "Pay To ",
 	"details": "Details",
@@ -221,7 +221,7 @@
 	"rejectElCheckGiveBack": "Reject Electronic check Give Back",
 	"giveBackDescription": "Give Back Description",
 	"rejectGiveBackDescription": "Give Back Description",
-	"deactivationModalText": "If approved, the client will not be disabled.",
+	"deactivationModalText": "If confirmed, the client will be disabled.",
 	"refuse": "Refuse",
 	"cashingCheck": "Cashing Check",
 	"noCheckInfo": "There is no information of check",
@@ -230,5 +230,9 @@
 	"(optional)": "(Optional)",
 	"depositID":"Deposit ID",
 	"accountselectCashingHelperText": "The account to which you want the desired amount to be deposited",
-	"dateCashingHelperText": "The check will be received on the date you want."
+	"dateCashingHelperText": "The check will be received on the date you want.",
+	"myself": "Myself",
+	"deactivationSelectText": "Select a client to deactivate.",
+	"netErr": "Network Error. Try again.",
+	"confirm": "confirm"
 }

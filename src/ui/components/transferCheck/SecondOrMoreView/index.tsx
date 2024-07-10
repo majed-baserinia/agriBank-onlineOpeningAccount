@@ -24,13 +24,13 @@ export default function SecondOrMoreView({ checkData }: { checkData: InquiryTran
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
 	const { addNewData } = useChecklistData();
-	const [value, setValue] = useState<'confirm' | 'reject'>('confirm');
+	const [value, setValue] = useState<'0' | '1'>('1');
 
 	const { isLoading: confirmLoading, mutate: confirmTransfer } = useTransferChequeInitiate();
 	const { isLoading: rejectLoading, mutate: rejectTransfer } = useRejectTransferChequeInitiate();
 
 	const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setValue((event.target as HTMLInputElement).value as 'confirm' | 'reject');
+		setValue((event.target as HTMLInputElement).value as '0' | '1');
 	};
 
 	const handleSubmit = (type: 'confirm' | 'reject') => {
@@ -109,16 +109,16 @@ export default function SecondOrMoreView({ checkData }: { checkData: InquiryTran
 							}}
 						>
 							<RadioButtonAdapter
-								value="confirm"
+								value={'1'}
 								label={t('confirmTransfer')}
 								onChange={handleRadioChange}
-								checked={value === 'reject'}
+								checked={value === '1'}
 							/>
 							<RadioButtonAdapter
-								value="reject"
+								value={'0'}
 								label={t('rejectTransfer')}
 								onChange={handleRadioChange}
-								checked={value === 'reject'}
+								checked={value === '0'}
 							/>
 						</Grid>
 					</RadioGroup>
@@ -129,7 +129,7 @@ export default function SecondOrMoreView({ checkData }: { checkData: InquiryTran
 						size="medium"
 						muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 						forwardIcon
-						onClick={() => handleSubmit(value)}
+						onClick={() => handleSubmit(value === '1'? 'confirm' :'reject')}
 					>
 						{t('continue')}
 					</ButtonAdapter>

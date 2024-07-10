@@ -15,7 +15,7 @@ import { paths } from 'ui/route-config/paths';
 type MenuItems = {
 	id: number;
 	title: string;
-	subtitle: string;
+	subtitle?: string;
 	routeTo?: string;
 	onClick?: () => void;
 }[];
@@ -34,17 +34,19 @@ export default function Deactivation() {
 			const newList: MenuItems = listItems.map((item, index) => {
 				return {
 					id: item.customerNumber,
-					title: index === 0 ? 'myChecks' : item.fullName,
-					subtitle: index === 0 ? 'myChecksSubtitle' : 'othersChecksSubtitle',
+					title: index === 0 ? 'myself' : item.fullName,
+					//subtitle: index === 0 ? 'myChecksSubtitle' : 'othersChecksSubtitle',
 					onClick: () => {
 						pushAlert({
 							type: 'warning',
 							messageText: t('deactivationModalText'),
 							hasConfirmAction: true,
+							confirmButtonText: t("confirm"),
 							hasRefuseAction: true,
 							actions: {
 								onRefuse: () => {},
 								onConfirm: () => {
+
 									deactiveCustomer(
 										{ customerNumber: item.customerNumber },
 										{
@@ -53,6 +55,7 @@ export default function Deactivation() {
 													type: 'success',
 													messageText: res.message,
 													hasConfirmAction: true,
+													
 													actions: {
 														onCloseModal: () => navigate(paths.Home),
 														onConfirm: () => navigate(paths.Home)
@@ -69,7 +72,8 @@ export default function Deactivation() {
 														onConfirm: () => navigate(paths.Home)
 													}
 												});
-											}
+											},
+											
 										}
 									);
 								},
@@ -110,7 +114,7 @@ export default function Deactivation() {
 							variant="bodyMd"
 							sx={{ color: theme.palette.text.secondary }}
 						>
-							{t('checkListsMenuText')}
+							{t('deactivationSelectText')}
 						</Typography>
 					</Grid>
 					<Grid
@@ -123,7 +127,7 @@ export default function Deactivation() {
 					</Grid>
 				</Grid>
 			</BoxAdapter>
-			<Loader showLoader={isLoading} />
+			<Loader showLoader={isLoading || deactiveLoading} />
 		</Grid>
 	);
 }

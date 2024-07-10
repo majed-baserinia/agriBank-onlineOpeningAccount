@@ -7,7 +7,7 @@ type Props = {
 	check: Check;
 };
 export default function CheckInfoBox(props: Props) {
-	const { seriesNo, sayadNo, amount, chequeStatusDescription, dueDate, reason, serialNo, description } = props.check;
+	const { seriesNo, sayadNo, amount, chequeStatusDescription, dueDate, reason, serialNo, description, reasonDescription } = props.check;
 	const theme = useTheme();
 	const { t } = useTranslation();
 
@@ -66,7 +66,7 @@ export default function CheckInfoBox(props: Props) {
 				/>
 				<OverviewItem
 					title={t('reason')}
-					value={reason}
+					value={reasonDescription}
 				/>
 			</Grid>
 			<Divider />

@@ -16,7 +16,7 @@ export interface HolderData  {
 	customerType: 1 | 2 | 3 | 4;
 	customerTypeDescription: string;
 	lastActionDate: string;
-	acceptTransfer: 0 | 1;
+	acceptTransfer: 0 | 1 | 2;
 	acceptTransferDescription: string;
 };
 

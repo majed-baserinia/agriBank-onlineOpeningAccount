@@ -132,6 +132,7 @@ export default function AddReceivers() {
 							) : null}
 							<Typography variant="bodyMd">{t('addReceiversText')}</Typography>
 							<CheckReceivers
+								sayad={steps.selectdCheckSheet?.sayadNo!}
 								getRceivers={(receiversList) => setStepData({ receivers: receiversList })}
 							/>
 						</Grid>

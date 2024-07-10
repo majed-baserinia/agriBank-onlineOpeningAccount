@@ -17,6 +17,7 @@ import Menu from 'ui/components/Menu';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
+import Loader from 'ui/htsc-components/loader/Loader';
 import Otp from 'ui/htsc-components/Otp';
 import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
@@ -82,6 +83,7 @@ export default function OtpTransferConfirmation() {
 				selectSingleSignatureLegal: true,
 				transferChequeKey: otpTransferRequirments.transferChequeKey
 			};
+console.log(requestBody);
 
 			if (transferAction === 'confirm') {
 				verifyOtpTransfer(requestBody, {
@@ -123,6 +125,7 @@ export default function OtpTransferConfirmation() {
 			dir={theme.direction}
 		>
 			<Grid
+			item
 				xs={12}
 				md={8}
 			>
@@ -215,6 +218,7 @@ export default function OtpTransferConfirmation() {
 			</Grid>
 			{matches ? null : (
 				<Grid
+				item
 					md={3}
 					dir={theme.direction}
 				>
@@ -230,6 +234,7 @@ export default function OtpTransferConfirmation() {
 					</BoxAdapter>
 				</Grid>
 			)}
+			<Loader showLoader={loadingVerifyTransfer || loadingVerifyReject || loadingInitTransfer || loadingInitReject} />
 		</Grid>
 	);
 }

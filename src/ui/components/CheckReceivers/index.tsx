@@ -9,7 +9,7 @@ import List from './List';
 import { CheckReceiversProps } from './type';
 
 export default function CheckReceivers(props: CheckReceiversProps) {
-	const { getRceivers } = props;
+	const { getRceivers, sayad } = props;
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const isDownSm = useMediaQuery(theme.breakpoints.down('sm'));
@@ -46,6 +46,7 @@ export default function CheckReceivers(props: CheckReceiversProps) {
 						<Sheet.Header />
 						<Sheet.Content>
 							<AddForm
+							sayad={sayad}
 								setOpen={setOpen}
 								setReceivers={setReceivers}
 							/>
@@ -59,6 +60,7 @@ export default function CheckReceivers(props: CheckReceiversProps) {
 					onClose={() => setOpen(false)}
 				>
 					<AddForm
+					sayad={sayad}
 						setOpen={setOpen}
 						setReceivers={setReceivers}
 					/>

@@ -112,6 +112,7 @@ export default function GiveBackCheckOTP() {
 			dir={theme.direction}
 		>
 			<Grid
+			item
 				xs={12}
 				md={8}
 			>
@@ -190,6 +191,7 @@ export default function GiveBackCheckOTP() {
 			</Grid>
 			{matches ? null : (
 				<Grid
+				item
 					md={3}
 					dir={theme.direction}
 				>

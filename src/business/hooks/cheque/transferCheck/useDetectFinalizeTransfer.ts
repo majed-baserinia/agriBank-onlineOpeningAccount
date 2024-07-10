@@ -1,6 +1,7 @@
 import { useChecklistData } from 'business/stores/checklistData/checklistData';
-import useRejectTransfercCequeFinalize from './useRejectTransfercCequeFinalize';
+
 import useTransferChequeFinalize from './useTransferChequeFinalize';
+import useRejectTransferChequeFinalize from './useRejectTransferChequeFinalize';
 
 export default function useDetectFinalizeTransfer() {
 	const { transferAction } = useChecklistData();
@@ -8,7 +9,7 @@ export default function useDetectFinalizeTransfer() {
 		return useTransferChequeFinalize;
 	}
 	if (transferAction === 'reject') {
-		return useRejectTransfercCequeFinalize;
+		return useRejectTransferChequeFinalize;
 	}
     return useTransferChequeFinalize;
 }

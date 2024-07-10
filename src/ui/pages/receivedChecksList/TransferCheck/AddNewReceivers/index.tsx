@@ -96,7 +96,7 @@ export default function AddNewReceivers() {
 								/>
 							) : null}
 							<Typography variant="bodyMd">{t('addNewReceiversText')}</Typography>
-							<CheckReceivers getRceivers={(receiversList) => addNewData({ receivers: receiversList })} />
+							<CheckReceivers sayad={selectedCheck?.sayadNo!} getRceivers={(receiversList) => addNewData({ receivers: receiversList })} />
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
