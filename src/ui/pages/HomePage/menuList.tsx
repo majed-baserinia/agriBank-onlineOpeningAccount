@@ -17,7 +17,7 @@ export const menuList = {
 					alt="issue Check"
 				/>
 			),
-			routeTo: paths.IssueCheck.SelectAccountPath
+			routeTo: 'paths.IssueCheck.SelectAccountPath'
 		},
 		{
 			id: '2',
@@ -28,7 +28,7 @@ export const menuList = {
 					alt="list check"
 				/>
 			),
-			routeTo: paths.ReceivedChecksList.SelectCheckList
+			routeTo: 'paths.ReceivedChecksList.SelectCheckList'
 		},
 		{
 			id: '3',
@@ -39,7 +39,7 @@ export const menuList = {
 					alt="transfered Cheks Icon"
 				/>
 			),
-			routeTo: paths.TransferredChecks.SelectTransferredCheckList
+			routeTo: 'paths.TransferredChecks.SelectTransferredCheckList'
 		}
 	],
 	management: [
@@ -52,7 +52,7 @@ export const menuList = {
 					alt="activation"
 				/>
 			),
-			routeTo: paths.Activation.firstStepPath
+			routeTo: 'paths.Activation.firstStepPath'
 		},
 		{
 			id: '2',
@@ -63,7 +63,7 @@ export const menuList = {
 					alt="deactivation"
 				/>
 			),
-			routeTo: paths.Deactivation
+			routeTo: 'paths.Deactivation'
 		}
 	]
 };

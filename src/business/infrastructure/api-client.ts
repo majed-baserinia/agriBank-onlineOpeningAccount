@@ -84,7 +84,6 @@ axiosInstance.interceptors.response.use(
 		} else if (error.response?.status == 400 && error?.response?.data) {
 			throw prepareErrorType(<ErrorType<TResponse>>error?.response?.data);
 		}
-console.log({error});
 
 		if (error.message === 'Network Error' && error.response?.status !== 500) {
 			pushAlert({
