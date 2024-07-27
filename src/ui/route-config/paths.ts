@@ -1,3 +1,3 @@
 export const paths = {
-	Home: '/cheque'
+	Home: '/onlineOpeningAccount'
 };
