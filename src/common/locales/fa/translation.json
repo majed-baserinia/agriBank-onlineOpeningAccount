@@ -1,4 +1,16 @@
 {
 	"Internal Error": "خطای داخلی",
-	"netErr": "خطای ارتباط"
+	"netErr": "خطای ارتباط",
+	"openingAccountSteps": "مراحل افتتاح حساب",
+	"openingAccountStepsText": "برای ایجاد حساب بانک کشاورزی نیاز به موارد زیر دارید",
+	"continue": "ادامه",
+	"openAccount": "افتتاح حساب",
+	"selectDeposit": "انتخاب سپرده",
+	"selectDepositSub": "سپرده کوتاه مدت، قرض‌الحسنه، طرح احسان ...",
+	"sendDocuments": "ارسال مدارک",
+	"sendDocumentsSub": "کارت‌ملی هوشمند، کدرهگیری، امضا، اطلاعات هویتی ...",
+	"address": "آدرس",
+	"addressSub": "آدرس سکونت، کد پستی",
+	"Identification":"شناسایی هویت",
+	"IdentificationSub":"دسترسی به دوربین برای ضبط"
 }

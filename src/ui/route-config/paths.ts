@@ -1,3 +1,4 @@
 export const paths = {
-	Home: '/onlineOpeningAccount'
+	Home: '/onlineOpeningAccount',
+	selectDeposit: '/onlineOpeningAccount/select-deposit',
 };

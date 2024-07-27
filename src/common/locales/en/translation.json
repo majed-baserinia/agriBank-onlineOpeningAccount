@@ -1,4 +1,16 @@
 {
 	"Internal Error": "Internal Error",
-	"netErr": "Network Error"
+	"netErr": "Network Error",
+	"openingAccountSteps":"Stages of opening an account",
+	"openingAccountStepsText": "To create an Agricultural Bank account, you need the following items",
+	"continue": "continue",
+	"openAccount": "Open an account",
+	"selectDeposit":"Select deposit",
+	"selectDepositSub":"Short-term deposit, Qarzul-Hasna, Ehsan plan...",
+	"sendDocuments": "Send documents",
+	"sendDocumentsSub": "Send documents",
+	"address": "Address",
+	"addressSub": "Residential address, postal code",
+	"Identification":"Identification",
+	"IdentificationSub":"Access to the camera to record"
 }
