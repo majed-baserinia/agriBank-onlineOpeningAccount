@@ -1,3 +1,3 @@
-export const Accounts = '/CustomerManager/accounts';
-export const VerifyOtp = '/cheque/DigitalCheque/issuechequeverifyinitiate';
-export const Transferchequeinitiateotp = '/cheque/DigitalCheque/transferchequeinitiateotp';
+export const getAccountsList = '/api/AccountType/list';
+export const createAuthRequest = '/api/v2/BancsLink/CreateAuthRequest';
+
