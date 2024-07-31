@@ -39,5 +39,13 @@
 	"activationCodeOtp": "کد فعال سازی",
 	"otpSendAgainSuccess": "کد فعال سازی با موفقیت ارسال شد.",
 	"obligationTitle": "تعهدنامه افتتاح حساب بانک کشاورزی",
-	"acceptObligation": "قوانین و شرایط خوانده و پذیرفته ام."
+	"acceptObligation": "قوانین و شرایط خوانده و پذیرفته ام.",
+	"province": "استان",
+	"city": "شهر",
+	"village": "روستا/ بخش",
+	"alley" : "کوچه و پلاک",
+	"street":"خیابان",
+	"postalCode" : "کد پستی",
+	"phone" :"شماره تلفن",
+	"job" :"شغل"
 }	

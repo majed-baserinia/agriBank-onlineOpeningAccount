@@ -1,7 +1,8 @@
 export const paths = {
-	Home: '/onlineOpeningAccount',
-	PersonalInfoPage: '/onlineOpeningAccount/personal-info-page',
-	otp: '/onlineOpeningAccount/otp',
-	obligation: '/onlineOpeningAccount/obligation',
-	locationInfo: '/onlineOpeningAccount/locationInfo',
+	Home: '/online-opening-account',
+	PersonalInfoPage: '/online-opening-account/personal-info-page',
+	otp: '/online-opening-account/otp',
+	obligation: '/online-opening-account/obligation',
+	locationInfo: '/online-opening-account/location-info',
+	selectBranch: '/online-opening-account/select-branch',
 };

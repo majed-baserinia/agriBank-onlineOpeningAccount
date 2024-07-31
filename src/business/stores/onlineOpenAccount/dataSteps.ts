@@ -1,4 +1,5 @@
 import CreateAuthRequestCommand from 'business/application/onlineOpenAccount/CreateAuthRequest/CreateAuthRequestCommand';
+import SaveAddressCommand from 'business/application/onlineOpenAccount/SaveAddress/SaveAddressCommand';
 import { create } from 'zustand';
 
 interface Functions {
@@ -7,8 +8,9 @@ interface Functions {
 }
 
 interface Data {
-	personalInfo?: CreateAuthRequestCommand,
-    token?: string,
+	personalInfo?: CreateAuthRequestCommand;
+	token?: string;
+	locationInfo?: SaveAddressCommand;
 }
 
 export const useDataSteps = create<Functions & Data>((set) => ({
