@@ -7,7 +7,8 @@ interface Functions {
 }
 
 interface Data {
-	pesonalInfo?: CreateAuthRequestCommand
+	personalInfo?: CreateAuthRequestCommand,
+    token?: string,
 }
 
 export const useDataSteps = create<Functions & Data>((set) => ({

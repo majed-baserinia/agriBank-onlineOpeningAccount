@@ -63,7 +63,7 @@ export default function PersonalInfoPage() {
 			{ ...data },
 			{
 				onSuccess: (res) => {
-					addNewData({ pesonalInfo: data });
+					addNewData({ personalInfo: data });
 					navigate(paths.otp, { state: { otpTime: res.otpTime } });
 				},
 				onError: (err) => {

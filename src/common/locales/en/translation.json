@@ -33,5 +33,9 @@
 	"notEmptybirthDateText": "Date of birth cannot be empty.",
 	"notEmptyidentityIssueDateText": "The issue date cannot be empty.",
 	"onlyDigitsAreAllowed": "Only digits are allowed",
-	"checkAndContinue":"Check and continue"
+	"checkAndContinue":"Check and continue",
+	"notEmptyVeryfyCodeText" :"Verification code cannot be empty.",
+	"otpPageTitleText":"The activation code has been sent to your number. Please enter it in the box below after receiving it.",
+	"activationCodeOtp": "Activation code",
+	"otpSendAgainSuccess": "The activation code has been sent again."
 }
