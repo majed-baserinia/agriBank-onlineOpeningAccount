@@ -37,5 +37,7 @@
 	"notEmptyVeryfyCodeText" :"Verification code cannot be empty.",
 	"otpPageTitleText":"The activation code has been sent to your number. Please enter it in the box below after receiving it.",
 	"activationCodeOtp": "Activation code",
-	"otpSendAgainSuccess": "The activation code has been sent again."
+	"otpSendAgainSuccess": "The activation code has been sent again.",
+	"obligationTitle": "Letter of commitment to open an account at the Bank of Agriculture",
+	"acceptObligation": "I have read and accepted the terms and conditions."
 }

@@ -37,5 +37,7 @@
 	"notEmptyVeryfyCodeText": "کد تایید نمیتواند خالی باشد.",
 	"otpPageTitleText":"کدفعال سازی به شماره شما ارسال شد. لطفا پس از دریافت آن را در کادر پایین وارد کنید.",
 	"activationCodeOtp": "کد فعال سازی",
-	"otpSendAgainSuccess": "کد فعال سازی با موفقیت ارسال شد."
+	"otpSendAgainSuccess": "کد فعال سازی با موفقیت ارسال شد.",
+	"obligationTitle": "تعهدنامه افتتاح حساب بانک کشاورزی",
+	"acceptObligation": "قوانین و شرایط خوانده و پذیرفته ام."
 }	

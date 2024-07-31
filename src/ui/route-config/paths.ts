@@ -3,4 +3,5 @@ export const paths = {
 	PersonalInfoPage: '/onlineOpeningAccount/personal-info-page',
 	otp: '/onlineOpeningAccount/otp',
 	obligation: '/onlineOpeningAccount/obligation',
+	locationInfo: '/onlineOpeningAccount/locationInfo',
 };
