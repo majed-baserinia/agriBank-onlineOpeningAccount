@@ -51,7 +51,7 @@ export default function HomePage() {
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
 	const handleSubmit = () => {
-		navigate(paths.selectDeposit)
+		navigate(paths.PersonalInfoPage)
 	};
 
 	return (

@@ -1,4 +1,5 @@
 export const paths = {
 	Home: '/onlineOpeningAccount',
-	selectDeposit: '/onlineOpeningAccount/select-deposit',
+	PersonalInfoPage: '/onlineOpeningAccount/personal-info-page',
+	otp: '/onlineOpeningAccount/otp'
 };
