@@ -47,5 +47,7 @@
 	"street" :"Street",
 	"postalCode": "Postal code",
 	"phone": "Phone",
-	"job": "Job"
+	"job": "Job",
+	"branch": "Branch",
+	"confirm": "confirm"
 }

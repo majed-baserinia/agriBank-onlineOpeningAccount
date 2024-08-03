@@ -35,7 +35,7 @@
 	"onlyDigitsAreAllowed": "مقدار ورودی باید عددی باشد",
 	"checkAndContinue": "بررسی و ادامه",
 	"notEmptyVeryfyCodeText": "کد تایید نمیتواند خالی باشد.",
-	"otpPageTitleText":"کدفعال سازی به شماره شما ارسال شد. لطفا پس از دریافت آن را در کادر پایین وارد کنید.",
+	"otpPageTitleText": "کدفعال سازی به شماره شما ارسال شد. لطفا پس از دریافت آن را در کادر پایین وارد کنید.",
 	"activationCodeOtp": "کد فعال سازی",
 	"otpSendAgainSuccess": "کد فعال سازی با موفقیت ارسال شد.",
 	"obligationTitle": "تعهدنامه افتتاح حساب بانک کشاورزی",
@@ -43,9 +43,11 @@
 	"province": "استان",
 	"city": "شهر",
 	"village": "روستا/ بخش",
-	"alley" : "کوچه و پلاک",
-	"street":"خیابان",
-	"postalCode" : "کد پستی",
-	"phone" :"شماره تلفن",
-	"job" :"شغل"
-}	
+	"alley": "کوچه و پلاک",
+	"street": "خیابان",
+	"postalCode": "کد پستی",
+	"phone": "شماره تلفن",
+	"job": "شغل",
+	"branch": "شعبه",
+	"confirm": "تایید"
+}
