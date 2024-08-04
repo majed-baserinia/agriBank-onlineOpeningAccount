@@ -2,7 +2,7 @@ import { ButtonProps } from "@mui/material";
 import { HTMLAttributes, MutableRefObject, ReactNode } from "react";
 
 export type Props<T extends Record<any, unknown>> = {
-	options: T[];
+	options?: T[];
 	label: string;
 	error?: boolean;
 	loading?: boolean;

@@ -131,7 +131,7 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 				popupIcon={<KeyboardArrowDownIcon />}
 				freeSolo
 				disablePortal
-				options={options}
+				options={options ?? []}
 				loading={loading}
 				noOptionsText=""
 				open={open}
