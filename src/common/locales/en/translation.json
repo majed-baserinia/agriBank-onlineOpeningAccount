@@ -58,5 +58,6 @@
 	"requestCard": "Request a card",
 	"refuseCardMenuTitle": "I do not want to receive a card",
 	"refuseCardMenuSubTitle": "A physical card will not be issued to you.",
-	"requestCardText": "If you want to receive a card, choose an option."
+	"requestCardText": "If you want to receive a card, choose an option.",
+	"loadingTextAutoComp":"Loading..."
 }

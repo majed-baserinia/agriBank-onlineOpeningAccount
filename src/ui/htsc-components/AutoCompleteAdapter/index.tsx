@@ -4,14 +4,13 @@ import {
 	AutocompleteInputChangeReason,
 	Button,
 	Grid,
+	Popper,
 	Theme,
 	useMediaQuery,
 	useTheme
 } from '@mui/material';
 import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import PaperComp from './PaperComp';
-import PopperComp from './PopperComp';
 import RenderInput from './RenderInput';
 import { Props } from './types';
 
@@ -29,11 +28,10 @@ const generateGridStyle = (theme: Theme) => {
 	};
 };
 
-
 // TODO: may need to add card format and functionality to edit card number
 // there is already implemented in the chargeAccount repo
 
-//also may need the icons for the card numbers 
+//also may need the icons for the card numbers
 //this is just a refactored version of that one in the chargeAccount repo
 export default function AutoCompleteAdapter<T extends Record<any, unknown>>(props: Props<T>) {
 	const {
@@ -133,6 +131,7 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 				disablePortal
 				options={options ?? []}
 				loading={loading}
+				loadingText={t('loadingTextAutoComp')}
 				noOptionsText=""
 				open={open}
 				value={value}
@@ -149,8 +148,14 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 					!hasConfirmButton ? setOpen(false) : null;
 				}}
 				renderOption={renderOption}
-				PopperComponent={(props) => <PopperComp {...props} />}
-				PaperComponent={(props) => <PaperComp {...props} />}
+				PopperComponent={(props) => (
+					<Popper
+						{...props}
+						sx={{
+							boxShadow: matches ? 0 : 3
+						}}
+					/>
+				)}
 				renderInput={(params) => (
 					<RenderInput
 						params={params}
