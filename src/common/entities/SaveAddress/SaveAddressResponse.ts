@@ -1,1 +1,3 @@
-export interface SaveAddressResponse {}
+export interface SaveAddressResponse {
+	isRequestCardPossible: boolean;
+}
