@@ -7,6 +7,7 @@ import ErrorPage from '../pages/ErrorPage';
 import HomePage from '../pages/HomePage';
 import Layout from '../pages/Layout';
 import { paths } from './paths';
+import SelectCard from 'ui/pages/SelectCard';
 
 const router = createBrowserRouter([
 	{
@@ -18,7 +19,9 @@ const router = createBrowserRouter([
 			{ path: paths.PersonalInfoPage, element: <PersonalInfoPage /> },
 			{ path: paths.otp, element: <OtpPage /> },
 			{ path: paths.obligation, element: <ObligationPage /> },
-			{ path: paths.locationInfo, element: <LocationInfoPage /> }
+			{ path: paths.locationInfo, element: <LocationInfoPage /> },
+			{ path: paths.selectCard, element: <SelectCard /> },
+			
 		]
 	}
 ]);
