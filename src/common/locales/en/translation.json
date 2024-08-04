@@ -49,5 +49,14 @@
 	"phone": "Phone",
 	"job": "Job",
 	"branch": "Branch",
-	"confirm": "confirm"
+	"confirm": "confirm",
+	"branchSelectTitleText": "Choose the nearest branch to your place of residence.",
+	"locationInfoTitleText": "Enter your location information.",
+	"jobInfoTitleText": "Select your job information.",
+	"requestCardMenuTitle": "Card issuance and receipt by post",
+	"requestCardMenuSubTitle": "free",
+	"requestCard": "Request a card",
+	"refuseCardMenuTitle": "I do not want to receive a card",
+	"refuseCardMenuSubTitle": "A physical card will not be issued to you.",
+	"requestCardText": "If you want to receive a card, choose an option."
 }

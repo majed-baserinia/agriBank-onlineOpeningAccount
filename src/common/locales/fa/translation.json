@@ -49,5 +49,14 @@
 	"phone": "شماره تلفن",
 	"job": "شغل",
 	"branch": "شعبه",
-	"confirm": "تایید"
+	"confirm": "تایید",
+	"branchSelectTitleText": "نزدیک‌ترین شعبه به محل زندگی خود را انتخاب کنید.",
+	"locationInfoTitleText": "اطلاعات محل سکونت خود را وارد کنید.",
+	"jobInfoTitleText": "اطلاعات شغل خود را انتخاب کنید.",
+	"requestCardMenuTitle": "صدور کارت و دریافت از طریق پست",
+	"requestCardMenuSubTitle": "رایگان",
+	"requestCard": "درخواست کارت",
+	"refuseCardMenuTitle": "تمایلی به دریافت کارت ندارم",
+	"refuseCardMenuSubTitle": "کارت فیزیکی برای شما صادر نمی‌شود.",
+	"requestCardText": "در صورت تمایل به دریافت کارت یک گزینه را به اختیار انتخاب کنید."
 }
