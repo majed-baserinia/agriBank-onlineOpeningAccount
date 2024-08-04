@@ -5,30 +5,45 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import SaveAddressCommand from 'business/application/onlineOpenAccount/SaveAddress/SaveAddressCommand';
 import useCities from 'business/hooks/useCities';
+import useGetBranches from 'business/hooks/useGetBranches';
 import useJobs from 'business/hooks/useJobs';
 import useProvinces from 'business/hooks/useProvinces';
+import useSaveAddress from 'business/hooks/useSaveAdderss';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import RequestCardBottomSheet from 'ui/components/RequestCardBottomSheet';
 import Title from 'ui/components/Title';
+import AutoCompleteAdapter from 'ui/htsc-components/AutoCompleteAdapter';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
+import { Option } from './type';
 
 export default function LocationInfoPage() {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { addNewData } = useDataSteps();
+
+	const { addNewData, token } = useDataSteps();
+
+	const [openBottomSheet, setOpenBottomSheet] = useState(false);
 
 	const { data: jobs, mutate: getJobs, isLoading: isLoadingJobs } = useJobs();
 	const { data: provinces, mutate: getProvinces, isLoading: isLoadingProvinces } = useProvinces();
 	const { data: cities, mutate: getCities, isLoading: isLoadingCities } = useCities();
+	const { mutate: saveAddress, isLoading: isLoadingSaveAddress } = useSaveAddress();
+	const {
+		data: branches,
+		mutate: getBranches,
+		isLoading: isLoadingGetBranches,
+		reset: clearBranches
+	} = useGetBranches();
 
 	const { handleSubmit, control, formState } = useForm<SaveAddressCommand>({
 		resolver: (values, context, options) => {
@@ -81,6 +96,21 @@ export default function LocationInfoPage() {
 		);
 	}, []);
 
+	const handleBranchSearchWithDebounce = useMemo(() => {
+		let timeoutId: ReturnType<typeof setTimeout>;
+
+		return (value: string) => {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(() => {
+				if (value) {
+					getBranches({ branchSearch: value });
+				} else {
+					clearBranches();
+				}
+			}, 500);
+		};
+	}, []);
+
 	const handlProvinceChahange = (provinceId: number) => {
 		getCities(
 			{ provinceId: provinceId },
@@ -98,7 +128,23 @@ export default function LocationInfoPage() {
 
 	const submitHandler = (data: SaveAddressCommand) => {
 		addNewData({ locationInfo: data });
-        navigate(paths.selectBranch);
+		saveAddress(
+			{ ...data, token: token! },
+			{
+				onSuccess: (res) => {
+					if (res.isRequestCardPossible) {
+						setOpenBottomSheet(true);
+					} else {
+						navigate(paths.nationalCardImage);
+					}
+				},
+				onError: (err) => {
+					if (err.status != 400) {
+						pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+					}
+				}
+			}
+		);
 	};
 
 	return (
@@ -121,21 +167,51 @@ export default function LocationInfoPage() {
 						direction={'column'}
 						justifyContent={'space-between'}
 						wrap="nowrap"
+						gap={'16px'}
 					>
 						<Grid>
 							<Title>{t('openAccount')}</Title>
 
-							<Typography
-								variant="bodyMd"
-								sx={{ marginBottom: '8px' }}
-							>
-								{t('personalInfoPageTitleText')}
-							</Typography>
 							<Grid
 								container
 								direction={'column'}
 								gap={'16px'}
 							>
+								<Typography variant="bodyMd">{t('branchSelectTitleText')}</Typography>
+								<Grid>
+									<Controller
+										control={control}
+										name="branchCode"
+										render={({ field }) => (
+											<AutoCompleteAdapter
+												isRequired
+												isOptionEqualToValue={(option: Option, value: Option) =>
+													option === value
+												}
+												label={t('branch')}
+												onChange={(val) => {
+													if (typeof val !== 'string' && val) {
+														field.onChange((val as Option).value);
+													}
+												}}
+												onInputChange={(val) => handleBranchSearchWithDebounce(val)}
+												options={branches?.map((branch) => ({
+													label: `${branch.cityName} ${branch.branchName}  ${branch.branchCode}`,
+													value: branch.branchCode
+												}))}
+												valueToShowToInput={(option: Option) => ({
+													text: option.label
+												})}
+												error={!!formState.errors.branchCode?.message}
+												helperText={formState.errors.branchCode?.message}
+												loading={isLoadingGetBranches}
+											/>
+										)}
+									/>
+								</Grid>
+
+								<Typography variant="bodyMd">{t('locationInfoTitleText')}</Typography>
+
 								<Grid>
 									<Controller
 										control={control}
@@ -260,6 +336,9 @@ export default function LocationInfoPage() {
 										)}
 									/>
 								</Grid>
+
+								<Typography variant="bodyMd">{t('jobInfoTitleText')}</Typography>
+
 								<Grid>
 									<Controller
 										control={control}
@@ -310,7 +389,11 @@ export default function LocationInfoPage() {
 					</BoxAdapter>
 				</Grid>
 			)} */}
-			<Loader showLoader={isLoadingCities || isLoadingJobs || isLoadingProvinces} />
+			<Loader showLoader={isLoadingCities || isLoadingSaveAddress || isLoadingJobs || isLoadingProvinces} />
+			<RequestCardBottomSheet
+				open={openBottomSheet}
+				setOpen={setOpenBottomSheet}
+			/>
 		</Grid>
 	);
 }
