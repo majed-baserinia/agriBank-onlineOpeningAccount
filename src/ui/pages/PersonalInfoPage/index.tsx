@@ -67,7 +67,9 @@ export default function PersonalInfoPage() {
 					navigate(paths.otp, { state: { otpTime: res.otpTime } });
 				},
 				onError: (err) => {
-					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+					if (err.status != 400) {
+						pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+					}
 				}
 			}
 		);
