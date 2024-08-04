@@ -34,10 +34,7 @@ export default function BottomSheetSelect(props: Props) {
 
 	return (
 		<>
-			<FormControl
-				fullWidth
-				sx={{ marginTop: '10px' }}
-			>
+			<FormControl fullWidth>
 				<InputLabel id="label">
 					{
 						<>
