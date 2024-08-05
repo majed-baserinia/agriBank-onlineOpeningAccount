@@ -5,7 +5,7 @@ export type CardType = {
 	cardPatternItems: CardPattern[];
 };
 
-type CardPattern = {
+export type CardPattern = {
 	cardPatternId: number;
 	title: string;
 	titleKey: string;

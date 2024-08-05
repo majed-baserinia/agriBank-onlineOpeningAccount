@@ -2,12 +2,13 @@ import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import InquiryGNAFForCardCommand from 'business/application/onlineOpenAccount/InquiryGNAFForCard/InquiryGNAFForCardCommand';
 import RequestCardCommand from 'business/application/onlineOpenAccount/RequestCard/RequestCardCommand';
+import useCities from 'business/hooks/useCities';
 import useInquiryGNAFForCard from 'business/hooks/useInquiryGNAFForCard';
 import useProvinces from 'business/hooks/useProvinces';
 import useRequestCard from 'business/hooks/useRequestCard';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -26,23 +27,19 @@ export default function SelectAddressPage() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { locationInfo, token } = useDataSteps();
+	const { locationInfo, token, selectedCardData } = useDataSteps();
 
 	const [showNewAddressForm, setShowNewAddressForm] = useState(false);
-	const { data: provinces, mutate: getProvinces, isLoading: isLoadingProvinces } = useProvinces();
-	const { mutate: requestCard, isLoading: isLoadingRequestCard } = useRequestCard();
-	const {
-		data: newAddressForPostalCode,
-		mutate: InquiryGNAFForCard,
-		isLoading: isLoadingInquiryGNAFForCard
-	} = useInquiryGNAFForCard();
-
-	const address = `${locationInfo?.village} ${locationInfo?.mainStreet} ${locationInfo?.alley} `;
-
-	const listOfOptions = [
-		{ value: 'myLocation', label: 'sendMyLocationTitle', subLabel: address, sx: { order: 1 } },
+	const addressRef = useRef(`${locationInfo?.village} ${locationInfo?.mainStreet} ${locationInfo?.alley} `);
+	const listOfOptions = useRef([
+		{ value: 'myLocation', label: 'sendMyLocationTitle', subLabel: addressRef.current, sx: { order: 1 } },
 		{ value: 'otherLocation', label: 'sendOtherLocationTitle', sx: { order: 2 } }
-	];
+	]);
+
+	const { data: provinces, mutate: getProvinces, isLoading: isLoadingProvinces } = useProvinces();
+	const { data: cities, mutate: getCities, isLoading: isLoadingCities } = useCities();
+	const { mutate: requestCard, isLoading: isLoadingRequestCard } = useRequestCard();
+	const { mutate: InquiryGNAFForCard, isLoading: isLoadingInquiryGNAFForCard } = useInquiryGNAFForCard();
 
 	useEffect(() => {
 		getProvinces(
@@ -66,6 +63,21 @@ export default function SelectAddressPage() {
 		);
 	}, []);
 
+	const handlProvinceChahange = (provinceId: number) => {
+		getCities(
+			{ provinceId: provinceId },
+			{
+				onError: (err) => {
+					pushAlert({
+						type: 'error',
+						messageText: err.detail,
+						hasConfirmAction: true
+					});
+				}
+			}
+		);
+	};
+
 	const handleRadioChange = (value: string) => {
 		if (value === 'otherLocation') {
 			setShowNewAddressForm(true);
@@ -81,7 +93,11 @@ export default function SelectAddressPage() {
 		context: RequestCardCommand
 	});
 
-	const { handleSubmit: handleInquiryPostalCode, control: controlPostalCode,getValues:getValuesFromInquiry } = useForm<InquiryGNAFForCardCommand>({
+	const {
+		handleSubmit: handleInquiryPostalCode,
+		control: controlPostalCode,
+		getValues: getValuesFromInquiry
+	} = useForm<InquiryGNAFForCardCommand>({
 		resolver: (values, context, options) => {
 			return validator(values, context, options);
 		},
@@ -93,10 +109,39 @@ export default function SelectAddressPage() {
 			{
 				cardAddress: data.cardAddress,
 				cityId: data.cityId,
-				cardPostalCode: getValuesFromInquiry("postalCode"),
-				requestCard:true,
-				cardPatternId: 0,
-				identifierValue: '',
+				cardPostalCode: getValuesFromInquiry('postalCode'),
+				requestCard: true,
+				cardPatternId: selectedCardData!.cardPatternId,
+				identifierValue: selectedCardData!.identifierValue,
+				sameHomeAddressForCard: false,
+				token: token!
+			},
+			{
+				onSuccess: () => {
+					navigate(paths.nationalCardImage);
+				},
+				onError: (err) => {
+					pushAlert({
+						type: 'error',
+						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
+						// @ts-ignore: Unreachable code error
+						messageText: (err.errors as string[]).length > 0 ? (err.errors as string[])[0] : err.detail,
+						hasConfirmAction: true
+					});
+				}
+			}
+		);
+	};
+
+	const handleSubmitWithDefaultAddress = () => {
+		requestCard(
+			{
+				cardAddress: addressRef.current,
+				cityId: locationInfo!.cityId,
+				cardPostalCode: locationInfo!.postalCode,
+				requestCard: true,
+				cardPatternId: selectedCardData!.cardPatternId,
+				identifierValue: selectedCardData!.identifierValue,
 				sameHomeAddressForCard: true,
 				token: token!
 			},
@@ -108,10 +153,6 @@ export default function SelectAddressPage() {
 		);
 	};
 
-
-    const handleSubmitWithDefaultAddress = ()=>{
-        
-    }
 	return (
 		<Grid
 			container
@@ -153,7 +194,7 @@ export default function SelectAddressPage() {
 							<Grid>
 								<RadioButtonAdapter
 									layoutColumns={matches ? 1 : 2}
-									listOfOptions={listOfOptions}
+									listOfOptions={listOfOptions.current}
 									onChange={handleRadioChange}
 									variant="backgroundSelected"
 									defaultValue="myLocation"
@@ -167,6 +208,23 @@ export default function SelectAddressPage() {
 									sx={{ marginTop: '32px' }}
 								>
 									<Grid>
+										<BottomSheetSelect
+											isRequired
+											list={
+												provinces?.data.map((province) => ({
+													value: province.id,
+													name: province.title
+												})) || []
+											}
+											label={t('province')}
+											onChange={(selectedProvince) => {
+												handlProvinceChahange(Number(selectedProvince.value));
+											}}
+											// error={!!formState.errors.cityId?.message}
+											// helperText={formState.errors.cityId?.message}
+										/>
+									</Grid>
+									<Grid>
 										<Controller
 											control={control}
 											name="cityId"
@@ -174,14 +232,14 @@ export default function SelectAddressPage() {
 												<BottomSheetSelect
 													isRequired
 													list={
-														provinces?.data.map((province) => ({
-															value: province.id,
-															name: province.title
+														cities?.data?.map((city) => ({
+															value: city.id,
+															name: city.title
 														})) || []
 													}
-													label={t('province')}
-													onChange={(selectedProvince) => {
-														field.onChange(Number(selectedProvince.value));
+													label={t('city')}
+													onChange={(selectedCity) => {
+														field.onChange(Number(selectedCity.value));
 													}}
 													// error={!!formState.errors.cityId?.message}
 													// helperText={formState.errors.cityId?.message}
@@ -284,7 +342,11 @@ export default function SelectAddressPage() {
 					</BoxAdapter>
 				</Grid>
 			)} */}
-			<Loader showLoader={false} />
+			<Loader
+				showLoader={
+					isLoadingCities || isLoadingInquiryGNAFForCard || isLoadingProvinces || isLoadingRequestCard
+				}
+			/>
 		</Grid>
 	);
 }
