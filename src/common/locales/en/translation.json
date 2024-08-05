@@ -288,5 +288,6 @@
 	"sendMyLocationTitle" :"Send to your home address",
 	"sendOtherLocationTitle": "Send to another address",
 	"inquiry" :"Inquiry",
-	"CardTypesSelectText":"Select a card type"
+	"CardTypesSelectText":"Select a card type",
+	"nationalImagePageTitleText" :"Dear subscriber, the photo of the original national card is accepted. Please place your national card in the frame close by."
 }
