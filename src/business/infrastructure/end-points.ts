@@ -9,3 +9,4 @@ export const Provinces = '/api/Province/list';
 export const Cities = '/api/City/list';
 export const Jobs = '/api/job/list';
 export const GetBranches = '/api/v1/Branch/GetBranches';
+export const InquiryGNAFForCard = '/api/BancsLink/InquiryGNAFForCard';
