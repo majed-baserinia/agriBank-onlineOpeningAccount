@@ -25,7 +25,6 @@ dist-ssr
 .vercel
 .vs
 
-package-lock.json
 
 
 # vite tmp files
