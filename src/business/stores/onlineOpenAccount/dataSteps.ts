@@ -22,12 +22,17 @@ interface Data {
 
 export const useDataSteps = create<Functions & Data>((set) => ({
 	addNewData: (data) => {
-		set((store) => ({
-			...store,
-			...data
-		}));
+		set((store) => {
+			const newDataStore = {
+				...store,
+				...data
+			};
+			localStorage.setItem('dataSteps', JSON.stringify(newDataStore));
+			return newDataStore;
+		});
 	},
 	reset: () => {
+		localStorage.removeItem('dataSteps');
 		set((store) => ({}));
 	}
 }));
