@@ -125,7 +125,7 @@ export default function SelectAddressPage() {
 						type: 'error',
 						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 						// @ts-ignore: Unreachable code error
-						messageText: (err.errors as string[]).length > 0 ? (err.errors as string[])[0] : err.detail,
+						messageText: err.error ? (err.error.message as string) : err.detail,
 						hasConfirmAction: true
 					});
 				}
@@ -148,6 +148,15 @@ export default function SelectAddressPage() {
 			{
 				onSuccess: () => {
 					navigate(paths.nationalCardImage);
+				},
+				onError: (err) => {
+					pushAlert({
+						type: 'error',
+						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
+						// @ts-ignore: Unreachable code error
+						messageText: err.error ? (err.error.message as string) : err.detail,
+						hasConfirmAction: true
+					});
 				}
 			}
 		);
@@ -282,6 +291,15 @@ export default function SelectAddressPage() {
 														{
 															onSuccess: (data) => {
 																setValue('cardAddress', data.address);
+															},
+															onError: (err) => {
+																pushAlert({
+																	type: 'error',
+																	// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
+																	// @ts-ignore: Unreachable code error
+																	messageText: err.error ? (err.error.message as string) : err.detail,
+																	hasConfirmAction: true
+																});
 															}
 														}
 													);
