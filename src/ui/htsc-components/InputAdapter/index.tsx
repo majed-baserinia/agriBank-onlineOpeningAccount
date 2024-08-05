@@ -43,7 +43,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 			type == 'cart' ? formatToCart(defaultValue) : type == 'money' ? formatToMoney(defaultValue) : defaultValue;
 
 		setValue(defVal);
-
+		setShrink(true)
 		setEndIcon(
 			success ? (
 				<SvgToIcon

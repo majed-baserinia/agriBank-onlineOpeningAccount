@@ -24,7 +24,7 @@ export default function BottomSheetSelect<T extends { value: string; name: strin
 
 	useEffect(() => {
 		setValue(defaultValue);
-	}, []);
+	}, [defaultValue]);
 
 	const handlClickItem = (item: T) => {
 		setValue(item.value);

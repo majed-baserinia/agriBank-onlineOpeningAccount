@@ -1,5 +1,5 @@
-import { FormHelperText, Typography } from '@mui/material';
-import { useRef, useState } from 'react';
+import { FormHelperText } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
 import { default as persian, default as persian_ca } from 'react-date-object/calendars/persian';
 import persian_en from 'react-date-object/locales/persian_en';
 import persian_fa from 'react-date-object/locales/persian_fa';
@@ -11,6 +11,7 @@ import 'react-multi-date-picker/styles/backgrounds/bg-gray.css';
 import 'react-multi-date-picker/styles/layouts/mobile.css';
 import 'react-multi-date-picker/styles/layouts/prime.css';
 
+import type{Value} from "react-multi-date-picker"
 import useInitialSettingStore from 'business/stores/initial-setting-store';
 import './styles.css';
 import { Props } from './type';
@@ -18,14 +19,20 @@ import { Props } from './type';
 export default function DatePickerAdapter(props: Props) {
 	const { t } = useTranslation();
 	const appLanguage = useInitialSettingStore((store) => store.settings.language);
-	const { placeHolder = t('date'), helperText, onChange, error } = props;
+	const { placeHolder = t('date'), helperText, onChange, error, defaultValue } = props;
 	const { settings } = useInitialSettingStore((s) => s);
 
-	const [value, setValue] = useState<DateObject | DateObject[] | null>(null);
+	const [value, setValue] = useState<Value>(null);
 	const datepicker = useRef();
 
-	const handleChange = (date: DateObject | DateObject[] | null) => {
-		const val = new DateObject(date as DateObject).convert(persian, persian_en).format();
+	useEffect(() => {
+		if (defaultValue) {
+			setValue(defaultValue);
+		}
+	}, [defaultValue]);
+
+	const handleChange = (date: Value) => {
+		const val = new DateObject(date!).convert(persian, persian_en).format();
 
 		setValue(date);
 		onChange(val);
@@ -37,7 +44,7 @@ export default function DatePickerAdapter(props: Props) {
 				ref={datepicker}
 				calendar={appLanguage === 'fa-IR' ? persian_ca : undefined}
 				locale={appLanguage === 'fa-IR' ? persian_fa : undefined}
-				//value={value}
+				value={value}
 				monthYearSeparator=" "
 				className="primary"
 				style={{ width: '100%' }}
