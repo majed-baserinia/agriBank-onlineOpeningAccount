@@ -55,7 +55,7 @@ const menuList = [
 		id: '1',
 		title: 'requestCardMenuTitle',
 		subtitle: 'requestCardMenuSubTitle',
-		routeTo: paths.selectCard
+		routeTo: paths.selectCardType
 	},
 	{
 		id: '2',

@@ -19,7 +19,7 @@ type MenuItems = {
 	onClick?: () => void;
 }[];
 
-export default function SelectCardType() {
+export default function SelectCardTypePage() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const navigate = useNavigate();

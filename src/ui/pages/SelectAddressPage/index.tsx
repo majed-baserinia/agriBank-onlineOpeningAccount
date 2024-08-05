@@ -21,7 +21,7 @@ import RadioButtonAdapter from 'ui/htsc-components/RadioButtonAdapter';
 import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 import { paths } from 'ui/route-config/paths';
 
-export default function SelectAddress() {
+export default function SelectAddressPage() {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const theme = useTheme();
