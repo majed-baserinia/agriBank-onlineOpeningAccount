@@ -45,7 +45,7 @@ export default function LocationInfoPage() {
 		reset: clearBranches
 	} = useGetBranches();
 
-	const { handleSubmit, control, formState } = useForm<SaveAddressCommand>({
+	const { handleSubmit, control, reset } = useForm<SaveAddressCommand>({
 		resolver: (values, context, options) => {
 			return validator(values, context, options);
 		},
@@ -96,6 +96,13 @@ export default function LocationInfoPage() {
 		);
 	}, []);
 
+	useEffect(() => {
+		const savedData = localStorage.getItem('dataSteps');
+		const dataSteps = savedData && JSON.parse(savedData);
+
+		dataSteps && reset({ ...dataSteps.locationInfo });
+	}, []);
+
 	const handleBranchSearchWithDebounce = useMemo(() => {
 		let timeoutId: ReturnType<typeof setTimeout>;
 
@@ -143,7 +150,7 @@ export default function LocationInfoPage() {
 						type: 'error',
 						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 						// @ts-ignore: Unreachable code error
-						messageText: (err.errors as string[]).length > 0 ? (err.errors as string[])[0] : err.detail,
+						messageText: err.error ? (err.error.message as string) : err.detail,
 						hasConfirmAction: true
 					});
 				}
@@ -222,6 +229,7 @@ export default function LocationInfoPage() {
 										name="provinceId"
 										render={({ field }) => (
 											<BottomSheetSelect
+												defaultValue={field?.value?.toString()}
 												isRequired
 												list={
 													provinces?.data.map((province) => ({
@@ -246,6 +254,7 @@ export default function LocationInfoPage() {
 										name="cityId"
 										render={({ field }) => (
 											<BottomSheetSelect
+												defaultValue={field?.value?.toString()}
 												isRequired
 												list={
 													cities?.data?.map((city) => ({
@@ -269,6 +278,7 @@ export default function LocationInfoPage() {
 										name="village"
 										render={({ field }) => (
 											<InputAdapter
+												defaultValue={field?.value}
 												isRequired
 												label={t('village')}
 												onChange={(value) => field.onChange(value)}
@@ -284,6 +294,7 @@ export default function LocationInfoPage() {
 										name="mainStreet"
 										render={({ field }) => (
 											<InputAdapter
+												defaultValue={field?.value}
 												isRequired
 												label={t('street')}
 												onChange={(value) => field.onChange(value)}
@@ -299,6 +310,7 @@ export default function LocationInfoPage() {
 										name="alley"
 										render={({ field }) => (
 											<InputAdapter
+												defaultValue={field?.value}
 												isRequired
 												label={t('alley')}
 												onChange={(value) => field.onChange(value)}
@@ -314,6 +326,7 @@ export default function LocationInfoPage() {
 										name="postalCode"
 										render={({ field }) => (
 											<InputAdapter
+												defaultValue={field?.value}
 												isRequired
 												type="number"
 												label={t('postalCode')}
@@ -330,6 +343,7 @@ export default function LocationInfoPage() {
 										name="phone"
 										render={({ field }) => (
 											<InputAdapter
+												defaultValue={field?.value}
 												isRequired
 												type="number"
 												label={t('phone')}
@@ -349,6 +363,7 @@ export default function LocationInfoPage() {
 										name="jobDetailId"
 										render={({ field }) => (
 											<BottomSheetSelect
+												defaultValue={field?.value?.toString()}
 												isRequired
 												list={
 													jobs?.data?.map((job) => ({
