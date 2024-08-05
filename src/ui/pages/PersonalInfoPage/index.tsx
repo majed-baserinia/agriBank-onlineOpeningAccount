@@ -31,7 +31,7 @@ export default function PersonalInfoPage() {
 	const { data: accountsList, mutate: getAccountsList, isLoading: isLoadingGettingAccounts } = useAccountsList();
 	const { mutate: createAuthRequest, isLoading: isLoadingCreateAuthRequest } = useCreateAuthRequest();
 
-	const { handleSubmit, control, formState } = useForm<CreateAuthRequestCommand>({
+	const { handleSubmit, control, reset } = useForm<CreateAuthRequestCommand>({
 		resolver: (values, context, options) => {
 			return validator(values, context, options);
 		},
@@ -60,6 +60,13 @@ export default function PersonalInfoPage() {
 		);
 	}, []);
 
+	useEffect(() => {
+		const savedData = localStorage.getItem('dataSteps');
+		const dataSteps = savedData && JSON.parse(savedData);
+
+		dataSteps && reset({ ...dataSteps.personalInfo, accountCode: undefined });
+	}, []);
+
 	const submitHandler = (data: CreateAuthRequestCommand) => {
 		createAuthRequest(
 			{ ...data },
@@ -73,7 +80,7 @@ export default function PersonalInfoPage() {
 						type: 'error',
 						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 						// @ts-ignore: Unreachable code error
-						messageText: (err.errors as string[]).length > 0 ? (err.errors as string[])[0] : err.detail,
+						messageText: err.error ? (err.error.message as string) : err.detail,
 						hasConfirmAction: true
 					});
 				}
@@ -122,6 +129,7 @@ export default function PersonalInfoPage() {
 										name="accountTypeId"
 										render={({ field }) => (
 											<BottomSheetSelect
+												defaultValue={field?.value?.toString()}
 												isRequired
 												list={
 													accountsList?.data
@@ -149,6 +157,7 @@ export default function PersonalInfoPage() {
 										name="mobile"
 										render={({ field }) => (
 											<InputAdapter
+												defaultValue={field?.value}
 												isRequired
 												type="number"
 												label={t('phoneNumber')}
@@ -165,6 +174,7 @@ export default function PersonalInfoPage() {
 										name="nationalCodeSerial"
 										render={({ field }) => (
 											<InputAdapter
+												defaultValue={field?.value}
 												isRequired
 												label={t('nationalCodeSerial')}
 												onChange={(value) => field.onChange(value)}
@@ -180,6 +190,7 @@ export default function PersonalInfoPage() {
 										name="nationalCode"
 										render={({ field }) => (
 											<InputAdapter
+												defaultValue={field?.value}
 												isRequired
 												type="number"
 												label={t('nationalCode')}
@@ -196,6 +207,7 @@ export default function PersonalInfoPage() {
 										name="birthDate"
 										render={({ field }) => (
 											<DatePickerAdapter
+												defaultValue={field?.value}
 												placeHolder={t('birthDate')}
 												onChange={(value) => field.onChange(value)}
 												// error={!!formState.errors.birthDate?.message}
@@ -210,6 +222,7 @@ export default function PersonalInfoPage() {
 										name="identityIssueDate"
 										render={({ field }) => (
 											<DatePickerAdapter
+												defaultValue={field?.value}
 												placeHolder={t('identityIssueDate')}
 												onChange={(value) => field.onChange(value)}
 												// error={!!formState.errors.identityIssueDate?.message}
