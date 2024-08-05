@@ -37,7 +37,7 @@ export default function DatePickerAdapter(props: Props) {
 				ref={datepicker}
 				calendar={appLanguage === 'fa-IR' ? persian_ca : undefined}
 				locale={appLanguage === 'fa-IR' ? persian_fa : undefined}
-				value={value}
+				//value={value}
 				monthYearSeparator=" "
 				className="primary"
 				style={{ width: '100%' }}
