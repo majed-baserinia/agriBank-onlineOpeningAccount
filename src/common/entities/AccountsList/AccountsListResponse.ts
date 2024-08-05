@@ -10,6 +10,7 @@ export interface AccountsListResponse {
 type Account = {
 	id: string;
 	title: string;
+	code: string;
 	hasCard: boolean;
 	isCurrency: boolean;
 };
