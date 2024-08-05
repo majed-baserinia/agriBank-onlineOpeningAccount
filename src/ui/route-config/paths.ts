@@ -6,5 +6,6 @@ export const paths = {
 	locationInfo: '/onlineOpeningAccount/location-info',
 	selectBranch: '/onlineOpeningAccount/select-branch',
 	selectCard: '/onlineOpeningAccount/select-card',
+	selectAddress: '/onlineOpeningAccount/select-address',
 	nationalCardImage: '/onlineOpeningAccount/national-card-image',
 };
