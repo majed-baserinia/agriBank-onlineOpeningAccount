@@ -287,5 +287,6 @@
 	"selectAddressPageTitleText":"Applying for a card and receiving it by mail",
 	"sendMyLocationTitle" :"Send to your home address",
 	"sendOtherLocationTitle": "Send to another address",
-	"inquiry" :"Inquiry"
+	"inquiry" :"Inquiry",
+	"CardTypesSelectText":"Select a card type"
 }

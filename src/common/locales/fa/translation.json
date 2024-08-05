@@ -287,5 +287,6 @@
 	"selectAddressPageTitleText" :"درخواست صدور کارت و دریافت از طریق پست",
 	"sendMyLocationTitle": "ارسال به آدرس محل سکونت",
 	"sendOtherLocationTitle": "ارسال به آدرس دیگر",
-	"inquiry": "استعلام"
+	"inquiry": "استعلام",
+	"CardTypesSelectText": "نوع کارت مورد نظر را انتخاب کنید."
 }
