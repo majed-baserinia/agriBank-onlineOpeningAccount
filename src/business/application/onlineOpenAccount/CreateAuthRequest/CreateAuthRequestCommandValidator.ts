@@ -19,8 +19,7 @@ export class CreateAuthRequestCommandValidator extends Validator<CreateAuthReque
 		this.ruleFor('nationalCodeSerial')
 			.notNull()
 			.withMessage(i18next.t('notEmptynationalCodeSerialText').toString())
-			.matches(new RegExp('^[0-9]+$'))
-			.withMessage(i18next.t('onlyDigitsAreAllowed').toString());
+			
 
 		this.ruleFor('nationalCode')
 			.notNull()
