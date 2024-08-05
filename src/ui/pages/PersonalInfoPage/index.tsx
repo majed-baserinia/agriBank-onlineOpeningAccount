@@ -69,9 +69,13 @@ export default function PersonalInfoPage() {
 					navigate(paths.otp, { state: { otpTime: res.otpTime } });
 				},
 				onError: (err) => {
-					if (err.status != 400) {
-						pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-					}
+					pushAlert({
+						type: 'error',
+						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
+						// @ts-ignore: Unreachable code error
+						messageText: (err.errors as string[]).length > 0 ? (err.errors as string[])[0] : err.detail,
+						hasConfirmAction: true
+					});
 				}
 			}
 		);
@@ -133,8 +137,8 @@ export default function PersonalInfoPage() {
 													field.onChange(Number(selectedDeposite.value));
 													setAccountCode(selectedDeposite.aditionalData);
 												}}
-												error={!!formState.errors.accountTypeId?.message}
-												helperText={formState.errors.accountTypeId?.message}
+												// error={!!formState.errors.accountTypeId?.message}
+												// helperText={formState.errors.accountTypeId?.message}
 											/>
 										)}
 									/>
@@ -149,8 +153,8 @@ export default function PersonalInfoPage() {
 												type="number"
 												label={t('phoneNumber')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.mobile?.message}
-												helperText={formState.errors.mobile?.message}
+												// error={!!formState.errors.mobile?.message}
+												// helperText={formState.errors.mobile?.message}
 											/>
 										)}
 									/>
@@ -164,8 +168,8 @@ export default function PersonalInfoPage() {
 												isRequired
 												label={t('nationalCodeSerial')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.nationalCodeSerial?.message}
-												helperText={formState.errors.nationalCodeSerial?.message}
+												// error={!!formState.errors.nationalCodeSerial?.message}
+												// helperText={formState.errors.nationalCodeSerial?.message}
 											/>
 										)}
 									/>
@@ -180,8 +184,8 @@ export default function PersonalInfoPage() {
 												type="number"
 												label={t('nationalCode')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.nationalCode?.message}
-												helperText={formState.errors.nationalCode?.message}
+												// error={!!formState.errors.nationalCode?.message}
+												// helperText={formState.errors.nationalCode?.message}
 											/>
 										)}
 									/>
@@ -194,8 +198,8 @@ export default function PersonalInfoPage() {
 											<DatePickerAdapter
 												placeHolder={t('birthDate')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.birthDate?.message}
-												helperText={formState.errors.birthDate?.message}
+												// error={!!formState.errors.birthDate?.message}
+												// helperText={formState.errors.birthDate?.message}
 											/>
 										)}
 									/>
@@ -208,8 +212,8 @@ export default function PersonalInfoPage() {
 											<DatePickerAdapter
 												placeHolder={t('identityIssueDate')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.identityIssueDate?.message}
-												helperText={formState.errors.identityIssueDate?.message}
+												// error={!!formState.errors.identityIssueDate?.message}
+												// helperText={formState.errors.identityIssueDate?.message}
 											/>
 										)}
 									/>

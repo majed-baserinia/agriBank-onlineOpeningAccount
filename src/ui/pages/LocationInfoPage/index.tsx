@@ -139,9 +139,13 @@ export default function LocationInfoPage() {
 					}
 				},
 				onError: (err) => {
-					if (err.status != 400) {
-						pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
-					}
+					pushAlert({
+						type: 'error',
+						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
+						// @ts-ignore: Unreachable code error
+						messageText: (err.errors as string[]).length > 0 ? (err.errors as string[])[0] : err.detail,
+						hasConfirmAction: true
+					});
 				}
 			}
 		);
@@ -202,9 +206,9 @@ export default function LocationInfoPage() {
 												valueToShowToInput={(option: Option) => ({
 													text: option.label
 												})}
-												error={!!formState.errors.branchCode?.message}
-												helperText={formState.errors.branchCode?.message}
 												loading={isLoadingGetBranches}
+												// error={!!formState.errors.branchCode?.message}
+												// helperText={formState.errors.branchCode?.message}
 											/>
 										)}
 									/>
@@ -230,8 +234,8 @@ export default function LocationInfoPage() {
 													field.onChange(Number(selectedProvince.value));
 													handlProvinceChahange(Number(selectedProvince.value));
 												}}
-												error={!!formState.errors.provinceId?.message}
-												helperText={formState.errors.provinceId?.message}
+												// error={!!formState.errors.provinceId?.message}
+												// helperText={formState.errors.provinceId?.message}
 											/>
 										)}
 									/>
@@ -253,8 +257,8 @@ export default function LocationInfoPage() {
 												onChange={(selectedCity) => {
 													field.onChange(Number(selectedCity.value));
 												}}
-												error={!!formState.errors.cityId?.message}
-												helperText={formState.errors.cityId?.message}
+												// error={!!formState.errors.cityId?.message}
+												// helperText={formState.errors.cityId?.message}
 											/>
 										)}
 									/>
@@ -268,8 +272,8 @@ export default function LocationInfoPage() {
 												isRequired
 												label={t('village')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.village?.message}
-												helperText={formState.errors.village?.message}
+												// error={!!formState.errors.village?.message}
+												// helperText={formState.errors.village?.message}
 											/>
 										)}
 									/>
@@ -283,8 +287,8 @@ export default function LocationInfoPage() {
 												isRequired
 												label={t('street')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.mainStreet?.message}
-												helperText={formState.errors.mainStreet?.message}
+												// error={!!formState.errors.mainStreet?.message}
+												// helperText={formState.errors.mainStreet?.message}
 											/>
 										)}
 									/>
@@ -298,8 +302,8 @@ export default function LocationInfoPage() {
 												isRequired
 												label={t('alley')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.alley?.message}
-												helperText={formState.errors.alley?.message}
+												// error={!!formState.errors.alley?.message}
+												// helperText={formState.errors.alley?.message}
 											/>
 										)}
 									/>
@@ -314,8 +318,8 @@ export default function LocationInfoPage() {
 												type="number"
 												label={t('postalCode')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.postalCode?.message}
-												helperText={formState.errors.postalCode?.message}
+												// error={!!formState.errors.postalCode?.message}
+												// helperText={formState.errors.postalCode?.message}
 											/>
 										)}
 									/>
@@ -330,8 +334,8 @@ export default function LocationInfoPage() {
 												type="number"
 												label={t('phone')}
 												onChange={(value) => field.onChange(value)}
-												error={!!formState.errors.phone?.message}
-												helperText={formState.errors.phone?.message}
+												// error={!!formState.errors.phone?.message}
+												// helperText={formState.errors.phone?.message}
 											/>
 										)}
 									/>
@@ -356,8 +360,8 @@ export default function LocationInfoPage() {
 												onChange={(selectedCity) => {
 													field.onChange(Number(selectedCity.value));
 												}}
-												error={!!formState.errors.jobDetailId?.message}
-												helperText={formState.errors.jobDetailId?.message}
+												// error={!!formState.errors.jobDetailId?.message}
+												// helperText={formState.errors.jobDetailId?.message}
 											/>
 										)}
 									/>
