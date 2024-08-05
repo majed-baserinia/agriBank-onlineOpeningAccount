@@ -1,7 +1,18 @@
+import { CSSProperties } from 'react';
+
 export type Props = {
-  checked: boolean;
-  value: string;
-  label: string;
-  disabled?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	listOfOptions: radioOptions[];
+	variant?: 'borderedSelected' | 'backgroundSelected';
+	defaultValue?: string;
+	title?: string;
+	onChange: (value: string) => void;
+	layoutColumns: number;
+};
+
+type radioOptions = {
+	value: string;
+	label: string;
+	subLabel?: string;
+	disabled?: boolean;
+	sx?: CSSProperties;
 };
