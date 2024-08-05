@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import Sheet from 'react-modal-sheet';
 import { Props } from './type';
 
-export default function BottomSheetSelect(props: Props) {
+export default function BottomSheetSelect<T extends { value: string; name: string }>(props: Props<T>) {
 	const { list, label, breackpoint = 'sm', defaultValue = '', onChange, isRequired, error, helperText } = props;
 
 	const theme = useTheme();
@@ -26,7 +26,7 @@ export default function BottomSheetSelect(props: Props) {
 		setValue(defaultValue);
 	}, []);
 
-	const handlClickItem = (item: { value: string; name: string }) => {
+	const handlClickItem = (item: T) => {
 		setValue(item.value);
 		onChange(item);
 		setOpen(false);
