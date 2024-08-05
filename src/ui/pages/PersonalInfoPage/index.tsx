@@ -8,7 +8,7 @@ import useAccountsList from 'business/hooks/useAccountsList';
 import useCreateAuthRequest from 'business/hooks/useCreateAuthRequest';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Title from 'ui/components/Title';
@@ -25,6 +25,8 @@ export default function PersonalInfoPage() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { addNewData } = useDataSteps();
+
+	const [accountCode, setAccountCode] = useState('');
 
 	const { data: accountsList, mutate: getAccountsList, isLoading: isLoadingGettingAccounts } = useAccountsList();
 	const { mutate: createAuthRequest, isLoading: isLoadingCreateAuthRequest } = useCreateAuthRequest();
@@ -63,7 +65,7 @@ export default function PersonalInfoPage() {
 			{ ...data },
 			{
 				onSuccess: (res) => {
-					addNewData({ personalInfo: data });
+					addNewData({ personalInfo: { ...data, accountCode: accountCode } });
 					navigate(paths.otp, { state: { otpTime: res.otpTime } });
 				},
 				onError: (err) => {
@@ -121,13 +123,15 @@ export default function PersonalInfoPage() {
 													accountsList?.data
 														? accountsList.data.map((acc) => ({
 																value: acc.id,
-																name: acc.title
+																name: acc.title,
+																aditionalData: acc.code
 															}))
 														: []
 												}
 												label={t('account')}
 												onChange={(selectedDeposite) => {
 													field.onChange(Number(selectedDeposite.value));
+													setAccountCode(selectedDeposite.aditionalData);
 												}}
 												error={!!formState.errors.accountTypeId?.message}
 												helperText={formState.errors.accountTypeId?.message}
