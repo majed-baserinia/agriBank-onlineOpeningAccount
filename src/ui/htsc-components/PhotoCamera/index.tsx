@@ -1,29 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Camera, CameraType } from 'react-camera-pro';
 
 import './styles.css';
 
+// https://www.npmjs.com/package/react-camera-pro?activeTab=readme
+
 type Props = {
-	onTakePhoto: (photo: string | null) => {};
+	onTakePhoto: (photo: string | null) => void;
 };
 
 export default function PhotoCamera(props: Props) {
 	const { onTakePhoto } = props;
-	const [numberOfCameras, setNumberOfCameras] = useState(0);
+
 	const [image, setImage] = useState<string | null>(null);
 	const [showImage, setShowImage] = useState<boolean>(false);
 	const camera = useRef<CameraType>(null);
-	const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
-	const [activeDeviceId, setActiveDeviceId] = useState<string | undefined>(undefined);
-	const [torchToggled, setTorchToggled] = useState<boolean>(false);
-
-	useEffect(() => {
-		(async () => {
-			const devices = await navigator.mediaDevices.enumerateDevices();
-			const videoDevices = devices.filter((i) => i.kind == 'videoinput');
-			setDevices(videoDevices);
-		})();
-	});
 
 	return (
 		<div className="container">
@@ -57,8 +48,6 @@ export default function PhotoCamera(props: Props) {
 						ref={camera}
 						aspectRatio={'cover'}
 						facingMode="environment"
-						numberOfCamerasCallback={(i) => setNumberOfCameras(i)}
-						videoSourceDeviceId={activeDeviceId}
 						errorMessages={{
 							noCameraAccessible:
 								'No camera device accessible. Please connect your camera or try a different browser.',
@@ -66,9 +55,6 @@ export default function PhotoCamera(props: Props) {
 							switchCamera:
 								'It is not possible to switch camera to different one because there is only one video device accessible.',
 							canvas: 'Canvas is not supported.'
-						}}
-						videoReadyCallback={() => {
-							console.log('Video feed ready.');
 						}}
 					/>
 				)}
@@ -83,47 +69,6 @@ export default function PhotoCamera(props: Props) {
 						}
 					}}
 				></button>
-				{/*<div className="control">
-         <select
-          onChange={(event) => {
-            setActiveDeviceId(event.target.value);
-          }}
-        > 
-          {devices.map((d) => (
-            <option key={d.deviceId} value={d.deviceId}>
-              {d.label}
-            </option>
-          ))}
-        </select>*/}
-				{/* <div
-          className="imagePreview"
-          style={{ backgroundImage: image ? `url(${image})` : '' }}
-          onClick={() => {
-            setShowImage(!showImage);
-          }}
-        /> */}
-
-				{/* {camera.current?.torchSupported && (
-          <button
-            className={`torchButton ${torchToggled ? 'toggled' : ''}`}
-            onClick={() => {
-              if (camera.current) {
-                setTorchToggled(camera.current.toggleTorch());
-              }
-            }}
-          />
-        )} */}
-				{/* <button
-          className="changeFacingCameraButton"
-          disabled={numberOfCameras <= 1}
-          onClick={() => {
-            if (camera.current) {
-              const result = camera.current.switchCamera();
-              console.log(result);
-            }
-          }}
-        /> 
-      </div>*/}
 			</div>
 		</div>
 	);
