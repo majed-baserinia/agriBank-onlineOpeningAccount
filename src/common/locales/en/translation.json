@@ -290,5 +290,6 @@
 	"inquiry" :"Inquiry",
 	"CardTypesSelectText":"Select the type of card you want.",
 	"nationalImagePageTitleText" :"Dear subscriber, the photo of the original national card is accepted. Please place your national card in the frame close by.",
-	"takePictureHintText": "Please make your phone horizontal when taking pictures."
+	"takePictureHintText": "Please make your phone horizontal when taking pictures.",
+	"endPageSuccessText": "Dear subscriber, your request to open an account has been successfully registered. The result will be notified by SMS"
 }
