@@ -10,5 +10,6 @@ export const Cities = '/api/City/list';
 export const Jobs = '/api/job/list';
 export const GetBranches = '/api/v1/Branch/GetBranches';
 export const InquiryGNAFForCard = '/api/BancsLink/InquiryGNAFForCard';
+export const SaveNationalCodeImage = '/api/BancsLink/SaveNationalCodeImage';
 // TODO: needs change the url
 export const CardsList = '/api/BancsLink/CardsList';
