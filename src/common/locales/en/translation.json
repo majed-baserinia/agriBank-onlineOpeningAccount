@@ -288,6 +288,7 @@
 	"sendMyLocationTitle" :"Send to your home address",
 	"sendOtherLocationTitle": "Send to another address",
 	"inquiry" :"Inquiry",
-	"CardTypesSelectText":"Select a card type",
-	"nationalImagePageTitleText" :"Dear subscriber, the photo of the original national card is accepted. Please place your national card in the frame close by."
+	"CardTypesSelectText":"Select the type of card you want.",
+	"nationalImagePageTitleText" :"Dear subscriber, the photo of the original national card is accepted. Please place your national card in the frame close by.",
+	"takePictureHintText": "Please make your phone horizontal when taking pictures."
 }

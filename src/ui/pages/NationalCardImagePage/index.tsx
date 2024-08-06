@@ -1,14 +1,48 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import phoneIcon from 'assets/icon/horizantal-phone.svg';
+import useSaveNationalCodeImage from 'business/hooks/useSaveNationalCodeImage';
+import { pushAlert } from 'business/stores/AppAlertsStore';
+import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
+import { SaveNationalCodeImageRequest } from 'common/entities/SaveNationalCodeImage/SaveNationalCodeImageRequest';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
+import PhotoCamera from 'ui/htsc-components/PhotoCamera';
+import SvgToIcon from 'ui/htsc-components/SvgToIcon';
+import { paths } from 'ui/route-config/paths';
 
 export default function NationalCardImagePage() {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+
+	const { token } = useDataSteps();
+	const [image, setImage] = useState<string | null>(null);
+	const { isLoading, mutate: postImage } = useSaveNationalCodeImage();
+
+	const handlesubmit = () => {
+		if (image) {
+			const data: SaveNationalCodeImageRequest = {
+				binaries: image,
+				fileName: 'nationalCard',
+				mimeType: 'image/jpeg',
+				token: token!
+			};
+			postImage(data, {
+				onError: (err) => {
+					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+				},
+				onSuccess: (res) => {
+					navigate(paths.thirdPartyAuth);
+				}
+			});
+		}
+	};
 
 	return (
 		<Grid
@@ -35,7 +69,7 @@ export default function NationalCardImagePage() {
 							<Title>{t('openAccount')}</Title>
 
 							<Grid
-								marginBottom={'64px'}
+								marginBottom={'16px'}
 								container
 								flexWrap={'nowrap'}
 								gap={'8px'}
@@ -48,16 +82,31 @@ export default function NationalCardImagePage() {
 								</Typography>
 							</Grid>
 
-							<Grid>
-                            
-                            </Grid>
+							<Grid sx={{ marginBottom: '16px' }}>
+								<PhotoCamera
+									onTakePhoto={(photo) => {
+										setImage(photo);
+									}}
+								/>
+							</Grid>
+							<Grid
+								container
+								gap={4}
+							>
+								<SvgToIcon
+									icon={phoneIcon}
+									alt="phone-icon"
+								/>
+								<Typography>{t('takePictureHintText')}</Typography>
+							</Grid>
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
+								disabled={!image}
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
-								onClick={() => {}}
+								muiButtonProps={{ sx: { width: '100%' } }}
+								onClick={handlesubmit}
 							>
 								{t('continue')}
 							</ButtonAdapter>
@@ -83,7 +132,7 @@ export default function NationalCardImagePage() {
 					</BoxAdapter>
 				</Grid>
 			)} */}
-			<Loader showLoader={false} />
+			<Loader showLoader={isLoading} />
 		</Grid>
 	);
 }

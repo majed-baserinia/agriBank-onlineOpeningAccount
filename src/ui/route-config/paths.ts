@@ -9,4 +9,5 @@ export const paths = {
 	selectCardType: '/onlineOpeningAccount/select-card-type',
 	selectAddress: '/onlineOpeningAccount/select-address',
 	nationalCardImage: '/onlineOpeningAccount/national-card-image',
+	thirdPartyAuth: '/onlineOpeningAccount/third-party-auth',
 };

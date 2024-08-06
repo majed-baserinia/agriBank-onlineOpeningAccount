@@ -10,6 +10,7 @@ import { paths } from './paths';
 import SelectCardPage from 'ui/pages/SelectCardPage';
 import SelectAddressPage from 'ui/pages/SelectAddressPage';
 import SelectCardTypePage from 'ui/pages/SelectCardTypePage';
+import NationalCardImagePage from 'ui/pages/NationalCardImagePage';
 
 const router = createBrowserRouter([
 	{
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
 			{ path: paths.selectCard, element: <SelectCardPage /> },
 			{ path: paths.selectAddress, element: <SelectAddressPage /> },
 			{ path: paths.selectCardType, element: <SelectCardTypePage /> },
+			{ path: paths.nationalCardImage, element: <NationalCardImagePage /> },
 			
 		]
 	}
