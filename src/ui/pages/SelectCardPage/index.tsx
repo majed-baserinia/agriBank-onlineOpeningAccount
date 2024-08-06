@@ -4,6 +4,7 @@ import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
+import SelectableCards from 'ui/pages/SelectCardPage/Cards';
 
 export default function SelectCardPage() {
 	const { t } = useTranslation();
@@ -48,9 +49,7 @@ export default function SelectCardPage() {
 								</Typography>
 							</Grid>
 
-							<Grid>
-                            
-                            </Grid>
+							<SelectableCards></SelectableCards>
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
@@ -65,24 +64,6 @@ export default function SelectCardPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{/* {matches ? null : (
-				<Grid
-				item
-					md={3}
-					dir={theme.direction}
-				>
-					<BoxAdapter>
-						<Menu
-							divider={false}
-							list={menuList.management}
-						/>
-						<Menu
-							divider={false}
-							list={menuList.services}
-						/>{' '}
-					</BoxAdapter>
-				</Grid>
-			)} */}
 			<Loader showLoader={false} />
 		</Grid>
 	);
