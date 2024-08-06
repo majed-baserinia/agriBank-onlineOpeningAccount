@@ -10,4 +10,5 @@ export const paths = {
 	selectAddress: '/onlineOpeningAccount/select-address',
 	nationalCardImage: '/onlineOpeningAccount/national-card-image',
 	thirdPartyAuth: '/onlineOpeningAccount/third-party-auth',
+	result: '/onlineOpeningAccount/result',
 };
