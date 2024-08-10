@@ -98,9 +98,10 @@ export default function LocationInfoPage() {
 
 	useEffect(() => {
 		const savedData = localStorage.getItem('dataSteps');
-		const dataSteps = savedData && JSON.parse(savedData);
-
-		dataSteps && reset({ ...dataSteps.locationInfo });
+		if (savedData) {
+			const dataSteps = JSON.parse(savedData);
+			reset({ ...dataSteps.locationInfo });
+		}
 	}, []);
 
 	const handleBranchSearchWithDebounce = useMemo(() => {

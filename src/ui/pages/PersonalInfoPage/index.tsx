@@ -62,9 +62,10 @@ export default function PersonalInfoPage() {
 
 	useEffect(() => {
 		const savedData = localStorage.getItem('dataSteps');
-		const dataSteps = savedData && JSON.parse(savedData);
-
-		dataSteps && reset({ ...dataSteps.personalInfo, accountCode: undefined });
+		if (savedData) {
+			const dataSteps = JSON.parse(savedData);
+			reset({ ...dataSteps.personalInfo, accountCode: undefined });
+		}
 	}, []);
 
 	const submitHandler = (data: CreateAuthRequestCommand) => {
