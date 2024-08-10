@@ -1,5 +1,6 @@
 import { useTheme } from '@mui/material';
 import { Options, Splide, SplideProps } from '@splidejs/react-splide';
+import { forwardRef } from 'react';
 import styles from './styles.module.css';
 
 export type Props = SplideProps & {
@@ -22,7 +23,10 @@ export type Props = SplideProps & {
 	};
 };
 
-export default function Carousel({ focusCenter, className, options, setDefaultOptions = true, ...restProps }: Props) {
+export const Carousel = forwardRef<Splide>(function (
+	{ focusCenter, className, options, setDefaultOptions = true, ...restProps }: Props,
+	ref
+) {
 	const theme = useTheme();
 
 	const newOptions: Options | undefined = setDefaultOptions
@@ -44,6 +48,7 @@ export default function Carousel({ focusCenter, className, options, setDefaultOp
 
 	return (
 		<Splide
+			ref={ref}
 			className={className}
 			style={
 				{
@@ -55,4 +60,6 @@ export default function Carousel({ focusCenter, className, options, setDefaultOp
 			{...restProps}
 		></Splide>
 	);
-}
+});
+
+export default Carousel;
