@@ -12,7 +12,14 @@ export type Props = SplideProps & {
 	/**
 	 * will fade/reduce-opacity of every slide expect the active one
 	 */
-	focusCenter?: boolean;
+	focusCenter?: {
+		enable: true;
+		/**
+		 * the scaling factor of active element
+		 */
+		scalingFactor?: number;
+		inactiveSlideOpacity?: number;
+	};
 };
 
 export default function Carousel({ focusCenter, className, options, setDefaultOptions = true, ...restProps }: Props) {
@@ -31,13 +38,19 @@ export default function Carousel({ focusCenter, className, options, setDefaultOp
 			}
 		: options;
 
-	if (focusCenter) {
+	if (focusCenter?.enable) {
 		className += ` ${styles['focus-center']}`;
 	}
 
 	return (
 		<Splide
 			className={className}
+			style={
+				{
+					'--inactive-slide-opacity': focusCenter?.inactiveSlideOpacity ?? 0.5,
+					'--scaling-factor': focusCenter?.scalingFactor ?? 1.2
+				} as React.CSSProperties
+			}
 			options={newOptions}
 			{...restProps}
 		></Splide>

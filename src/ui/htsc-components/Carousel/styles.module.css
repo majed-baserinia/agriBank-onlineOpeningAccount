@@ -1,10 +1,12 @@
 .focus-center :global(.splide__list) li {
-	filter: opacity(0.6);
-    transform: scale(0.95);
-    transition: filter 200ms, transform 350ms;
+	filter: opacity(var(--inactive-slide-opacity));
+	transform: scale(calc(var(--scaling-factor) - 1));
+	transition:
+		filter 200ms,
+		transform 350ms;
 }
 
 .focus-center :global(.splide__list) li:global(.is-active) {
 	filter: opacity(1);
-    transform: scale(1);
+	transform: scale(1);
 }
