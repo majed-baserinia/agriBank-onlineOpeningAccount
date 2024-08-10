@@ -2,56 +2,65 @@ import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 
-import fileInvoiceIcon from 'assets/icon/menu/file-invoice.svg';
+import cameraIcon from 'assets/icon/menu/camera.svg';
 import identityCardIcon from 'assets/icon/menu/identity-card.svg';
 import locationPinIcon from 'assets/icon/menu/location-pin.svg';
-import cameraIcon from 'assets/icon/menu/camera.svg';
+import noteSquareIcon from 'assets/icon/menu/note-square.svg';
+import soundOffIcon from 'assets/icon/menu/sound-off.svg';
+import userIcon from 'assets/icon/user.svg';
+import { useNavigate } from 'react-router-dom';
 import Title from 'ui/components/Title';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
-import { useNavigate } from 'react-router-dom';
 import { paths } from 'ui/route-config/paths';
-
 
 const stagesList = [
 	{
 		id: 1,
-		title: 'selectDeposit',
-		subtitle: 'selectDepositSub',
-		icon: fileInvoiceIcon,
-		iconAlt: 'file-Invoice'
-	},
-	{
-		id: 2,
-		title: 'sendDocuments',
-		subtitle: 'sendDocumentsSub',
+		title: 'nationalCardHomePageTitle',
 		icon: identityCardIcon,
 		iconAlt: 'identity-Card'
 	},
 	{
-		id: 3,
-		title: 'address',
-		subtitle: 'addressSub',
-		icon: locationPinIcon,
-		iconAlt: 'location-Pin'
-	},
-	{
-		id: 4,
-		title: 'Identification',
-		subtitle: 'IdentificationSub',
+		id: 2,
+		title: 'cameraAccessHomePageTitle',
 		icon: cameraIcon,
 		iconAlt: 'camera'
 	},
-] as const
+	{
+		id: 3,
+		title: 'noVoiceHomePageTitle',
+		icon: soundOffIcon,
+		iconAlt: 'sound Off'
+	},
+	{
+		id: 4,
+		title: 'identificationHomePageTitle',
+		icon: locationPinIcon,
+		iconAlt: 'location-icon'
+	},
+	{
+		id: 5,
+		title: 'hijabHomePageTitle',
+		icon: userIcon,
+		iconAlt: 'user-icon'
+	},
+	{
+		id: 6,
+		title: 'penHomePageTitle',
+		icon: noteSquareIcon,
+		iconAlt: 'note-square-icon'
+	}
+] as const;
 
 export default function HomePage() {
 	const { t } = useTranslation();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
 	const handleSubmit = () => {
-		navigate(paths.PersonalInfoPage)
+		navigate(paths.PersonalInfoPage);
 	};
 
 	return (
@@ -85,49 +94,42 @@ export default function HomePage() {
 								{t('openingAccountStepsText')}
 							</Typography>
 
-							{stagesList.map((item)=> <Grid overflow={'hidden'}>
-								<Grid
-									container
-									justifyContent={'space-between'}
-									alignItems={'center'}
-									minWidth={'290px'}
-									sx={{ padding: matches ? '16px 0' : '24px 0', overflow: 'hidden' }}
-								>
-									<Grid>
-										<Grid
-											container
-											gap={'8px'}
-											alignItems={'start'}
-											justifyContent={'center'}
-										>
-											<Grid item>
-												<SvgToIcon
-													icon={item.icon}
-													alt={item.iconAlt}
-												/>
-											</Grid>
-											<Grid>
-												<Typography
-													variant="bodyMd"
-													fontWeight={'medium'}
-													noWrap
-												>
-													
-													{t(item.title)}
-												</Typography>
-
-												<Typography
-													variant="bodyXs"
-													fontWeight={'medium'}
-													sx={{ color: theme.palette.text.secondary, marginTop: '8px' }}
-												>
-												{t(item.subtitle)}
-												</Typography>
+							{stagesList.map((item) => (
+								<Grid overflow={'hidden'}>
+									<Grid
+										container
+										justifyContent={'space-between'}
+										alignItems={'center'}
+										minWidth={'290px'}
+										sx={{ padding: matches ? '16px 0' : '24px 0', overflow: 'hidden' }}
+									>
+										<Grid>
+											<Grid
+												container
+												gap={'8px'}
+												alignItems={'start'}
+												justifyContent={'center'}
+											>
+												<Grid item>
+													<SvgToIcon
+														icon={item.icon}
+														alt={item.iconAlt}
+													/>
+												</Grid>
+												<Grid>
+													<Typography
+														variant="bodyMd"
+														fontWeight={'medium'}
+														noWrap
+													>
+														{t(item.title)}
+													</Typography>
+												</Grid>
 											</Grid>
 										</Grid>
 									</Grid>
 								</Grid>
-							</Grid>)}
+							))}
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
