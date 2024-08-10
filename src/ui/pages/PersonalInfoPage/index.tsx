@@ -11,6 +11,7 @@ import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
@@ -18,6 +19,7 @@ import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
+import { stagesList } from '../HomePage';
 
 export default function PersonalInfoPage() {
 	const { t } = useTranslation();
@@ -74,7 +76,7 @@ export default function PersonalInfoPage() {
 			{
 				onSuccess: (res) => {
 					addNewData({ personalInfo: { ...data, accountCode: accountCode } });
-					navigate(paths.otp, { state: { otpTime: res.otpTime } });
+					navigate(paths.otp, { state: { otpTime: res } });
 				},
 				onError: (err) => {
 					pushAlert({
@@ -121,10 +123,18 @@ export default function PersonalInfoPage() {
 							</Typography>
 							<Grid
 								container
-								direction={'column'}
-								gap={'16px'}
+								direction={'row'}
+								spacing={'16px'}
 							>
-								<Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+									sx={{ order: { xs: 1, sm: 1, md: 1, lg: 1, xl: 1 } }}
+								>
 									<Controller
 										control={control}
 										name="accountTypeId"
@@ -150,7 +160,15 @@ export default function PersonalInfoPage() {
 										)}
 									/>
 								</Grid>
-								<Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+									sx={{ order: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 } }}
+								>
 									<Controller
 										control={control}
 										name="mobile"
@@ -167,7 +185,15 @@ export default function PersonalInfoPage() {
 										)}
 									/>
 								</Grid>
-								<Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+									sx={{ order: { xs: 3, sm: 3, md: 3, lg: 3, xl: 3 } }}
+								>
 									<Controller
 										control={control}
 										name="nationalCodeSerial"
@@ -183,7 +209,15 @@ export default function PersonalInfoPage() {
 										)}
 									/>
 								</Grid>
-								<Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+									sx={{ order: { xs: 4, sm: 4, md: 4, lg: 4, xl: 4 } }}
+								>
 									<Controller
 										control={control}
 										name="nationalCode"
@@ -200,7 +234,15 @@ export default function PersonalInfoPage() {
 										)}
 									/>
 								</Grid>
-								<Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+									sx={{ order: { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 } }}
+								>
 									<Controller
 										control={control}
 										name="birthDate"
@@ -215,7 +257,15 @@ export default function PersonalInfoPage() {
 										)}
 									/>
 								</Grid>
-								<Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+									sx={{ order: { xs: 6, sm: 6, md: 6, lg: 6, xl: 6 } }}
+								>
 									<Controller
 										control={control}
 										name="identityIssueDate"
@@ -245,18 +295,17 @@ export default function PersonalInfoPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{/* {matches ? null : (
+			{matches ? null : (
 				<Grid
 					item
 					md={3}
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList.management} />
-						<Menu list={menuList.services} />
+						<StagesListComp list={stagesList} />
 					</BoxAdapter>
 				</Grid>
-			)} */}
+			)}
 			<Loader showLoader={isLoadingGettingAccounts || isLoadingCreateAuthRequest} />
 		</Grid>
 	);
