@@ -1,4 +1,4 @@
-import Slides from 'ui/htsc-components/Carousel/Slides';
+import Slides from 'ui/htsc-components/Carousel/Slide/Slides';
 
 export type Props = {
 	className?: string;

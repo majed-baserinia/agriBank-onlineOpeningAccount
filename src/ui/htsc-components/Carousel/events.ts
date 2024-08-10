@@ -8,11 +8,11 @@ type DefaultEvents =
 	| 'play'
 	| 'pause';
 
-export type MappedEvent<T extends string> = T extends `${infer X}.${infer Y}`
+type MappedEvent<T extends string> = T extends `${infer X}.${infer Y}`
 	? `on${Capitalize<Y>}${Capitalize<X>}`
 	: `on${Capitalize<T>}`;
 
-export type MappedEvents = {
+type MappedEvents = {
 	[K in DefaultEvents as MappedEvent<K>]: K;
 };
 

@@ -1,7 +1,7 @@
 import Glide from '@glidejs/glide/dist/glide.modular.esm';
 import { RefObject, useEffect, useState } from 'react';
-import type { GlideOptions } from 'ui/htsc-components/Carousel/Root/Carousel';
-import { GlideEvents, mappedEventToGlideEvent } from 'ui/htsc-components/Carousel/Root/Events';
+import { GlideEvents, mappedEventToGlideEvent } from 'ui/htsc-components/Carousel/events';
+import { GlideOptions } from 'ui/htsc-components/Carousel/options';
 
 export function useInitializeGlider(element: RefObject<HTMLElement>, options: GlideOptions & GlideEvents) {
 	const [glide, setGlide] = useState<Glide | null>(null);
