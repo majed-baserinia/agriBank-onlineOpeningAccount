@@ -9,12 +9,14 @@ import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
+import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import Otp from 'ui/htsc-components/Otp';
 import { paths } from 'ui/route-config/paths';
+import { stagesList } from '../HomePage';
 
 export default function OtpPage() {
 	const theme = useTheme();
@@ -24,10 +26,9 @@ export default function OtpPage() {
 	const location = useLocation();
 	const otpTime = location.state.otpTime;
 
-	
 	const { personalInfo, addNewData } = useDataSteps();
 	const { mutate: verifyOtp, isLoading: isLoadingVerify } = useVerificationOTP();
-	const {data: createAuthRes, mutate: sendAgain, isLoading: isLoadingSendAgain } = useCreateAuthRequest();
+	const { data: createAuthRes, mutate: sendAgain, isLoading: isLoadingSendAgain } = useCreateAuthRequest();
 
 	const {
 		handleSubmit: handleSubmitForVerifyOtp,
@@ -155,24 +156,17 @@ export default function OtpPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{/* {matches ? null : (
+			{matches ? null : (
 				<Grid
-				item
+					item
 					md={3}
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu
-							divider={false}
-							list={menuList.management}
-						/>
-						<Menu
-							divider={false}
-							list={menuList.services}
-						/>{' '}
+						<StagesListComp list={stagesList} />
 					</BoxAdapter>
 				</Grid>
-			)} */}
+			)}
 			<Loader showLoader={isLoadingVerify || isLoadingSendAgain} />
 		</Grid>
 	);

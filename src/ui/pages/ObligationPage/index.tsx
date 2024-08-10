@@ -7,12 +7,14 @@ import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import SwitchAdapter from 'ui/htsc-components/SwitchAdapter';
 import { paths } from 'ui/route-config/paths';
+import { stagesList } from '../HomePage';
 
 export default function ObligationPage() {
 	const theme = useTheme();
@@ -128,24 +130,17 @@ export default function ObligationPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{/* {matches ? null : (
+			{matches ? null : (
 				<Grid
-				item
+					item
 					md={3}
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu
-							divider={false}
-							list={menuList.management}
-						/>
-						<Menu
-							divider={false}
-							list={menuList.services}
-						/>{' '}
+						<StagesListComp list={stagesList} />
 					</BoxAdapter>
 				</Grid>
-			)} */}
+			)}
 			<Loader showLoader={isLoadingGetObligation || isLoadingSaveObligation} />
 		</Grid>
 	);

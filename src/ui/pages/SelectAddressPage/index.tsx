@@ -21,6 +21,8 @@ import Loader from 'ui/htsc-components/loader/Loader';
 import RadioButtonAdapter from 'ui/htsc-components/RadioButtonAdapter';
 import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 import { paths } from 'ui/route-config/paths';
+import { stagesList } from '../HomePage';
+import StagesListComp from 'ui/components/StagesListComp';
 
 export default function SelectAddressPage() {
 	const { t } = useTranslation();
@@ -342,24 +344,17 @@ export default function SelectAddressPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{/* {matches ? null : (
+			{matches ? null : (
 				<Grid
 				item
 					md={3}
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu
-							divider={false}
-							list={menuList.management}
-						/>
-						<Menu
-							divider={false}
-							list={menuList.services}
-						/>{' '}
+						<StagesListComp list={stagesList} />
 					</BoxAdapter>
 				</Grid>
-			)} */}
+			)}
 			<Loader
 				showLoader={
 					isLoadingCities || isLoadingInquiryGNAFForCard || isLoadingProvinces || isLoadingRequestCard

@@ -7,6 +7,7 @@ import { SaveNationalCodeImageRequest } from 'common/entities/SaveNationalCodeIm
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
@@ -14,6 +15,7 @@ import Loader from 'ui/htsc-components/loader/Loader';
 import PhotoCamera from 'ui/htsc-components/PhotoCamera';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import { paths } from 'ui/route-config/paths';
+import { stagesList } from '../HomePage';
 
 export default function NationalCardImagePage() {
 	const { t } = useTranslation();
@@ -119,24 +121,17 @@ export default function NationalCardImagePage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{/* {matches ? null : (
+			{matches ? null : (
 				<Grid
-				item
+					item
 					md={3}
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu
-							divider={false}
-							list={menuList.management}
-						/>
-						<Menu
-							divider={false}
-							list={menuList.services}
-						/>{' '}
+						<StagesListComp list={stagesList} />
 					</BoxAdapter>
 				</Grid>
-			)} */}
+			)}
 			<Loader showLoader={isLoading} />
 		</Grid>
 	);

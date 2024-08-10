@@ -1,10 +1,12 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import SelectableCards from 'ui/pages/SelectCardPage/Cards';
+import { stagesList } from '../HomePage';
 
 export default function SelectCardPage() {
 	const { t } = useTranslation();
@@ -64,6 +66,17 @@ export default function SelectCardPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
+			{matches ? null : (
+				<Grid
+					item
+					md={3}
+					dir={theme.direction}
+				>
+					<BoxAdapter>
+						<StagesListComp list={stagesList} />
+					</BoxAdapter>
+				</Grid>
+			)}
 			<Loader showLoader={false} />
 		</Grid>
 	);

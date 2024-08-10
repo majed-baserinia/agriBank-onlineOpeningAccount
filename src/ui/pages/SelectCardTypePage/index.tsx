@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Menu from 'ui/components/Menu';
+import StagesListComp from 'ui/components/StagesListComp';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
+import { stagesList } from '../HomePage';
 
 type MenuItems = {
 	id: number;
@@ -67,42 +69,61 @@ export default function SelectCardTypePage() {
 	if (isLoading) return <Loader showLoader />;
 
 	return (
-		<Grid sx={{ padding: matches ? '0' : '64px' }}>
-			<BoxAdapter fullWidth={matches}>
-				<Grid
-					sx={{
-						minHeight: matches ? '100vh' : 'calc(100% - 128px)',
-						padding: matches ? '0' : '16px'
-					}}
-					container
-					direction={'column'}
-					gap={'24px'}
-				>
+		<Grid
+			container
+			sx={{ padding: matches ? '0' : '64px 0' }}
+			justifyContent={'center'}
+			gap={'24px'}
+			dir={theme.direction}
+		>
+			<Grid>
+				<BoxAdapter fullWidth={matches}>
 					<Grid
-						container
-						gap={'8px'}
-					>
-						<SvgToIcon
-							icon={infoIcon}
-							alt="info"
-						/>
-						<Typography
-							variant="bodyMd"
-							sx={{ color: theme.palette.text.secondary }}
-						>
-							{t('CardTypesSelectText')}
-						</Typography>
-					</Grid>
-					<Grid
-						dir={theme.direction}
+						sx={{
+							minHeight: matches ? '100vh' : 'calc(100% - 128px)',
+							padding: matches ? '0' : '16px'
+						}}
 						container
 						direction={'column'}
-						gap={'56px'}
+						gap={'24px'}
 					>
-						<Menu list={menuItems} />
+						<Grid
+							container
+							gap={'8px'}
+						>
+							<SvgToIcon
+								icon={infoIcon}
+								alt="info"
+							/>
+							<Typography
+								variant="bodyMd"
+								sx={{ color: theme.palette.text.secondary }}
+							>
+								{t('CardTypesSelectText')}
+							</Typography>
+						</Grid>
+						<Grid
+							dir={theme.direction}
+							container
+							direction={'column'}
+							gap={'56px'}
+						>
+							<Menu list={menuItems} />
+						</Grid>
 					</Grid>
+				</BoxAdapter>
+			</Grid>
+			{matches ? null : (
+				<Grid
+					item
+					md={3}
+					dir={theme.direction}
+				>
+					<BoxAdapter>
+						<StagesListComp list={stagesList} />
+					</BoxAdapter>
 				</Grid>
-			</BoxAdapter>
+			)}
 		</Grid>
 	);
 }

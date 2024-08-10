@@ -15,6 +15,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import RequestCardBottomSheet from 'ui/components/RequestCardBottomSheet';
+import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import AutoCompleteAdapter from 'ui/htsc-components/AutoCompleteAdapter';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
@@ -22,6 +23,7 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
+import { stagesList } from '../HomePage';
 import { Option } from './type';
 
 export default function LocationInfoPage() {
@@ -397,18 +399,17 @@ export default function LocationInfoPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{/* {matches ? null : (
+			{matches ? null : (
 				<Grid
 					item
 					md={3}
 					dir={theme.direction}
 				>
 					<BoxAdapter>
-						<Menu list={menuList.management} />
-						<Menu list={menuList.services} />
+						<StagesListComp list={stagesList} />
 					</BoxAdapter>
 				</Grid>
-			)} */}
+			)}
 			<Loader showLoader={isLoadingCities || isLoadingSaveAddress || isLoadingJobs || isLoadingProvinces} />
 			<RequestCardBottomSheet
 				open={openBottomSheet}
