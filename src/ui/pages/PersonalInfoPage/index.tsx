@@ -133,18 +133,16 @@ export default function PersonalInfoPage() {
 												defaultValue={field?.value?.toString()}
 												isRequired
 												list={
-													accountsList?.data
-														? accountsList.data.map((acc) => ({
-																value: acc.id,
-																name: acc.title,
-																aditionalData: acc.code
-															}))
-														: []
+													accountsList?.data?.map((acc) => ({
+														value: acc.id,
+														name: acc.title,
+														additionalData: acc.code
+													})) || []
 												}
 												label={t('account')}
 												onChange={(selectedDeposite) => {
 													field.onChange(Number(selectedDeposite.value));
-													setAccountCode(selectedDeposite.aditionalData);
+													setAccountCode(selectedDeposite.additionalData);
 												}}
 												// error={!!formState.errors.accountTypeId?.message}
 												// helperText={formState.errors.accountTypeId?.message}
