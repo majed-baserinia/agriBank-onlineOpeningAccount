@@ -1,4 +1,4 @@
-import { InputAdornment, TextField, Typography, useTheme } from '@mui/material';
+import { InputAdornment, TextField, useTheme } from '@mui/material';
 import { formatToCart, formatToMoney } from 'common/utils/formatInput';
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -34,7 +34,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 	} = props;
 
 	const theme = useTheme();
-	const [value, setValue] = useState("");
+	const [value, setValue] = useState('');
 	const [shrink, setShrink] = useState(defaultValue ? true : false);
 	const [endIcon, setEndIcon] = useState<ReactNode>(null);
 
@@ -43,7 +43,9 @@ export default function InputAdapter(props: InputAdapterProps) {
 			type == 'cart' ? formatToCart(defaultValue) : type == 'money' ? formatToMoney(defaultValue) : defaultValue;
 
 		setValue(defVal);
-		setShrink(true)
+		if (defVal) {
+			setShrink(true);
+		}
 		setEndIcon(
 			success ? (
 				<SvgToIcon
@@ -112,7 +114,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 
 	return (
 		<TextField
-		    inputRef={input => input && focused && input.focus()}
+			inputRef={(input) => input && focused && input.focus()}
 			color={success ? 'success' : undefined}
 			variant="outlined"
 			dir={theme.direction}
