@@ -18,18 +18,17 @@ export default function SelectableCards({ className, onCardSelected }: Props) {
 				enabled: true,
 				scalingFactor: 1.8
 			}}
-			options={{
-				type: 'loop',
-				focus: 'center',
-				perPage: 3,
-				gap: '2em'
-			}}
-			onActive={(_, slide) => {
-				onCardSelected?.(
-					cards.cardPatternItems.find((v) => {
-						return v.cardPatternId.toString() === slide.slide.dataset.key;
-					})!
-				);
+			gap={20}
+			type="carousel"
+			focusAt={'center'}
+			perView={3}
+			onAfterRun={(...args) => {
+				console.log(args);
+				// onCardSelected?.(
+				// 	cards.cardPatternItems.find((v) => {
+				// 		return v.cardPatternId.toString() === slide.slide.dataset.key;
+				// 	})!
+				// );
 			}}
 		>
 			{mcokCards.cardPatternItems.map((data) => {

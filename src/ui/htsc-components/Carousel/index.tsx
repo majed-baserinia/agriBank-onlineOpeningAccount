@@ -1,5 +1,5 @@
-import '@splidejs/react-splide/css/core';
-import Carousel from './Carousel';
+import '@glidejs/glide/dist/css/glide.core.css';
+import Carousel from './Root/Carousel';
 import Slide from './Slide';
 
 // TODO: everything exported from here should only expose props that are interchangeable between libraries

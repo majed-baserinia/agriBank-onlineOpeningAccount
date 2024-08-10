@@ -1,4 +1,8 @@
-import { SplideSlide } from '@splidejs/react-splide';
+export type Props = {
+	className?: string;
+	children: React.ReactNode;
+};
 
-const Slide = SplideSlide;
-export default Slide;
+export default function Slide({ className, children }: Props) {
+	return <li className={`glide__slide ${className}`}>{children}</li>;
+}
