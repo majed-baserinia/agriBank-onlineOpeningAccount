@@ -1,4 +1,6 @@
+import { useTheme } from '@mui/material';
 import { Options, Splide, SplideProps } from '@splidejs/react-splide';
+import styles from './styles.module.css';
 
 export type Props = SplideProps & {
 	/**
@@ -6,10 +8,16 @@ export type Props = SplideProps & {
 	 * for instance enables rewind/rewindByDrag which is most-likely the case for
 	 * most use cases
 	 */
-	setDefaultOptions?: true;
+	setDefaultOptions?: boolean;
+	/**
+	 * will fade/reduce-opacity of every slide expect the active one
+	 */
+	focusCenter?: boolean;
 };
 
-export default function Carousel({ setDefaultOptions, options, ...restProps }: Props) {
+export default function Carousel({ focusCenter, className, options, setDefaultOptions = true, ...restProps }: Props) {
+	const theme = useTheme();
+
 	const newOptions: Options | undefined = setDefaultOptions
 		? {
 				arrows: false,
@@ -18,14 +26,20 @@ export default function Carousel({ setDefaultOptions, options, ...restProps }: P
 				pagination: false,
 				wheel: true,
 				keyboard: 'focused',
+				direction: theme.direction,
 				...options
 			}
 		: options;
 
+	if (focusCenter) {
+		className += ` ${styles['focus-center']}`;
+	}
+
 	return (
 		<Splide
-			{...restProps}
+			className={className}
 			options={newOptions}
+			{...restProps}
 		></Splide>
 	);
 }

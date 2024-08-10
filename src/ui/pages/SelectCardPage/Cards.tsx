@@ -56,6 +56,7 @@ export default function SelectableCards() {
 	return (
 		<Carousel.Root
 			setDefaultOptions={true}
+			focusCenter={true}
 			options={{
 				type: 'loop',
 				focus: 'center',
