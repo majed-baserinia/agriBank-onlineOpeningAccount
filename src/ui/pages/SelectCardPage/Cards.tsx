@@ -14,7 +14,7 @@ export default function SelectableCards({ className }: Props) {
 		<Carousel.Root
 			setDefaultOptions={true}
 			focusCenter={{
-				enable: true,
+				enabled: true,
 				scalingFactor: 1.8
 			}}
 			className={className}

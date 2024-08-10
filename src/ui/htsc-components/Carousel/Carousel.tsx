@@ -14,7 +14,7 @@ export type Props = SplideProps & {
 	 * will fade/reduce-opacity of every slide expect the active one
 	 */
 	focusCenter?: {
-		enable: true;
+		enabled: true;
 		/**
 		 * the scaling factor of active element
 		 */
@@ -23,8 +23,8 @@ export type Props = SplideProps & {
 	};
 };
 
-export const Carousel = forwardRef<Splide>(function (
-	{ focusCenter, className, options, setDefaultOptions = true, ...restProps }: Props,
+export const Carousel = forwardRef<Splide, Props>(function (
+	{ focusCenter, className, options, setDefaultOptions = true, ...restProps },
 	ref
 ) {
 	const theme = useTheme();
@@ -42,7 +42,7 @@ export const Carousel = forwardRef<Splide>(function (
 			}
 		: options;
 
-	if (focusCenter?.enable) {
+	if (focusCenter?.enabled) {
 		className += ` ${styles['focus-center']}`;
 	}
 
