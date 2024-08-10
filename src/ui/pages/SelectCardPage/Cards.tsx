@@ -22,7 +22,7 @@ export default function SelectableCards({ className, onCardSelected }: Props) {
 			type="carousel"
 			focusAt={'center'}
 			perView={3}
-			onAfterRun={(...args) => {
+			onEndRun={(...args) => {
 				console.log(args);
 				// onCardSelected?.(
 				// 	cards.cardPatternItems.find((v) => {

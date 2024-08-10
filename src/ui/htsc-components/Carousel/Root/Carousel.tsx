@@ -1,4 +1,4 @@
-import Glide from '@glidejs/glide';
+import type Glide from '@glidejs/glide';
 import { Theme, useTheme } from '@mui/material';
 import React, { useRef } from 'react';
 import OptionsContext from 'ui/htsc-components/Carousel/Context/OptionsContext';

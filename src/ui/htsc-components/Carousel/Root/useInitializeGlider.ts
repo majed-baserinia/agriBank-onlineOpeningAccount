@@ -1,4 +1,4 @@
-import Glide from '@glidejs/glide/dist/glide.modular.esm';
+import Glide from '@glidejs/glide';
 import { RefObject, useEffect, useState } from 'react';
 import { GlideEvents, mappedEventToGlideEvent } from 'ui/htsc-components/Carousel/events';
 import { GlideOptions } from 'ui/htsc-components/Carousel/options';
@@ -8,7 +8,6 @@ export function useInitializeGlider(element: RefObject<HTMLElement>, options: Gl
 
 	useEffect(() => {
 		const glide = new Glide(element.current!, options).mount();
-		setGlide(glide);
 
 		const events = Object.entries(options).filter(([key, value]) => {
 			return key.startsWith('on');
@@ -18,9 +17,11 @@ export function useInitializeGlider(element: RefObject<HTMLElement>, options: Gl
 			glide.on(mappedEventToGlideEvent(key), value as (...args: any) => void);
 		});
 
+		setGlide(glide);
+
 		return () => {
-			setGlide(null);
 			glide.destroy();
+			setGlide(null);
 		};
 	}, [element.current]);
 

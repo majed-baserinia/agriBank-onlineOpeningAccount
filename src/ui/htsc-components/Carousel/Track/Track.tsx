@@ -4,6 +4,7 @@ export type Props = {
 	className?: string;
 	children: React.ReactNode;
 };
+
 export default function Track({ className = '', children }: Props) {
 	return (
 		<div

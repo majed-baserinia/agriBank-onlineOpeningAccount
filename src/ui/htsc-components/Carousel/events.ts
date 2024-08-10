@@ -1,6 +1,9 @@
 type DefaultEvents =
 	| 'run.after'
 	| 'run.before'
+	| 'run.start'
+	| 'run.end'
+	| 'run.offset'
 	| 'mount.before'
 	| 'mount.after'
 	| 'update'
@@ -23,6 +26,9 @@ export type GlideEvents = {
 const MAPPED_EVENTS: { [K in DefaultEvents as K]: MappedEvent<K> } = {
 	'run.after': 'onAfterRun',
 	'run.before': 'onBeforeRun',
+	'run.start': 'onStartRun',
+	'run.end': 'onEndRun',
+	'run.offset': 'onOffsetRun',
 	'mount.after': 'onAfterMount',
 	'mount.before': 'onBeforeMount',
 	update: 'onUpdate',
