@@ -31,7 +31,9 @@ export default function ObligationPage() {
 			getObligation(
 				{ token },
 				{
-					onSuccess: () => {},
+					onSuccess: (res) => {
+						addNewData({ isKycNeeded: res.isKYCNeeded });
+					},
 					onError: (err) => {
 						pushAlert({
 							type: 'error',
@@ -55,8 +57,8 @@ export default function ObligationPage() {
 				{ token },
 				{
 					onSuccess: () => {
-                        navigate(paths.locationInfo);
-                    },
+						navigate(paths.locationInfo);
+					},
 					onError: (err) => {
 						pushAlert({
 							type: 'error',
@@ -92,19 +94,25 @@ export default function ObligationPage() {
 						<Grid>
 							<Title>{t('obligationTitle')}</Title>
 
-							<Grid item>
-								<Typography variant={'body1'}>{obligation?.aggrementText}</Typography>
-							</Grid>
-							<Grid item>
-								<SwitchAdapter
-									checked={aggrementAccepted}
-									label={t('acceptObligation')}
-									onChange={() => {
-										setAggrementAccepted(!aggrementAccepted);
-									}}
-									type="small"
-								></SwitchAdapter>
-							</Grid>
+							{!isLoadingGetObligation ? (
+								<>
+									<Grid item>
+										<Typography variant={'body1'}>
+											<div dangerouslySetInnerHTML={{ __html: obligation?.aggrementText! }} />
+										</Typography>
+									</Grid>
+									<Grid item>
+										<SwitchAdapter
+											checked={aggrementAccepted}
+											label={t('acceptObligation')}
+											onChange={() => {
+												setAggrementAccepted(!aggrementAccepted);
+											}}
+											type="small"
+										></SwitchAdapter>
+									</Grid>
+								</>
+							) : null}
 						</Grid>
 						<Grid container>
 							<ButtonAdapter

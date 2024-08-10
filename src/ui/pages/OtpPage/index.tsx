@@ -24,9 +24,10 @@ export default function OtpPage() {
 	const location = useLocation();
 	const otpTime = location.state.otpTime;
 
+	
 	const { personalInfo, addNewData } = useDataSteps();
 	const { mutate: verifyOtp, isLoading: isLoadingVerify } = useVerificationOTP();
-	const { mutate: sendAgain, isLoading: isLoadingSendAgain } = useCreateAuthRequest();
+	const {data: createAuthRes, mutate: sendAgain, isLoading: isLoadingSendAgain } = useCreateAuthRequest();
 
 	const {
 		handleSubmit: handleSubmitForVerifyOtp,
@@ -134,7 +135,7 @@ export default function OtpPage() {
 											helperText={formState?.errors?.verifyCode?.message}
 											label={t('activationCodeOtp')}
 											maxLength={8}
-											timerInSeconds={otpTime}
+											timerInSeconds={createAuthRes && otpTime}
 											handleResend={handleSendAgain}
 										/>
 									)}

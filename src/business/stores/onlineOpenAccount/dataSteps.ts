@@ -19,6 +19,7 @@ interface Data {
 	cards?: CardType;
 	selectedCardData?: SelectedCardData;
 	orderId?: string;
+	isKycNeeded?: boolean;
 }
 
 export const useDataSteps = create<Functions & Data>((set) => ({
