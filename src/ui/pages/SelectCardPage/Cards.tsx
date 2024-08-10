@@ -15,37 +15,32 @@ export default function SelectableCards({ className, cards, onActiveChange }: Pr
 
 	return (
 		<Carousel.Root
-			setDefaultOptions={true}
-			focusCenter={{
+			className={className}
+			focusActiveSlide={{
 				enabled: true,
 				scalingFactor: 1.8
 			}}
-			className={className}
 			options={{
 				type: 'loop',
 				focus: 'center',
 				perPage: 3,
-				speed: 500,
-				flickPower: 300,
-				flickMaxPages: 1
+				gap: '2em'
 			}}
 		>
 			{mcokCards.cardPatternItems.map((data) => {
 				return (
 					<Carousel.Slide key={data.titleKey}>
-						<>
-							<img
-								className="overflow-hidden rounded-lg"
-								alt="card-image"
-								src={data.picsAddress}
-							></img>
-							<Typography
-								textAlign={'center'}
-								sx={{ marginTop: '32px' }}
-							>
-								{data.title}
-							</Typography>
-						</>
+						<img
+							className="overflow-hidden rounded-lg"
+							alt="card-image"
+							src={data.picsAddress}
+						></img>
+						<Typography
+							textAlign={'center'}
+							sx={{ marginTop: '32px' }}
+						>
+							{data.title}
+						</Typography>
 					</Carousel.Slide>
 				);
 			})}

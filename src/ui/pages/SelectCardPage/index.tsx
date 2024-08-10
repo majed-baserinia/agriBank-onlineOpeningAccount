@@ -96,11 +96,12 @@ export default function SelectCardPage() {
 									{t('selectCardPageTitleText')}
 								</Typography>
 							</Grid>
-
-							<SelectableCards
-								cards={cards!}
-								onActiveChange={handleCardChange}
-							/>
+							<Grid margin={'auto'}>
+								<SelectableCards
+									cards={cards!}
+									onActiveChange={handleCardChange}
+								></SelectableCards>
+							</Grid>
 						</Grid>
 						<Grid container>
 							<ButtonAdapter

@@ -11,9 +11,11 @@ export type Props = SplideProps & {
 	 */
 	setDefaultOptions?: boolean;
 	/**
-	 * will fade/reduce-opacity of every slide expect the active one
+	 * creates a focus effect on the active slide by reducing the opacity of none-active slides and
+	 * scaling the active one
+	 * * you must add the `slide-is-root` data attribute to the root of your slide elements for this to work
 	 */
-	focusCenter?: {
+	focusActiveSlide?: {
 		enabled: true;
 		/**
 		 * the scaling factor of active element
@@ -23,8 +25,12 @@ export type Props = SplideProps & {
 	};
 };
 
+/**
+ * A carousel using Splide under the hood, for more info please refer to Splide docs.
+ * * Although you can use anything to create rows in this carousel but its highly discouraged to do so, always use Carousel.Slide
+ */
 export const Carousel = forwardRef<Splide, Props>(function (
-	{ focusCenter, className, options, setDefaultOptions = true, ...restProps },
+	{ focusActiveSlide: focusCenter, className, options, setDefaultOptions = true, ...restProps },
 	ref
 ) {
 	const theme = useTheme();
@@ -37,6 +43,10 @@ export const Carousel = forwardRef<Splide, Props>(function (
 				pagination: false,
 				wheel: true,
 				keyboard: 'focused',
+				speed: 500,
+				flickPower: 300,
+				flickMaxPages: 1,
+				isNavigation: true,
 				direction: theme.direction,
 				...options
 			}
