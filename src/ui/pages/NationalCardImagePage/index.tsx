@@ -21,7 +21,7 @@ export default function NationalCardImagePage() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
-	const { token } = useDataSteps();
+	const { token, addNewData } = useDataSteps();
 	const [image, setImage] = useState<string | null>(null);
 	const { isLoading, mutate: postImage } = useSaveNationalCodeImage();
 
@@ -38,6 +38,7 @@ export default function NationalCardImagePage() {
 					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
 				},
 				onSuccess: (res) => {
+					addNewData({ orderId: res });
 					navigate(paths.thirdPartyAuth);
 				}
 			});

@@ -1,1 +1,1 @@
-export interface SaveNationalCodeImageResponse {}
+export type SaveNationalCodeImageResponse = string;

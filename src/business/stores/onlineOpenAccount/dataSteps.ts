@@ -18,6 +18,7 @@ interface Data {
 	locationInfo?: SaveAddressCommand;
 	cards?: CardType;
 	selectedCardData?: SelectedCardData;
+	orderId?: string;
 }
 
 export const useDataSteps = create<Functions & Data>((set) => ({
