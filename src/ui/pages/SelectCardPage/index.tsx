@@ -98,8 +98,9 @@ export default function SelectCardPage() {
 							</Grid>
 							<Grid margin={'auto'}>
 								<SelectableCards
-									cards={cards!}
-									onActiveChange={handleCardChange}
+									onCardSelected={(selectedCard) => {
+										console.log(selectedCard);
+									}}
 								></SelectableCards>
 							</Grid>
 						</Grid>
