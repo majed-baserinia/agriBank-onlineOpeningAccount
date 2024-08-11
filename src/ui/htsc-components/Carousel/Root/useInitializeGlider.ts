@@ -1,6 +1,6 @@
 import Glide from '@glidejs/glide';
 import { RefObject, useEffect, useState } from 'react';
-import { Callback, GlideEvents, mappedEventToGlideEvent } from 'ui/htsc-components/Carousel/events';
+import { addEventListener, Callback, GlideEvents } from 'ui/htsc-components/Carousel/events';
 import { GlideOptions } from 'ui/htsc-components/Carousel/options';
 
 export function useInitializeGlider(element: RefObject<HTMLElement>, options: GlideOptions & GlideEvents) {
@@ -14,9 +14,7 @@ export function useInitializeGlider(element: RefObject<HTMLElement>, options: Gl
 		}) as any as [keyof GlideEvents, Callback][];
 
 		events.forEach(([key, value]) => {
-			glide.on(mappedEventToGlideEvent(key), function (...args: any) {
-				value(glide, ...args);
-			});
+			addEventListener(glide, key, value);
 		});
 
 		glide.mount();

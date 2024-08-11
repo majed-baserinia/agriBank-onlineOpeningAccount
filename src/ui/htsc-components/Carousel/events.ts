@@ -52,3 +52,9 @@ export function mappedEventToGlideEvent(name: string): DefaultEvents {
 	}
 	return originalEventName[0] as DefaultEvents;
 }
+
+export function addEventListener(instance: Glide, name: string, callback: Callback) {
+	instance.on(mappedEventToGlideEvent(name), (...args: any) => {
+		callback(instance, ...args);
+	});
+}
