@@ -15,6 +15,7 @@ import Loader from 'ui/htsc-components/loader/Loader';
 import SwitchAdapter from 'ui/htsc-components/SwitchAdapter';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
+import Stepper from 'ui/htsc-components/Stepper';
 
 export default function ObligationPage() {
 	const theme = useTheme();
@@ -95,7 +96,22 @@ export default function ObligationPage() {
 					>
 						<Grid>
 							<Title>{t('obligationTitle')}</Title>
-
+							{!matches ? (
+								<Stepper
+									list={[
+										t('enterInformation'),
+										t('activationCodeTitle'),
+										t('commitmentLetter'),
+										t('residenceBranch'),
+										t('cardType'),
+										t('cardDesign'),
+										t('cardIssuance'),
+										t('sendDocuments'),
+										t('end')
+									]}
+									active={2}
+								/>
+							) : null}
 							{!isLoadingGetObligation ? (
 								<>
 									<Grid item>

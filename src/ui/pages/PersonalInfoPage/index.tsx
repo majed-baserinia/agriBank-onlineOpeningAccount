@@ -18,6 +18,7 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
+import Stepper from 'ui/htsc-components/Stepper';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 
@@ -115,6 +116,22 @@ export default function PersonalInfoPage() {
 						<Grid>
 							<Title>{t('openAccount')}</Title>
 
+							{!matches ? (
+								<Stepper
+									list={[
+										t('enterInformation'),
+										t('activationCodeTitle'),
+										t('commitmentLetter'),
+										t('residenceBranch'),
+										t('cardType'),
+										t('cardDesign'),
+										t('cardIssuance'),
+										t('sendDocuments'),
+										t('end')
+									]}
+									active={0}
+								/>
+							) : null}
 							<Typography
 								variant="bodyMd"
 								sx={{ marginBottom: '8px' }}

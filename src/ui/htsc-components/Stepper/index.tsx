@@ -23,7 +23,7 @@ export default function Stepper(props: Props) {
 
 	return (
 		<div className="mb-10">
-			<ul className="relative flex flex-row   p-5">
+			<ul className="relative flex flex-row overflow-x-scroll  p-5">
 				{list?.map((item, index) => {
 					return (
 						<li

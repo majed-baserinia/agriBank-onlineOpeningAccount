@@ -23,6 +23,7 @@ import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 import StagesListComp from 'ui/components/StagesListComp';
+import Stepper from 'ui/htsc-components/Stepper';
 
 export default function SelectAddressPage() {
 	const { t } = useTranslation();
@@ -187,7 +188,22 @@ export default function SelectAddressPage() {
 					>
 						<Grid>
 							<Title>{t('openAccount')}</Title>
-
+							{!matches ? (
+								<Stepper
+									list={[
+										t('enterInformation'),
+										t('activationCodeTitle'),
+										t('commitmentLetter'),
+										t('residenceBranch'),
+										t('cardType'),
+										t('cardDesign'),
+										t('cardIssuance'),
+										t('sendDocuments'),
+										t('end')
+									]}
+									active={6}
+								/>
+							) : null}
 							<Grid
 								marginBottom={'64px'}
 								container

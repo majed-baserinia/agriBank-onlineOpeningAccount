@@ -7,6 +7,7 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import SelectableCards from 'ui/pages/SelectCardPage/Cards';
 import { stagesList } from '../HomePage';
+import Stepper from 'ui/htsc-components/Stepper';
 
 export default function SelectCardPage() {
 	const { t } = useTranslation();
@@ -36,7 +37,22 @@ export default function SelectCardPage() {
 					>
 						<Grid>
 							<Title>{t('openAccount')}</Title>
-
+							{!matches ? (
+								<Stepper
+									list={[
+										t('enterInformation'),
+										t('activationCodeTitle'),
+										t('commitmentLetter'),
+										t('residenceBranch'),
+										t('cardType'),
+										t('cardDesign'),
+										t('cardIssuance'),
+										t('sendDocuments'),
+										t('end')
+									]}
+									active={5}
+								/>
+							) : null}
 							<Grid
 								marginBottom={'64px'}
 								container

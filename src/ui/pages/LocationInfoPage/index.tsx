@@ -25,6 +25,7 @@ import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 import { Option } from './type';
+import Stepper from 'ui/htsc-components/Stepper';
 
 export default function LocationInfoPage() {
 	const { t } = useTranslation();
@@ -185,7 +186,22 @@ export default function LocationInfoPage() {
 					>
 						<Grid>
 							<Title>{t('openAccount')}</Title>
-
+							{!matches ? (
+								<Stepper
+									list={[
+										t('enterInformation'),
+										t('activationCodeTitle'),
+										t('commitmentLetter'),
+										t('residenceBranch'),
+										t('cardType'),
+										t('cardDesign'),
+										t('cardIssuance'),
+										t('sendDocuments'),
+										t('end')
+									]}
+									active={0}
+								/>
+							) : null}
 							<Grid
 								container
 								direction={'column'}

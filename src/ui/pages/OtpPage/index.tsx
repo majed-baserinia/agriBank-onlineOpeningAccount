@@ -15,6 +15,7 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import Otp from 'ui/htsc-components/Otp';
+import Stepper from 'ui/htsc-components/Stepper';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 
@@ -103,7 +104,22 @@ export default function OtpPage() {
 					>
 						<Grid>
 							<Title>{t('openAccount')}</Title>
-
+							{!matches ? (
+								<Stepper
+									list={[
+										t('enterInformation'),
+										t('activationCodeTitle'),
+										t('commitmentLetter'),
+										t('residenceBranch'),
+										t('cardType'),
+										t('cardDesign'),
+										t('cardIssuance'),
+										t('sendDocuments'),
+										t('end')
+									]}
+									active={1}
+								/>
+							) : null}
 							<Grid
 								marginBottom={'64px'}
 								container

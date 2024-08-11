@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import Menu from 'ui/components/Menu';
 import StagesListComp from 'ui/components/StagesListComp';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
+import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
@@ -76,43 +77,65 @@ export default function SelectCardTypePage() {
 			gap={'24px'}
 			dir={theme.direction}
 		>
-			<Grid>
+			<Grid
+				item
+				xs={12}
+				md={8}
+			>
 				<BoxAdapter fullWidth={matches}>
 					<Grid
-						sx={{
-							minHeight: matches ? '100vh' : 'calc(100% - 128px)',
-							padding: matches ? '0' : '16px'
-						}}
+						minHeight={matches ? 'calc(100vh - 64px)' : 'calc(100vh - 192px)'}
 						container
 						direction={'column'}
-						gap={'24px'}
+						justifyContent={'space-between'}
+						wrap="nowrap"
+						gap={'16px'}
 					>
-						<Grid
-							container
-							gap={'8px'}
-						>
-							<SvgToIcon
-								icon={infoIcon}
-								alt="info"
-							/>
-							<Typography
-								variant="bodyMd"
-								sx={{ color: theme.palette.text.secondary }}
+						<Grid>
+							{!matches ? (
+								<Stepper
+									list={[
+										t('enterInformation'),
+										t('activationCodeTitle'),
+										t('commitmentLetter'),
+										t('residenceBranch'),
+										t('cardType'),
+										t('cardDesign'),
+										t('cardIssuance'),
+										t('sendDocuments'),
+										t('end')
+									]}
+									active={4}
+								/>
+							) : null}
+							<Grid
+								container
+								gap={'8px'}
 							>
-								{t('CardTypesSelectText')}
-							</Typography>
-						</Grid>
-						<Grid
-							dir={theme.direction}
-							container
-							direction={'column'}
-							gap={'56px'}
-						>
-							<Menu list={menuItems} />
+								<SvgToIcon
+									icon={infoIcon}
+									alt="info"
+								/>
+								<Typography
+									variant="bodyMd"
+									sx={{ color: theme.palette.text.secondary }}
+								>
+									{t('CardTypesSelectText')}
+								</Typography>
+							</Grid>
+							<Grid
+								dir={theme.direction}
+								container
+								direction={'column'}
+								gap={'56px'}
+							>
+								<Menu list={menuItems} />
+							</Grid>
 						</Grid>
 					</Grid>
 				</BoxAdapter>
 			</Grid>
+
 			{matches ? null : (
 				<Grid
 					item

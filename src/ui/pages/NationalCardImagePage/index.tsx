@@ -16,6 +16,7 @@ import PhotoCamera from 'ui/htsc-components/PhotoCamera';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
+import Stepper from 'ui/htsc-components/Stepper';
 
 export default function NationalCardImagePage() {
 	const { t } = useTranslation();
@@ -74,7 +75,22 @@ export default function NationalCardImagePage() {
 					>
 						<Grid>
 							<Title>{t('openAccount')}</Title>
-
+							{!matches ? (
+								<Stepper
+									list={[
+										t('enterInformation'),
+										t('activationCodeTitle'),
+										t('commitmentLetter'),
+										t('residenceBranch'),
+										t('cardType'),
+										t('cardDesign'),
+										t('cardIssuance'),
+										t('sendDocuments'),
+										t('end')
+									]}
+									active={7}
+								/>
+							) : null}
 							<Grid
 								marginBottom={'16px'}
 								container
