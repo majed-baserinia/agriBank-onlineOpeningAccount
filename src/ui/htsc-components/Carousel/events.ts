@@ -1,3 +1,5 @@
+import Glide from '@glidejs/glide';
+
 type DefaultEvents =
 	| 'run.after'
 	| 'run.before'
@@ -6,6 +8,8 @@ type DefaultEvents =
 	| 'run.offset'
 	| 'mount.before'
 	| 'mount.after'
+	| 'build.before'
+	| 'build.after'
 	| 'update'
 	| 'destroy'
 	| 'play'
@@ -19,8 +23,10 @@ type MappedEvents = {
 	[K in DefaultEvents as MappedEvent<K>]: K;
 };
 
+export type Callback = (glide: Glide, ...args: any) => void;
+
 export type GlideEvents = {
-	[K in keyof MappedEvents as K]?: (...args: any) => void;
+	[K in keyof MappedEvents as K]?: Callback;
 };
 
 const MAPPED_EVENTS: { [K in DefaultEvents as K]: MappedEvent<K> } = {
@@ -31,6 +37,8 @@ const MAPPED_EVENTS: { [K in DefaultEvents as K]: MappedEvent<K> } = {
 	'run.offset': 'onOffsetRun',
 	'mount.after': 'onAfterMount',
 	'mount.before': 'onBeforeMount',
+	'build.before': 'onBeforeBuild',
+	'build.after': 'onAfterBuild',
 	update: 'onUpdate',
 	destroy: 'onDestroy',
 	play: 'onPlay',

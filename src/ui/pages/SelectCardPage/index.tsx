@@ -1,5 +1,4 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { CardPattern } from 'common/entities/CardsList/CardsListResponse';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +19,6 @@ export default function SelectCardPage() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { cards, addNewData } = useDataSteps();
 
 	const [open, setOpen] = useState(false);
 	const [selectedCard, setSelectedCard] = useState<CardPattern>();
@@ -31,17 +29,16 @@ export default function SelectCardPage() {
 	};
 
 	const submitHandler = () => {
-		if (selectedCard) {
-			if (selectedCard?.hasIdentifier) {
-				setOpen(true);
-			} else {
-				addNewData({
-					selectedCardData: { ...selectedCard, cardInfoId: 0, identifierValue: '' }
-				});
-
-				navigate(paths.selectAddress);
-			}
-		}
+		// if (selectedCard) {
+		// 	if (selectedCard?.hasIdentifier) {
+		// 		setOpen(true);
+		// 	} else {
+		// 		addNewData({
+		// 			selectedCardData: { ...selectedCard, cardInfoId: 0, identifierValue: '' }
+		// 		});
+		// 		navigate(paths.selectAddress);
+		// 	}
+		// }
 	};
 
 	return (
@@ -97,11 +94,7 @@ export default function SelectCardPage() {
 								</Typography>
 							</Grid>
 							<Grid margin={'auto'}>
-								<SelectableCards
-									onCardSelected={(selectedCard) => {
-										console.log(selectedCard);
-									}}
-								></SelectableCards>
+								<SelectableCards onCardSelected={handleCardChange}></SelectableCards>
 							</Grid>
 						</Grid>
 						<Grid container>
@@ -150,9 +143,9 @@ export default function SelectCardPage() {
 							muiButtonProps={{ sx: { width: '100%' } }}
 							onClick={() => {
 								setOpen(false);
-								addNewData({
-									selectedCardData: { ...selectedCard!, cardInfoId: 0, identifierValue: identifier! }
-								});
+								// addNewData({
+								// 	selectedCardData: { ...selectedCard!, cardInfoId: 0, identifierValue: identifier! }
+								// });
 								navigate(paths.selectAddress);
 							}}
 						>

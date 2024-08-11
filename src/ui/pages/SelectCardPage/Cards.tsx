@@ -5,11 +5,16 @@ import { useCards } from 'ui/pages/SelectCardPage/useCards';
 
 type Props = {
 	className?: string;
-	onCardSelected?: (selectedCard: CardPattern) => void;
+	onCardSelected?: (card: CardPattern) => void;
 };
 
 export default function SelectableCards({ className, onCardSelected }: Props) {
+	// const { cards, addNewData } = useDataSteps();
 	const cards = useCards();
+
+	const handleCardChanged = (glide: Glide) => {
+		onCardSelected?.(cards.cardPatternItems[glide.index]);
+	};
 
 	return (
 		<Carousel.Root
@@ -22,16 +27,14 @@ export default function SelectableCards({ className, onCardSelected }: Props) {
 			type="carousel"
 			focusAt={'center'}
 			perView={3}
-			onEndRun={(...args) => {
-				console.log(args);
-				// onCardSelected?.(
-				// 	cards.cardPatternItems.find((v) => {
-				// 		return v.cardPatternId.toString() === slide.slide.dataset.key;
-				// 	})!
-				// );
+			onAfterMount={(glide) => {
+				handleCardChanged(glide);
+			}}
+			onAfterRun={(glide) => {
+				handleCardChanged(glide);
 			}}
 		>
-			{mcokCards.cardPatternItems.map((data) => {
+			{cards.cardPatternItems.map((data) => {
 				return (
 					<Carousel.Slide
 						key={data.cardPatternId}
