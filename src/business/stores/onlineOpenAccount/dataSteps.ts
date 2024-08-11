@@ -8,10 +8,7 @@ interface Functions {
 	reset: () => void;
 }
 
-type SelectedCardData = CardPattern & {
-	cardInfoId: number;
-	identifierValue: string;
-};
+type SelectedCardData = CardPattern;
 interface Data {
 	personalInfo?: CreateAuthRequestCommand & { accountCode: string };
 	token?: string;

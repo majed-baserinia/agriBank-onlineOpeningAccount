@@ -115,7 +115,7 @@ export default function SelectAddressPage() {
 				cardPostalCode: getValuesFromInquiry('postalCode'),
 				requestCard: true,
 				cardPatternId: selectedCardData!.cardPatternId,
-				identifierValue: selectedCardData!.identifierValue,
+				identifierValue: '',
 				sameHomeAddressForCard: false,
 				token: token!
 			},
@@ -144,7 +144,7 @@ export default function SelectAddressPage() {
 				cardPostalCode: locationInfo!.postalCode,
 				requestCard: true,
 				cardPatternId: selectedCardData!.cardPatternId,
-				identifierValue: selectedCardData!.identifierValue,
+				identifierValue: '',
 				sameHomeAddressForCard: true,
 				token: token!
 			},
