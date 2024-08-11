@@ -1,17 +1,14 @@
 import { Typography } from '@mui/material';
-import { CardPattern } from 'common/entities/CardsList/CardsListResponse';
+import { CardPattern, CardType } from 'common/entities/CardsList/CardsListResponse';
 import Carousel from 'ui/htsc-components/Carousel';
-import { useCards } from 'ui/pages/SelectCardPage/useCards';
 
 type Props = {
 	className?: string;
+	cards: CardType;
 	onCardSelected?: (card: CardPattern) => void;
 };
 
-export default function SelectableCards({ className, onCardSelected }: Props) {
-	// const { cards, addNewData } = useDataSteps();
-	const cards = useCards();
-
+export default function SelectableCards({ className, cards, onCardSelected }: Props) {
 	const handleCardChanged = (glide: Glide) => {
 		onCardSelected?.(cards.cardPatternItems[glide.index]);
 	};

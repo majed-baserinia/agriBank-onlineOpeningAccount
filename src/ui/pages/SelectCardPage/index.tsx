@@ -1,4 +1,5 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { CardPattern } from 'common/entities/CardsList/CardsListResponse';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +12,7 @@ import InputAdapter from 'ui/htsc-components/InputAdapter';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import Stepper from 'ui/htsc-components/Stepper';
 import SelectableCards from 'ui/pages/SelectCardPage/Cards';
+import { getMockData } from 'ui/pages/SelectCardPage/mock-data';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 
@@ -22,6 +24,7 @@ export default function SelectCardPage() {
 
 	const [open, setOpen] = useState(false);
 	const [selectedCard, setSelectedCard] = useState<CardPattern>();
+	const { cards = getMockData(), addNewData } = useDataSteps();
 	const [identifier, setIdentifier] = useState<string>();
 
 	const handleCardChange = (activeCard: CardPattern) => {
@@ -29,16 +32,16 @@ export default function SelectCardPage() {
 	};
 
 	const submitHandler = () => {
-		// if (selectedCard) {
-		// 	if (selectedCard?.hasIdentifier) {
-		// 		setOpen(true);
-		// 	} else {
-		// 		addNewData({
-		// 			selectedCardData: { ...selectedCard, cardInfoId: 0, identifierValue: '' }
-		// 		});
-		// 		navigate(paths.selectAddress);
-		// 	}
-		// }
+		if (selectedCard) {
+			if (selectedCard?.hasIdentifier) {
+				setOpen(true);
+			} else {
+				addNewData({
+					selectedCardData: { ...selectedCard, cardInfoId: 0, identifierValue: '' }
+				});
+				navigate(paths.selectAddress);
+			}
+		}
 	};
 
 	return (
@@ -94,7 +97,10 @@ export default function SelectCardPage() {
 								</Typography>
 							</Grid>
 							<Grid margin={'auto'}>
-								<SelectableCards onCardSelected={handleCardChange}></SelectableCards>
+								<SelectableCards
+									cards={cards}
+									onCardSelected={handleCardChange}
+								></SelectableCards>
 							</Grid>
 						</Grid>
 						<Grid container>
@@ -143,9 +149,9 @@ export default function SelectCardPage() {
 							muiButtonProps={{ sx: { width: '100%' } }}
 							onClick={() => {
 								setOpen(false);
-								// addNewData({
-								// 	selectedCardData: { ...selectedCard!, cardInfoId: 0, identifierValue: identifier! }
-								// });
+								addNewData({
+									selectedCardData: { ...selectedCard!, cardInfoId: 0, identifierValue: identifier! }
+								});
 								navigate(paths.selectAddress);
 							}}
 						>

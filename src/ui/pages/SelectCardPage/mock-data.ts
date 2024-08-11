@@ -1,6 +1,7 @@
 import { CardType } from 'common/entities/CardsList/CardsListResponse';
 
-export function useCards() {
+// TODO: remove this file
+export function getMockData() {
 	const mockData: CardType = {
 		cardTypeTitle: 'باران',
 		cardPatternItems: [
