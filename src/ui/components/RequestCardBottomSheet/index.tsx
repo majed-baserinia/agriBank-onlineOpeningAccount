@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
-import BottomSheetAdapter from 'ui/htsc-components/BottomSheetAdapter/BottomSheetAdapter';
+import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import { paths } from 'ui/route-config/paths';
 import Menu from '../Menu';
 
@@ -15,7 +15,9 @@ export default function RequestCardBottomSheet(props: Props) {
 	const { t } = useTranslation();
 
 	return (
-		<BottomSheetAdapter
+		<ModalOrBottomSheet
+			breackpoint="sm"
+			title=""
 			open={open}
 			setOpen={setOpen}
 			snapPoints={[300]}
@@ -46,7 +48,7 @@ export default function RequestCardBottomSheet(props: Props) {
 				</Grid>
 				<Menu list={menuList} />
 			</Grid>
-		</BottomSheetAdapter>
+		</ModalOrBottomSheet>
 	);
 }
 

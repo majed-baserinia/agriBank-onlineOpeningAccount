@@ -192,7 +192,14 @@ export default function LocationInfoPage() {
 								gap={'16px'}
 							>
 								<Typography variant="bodyMd">{t('branchSelectTitleText')}</Typography>
-								<Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+								>
 									<Controller
 										control={control}
 										name="branchCode"
@@ -225,142 +232,210 @@ export default function LocationInfoPage() {
 								</Grid>
 
 								<Typography variant="bodyMd">{t('locationInfoTitleText')}</Typography>
-
-								<Grid>
-									<Controller
-										control={control}
-										name="provinceId"
-										render={({ field }) => (
-											<BottomSheetSelect
-												defaultValue={field?.value?.toString()}
-												isRequired
-												list={
-													provinces?.data.map((province) => ({
-														value: province.id,
-														name: province.title
-													})) || []
-												}
-												label={t('province')}
-												onChange={(selectedProvince) => {
-													field.onChange(Number(selectedProvince.value));
-													handlProvinceChahange(Number(selectedProvince.value));
-												}}
-												// error={!!formState.errors.provinceId?.message}
-												// helperText={formState.errors.provinceId?.message}
-											/>
-										)}
-									/>
-								</Grid>
-								<Grid>
-									<Controller
-										control={control}
-										name="cityId"
-										render={({ field }) => (
-											<BottomSheetSelect
-												defaultValue={field?.value?.toString()}
-												isRequired
-												list={
-													cities?.data?.map((city) => ({
-														value: city.id,
-														name: city.title
-													})) || []
-												}
-												label={t('city')}
-												onChange={(selectedCity) => {
-													field.onChange(Number(selectedCity.value));
-												}}
-												// error={!!formState.errors.cityId?.message}
-												// helperText={formState.errors.cityId?.message}
-											/>
-										)}
-									/>
-								</Grid>
-								<Grid>
-									<Controller
-										control={control}
-										name="village"
-										render={({ field }) => (
-											<InputAdapter
-												defaultValue={field?.value}
-												isRequired
-												label={t('village')}
-												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.village?.message}
-												// helperText={formState.errors.village?.message}
-											/>
-										)}
-									/>
-								</Grid>
-								<Grid>
-									<Controller
-										control={control}
-										name="mainStreet"
-										render={({ field }) => (
-											<InputAdapter
-												defaultValue={field?.value}
-												isRequired
-												label={t('street')}
-												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.mainStreet?.message}
-												// helperText={formState.errors.mainStreet?.message}
-											/>
-										)}
-									/>
-								</Grid>
-								<Grid>
-									<Controller
-										control={control}
-										name="alley"
-										render={({ field }) => (
-											<InputAdapter
-												defaultValue={field?.value}
-												isRequired
-												label={t('alley')}
-												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.alley?.message}
-												// helperText={formState.errors.alley?.message}
-											/>
-										)}
-									/>
-								</Grid>
-								<Grid>
-									<Controller
-										control={control}
-										name="postalCode"
-										render={({ field }) => (
-											<InputAdapter
-												defaultValue={field?.value}
-												isRequired
-												type="number"
-												label={t('postalCode')}
-												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.postalCode?.message}
-												// helperText={formState.errors.postalCode?.message}
-											/>
-										)}
-									/>
-								</Grid>
-								<Grid>
-									<Controller
-										control={control}
-										name="phone"
-										render={({ field }) => (
-											<InputAdapter
-												defaultValue={field?.value}
-												isRequired
-												type="number"
-												label={t('phone')}
-												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.phone?.message}
-												// helperText={formState.errors.phone?.message}
-											/>
-										)}
-									/>
+								<Grid
+									container
+									direction={'row'}
+									spacing={'16px'}
+								>
+									<Grid
+										item
+										xs={12}
+										sm={12}
+										md={6}
+										lg={6}
+										xl={6}
+										sx={{ order: { xs: 1, sm: 1, md: 1, lg: 1, xl: 1 } }}
+									>
+										<Controller
+											control={control}
+											name="provinceId"
+											render={({ field }) => (
+												<BottomSheetSelect
+													defaultValue={field?.value?.toString()}
+													isRequired
+													list={
+														provinces?.data.map((province) => ({
+															value: province.id,
+															name: province.title
+														})) || []
+													}
+													label={t('province')}
+													onChange={(selectedProvince) => {
+														field.onChange(Number(selectedProvince.value));
+														handlProvinceChahange(Number(selectedProvince.value));
+													}}
+													// error={!!formState.errors.provinceId?.message}
+													// helperText={formState.errors.provinceId?.message}
+												/>
+											)}
+										/>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										sm={12}
+										md={6}
+										lg={6}
+										xl={6}
+										sx={{ order: { xs: 2, sm: 2, md: 2, lg: 2, xl: 2 } }}
+									>
+										<Controller
+											control={control}
+											name="cityId"
+											render={({ field }) => (
+												<BottomSheetSelect
+													defaultValue={field?.value?.toString()}
+													isRequired
+													list={
+														cities?.data?.map((city) => ({
+															value: city.id,
+															name: city.title
+														})) || []
+													}
+													label={t('city')}
+													onChange={(selectedCity) => {
+														field.onChange(Number(selectedCity.value));
+													}}
+													// error={!!formState.errors.cityId?.message}
+													// helperText={formState.errors.cityId?.message}
+												/>
+											)}
+										/>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										sm={12}
+										md={6}
+										lg={6}
+										xl={6}
+										sx={{ order: { xs: 3, sm: 3, md: 3, lg: 3, xl: 3 } }}
+									>
+										<Controller
+											control={control}
+											name="village"
+											render={({ field }) => (
+												<InputAdapter
+													defaultValue={field?.value}
+													isRequired
+													label={t('village')}
+													onChange={(value) => field.onChange(value)}
+													// error={!!formState.errors.village?.message}
+													// helperText={formState.errors.village?.message}
+												/>
+											)}
+										/>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										sm={12}
+										md={6}
+										lg={6}
+										xl={6}
+										sx={{ order: { xs: 4, sm: 4, md: 4, lg: 4, xl: 4 } }}
+									>
+										<Controller
+											control={control}
+											name="mainStreet"
+											render={({ field }) => (
+												<InputAdapter
+													defaultValue={field?.value}
+													isRequired
+													label={t('street')}
+													onChange={(value) => field.onChange(value)}
+													// error={!!formState.errors.mainStreet?.message}
+													// helperText={formState.errors.mainStreet?.message}
+												/>
+											)}
+										/>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										sm={12}
+										md={6}
+										lg={6}
+										xl={6}
+										sx={{ order: { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 } }}
+									>
+										<Controller
+											control={control}
+											name="alley"
+											render={({ field }) => (
+												<InputAdapter
+													defaultValue={field?.value}
+													isRequired
+													label={t('alley')}
+													onChange={(value) => field.onChange(value)}
+													// error={!!formState.errors.alley?.message}
+													// helperText={formState.errors.alley?.message}
+												/>
+											)}
+										/>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										sm={12}
+										md={6}
+										lg={6}
+										xl={6}
+										sx={{ order: { xs: 6, sm: 6, md: 6, lg: 6, xl: 6 } }}
+									>
+										<Controller
+											control={control}
+											name="postalCode"
+											render={({ field }) => (
+												<InputAdapter
+													defaultValue={field?.value}
+													isRequired
+													type="number"
+													label={t('postalCode')}
+													onChange={(value) => field.onChange(value)}
+													// error={!!formState.errors.postalCode?.message}
+													// helperText={formState.errors.postalCode?.message}
+												/>
+											)}
+										/>
+									</Grid>
+									<Grid
+										item
+										xs={12}
+										sm={12}
+										md={6}
+										lg={6}
+										xl={6}
+										sx={{ order: { xs: 7, sm: 7, md: 7, lg: 7, xl: 7 } }}
+									>
+										<Controller
+											control={control}
+											name="phone"
+											render={({ field }) => (
+												<InputAdapter
+													defaultValue={field?.value}
+													isRequired
+													type="number"
+													label={t('phone')}
+													onChange={(value) => field.onChange(value)}
+													// error={!!formState.errors.phone?.message}
+													// helperText={formState.errors.phone?.message}
+												/>
+											)}
+										/>
+									</Grid>
 								</Grid>
 
 								<Typography variant="bodyMd">{t('jobInfoTitleText')}</Typography>
 
-								<Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+								>
 									<Controller
 										control={control}
 										name="jobDetailId"
