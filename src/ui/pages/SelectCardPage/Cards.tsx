@@ -36,11 +36,7 @@ export default function SelectableCards({ className, onCardSelected }: Props) {
 		>
 			{cards.cardPatternItems.map((data) => {
 				return (
-					<Carousel.Slide
-						key={data.cardPatternId}
-						className="max-w-xs"
-						data-key={data.cardPatternId}
-					>
+					<Carousel.Slide key={data.cardPatternId}>
 						<img
 							className="overflow-hidden rounded-lg"
 							alt="card-image"
