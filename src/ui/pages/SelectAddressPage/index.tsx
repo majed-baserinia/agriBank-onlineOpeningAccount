@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -19,11 +20,10 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import RadioButtonAdapter from 'ui/htsc-components/RadioButtonAdapter';
+import Stepper from 'ui/htsc-components/Stepper';
 import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
-import StagesListComp from 'ui/components/StagesListComp';
-import Stepper from 'ui/htsc-components/Stepper';
 
 export default function SelectAddressPage() {
 	const { t } = useTranslation();
@@ -208,31 +208,26 @@ export default function SelectAddressPage() {
 								marginBottom={'64px'}
 								container
 								flexWrap={'nowrap'}
+								direction={'column'}
 								gap={'8px'}
 							>
-								<Typography
-									variant="bodyMd"
-									sx={{ marginBottom: '8px' }}
-								>
-									{t('selectAddressPageTitleText')}
-								</Typography>
+								<Typography variant="bodyMd">{t('selectAddressPageTitleText')}</Typography>
+								<Grid>
+									<RadioButtonAdapter
+										layoutColumns={matches ? 1 : 2}
+										listOfOptions={listOfOptions.current}
+										onChange={handleRadioChange}
+										variant="backgroundSelected"
+										defaultValue="myLocation"
+									/>
+								</Grid>
 							</Grid>
 
-							<Grid>
-								<RadioButtonAdapter
-									layoutColumns={matches ? 1 : 2}
-									listOfOptions={listOfOptions.current}
-									onChange={handleRadioChange}
-									variant="backgroundSelected"
-									defaultValue="myLocation"
-								/>
-							</Grid>
 							{showNewAddressForm ? (
 								<Grid
 									container
 									direction={'column'}
 									gap={16}
-									sx={{ marginTop: '32px' }}
 								>
 									<Grid>
 										<BottomSheetSelect
@@ -315,7 +310,10 @@ export default function SelectAddressPage() {
 																	type: 'error',
 																	// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 																	// @ts-ignore: Unreachable code error
-																	messageText: err.error ? (err.error.message as string) : err.detail,
+																	messageText: err.error
+																		? // @ts-ignore: Unreachable code error
+																			(err.error.message as string)
+																		: err.detail,
 																	hasConfirmAction: true
 																});
 															}
@@ -362,7 +360,7 @@ export default function SelectAddressPage() {
 			</Grid>
 			{matches ? null : (
 				<Grid
-				item
+					item
 					md={3}
 					dir={theme.direction}
 				>
