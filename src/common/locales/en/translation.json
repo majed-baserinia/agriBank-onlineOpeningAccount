@@ -304,5 +304,6 @@
 	"residenceBranch": "Residence branch",
 	"cardType": "Card type",
 	"cardDesign": "Card Design",
-	"cardIssuance": "Card Issuance"
+	"cardIssuance": "Card Issuance",
+	"selectCardPageTitleText":"Choose a plan for your bank card."
 }

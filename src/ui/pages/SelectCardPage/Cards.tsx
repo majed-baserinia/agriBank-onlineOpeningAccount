@@ -1,14 +1,17 @@
-import { useTheme } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
+import { CardPattern, CardType } from 'common/entities/CardsList/CardsListResponse';
 import Carousel from 'ui/htsc-components/Carousel';
 import { useCards } from 'ui/pages/SelectCardPage/useCards';
 
 type Props = {
 	className?: string;
+	cards: CardType;
+	onActiveChange?: (card: CardPattern) => void;
 };
 
-export default function SelectableCards({ className }: Props) {
+export default function SelectableCards({ className, cards, onActiveChange }: Props) {
 	const theme = useTheme();
-	const cards = useCards();
+	const mcokCards = useCards();
 
 	return (
 		<Carousel.Root
@@ -27,14 +30,22 @@ export default function SelectableCards({ className }: Props) {
 				flickMaxPages: 1
 			}}
 		>
-			{cards.cardPatternItems.map((data) => {
+			{mcokCards.cardPatternItems.map((data) => {
 				return (
 					<Carousel.Slide key={data.titleKey}>
-						<img
-							className="overflow-hidden rounded-lg"
-							alt="card-image"
-							src={data.picsAddress}
-						></img>
+						<>
+							<img
+								className="overflow-hidden rounded-lg"
+								alt="card-image"
+								src={data.picsAddress}
+							></img>
+							<Typography
+								textAlign={'center'}
+								sx={{ marginTop: '32px' }}
+							>
+								{data.title}
+							</Typography>
+						</>
 					</Carousel.Slide>
 				);
 			})}

@@ -304,5 +304,6 @@
 	"residenceBranch": "شعبه محل سکونت",
 	"cardType": "نوع کارت",
 	"cardDesign": "طرح کارت",
-	"cardIssuance": " صدور کارت"
+	"cardIssuance": " صدور کارت",
+	"selectCardPageTitleText":"یک طرح برای کارت بانکی خود انتخاب کنید."
 }
