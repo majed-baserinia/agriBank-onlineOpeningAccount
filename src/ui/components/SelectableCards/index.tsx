@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
 import { CardPattern, CardType } from 'common/entities/CardsList/CardsListResponse';
 import Carousel from 'ui/htsc-components/Carousel';
 
@@ -9,6 +9,7 @@ type Props = {
 };
 
 export default function SelectableCards({ className, cards, onCardSelected }: Props) {
+	const theme = useTheme();
 	const handleCardChanged = (glide: Glide) => {
 		onCardSelected?.(cards.cardPatternItems[glide.index]);
 	};
@@ -20,7 +21,7 @@ export default function SelectableCards({ className, cards, onCardSelected }: Pr
 				enabled: true,
 				scalingFactor: 1.8
 			}}
-			gap={20}
+	
 			type="carousel"
 			focusAt={'center'}
 			perView={3}
@@ -29,6 +30,11 @@ export default function SelectableCards({ className, cards, onCardSelected }: Pr
 			}}
 			onAfterRun={(glide) => {
 				handleCardChanged(glide);
+			}}
+			breakpoints={{
+				[theme.breakpoints.values.sm]: {
+					peek: -50
+				}
 			}}
 		>
 			{cards.cardPatternItems.map((data) => {

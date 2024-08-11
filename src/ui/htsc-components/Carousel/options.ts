@@ -1,8 +1,7 @@
 export type GlideOptions = Partial<Glide.Options> & {
 	/**
-	 * sets a sensible defaults for the carousel root.
-	 * for instance enables rewind/rewindByDrag which is most-likely the case for
-	 * most use cases
+	 * sets sensible defaults for the carousel root.
+	 * for instance sets the direction based on theme
 	 */
 	setDefaultOptions?: boolean;
 	/**

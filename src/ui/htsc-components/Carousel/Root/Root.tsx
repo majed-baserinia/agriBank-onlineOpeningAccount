@@ -14,11 +14,7 @@ export type Props = GlideOptions &
 		children: React.ReactNode;
 	};
 
-/**
- * A carousel using glidejs under the hood, for more info please refer to glidejs docs.
- * * Although you can use anything to create rows in this carousel but its highly discouraged to do so, always use Carousel.Slide
- */
-export default function Carousel({ className, setDefaultOptions = true, children, ...options }: Props) {
+export default function Root({ className, setDefaultOptions = true, children, ...options }: Props) {
 	const rootRef = useRef<HTMLDivElement>(null);
 	const theme = useTheme();
 	const { glide } = useInitializeGlider(rootRef, getGliderOptions(theme, options, setDefaultOptions));
