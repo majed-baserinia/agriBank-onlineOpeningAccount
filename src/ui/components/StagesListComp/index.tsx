@@ -36,7 +36,7 @@ export default function StagesListComp(props: Props) {
 									container
 									gap={'8px'}
 									alignItems={'start'}
-									justifyContent={'center'}
+									justifyContent={'start'}
 								>
 									<Grid item>
 										<SvgToIcon
