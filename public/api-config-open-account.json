@@ -1,0 +1,6 @@
+{
+	"apiBaseUrl": "http://10.0.85.33:8090/api/bankingservices/kyc",
+	"ThemeRoute": "http://10.0.189.141:31100/cdn/themes/",
+	"apiBaseUrlDigitalBanking": "http://10.0.85.33:8090/api/bankingservices/baran"
+
+}

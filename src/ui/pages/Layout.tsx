@@ -25,7 +25,7 @@ const Layout = () => {
 
 	const getConfig = async () => {
 		try {
-			const res = await fetch('/api-config.json');
+			const res = await fetch('/api-config-open-account.json');
 			const apiConf = await res.json();
 			ApiConfigSingleton.initiateApiConfig(apiConf?.apiBaseUrl);
 
