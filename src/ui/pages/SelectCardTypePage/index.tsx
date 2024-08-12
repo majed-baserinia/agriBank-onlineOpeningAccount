@@ -26,10 +26,11 @@ export default function SelectCardTypePage() {
 	const { t } = useTranslation();
 	const theme = useTheme();
 	const navigate = useNavigate();
-	const matches = useMediaQuery(theme.breakpoints.down('sm'));
+	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
-	const { addNewData, token, personalInfo } = useDataSteps();
-	const { data: CardsList, mutate: getCardsList, isLoading } = useCardsList();
+	const { addNewData, token, personalInfo } = useDataSteps()
+	
+	const { data: CardsList, mutate: getCardsList, isLoading } = useCardsList(personalInfo?.accountCode!);
 	const [menuItems, setMenuItems] = useState<MenuItems>([]);
 
 	useEffect(() => {
@@ -53,7 +54,7 @@ export default function SelectCardTypePage() {
 				return {
 					id: index,
 					title: cardType.cardTypeTitle,
-					onclick: () => {
+					onClick: () => {
 						addNewData({ cards: cardType });
 						navigate(paths.selectCard);
 					}

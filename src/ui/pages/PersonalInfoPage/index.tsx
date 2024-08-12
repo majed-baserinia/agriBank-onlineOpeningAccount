@@ -67,7 +67,8 @@ export default function PersonalInfoPage() {
 		const savedData = localStorage.getItem('dataSteps');
 		if (savedData) {
 			const dataSteps = JSON.parse(savedData);
-			reset({ ...dataSteps.personalInfo, accountCode: undefined });
+			setAccountCode(dataSteps.personalInfo?.accountCode);
+			reset({ ...dataSteps.personalInfo });
 		}
 	}, []);
 
