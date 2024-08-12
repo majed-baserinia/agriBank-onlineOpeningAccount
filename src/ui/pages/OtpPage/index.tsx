@@ -56,7 +56,9 @@ export default function OtpPage() {
 					onError: (err) => {
 						pushAlert({
 							type: 'error',
-							messageText: err.detail,
+							// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
+							// @ts-ignore: Unreachable code error
+							messageText: err.error ? (err.error.message as string) : err.detail,
 							hasConfirmAction: true
 						});
 					}
