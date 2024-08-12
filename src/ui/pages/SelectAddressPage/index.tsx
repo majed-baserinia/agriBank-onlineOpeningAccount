@@ -331,6 +331,7 @@ export default function SelectAddressPage() {
 											name="cardAddress"
 											render={({ field }) => (
 												<TextareaAdapter
+													defaultValue={field.value}
 													isRequired
 													label={t('address')}
 													onChange={(value) => field.onChange(value)}
