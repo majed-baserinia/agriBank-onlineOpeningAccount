@@ -34,8 +34,8 @@ export * from './onlineOpenAccount/SaveAddress/SaveAddressCommandValidator';
 export * from './onlineOpenAccount/SaveObligation/SaveObligationCommand';
 export * from './onlineOpenAccount/SaveObligation/SaveObligationCommandHandler';
 
-export * from './onlineOpenAccount/CardsList/CardsListCommand';
-export * from './onlineOpenAccount/CardsList/CardsListCommandHandler';
+export * from './onlineOpenAccount/CardsList/CardsListQuery';
+export * from './onlineOpenAccount/CardsList/CardsListQueryHandler';
 
 export * from './onlineOpenAccount/InquiryGNAFForCard/InquiryGNAFForCardCommand';
 export * from './onlineOpenAccount/InquiryGNAFForCard/InquiryGNAFForCardCommandHandler';
