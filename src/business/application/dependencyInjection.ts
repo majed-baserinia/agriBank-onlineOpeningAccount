@@ -44,3 +44,9 @@ export * from './onlineOpenAccount/InquiryGNAFForCard/InquiryGNAFForCardCommandV
 export * from './onlineOpenAccount/RequestCard/RequestCardCommand';
 export * from './onlineOpenAccount/RequestCard/RequestCardCommandHandler';
 export * from './onlineOpenAccount/RequestCard/RequestCardCommandValidator';
+
+export * from './onlineOpenAccount/SaveNationalCodeImage/SaveNationalCodeImageCommand';
+export * from './onlineOpenAccount/SaveNationalCodeImage/SaveNationalCodeImageCommandHandler';
+
+export * from './onlineOpenAccount/CustomerDidKycOperation/CustomerDidKycOperationCommand';
+export * from './onlineOpenAccount/CustomerDidKycOperation/CustomerDidKycOperationCommandHandler';
