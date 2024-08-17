@@ -10,6 +10,7 @@ import { Props } from './type';
 
 export default function Otp(props: Props) {
 	const { maxLength = 8, onChange, helperText, error, label, handleResend, timerInSeconds } = props;
+	;
 	const { t } = useTranslation();
 	const [IsCountDownTimerCounting, setIsCountDownTimerCounting] = useState<boolean>();
 

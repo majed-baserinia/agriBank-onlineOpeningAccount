@@ -6,6 +6,7 @@ import useVerificationOTP from 'business/hooks/useVerificationOTP';
 
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -25,12 +26,16 @@ export default function OtpPage() {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const location = useLocation();
-	const otpTime = location.state.otpTime;
+
+	const [otpTime, setOtpTime] = useState<{ timer: number }>();
 
 	const { personalInfo, addNewData } = useDataSteps();
 	const { mutate: verifyOtp, isLoading: isLoadingVerify } = useVerificationOTP();
 	const { data: createAuthRes, mutate: sendAgain, isLoading: isLoadingSendAgain } = useCreateAuthRequest();
 
+	useEffect(() => {
+		setOtpTime({ timer: location.state.otpTime });
+	}, []);
 	const {
 		handleSubmit: handleSubmitForVerifyOtp,
 		formState,
@@ -71,6 +76,7 @@ export default function OtpPage() {
 		if (personalInfo) {
 			sendAgain(personalInfo, {
 				onSuccess: (response) => {
+					setOtpTime({ timer: response });
 					pushAlert({
 						type: 'info',
 						messageText: t('otpSendAgainSuccess'),
@@ -154,7 +160,7 @@ export default function OtpPage() {
 											helperText={formState?.errors?.verifyCode?.message}
 											label={t('activationCodeOtp')}
 											maxLength={8}
-											timerInSeconds={createAuthRes && otpTime}
+											timerInSeconds={otpTime}
 											handleResend={handleSendAgain}
 										/>
 									)}

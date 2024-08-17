@@ -5,5 +5,7 @@ export type Props = {
 	error?: boolean;
 	label: string;
 	handleResend: () => void;
-	timerInSeconds?: number;
+	timerInSeconds?: {
+		timer: number
+	}
 };
