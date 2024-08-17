@@ -305,5 +305,6 @@
 	"cardType": "Card type",
 	"cardDesign": "Card Design",
 	"cardIssuance": "Card Issuance",
-	"selectCardPageTitleText":"Choose a plan for your bank card."
+	"selectCardPageTitleText":"Choose a plan for your bank card.",
+	"endPageErrorText" : "The operation encountered an error"
 }

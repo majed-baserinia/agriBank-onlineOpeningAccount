@@ -1,7 +1,8 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { sendPostmessage } from 'business/hooks/postMessage/useInitPostMessage';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import AlertIcon from 'ui/htsc-components/alerts/alertIcon';
@@ -9,19 +10,18 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import Stepper from 'ui/htsc-components/Stepper';
-import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 
 export default function ResultPage() {
 	const { t } = useTranslation();
-	const navigate = useNavigate();
+	const location = useLocation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { reset } = useDataSteps();
 
 	const handlesubmit = () => {
 		reset();
-		navigate(paths.Home);
+		sendPostmessage('isFinishedBack', 'true');
 	};
 
 	return (
@@ -71,7 +71,11 @@ export default function ResultPage() {
 								gap={'16px'}
 							>
 								<Grid>
-									<AlertIcon type={'success'} />
+									{location.state.status === 'Approved' ? (
+										<AlertIcon type={'success'} />
+									) : (
+										<AlertIcon type={'error'} />
+									)}
 								</Grid>
 								<Grid>
 									<Typography
@@ -79,7 +83,7 @@ export default function ResultPage() {
 										fontWeight={'bold'}
 										textAlign={'center'}
 									>
-										{t('success')}
+										{location.state.status === 'Approved' ? t('success') : t('error')}
 									</Typography>
 								</Grid>
 
@@ -89,7 +93,9 @@ export default function ResultPage() {
 										variant="bodySm"
 										fontWeight={'regular'}
 									>
-										{t('endPageSuccessText')}
+										{location.state.status === 'Approved'
+											? t('endPageSuccessText')
+											: t('endPageErrorText')}
 									</Typography>
 								</Grid>
 							</Grid>
