@@ -13,10 +13,10 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import PhotoCamera from 'ui/htsc-components/PhotoCamera';
+import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
-import Stepper from 'ui/htsc-components/Stepper';
 
 export default function NationalCardImagePage() {
 	const { t } = useTranslation();
@@ -32,13 +32,19 @@ export default function NationalCardImagePage() {
 		if (image) {
 			const data: SaveNationalCodeImageRequest = {
 				binaries: image,
-				fileName: 'nationalCard',
+				fileName: 'nationalCard.jpg',
 				mimeType: 'image/jpeg',
 				token: token!
 			};
 			postImage(data, {
 				onError: (err) => {
-					pushAlert({ type: 'error', messageText: err.detail, hasConfirmAction: true });
+					pushAlert({
+						type: 'error',
+						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
+						// @ts-ignore: Unreachable code error
+						messageText: err.error ? (err.error.message as string) : err.detail,
+						hasConfirmAction: true
+					});
 				},
 				onSuccess: (res) => {
 					addNewData({ orderId: res });
