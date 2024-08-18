@@ -1,4 +1,5 @@
 import useCustomerDidKycOperation from 'business/hooks/useCustomerDidKycOperation';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -42,8 +43,9 @@ export default function ThirdPartyAuthPage() {
 			e.data.data.kycStatus === 'Reject';
 			e.data.data.kycStatus === 'Draft';
 			e.data.data.kycStatus === 'InProgress';
-			if (e.data.data.kycStatus === 'unAthorized') {
-			}
+
+			console.log(e);
+
 			if (e.data.data.kycStatus === 'Approved' || e.data.data.kycStatus === 'Reject') {
 				mutate(
 					{ token: token! },
@@ -56,6 +58,8 @@ export default function ThirdPartyAuthPage() {
 						}
 					}
 				);
+			} else {
+				pushAlert({ type: 'error', messageText: e.data.data.kycStatus, hasConfirmAction: true });
 			}
 		}
 	};
