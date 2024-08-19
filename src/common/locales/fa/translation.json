@@ -306,5 +306,6 @@
 	"cardDesign": "طرح کارت",
 	"cardIssuance": " صدور کارت",
 	"selectCardPageTitleText": "یک طرح برای کارت بانکی خود انتخاب کنید.",
-	"endPageErrorText": "عملیات با خطا مواجه شد "
+	"endPageErrorText": "عملیات با خطا مواجه شد ",
+	"jobGroup" : "گروه شغلی"
 }

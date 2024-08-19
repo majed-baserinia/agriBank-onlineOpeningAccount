@@ -6,6 +6,7 @@ import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import SaveAddressCommand from 'business/application/onlineOpenAccount/SaveAddress/SaveAddressCommand';
 import useCities from 'business/hooks/useCities';
 import useGetBranches from 'business/hooks/useGetBranches';
+import useJobDetail from 'business/hooks/useJobDetail';
 import useJobs from 'business/hooks/useJobs';
 import useProvinces from 'business/hooks/useProvinces';
 import useSaveAddress from 'business/hooks/useSaveAdderss';
@@ -22,10 +23,10 @@ import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
+import Stepper from 'ui/htsc-components/Stepper';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 import { Option } from './type';
-import Stepper from 'ui/htsc-components/Stepper';
 
 export default function LocationInfoPage() {
 	const { t } = useTranslation();
@@ -38,6 +39,7 @@ export default function LocationInfoPage() {
 	const [openBottomSheet, setOpenBottomSheet] = useState(false);
 
 	const { data: jobs, mutate: getJobs, isLoading: isLoadingJobs } = useJobs();
+	const { data: jobDetails, mutate: getJobDetails, isLoading: isLoadingJobsDetail } = useJobDetail();
 	const { data: provinces, mutate: getProvinces, isLoading: isLoadingProvinces } = useProvinces();
 	const { data: cities, mutate: getCities, isLoading: isLoadingCities } = useCities();
 	const { mutate: saveAddress, isLoading: isLoadingSaveAddress } = useSaveAddress();
@@ -452,6 +454,42 @@ export default function LocationInfoPage() {
 									lg={6}
 									xl={6}
 								>
+									<BottomSheetSelect
+										// MARK: working section
+										isRequired
+										list={
+											jobs?.data?.map((job) => ({
+												value: job.id,
+												name: job.title
+											})) || []
+										}
+										label={t('jobGroup')}
+										onChange={(selectedJob) => {
+											getJobDetails(
+												{ code: '', jobId: selectedJob.value },
+												{
+													onError: (err) => {
+														pushAlert({
+															type: 'error',
+															messageText: err.detail,
+															hasConfirmAction: true
+														});
+													}
+												}
+											);
+										}}
+										// error={!!formState.errors.jobDetailId?.message}
+										// helperText={formState.errors.jobDetailId?.message}
+									/>
+								</Grid>
+								<Grid
+									item
+									xs={12}
+									sm={12}
+									md={6}
+									lg={6}
+									xl={6}
+								>
 									<Controller
 										control={control}
 										name="jobDetailId"
@@ -460,7 +498,7 @@ export default function LocationInfoPage() {
 												defaultValue={field?.value?.toString()}
 												isRequired
 												list={
-													jobs?.data?.map((job) => ({
+													jobDetails?.data?.map((job) => ({
 														value: job.id,
 														name: job.title
 													})) || []

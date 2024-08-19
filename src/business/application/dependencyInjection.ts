@@ -50,3 +50,6 @@ export * from './onlineOpenAccount/SaveNationalCodeImage/SaveNationalCodeImageCo
 
 export * from './onlineOpenAccount/CustomerDidKycOperation/CustomerDidKycOperationCommand';
 export * from './onlineOpenAccount/CustomerDidKycOperation/CustomerDidKycOperationCommandHandler';
+
+export * from './onlineOpenAccount/JobDetail/JobDetailCommand';
+export * from './onlineOpenAccount/JobDetail/JobDetailCommandHandler';

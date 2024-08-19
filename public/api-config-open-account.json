@@ -1,7 +1,7 @@
 {
-	"apiBaseUrl": "https://mbs-pilot.bki.ir/api/bankingservices/kyc",
-	"ThemeRoute": "http://digitalBanking-pilot.bki.ir/cdn/themes/",
-	"apiBaseUrlDigitalBanking": "https://digitalBanking-pilot.bki.ir",
+	"apiBaseUrl": "http://10.0.85.33:8090/api/bankingservices/kyc",
+	"ThemeRoute": "http://digitalBanking-tst.bki.ir/cdn/themes/",
+	"apiBaseUrlDigitalBanking": "http://10.0.85.33:8090",
 	"kycUrl": "https://core.ashname.shakeylead.com/keshavarzi/start"
 
 }

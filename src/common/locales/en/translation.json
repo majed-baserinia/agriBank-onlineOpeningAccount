@@ -306,5 +306,6 @@
 	"cardDesign": "Card Design",
 	"cardIssuance": "Card Issuance",
 	"selectCardPageTitleText":"Choose a plan for your bank card.",
-	"endPageErrorText" : "The operation encountered an error"
+	"endPageErrorText" : "The operation encountered an error",
+	"jobGroup" : "Job Group"
 }
