@@ -28,8 +28,8 @@ export default function SelectCardTypePage() {
 	const navigate = useNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
-	const { addNewData, token, personalInfo } = useDataSteps()
-	
+	const { addNewData, token, personalInfo } = useDataSteps();
+
 	const { data: CardsList, mutate: getCardsList, isLoading } = useCardsList(personalInfo?.accountCode!);
 	const [menuItems, setMenuItems] = useState<MenuItems>([]);
 
@@ -45,6 +45,7 @@ export default function SelectCardTypePage() {
 
 	useEffect(() => {
 		if (CardsList?.length === 1) {
+			// ir there is only one item, we presume that it is selected
 			addNewData({ cards: CardsList[0] });
 			navigate(paths.selectCard, {
 				replace: true
@@ -55,8 +56,14 @@ export default function SelectCardTypePage() {
 					id: index,
 					title: cardType.cardTypeTitle,
 					onClick: () => {
-						addNewData({ cards: cardType });
-						navigate(paths.selectCard);
+						if (cardType.cardPatternItems.length === 1) {
+							// if only there is one pattern we presume that it is selected
+							addNewData({ selectedCardData: cardType.cardPatternItems[0] });
+							navigate(paths.selectAddress);
+						} else {
+							addNewData({ cards: cardType });
+							navigate(paths.selectCard);
+						}
 					}
 				};
 			});

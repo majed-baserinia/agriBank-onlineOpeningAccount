@@ -1,5 +1,5 @@
 import { InputAdornment, TextField, useTheme } from '@mui/material';
-import { formatToCart, formatToMoney } from 'common/utils/formatInput';
+import { formatToCart, formatToMoney, persianToEnglishDigits } from 'common/utils/formatInput';
 import { ReactNode, useEffect, useState } from 'react';
 
 import alertIcon from '../../../assets/icon/input/alertIcon.svg';
@@ -62,10 +62,10 @@ export default function InputAdapter(props: InputAdapterProps) {
 	}, [success, error, defaultValue]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const originalValue = event.target.value;
+		const originalValue = persianToEnglishDigits(event.target.value);
 
 		// Remove non-numeric characters
-		const numericValue = event.target.value.replace(/[^0-9]/g, '');
+		const numericValue = originalValue.replace(/[^0-9]/g, '');
 
 		// Save the cursor position before modifying the input value
 		const cursorPosition = event.target.selectionStart;
