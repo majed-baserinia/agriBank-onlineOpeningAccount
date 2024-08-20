@@ -13,6 +13,7 @@ import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 
 type MenuItems = {
 	id: number;
@@ -38,7 +39,11 @@ export default function SelectCardTypePage() {
 			{ accountCode: personalInfo?.accountCode! },
 			{
 				onSuccess: (res) => {},
-				onError: (error) => {}
+				onError: (error) => {
+					pushAlert({type: 'error', messageText: error.detail, hasConfirmAction: true, actions:{
+						onConfirm: ()=>navigate(paths.Home)
+					}})
+				}
 			}
 		);
 	}, []);

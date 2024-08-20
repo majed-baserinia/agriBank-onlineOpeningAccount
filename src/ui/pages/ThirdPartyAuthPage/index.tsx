@@ -58,7 +58,11 @@ export default function ThirdPartyAuthPage() {
 						}
 					}
 				);
-			} else {
+			} else if (
+				e.data.data.kycStatus === 'InvalidOrderId' ||
+				e.data.data.kycStatus === 'InvalidKYCStatus' ||
+				e.data.data.kycStatus === 'unAthorized'
+			) {
 				pushAlert({ type: 'error', messageText: e.data.data.kycStatus, hasConfirmAction: true });
 			}
 		}

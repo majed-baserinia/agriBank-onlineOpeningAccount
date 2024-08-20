@@ -1,9 +1,13 @@
 import { Grid, Typography } from '@mui/material';
+import useRequestCard from 'business/hooks/useRequestCard';
+import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import { paths } from 'ui/route-config/paths';
 import Menu from '../Menu';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 
 type Props = {
 	open: boolean;
@@ -13,6 +17,55 @@ type Props = {
 export default function RequestCardBottomSheet(props: Props) {
 	const { open, setOpen } = props;
 	const { t } = useTranslation();
+	const navigate = useNavigate();
+	const { mutate: requestCard, isLoading: isLoadingRequestCard } = useRequestCard();
+	const { token } = useDataSteps();
+
+	const handleSubmitWithNoCard = () => {
+		requestCard(
+			{
+				requestCard: false,
+				token: token!,
+				cardAddress: '',
+				cityId: 0,
+				cardPostalCode: '',
+				cardPatternId: 0,
+				identifierValue: '',
+				sameHomeAddressForCard: false
+			},
+			{
+				onSuccess: () => {
+					navigate(paths.nationalCardImage);
+				},
+				onError: (err) => {
+					pushAlert({
+						type: 'error',
+						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
+						// @ts-ignore: Unreachable code error
+						messageText: err.error ? (err.error.message as string) : err.detail,
+						hasConfirmAction: true
+					});
+				}
+			}
+		);
+	};
+
+
+	const menuList = [
+		{
+			id: '1',
+			title: 'requestCardMenuTitle',
+			subtitle: 'requestCardMenuSubTitle',
+			routeTo: paths.selectCardType
+		},
+		{
+			id: '2',
+			title: 'refuseCardMenuTitle',
+			subtitle: 'refuseCardMenuSubTitle',
+			onClick: handleSubmitWithNoCard
+		}
+	];
+
 
 	return (
 		<ModalOrBottomSheet
@@ -52,17 +105,4 @@ export default function RequestCardBottomSheet(props: Props) {
 	);
 }
 
-const menuList = [
-	{
-		id: '1',
-		title: 'requestCardMenuTitle',
-		subtitle: 'requestCardMenuSubTitle',
-		routeTo: paths.selectCardType
-	},
-	{
-		id: '2',
-		title: 'refuseCardMenuTitle',
-		subtitle: 'refuseCardMenuSubTitle',
-		routeTo: paths.nationalCardImage
-	}
-];
+
