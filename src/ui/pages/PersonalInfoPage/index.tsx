@@ -27,7 +27,7 @@ export default function PersonalInfoPage() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { addNewData } = useDataSteps();
+	const { addNewData, otl } = useDataSteps();
 
 	const [accountCode, setAccountCode] = useState('');
 
@@ -74,7 +74,7 @@ export default function PersonalInfoPage() {
 
 	const submitHandler = (data: CreateAuthRequestCommand) => {
 		createAuthRequest(
-			{ ...data },
+			{ ...data, oneTimeLinkCode: otl },
 			{
 				onSuccess: (res) => {
 					addNewData({ personalInfo: { ...data, accountCode: accountCode } });

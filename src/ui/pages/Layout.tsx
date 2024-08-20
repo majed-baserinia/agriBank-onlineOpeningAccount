@@ -8,13 +8,15 @@ import AppAlerts from 'ui/htsc-components/alerts/AppAlerts';
 import Loader from 'ui/htsc-components/loader/Loader';
 import themeInitializer from 'ui/theme-config/baseTheme';
 
+import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import ApiConfigSingleton from '../../business/stores/api-config-singleton';
-import useInitialSettingStore, { InitialSetting } from '../../business/stores/initial-setting-store';
+import useInitialSettingStore from '../../business/stores/initial-setting-store';
 
 const Layout = () => {
 	useInitPostMessage();
 	const { settings, setSettings } = useInitialSettingStore((s) => s);
 	const [configReady, seConfigReady] = useState(false);
+	const { addNewData } = useDataSteps();
 
 	const GlobalStyle = createGlobalStyle`
       html, body {
@@ -33,10 +35,12 @@ const Layout = () => {
 			const urlParams = new URLSearchParams(window.location.search);
 			const language = urlParams.get('Lang');
 			const themeName = urlParams.get('Theme');
+			const otl = urlParams.get('otl');
+			addNewData({otl: otl!})
 
 			//get the theme and set the language
 			const theme = await themeInitializer(themeName, apiConf?.ThemeRoute);
-			
+
 			changeLanguage(language ? language : 'fa-IR');
 
 			//set the settings {theme, language, idToken, refreshToken} to store
@@ -45,7 +49,7 @@ const Layout = () => {
 				...settings,
 				theme: theme,
 				language: language ? language : 'fa-IR'
-			} );
+			});
 
 			seConfigReady(true);
 		} catch (err) {

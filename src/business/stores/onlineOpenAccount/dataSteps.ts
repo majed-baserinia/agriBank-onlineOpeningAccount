@@ -16,6 +16,7 @@ interface Data {
 	cards?: CardType;
 	selectedCardData?: SelectedCardData;
 	orderId?: string;
+	otl?: string;
 	isKycNeeded?: boolean;
 }
 
