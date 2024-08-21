@@ -214,15 +214,16 @@ export default function PersonalInfoPage() {
 								>
 									<Controller
 										control={control}
-										name="nationalCodeSerial"
+										name="nationalCode"
 										render={({ field }) => (
 											<InputAdapter
 												defaultValue={field?.value}
 												isRequired
-												label={t('nationalCodeSerial')}
+												type="number"
+												label={t('nationalCode')}
 												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.nationalCodeSerial?.message}
-												// helperText={formState.errors.nationalCodeSerial?.message}
+												// error={!!formState.errors.nationalCode?.message}
+												// helperText={formState.errors.nationalCode?.message}
 											/>
 										)}
 									/>
@@ -238,16 +239,15 @@ export default function PersonalInfoPage() {
 								>
 									<Controller
 										control={control}
-										name="nationalCode"
+										name="nationalCodeSerial"
 										render={({ field }) => (
 											<InputAdapter
 												defaultValue={field?.value}
 												isRequired
-												type="number"
-												label={t('nationalCode')}
+												label={t('nationalCodeSerial')}
 												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.nationalCode?.message}
-												// helperText={formState.errors.nationalCode?.message}
+												// error={!!formState.errors.nationalCodeSerial?.message}
+												// helperText={formState.errors.nationalCodeSerial?.message}
 											/>
 										)}
 									/>
