@@ -171,7 +171,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 			helperText={helperText}
 			InputProps={{
 				inputMode:
-					type === 'cart' || type === 'money' || type === 'number' || type === 'date' ? 'numeric' : undefined,
+					 type === 'cart' || type === 'money' || type === 'number' || type === 'date' ? 'numeric' : undefined,
 				dir: theme.direction,
 				sx: { input: { color: theme.palette.grey[400] } },
 				startAdornment: icon ? <InputAdornment position="start">{icon}</InputAdornment> : null,
@@ -179,7 +179,9 @@ export default function InputAdapter(props: InputAdapterProps) {
 					error || success || endIcon ? (
 						<InputAdornment position="end">{internalEndIcon}</InputAdornment>
 					) : null,
-				...inputProps
+				...inputProps,
+				
+				type:type === 'cart' || type === 'money' || type === 'number' || type === 'date' ? 'number' : undefined 
 			}}
 			InputLabelProps={{
 				size: 'small',
