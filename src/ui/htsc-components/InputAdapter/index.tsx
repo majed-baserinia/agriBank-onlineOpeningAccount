@@ -1,5 +1,11 @@
 import { InputAdornment, TextField, useTheme } from '@mui/material';
-import { formatToCart, formatToMoney, persianToEnglishDigits } from 'common/utils/formatInput';
+import {
+	formatGeorgianDate,
+	formatPersianDate,
+	formatToCart,
+	formatToMoney,
+	persianToEnglishDigits
+} from 'common/utils/formatInput';
 import { ReactNode, useEffect, useState } from 'react';
 
 import alertIcon from '../../../assets/icon/input/alertIcon.svg';
@@ -21,6 +27,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 		isRequired = false,
 		label,
 		icon,
+		endIcon,
 		type = 'text',
 		defaultValue = '',
 		onChange,
@@ -36,7 +43,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 	const theme = useTheme();
 	const [value, setValue] = useState('');
 	const [shrink, setShrink] = useState(defaultValue ? true : false);
-	const [endIcon, setEndIcon] = useState<ReactNode>(null);
+	const [internalEndIcon, setInternalEndIcon] = useState<ReactNode>(null);
 
 	useEffect(() => {
 		const defVal =
@@ -46,7 +53,8 @@ export default function InputAdapter(props: InputAdapterProps) {
 		if (defVal) {
 			setShrink(true);
 		}
-		setEndIcon(
+
+		setInternalEndIcon(
 			success ? (
 				<SvgToIcon
 					icon={sucIcon}
@@ -57,9 +65,11 @@ export default function InputAdapter(props: InputAdapterProps) {
 					icon={alertIcon}
 					alt="error"
 				/>
-			) : null
+			) : (
+				endIcon
+			)
 		);
-	}, [success, error, defaultValue]);
+	}, [success, error, defaultValue, endIcon]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const originalValue = persianToEnglishDigits(event.target.value);
@@ -70,7 +80,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 		// Save the cursor position before modifying the input value
 		const cursorPosition = event.target.selectionStart;
 
-		if (type === 'text' || type == 'password') {
+		if (type === 'text' || type === 'password') {
 			setValue(originalValue);
 			onChange(originalValue);
 		}
@@ -78,7 +88,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 			setValue(numericValue);
 			onChange(numericValue);
 		}
-		if (type == 'cart' || type == 'money') {
+		if (type === 'cart' || type === 'money') {
 			// Format input as 4 digits separated by "-"
 			const formattedInput = type == 'cart' ? formatToCart(numericValue) : formatToMoney(numericValue);
 
@@ -95,6 +105,13 @@ export default function InputAdapter(props: InputAdapterProps) {
 					(cursorPosition as number) + lengthDiff
 				);
 			});
+		}
+		if (type === 'date') {
+			let formattedValue =
+				theme.direction === 'rtl' ? formatPersianDate(numericValue) : formatGeorgianDate(numericValue);
+
+			setValue(formattedValue);
+			onChange(formattedValue);
 		}
 	};
 
@@ -124,7 +141,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 			onFocus={() => setShrink(true)}
 			onBlur={() => (value ? setShrink(true) : setShrink(false))}
 			disabled={disabled}
-			type={type == 'password' ? 'password' : 'text'}
+			type={type === 'password' ? 'password' : 'text'}
 			label={
 				<>
 					{isRequired ? (
@@ -153,11 +170,15 @@ export default function InputAdapter(props: InputAdapterProps) {
 			error={error}
 			helperText={helperText}
 			InputProps={{
-				inputMode: type == 'cart' || type == 'money' || type == 'number' ? 'numeric' : undefined,
+				inputMode:
+					type === 'cart' || type === 'money' || type === 'number' || type === 'date' ? 'numeric' : undefined,
 				dir: theme.direction,
 				sx: { input: { color: theme.palette.grey[400] } },
 				startAdornment: icon ? <InputAdornment position="start">{icon}</InputAdornment> : null,
-				endAdornment: error || success ? <InputAdornment position="end">{endIcon}</InputAdornment> : null,
+				endAdornment:
+					error || success || endIcon ? (
+						<InputAdornment position="end">{internalEndIcon}</InputAdornment>
+					) : null,
 				...inputProps
 			}}
 			InputLabelProps={{
