@@ -14,20 +14,6 @@ import { useTranslation } from 'react-i18next';
 import RenderInput from './RenderInput';
 import { Props } from './types';
 
-const generateGridStyle = (theme: Theme) => {
-	return {
-		position: 'absolute',
-		top: '0',
-		left: '0',
-		right: '0',
-		bottom: '0',
-		zIndex: '9',
-		padding: '16px',
-		height: window.innerHeight + 'px',
-		backgroundColor: theme.palette.background.paper
-	};
-};
-
 // TODO: may need to add card format and functionality to edit card number
 // there is already implemented in the chargeAccount repo
 
@@ -72,6 +58,20 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 	const handlePopState = (event: PopStateEvent) => {
 		event.preventDefault();
 		setOpen(false);
+	};
+
+	const generateGridStyle = (theme: Theme) => {
+		return {
+			position: 'absolute',
+			top: '0',
+			left: '0',
+			right: '0',
+			bottom: '0',
+			zIndex: '9',
+			padding: '16px',
+			height: window.innerHeight + 'px',
+			backgroundColor: theme.palette.background.paper
+		};
 	};
 
 	const onChangeHandler = (event: SyntheticEvent<Element, Event>, newValue: string | T | null) => {
@@ -123,7 +123,8 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 			container
 			flexDirection={'column'}
 			justifyContent={'space-between'}
-			sx={open && matches ? { ...generateGridStyle(theme) } : null}
+			 sx={open && matches ? { ...generateGridStyle(theme) } : null}
+			
 		>
 			<Autocomplete
 				popupIcon={<KeyboardArrowDownIcon />}
@@ -155,6 +156,12 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 							boxShadow: matches ? 0 : 3
 						}}
 					/>
+				)}
+				ListboxComponent={(props) => (
+					<ul
+						{...props}
+						style={{ maxHeight: matches ? '100%' : '40vh' }}
+					></ul>
 				)}
 				renderInput={(params) => (
 					<RenderInput
