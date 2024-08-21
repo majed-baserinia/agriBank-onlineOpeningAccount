@@ -23,38 +23,31 @@ export default function StagesListComp(props: Props) {
 		<>
 			{list.map((item) => {
 				return (
-					<Grid overflow={'hidden'}>
+					<Grid
+						container
+						justifyContent={'space-between'}
+						alignItems={'center'}
+						sx={{ padding: matches ? '16px 0' : '24px 0' }}
+					>
 						<Grid
 							container
-							justifyContent={'space-between'}
-							alignItems={'center'}
-							minWidth={'290px'}
-							sx={{ padding: matches ? '16px 0' : '24px 0', overflow: 'hidden' }}
+							gap={'8px'}
+							flexWrap={'nowrap'}
+							alignItems={'start'}
+							justifyContent={'start'}
 						>
-							<Grid>
-								<Grid
-									container
-									gap={'8px'}
-									alignItems={'start'}
-									justifyContent={'start'}
-								>
-									<Grid item>
-										<SvgToIcon
-											icon={item.icon}
-											alt={item.iconAlt}
-										/>
-									</Grid>
-									<Grid>
-										<Typography
-											variant="bodyMd"
-											fontWeight={'medium'}
-											noWrap
-										>
-											{t(item.title, item.title)}
-										</Typography>
-									</Grid>
-								</Grid>
-							</Grid>
+							<SvgToIcon
+								icon={item.icon}
+								alt={item.iconAlt}
+							/>
+
+							<Typography
+								variant="bodyMd"
+								fontWeight={'medium'}
+								flexWrap={'wrap'}
+							>
+								{t(item.title, item.title)}
+							</Typography>
 						</Grid>
 					</Grid>
 				);
