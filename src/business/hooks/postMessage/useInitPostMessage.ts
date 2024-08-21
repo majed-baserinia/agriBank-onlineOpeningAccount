@@ -1,4 +1,6 @@
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import useInitialSettingStore, { InitialSetting } from 'business/stores/initial-setting-store';
+import i18n from 'i18n';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postMessageTypes } from './types';
@@ -42,7 +44,20 @@ const useInitPostMessage = () => {
 		if (window.location.pathname == basePath) {
 			sendPostmessage('isFinishedBack', 'true');
 		} else {
-			navigate(-1);
+			pushAlert({
+				type: 'warning',
+				messageText: i18n.t('backButtonText'),
+				hasConfirmAction: true,
+				hasRefuseAction: true,
+				actions: {
+					onCloseModal: () => {},
+					onConfirm: () => {
+						sendPostmessage('isFinishedBack', 'true');
+					},
+					onRefuse: () => {}
+				}
+			});
+			//navigate(-1);
 		}
 	};
 
