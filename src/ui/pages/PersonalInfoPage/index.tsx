@@ -267,7 +267,7 @@ export default function PersonalInfoPage() {
 										render={({ field }) => (
 											<DatePickerAdapter
 												defaultValue={field?.value}
-												placeHolder={t('birthDate')}
+												label={t('birthDate')}
 												onChange={(value) => field.onChange(value)}
 												// error={!!formState.errors.birthDate?.message}
 												// helperText={formState.errors.birthDate?.message}
@@ -290,7 +290,7 @@ export default function PersonalInfoPage() {
 										render={({ field }) => (
 											<DatePickerAdapter
 												defaultValue={field?.value}
-												placeHolder={t('identityIssueDate')}
+												label={t('identityIssueDate')}
 												onChange={(value) => field.onChange(value)}
 												// error={!!formState.errors.identityIssueDate?.message}
 												// helperText={formState.errors.identityIssueDate?.message}

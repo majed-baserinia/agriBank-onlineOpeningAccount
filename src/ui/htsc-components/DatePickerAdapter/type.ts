@@ -1,5 +1,5 @@
 export type Props = {
-	placeHolder?: string;
+	label?: string;
 	className?: string;
 	error?: boolean;
 	helperText?: string;
