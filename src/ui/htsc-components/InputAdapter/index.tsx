@@ -1,13 +1,7 @@
 import { InputAdornment, TextField, useTheme } from '@mui/material';
-import {
-	formatGeorgianDate,
-	formatPersianDate,
-	formatToCart,
-	formatToMoney,
-	persianToEnglishDigits
-} from 'common/utils/formatInput';
 import { ReactNode, useEffect, useState } from 'react';
 
+import { useFormatter } from 'ui/htsc-components/InputAdapter/formatter';
 import alertIcon from '../../../assets/icon/input/alertIcon.svg';
 import sucIcon from '../../../assets/icon/input/successIcon.svg';
 import SvgToIcon from '../SvgToIcon';
@@ -43,11 +37,11 @@ export default function InputAdapter(props: InputAdapterProps) {
 	const theme = useTheme();
 	const [value, setValue] = useState('');
 	const [shrink, setShrink] = useState(defaultValue ? true : false);
+	const format = useFormatter({ type, theme });
 	const [internalEndIcon, setInternalEndIcon] = useState<ReactNode>(null);
 
 	useEffect(() => {
-		const defVal =
-			type == 'cart' ? formatToCart(defaultValue) : type == 'money' ? formatToMoney(defaultValue) : defaultValue;
+		const defVal = format(defaultValue).formatted;
 
 		setValue(defVal);
 		if (defVal) {
@@ -72,47 +66,21 @@ export default function InputAdapter(props: InputAdapterProps) {
 	}, [success, error, defaultValue, endIcon]);
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const originalValue = persianToEnglishDigits(event.target.value);
+		const result = format(event.target.value);
+		const lengthDiff = result.formatted.length - result.original.length;
 
-		// Remove non-numeric characters
-		const numericValue = originalValue.replace(/[^0-9]/g, '');
-
-		// Save the cursor position before modifying the input value
 		const cursorPosition = event.target.selectionStart;
 
-		if (type === 'text' || type === 'password') {
-			setValue(originalValue);
-			onChange(originalValue);
-		}
-		if (type === 'number') {
-			setValue(numericValue);
-			onChange(numericValue);
-		}
-		if (type === 'cart' || type === 'money') {
-			// Format input as 4 digits separated by "-"
-			const formattedInput = type == 'cart' ? formatToCart(numericValue) : formatToMoney(numericValue);
+		// move the cursor if there are any changes
+		requestAnimationFrame(() => {
+			event.target.setSelectionRange(
+				(cursorPosition as number) + lengthDiff,
+				(cursorPosition as number) + lengthDiff
+			);
+		});
 
-			// Calculate the difference in length between the original and formatted values
-			const lengthDiff = formattedInput.length - originalValue.length;
-
-			setValue(formattedInput);
-			onChange(formattedInput.replaceAll('-', '').replaceAll(',', ''));
-
-			// Set the cursor position back to the saved position
-			requestAnimationFrame(() => {
-				event.target.setSelectionRange(
-					(cursorPosition as number) + lengthDiff,
-					(cursorPosition as number) + lengthDiff
-				);
-			});
-		}
-		if (type === 'date') {
-			let formattedValue =
-				theme.direction === 'rtl' ? formatPersianDate(numericValue) : formatGeorgianDate(numericValue);
-
-			setValue(formattedValue);
-			onChange(formattedValue);
-		}
+		setValue(result.formatted);
+		onChange(type === 'card' || type === 'money' ? result.numeric : result.formatted);
 	};
 
 	const labelStyle = () => {
@@ -185,8 +153,8 @@ export default function InputAdapter(props: InputAdapterProps) {
 						<InputAdornment position="end">{internalEndIcon}</InputAdornment>
 					) : null,
 				...inputProps,
-				
-				type:type === 'cart' || type === 'money' || type === 'number' || type === 'date' ? 'number' : undefined 
+
+				type: type === 'cart' || type === 'money' || type === 'number' || type === 'date' ? 'number' : undefined
 			}}
 			InputLabelProps={{
 				size: 'small',

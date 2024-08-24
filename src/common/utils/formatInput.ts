@@ -1,4 +1,4 @@
-export const formatToCart = (value: string) => {
+export const formatToCard = (value: string) => {
 	return value.replace(/(\d{4})/g, '$1-').slice(0, 19);
 };
 

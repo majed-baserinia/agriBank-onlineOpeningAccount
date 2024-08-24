@@ -8,7 +8,7 @@ export type InputAdapterProps = {
 	label: string;
 	icon?: React.ReactNode;
 	endIcon?: React.ReactNode;
-	type?: 'cart' | 'money' | 'text' | 'password' | 'number' | 'date';
+	type?: 'card' | 'money' | 'text' | 'password' | 'number' | 'date';
 	defaultValue?: string;
 	onChange: (value: string) => void;
 	muiTextFieldProps?: TextFieldProps;
