@@ -140,7 +140,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 			InputProps={{
 				inputProps: {
 					inputMode:
-						type === 'cart' || type === 'money' || type === 'number' || type === 'date'
+						type === 'card' || type === 'money' || type === 'number' || type === 'date'
 							? 'numeric'
 							: undefined,
 					...(type === 'date' ? { pattern: '[0-9]{4}\\/[0-9]{2}\\/[0-9]{2}' } : {})
@@ -152,9 +152,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 					error || success || endIcon ? (
 						<InputAdornment position="end">{internalEndIcon}</InputAdornment>
 					) : null,
-				...inputProps,
-
-				type: type === 'cart' || type === 'money' || type === 'number' || type === 'date' ? 'number' : undefined
+				...inputProps
 			}}
 			InputLabelProps={{
 				size: 'small',

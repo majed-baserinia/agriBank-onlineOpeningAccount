@@ -3,5 +3,4 @@
 	"ThemeRoute": "http://digitalBanking-tst.bki.ir/cdn/themes/",
 	"apiBaseUrlDigitalBanking": "http://10.0.85.33:8090",
 	"kycUrl": "https://core.ashname.shakeylead.com/keshavarzi/start"
-
 }
