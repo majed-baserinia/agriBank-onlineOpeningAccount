@@ -170,8 +170,13 @@ export default function InputAdapter(props: InputAdapterProps) {
 			error={error}
 			helperText={helperText}
 			InputProps={{
-				inputMode:
-					type === 'cart' || type === 'money' || type === 'number' || type === 'date' ? 'numeric' : undefined,
+				inputProps: {
+					inputMode:
+						type === 'card' || type === 'money' || type === 'number' || type === 'date'
+							? 'numeric'
+							: undefined,
+					...(type === 'date' ? { pattern: '[0-9]{4}\\/[0-9]{2}\\/[0-9]{2}' } : {})
+				},
 				dir: theme.direction,
 				sx: { input: { color: theme.palette.grey[400] } },
 				startAdornment: icon ? <InputAdornment position="start">{icon}</InputAdornment> : null,
