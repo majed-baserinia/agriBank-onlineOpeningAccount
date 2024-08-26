@@ -46,15 +46,21 @@ export default function SelectCardPage() {
 				xs={12}
 				md={8}
 			>
-				<BoxAdapter fullWidth={matches}>
+				<BoxAdapter
+					fullWidth={matches}
+					muiPaperProps={{ sx: { minWidth: '25%', padding: '0px' } }}
+				>
 					<Grid
 						minHeight={matches ? 'calc(100vh - 64px)' : 'calc(100vh - 192px)'}
 						container
 						direction={'column'}
-						justifyContent={'space-between'}
 						wrap="nowrap"
 					>
-						<Grid>
+						<Grid
+							sx={{
+								padding: '32px 32px 0 32px'
+							}}
+						>
 							<Title>{t('openAccount')}</Title>
 							{!matches ? (
 								<Stepper
@@ -85,14 +91,20 @@ export default function SelectCardPage() {
 									{t('selectCardPageTitleText')}
 								</Typography>
 							</Grid>
-							<Grid margin={'auto'}>
-								<SelectableCards
-									cards={cards!}
-									onCardSelected={handleCardChange}
-								/>
-							</Grid>
 						</Grid>
-						<Grid container>
+						<Grid>
+							<SelectableCards
+								cards={cards!}
+								onCardSelected={handleCardChange}
+							/>
+						</Grid>
+						<Grid
+							sx={{
+								padding: '32px'
+							}}
+							marginTop={'auto'}
+							container
+						>
 							<ButtonAdapter
 								variant="contained"
 								size="medium"

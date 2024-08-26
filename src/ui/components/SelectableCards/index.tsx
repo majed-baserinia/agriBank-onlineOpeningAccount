@@ -21,7 +21,6 @@ export default function SelectableCards({ className, cards, onCardSelected }: Pr
 				enabled: true,
 				scalingFactor: 1.8
 			}}
-	
 			type="carousel"
 			focusAt={'center'}
 			perView={3}
@@ -33,8 +32,13 @@ export default function SelectableCards({ className, cards, onCardSelected }: Pr
 			}}
 			breakpoints={{
 				[theme.breakpoints.values.sm]: {
-					peek: -50
+					peek: -100
 				}
+			}}
+			gridProps={{
+				md: 9,
+				xl: 8,
+				margin: 'auto'
 			}}
 		>
 			{cards.cardPatternItems.map((data) => {
