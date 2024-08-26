@@ -19,7 +19,7 @@ export default function ResultPage() {
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { reset } = useDataSteps();
 
-	const handlesubmit = () => {
+	const handleSubmit = () => {
 		reset();
 		sendPostmessage('isFinishedBack', 'true');
 	};
@@ -105,7 +105,7 @@ export default function ResultPage() {
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
-								onClick={handlesubmit}
+								onClick={handleSubmit}
 							>
 								{t('confirm')}
 							</ButtonAdapter>

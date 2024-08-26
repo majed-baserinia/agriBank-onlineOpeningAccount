@@ -36,35 +36,37 @@ export default function ThirdPartyAuthPage() {
 	const getResultFromWebView = (e: MessageEvent) => {
 		if (e.data.event_id === 'kycResponse') {
 			// اتمام کار شرکت شاکلید
-			e.data.data.kycStatus === 'unAthorized';
-			e.data.data.kycStatus === 'InvalidOrderId';
-			e.data.data.kycStatus === 'InvalidKYCStatus';
-			e.data.data.kycStatus === 'Approved';
-			e.data.data.kycStatus === 'Reject';
-			e.data.data.kycStatus === 'Draft';
-			e.data.data.kycStatus === 'InProgress';
+			// e.data.data.kycStatus === 'unAthorized';
+			// e.data.data.kycStatus === 'InvalidOrderId';
+			// e.data.data.kycStatus === 'InvalidKYCStatus';
+			// e.data.data.kycStatus === 'Approved';
+			// e.data.data.kycStatus === 'Reject';
+			// e.data.data.kycStatus === 'Draft';
+			// e.data.data.kycStatus === 'InProgress';
 
-			console.log(e);
-
-			if (e.data.data.kycStatus === 'Approved' || e.data.data.kycStatus === 'Reject') {
+			// if (
+			// 	e.data.data.kycStatus === 'Approved' ||
+			// 	e.data.data.kycStatus === 'Reject' ||
+			// 	e.data.data.kycStatus === 'InProgress'
+			// ) {
 				mutate(
 					{ token: token! },
 					{
 						onSuccess: (res) => {
-							navigate(paths.result, { state: { status: e.data.data.kycStatus } });
+							navigate(paths.result, { state: { status: 	e.data.data.kycStatus === 'InProgress' ? 'Approved' : 'Reject' } });
 						},
 						onError: (err) => {
-							navigate(paths.result, { state: { status: e.data.data.kycStatus } });
+							navigate(paths.result, { state: { status: 'Reject' } });
 						}
 					}
 				);
-			} else if (
-				e.data.data.kycStatus === 'InvalidOrderId' ||
-				e.data.data.kycStatus === 'InvalidKYCStatus' ||
-				e.data.data.kycStatus === 'unAthorized'
-			) {
-				pushAlert({ type: 'error', messageText: e.data.data.kycStatus, hasConfirmAction: true });
-			}
+			// } else if (
+			// 	e.data.data.kycStatus === 'InvalidOrderId' ||
+			// 	e.data.data.kycStatus === 'InvalidKYCStatus' ||
+			// 	e.data.data.kycStatus === 'unAthorized'
+			// ) {
+			// 	pushAlert({ type: 'error', messageText: e.data.data.kycStatus, hasConfirmAction: true });
+			// }
 		}
 	};
 

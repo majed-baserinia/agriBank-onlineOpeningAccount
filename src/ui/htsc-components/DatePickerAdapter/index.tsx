@@ -36,7 +36,7 @@ export default function DatePickerAdapter(props: Props) {
 	};
 
 	const handleDatePickerChange = (date: Value) => {
-		const val = new DateObject(date!).convert(persian, persian_en).format();
+		const val = new DateObject(date! as string).convert(persian, persian_en).format();
 		//	setValue(date);
 		handleSyncValue(val);
 	};
