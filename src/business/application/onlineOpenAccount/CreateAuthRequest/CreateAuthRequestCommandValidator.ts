@@ -27,8 +27,8 @@ export class CreateAuthRequestCommandValidator extends Validator<CreateAuthReque
 			.matches(new RegExp('^[0-9]+$'))
 			.withMessage(i18next.t('onlyDigitsAreAllowed').toString());
 
-		this.ruleFor('birthDate').notNull().withMessage(i18next.t('notEmptybirthDateText').toString());
+		this.ruleFor('birthDate').notNull().withMessage(i18next.t('notEmptybirthDateText').toString()).minLength(10).withMessage(i18next.t("minLengthDateValidation"))
 
-		this.ruleFor('identityIssueDate').notNull().withMessage(i18next.t('notEmptyidentityIssueDateText').toString());
+		this.ruleFor('identityIssueDate').notNull().withMessage(i18next.t('notEmptyidentityIssueDateText').toString()).minLength(10).withMessage(i18next.t("minLengthDateValidation"))
 	}
 }

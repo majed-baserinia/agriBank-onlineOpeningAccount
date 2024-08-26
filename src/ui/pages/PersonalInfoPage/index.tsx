@@ -34,7 +34,7 @@ export default function PersonalInfoPage() {
 	const { data: accountsList, mutate: getAccountsList, isLoading: isLoadingGettingAccounts } = useAccountsList();
 	const { mutate: createAuthRequest, isLoading: isLoadingCreateAuthRequest } = useCreateAuthRequest();
 
-	const { handleSubmit, control, reset } = useForm<CreateAuthRequestCommand>({
+	const { handleSubmit, control, reset, formState } = useForm<CreateAuthRequestCommand>({
 		resolver: (values, context, options) => {
 			return validator(values, context, options);
 		},
@@ -172,8 +172,8 @@ export default function PersonalInfoPage() {
 													field.onChange(Number(selectedDeposite.value));
 													setAccountCode(selectedDeposite.additionalData);
 												}}
-												// error={!!formState.errors.accountTypeId?.message}
-												// helperText={formState.errors.accountTypeId?.message}
+												error={!!formState.errors.accountTypeId?.message}
+												helperText={formState.errors.accountTypeId?.message}
 											/>
 										)}
 									/>
@@ -197,8 +197,8 @@ export default function PersonalInfoPage() {
 												type="number"
 												label={t('phoneNumber')}
 												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.mobile?.message}
-												// helperText={formState.errors.mobile?.message}
+												error={!!formState.errors.mobile?.message}
+												helperText={formState.errors.mobile?.message}
 											/>
 										)}
 									/>
@@ -222,8 +222,8 @@ export default function PersonalInfoPage() {
 												type="number"
 												label={t('nationalCode')}
 												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.nationalCode?.message}
-												// helperText={formState.errors.nationalCode?.message}
+												error={!!formState.errors.nationalCode?.message}
+												helperText={formState.errors.nationalCode?.message}
 											/>
 										)}
 									/>
@@ -246,8 +246,8 @@ export default function PersonalInfoPage() {
 												isRequired
 												label={t('nationalCodeSerial')}
 												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.nationalCodeSerial?.message}
-												// helperText={formState.errors.nationalCodeSerial?.message}
+												error={!!formState.errors.nationalCodeSerial?.message}
+												helperText={formState.errors.nationalCodeSerial?.message}
 											/>
 										)}
 									/>
@@ -269,8 +269,8 @@ export default function PersonalInfoPage() {
 												defaultValue={field?.value}
 												label={t('birthDate')}
 												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.birthDate?.message}
-												// helperText={formState.errors.birthDate?.message}
+												error={!!formState.errors.birthDate?.message}
+												helperText={formState.errors.birthDate?.message}
 											/>
 										)}
 									/>
@@ -292,8 +292,8 @@ export default function PersonalInfoPage() {
 												defaultValue={field?.value}
 												label={t('identityIssueDate')}
 												onChange={(value) => field.onChange(value)}
-												// error={!!formState.errors.identityIssueDate?.message}
-												// helperText={formState.errors.identityIssueDate?.message}
+												error={!!formState.errors.identityIssueDate?.message}
+												helperText={formState.errors.identityIssueDate?.message}
 											/>
 										)}
 									/>

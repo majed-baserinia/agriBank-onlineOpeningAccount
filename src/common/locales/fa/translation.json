@@ -308,5 +308,6 @@
 	"selectCardPageTitleText": "یک طرح برای کارت بانکی خود انتخاب کنید.",
 	"endPageErrorText": "عملیات با خطا مواجه شد ",
 	"jobGroup" : "گروه شغلی",
-	"backButtonText": "در صورت تایید به صفحه اول باز خواهید گشت."
+	"backButtonText": "در صورت تایید به صفحه اول باز خواهید گشت.",
+	"minLengthDateValidation" :"تاریخ را به صورت کامل وارد کنید."
 }
