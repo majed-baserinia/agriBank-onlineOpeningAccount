@@ -7,7 +7,6 @@ import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -22,8 +21,7 @@ export default function ObligationPage() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
-	const navigate = useNavigate();
-	usePreventNavigate();
+	const { navigate } = usePreventNavigate();
 
 	const { token, addNewData } = useDataSteps();
 	const [aggrementAccepted, setAggrementAccepted] = useState(false);

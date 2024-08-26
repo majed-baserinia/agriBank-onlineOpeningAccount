@@ -6,7 +6,6 @@ import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import Menu from 'ui/components/Menu';
 import StagesListComp from 'ui/components/StagesListComp';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -27,9 +26,8 @@ type MenuItems = {
 export default function SelectCardTypePage() {
 	const { t } = useTranslation();
 	const theme = useTheme();
-	const navigate = useNavigate();
+	const { navigate } = usePreventNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	usePreventNavigate();
 	const { addNewData, token, personalInfo } = useDataSteps();
 
 	const { data: CardsList, mutate: getCardsList, isLoading } = useCardsList(personalInfo?.accountCode!);

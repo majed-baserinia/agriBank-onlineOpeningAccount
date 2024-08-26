@@ -10,7 +10,7 @@ import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -25,9 +25,8 @@ export default function OtpPage() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
-	const navigate = useNavigate();
 	const location = useLocation();
-	usePreventNavigate();
+	const { navigate } = usePreventNavigate();
 
 	const [otpTime, setOtpTime] = useState<{ timer: number }>();
 

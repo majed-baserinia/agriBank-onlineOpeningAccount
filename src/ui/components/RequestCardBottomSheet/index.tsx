@@ -1,5 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 import useRequestCard from 'business/hooks/useRequestCard';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import { paths } from 'ui/route-config/paths';
 import Menu from '../Menu';
-import { pushAlert } from 'business/stores/AppAlertsStore';
 
 type Props = {
 	open: boolean;
@@ -50,7 +50,6 @@ export default function RequestCardBottomSheet(props: Props) {
 		);
 	};
 
-
 	const menuList = [
 		{
 			id: '1',
@@ -65,7 +64,6 @@ export default function RequestCardBottomSheet(props: Props) {
 			onClick: handleSubmitWithNoCard
 		}
 	];
-
 
 	return (
 		<ModalOrBottomSheet
@@ -104,5 +102,3 @@ export default function RequestCardBottomSheet(props: Props) {
 		</ModalOrBottomSheet>
 	);
 }
-
-

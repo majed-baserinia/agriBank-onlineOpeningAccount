@@ -7,7 +7,6 @@ import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { SaveNationalCodeImageRequest } from 'common/entities/SaveNationalCodeImage/SaveNationalCodeImageRequest';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -21,14 +20,14 @@ import { stagesList } from '../HomePage';
 
 export default function NationalCardImagePage() {
 	const { t } = useTranslation();
-	const navigate = useNavigate();
+	const { navigate } = usePreventNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 
 	const { token, addNewData, isKycNeeded } = useDataSteps();
 	const [image, setImage] = useState<string | null>(null);
 	const { isLoading, mutate: postImage } = useSaveNationalCodeImage();
-	usePreventNavigate();
+
 	const handlesubmit = () => {
 		if (image) {
 			const data: SaveNationalCodeImageRequest = {

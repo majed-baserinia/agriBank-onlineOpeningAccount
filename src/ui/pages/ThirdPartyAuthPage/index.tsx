@@ -2,16 +2,14 @@ import useCustomerDidKycOperation from 'business/hooks/useCustomerDidKycOperatio
 import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 
 export default function ThirdPartyAuthPage() {
-	const navigate = useNavigate();
 	const [url, setUrl] = useState('');
 	const { orderId, token } = useDataSteps();
 	const { mutate, isLoading } = useCustomerDidKycOperation();
-	usePreventNavigate();
+	const { navigate } = usePreventNavigate();
 	useEffect(() => {
 		async function createUrlByOrderId() {
 			try {

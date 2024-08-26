@@ -15,7 +15,6 @@ import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import RequestCardBottomSheet from 'ui/components/RequestCardBottomSheet';
 import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
@@ -31,10 +30,9 @@ import { Option } from './type';
 
 export default function LocationInfoPage() {
 	const { t } = useTranslation();
-	const navigate = useNavigate();
+	const { navigate } = usePreventNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	usePreventNavigate();
 
 	const { addNewData, token } = useDataSteps();
 

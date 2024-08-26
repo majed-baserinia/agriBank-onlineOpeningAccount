@@ -1,6 +1,5 @@
 import useInitialSettingStore, { InitialSetting } from 'business/stores/initial-setting-store';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { postMessageTypes } from './types';
 
 const checkIsInIframe = () => {
@@ -13,7 +12,6 @@ export const sendPostmessage = (type: postMessageTypes, data: string) => {
 };
 
 const useInitPostMessage = () => {
-	const navigate = useNavigate();
 	const { settings, setSettings } = useInitialSettingStore((s) => s);
 
 	useEffect(() => {
