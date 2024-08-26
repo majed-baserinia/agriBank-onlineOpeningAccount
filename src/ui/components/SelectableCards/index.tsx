@@ -53,7 +53,7 @@ export default function SelectableCards({ className, cards, onCardSelected }: Pr
 							textAlign={'center'}
 							sx={{ marginTop: '32px' }}
 						>
-							{data.title}
+							{data.titleKey}
 						</Typography>
 					</Carousel.Slide>
 				);
