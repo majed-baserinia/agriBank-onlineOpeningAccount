@@ -8,6 +8,7 @@ import useCities from 'business/hooks/useCities';
 import useGetBranches from 'business/hooks/useGetBranches';
 import useJobDetail from 'business/hooks/useJobDetail';
 import useJobs from 'business/hooks/useJobs';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import useProvinces from 'business/hooks/useProvinces';
 import useSaveAddress from 'business/hooks/useSaveAdderss';
 import { pushAlert } from 'business/stores/AppAlertsStore';
@@ -33,6 +34,7 @@ export default function LocationInfoPage() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	usePreventNavigate();
 
 	const { addNewData, token } = useDataSteps();
 
@@ -455,7 +457,6 @@ export default function LocationInfoPage() {
 									xl={6}
 								>
 									<BottomSheetSelect
-										// MARK: working section
 										isRequired
 										list={
 											jobs?.data?.map((job) => ({

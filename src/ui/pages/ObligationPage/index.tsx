@@ -3,6 +3,7 @@ import useGetObligation from 'business/hooks/useGetObligation';
 import useSaveObligation from 'business/hooks/useSaveObligation';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,16 +13,17 @@ import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
+import Stepper from 'ui/htsc-components/Stepper';
 import SwitchAdapter from 'ui/htsc-components/SwitchAdapter';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
-import Stepper from 'ui/htsc-components/Stepper';
 
 export default function ObligationPage() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+	usePreventNavigate();
 
 	const { token, addNewData } = useDataSteps();
 	const [aggrementAccepted, setAggrementAccepted] = useState(false);
@@ -44,7 +46,7 @@ export default function ObligationPage() {
 							// @ts-ignore: Unreachable code error
 							messageText: err.error ? (err.error.message as string) : err.detail,
 							hasConfirmAction: true,
-							actions:{
+							actions: {
 								onCloseModal: () => {
 									navigate(paths.Home);
 								},

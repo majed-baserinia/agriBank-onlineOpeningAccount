@@ -1,5 +1,6 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { sendPostmessage } from 'business/hooks/postMessage/useInitPostMessage';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
@@ -18,7 +19,7 @@ export default function ResultPage() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { reset } = useDataSteps();
-
+	usePreventNavigate();
 	const handleSubmit = () => {
 		reset();
 		sendPostmessage('isFinishedBack', 'true');

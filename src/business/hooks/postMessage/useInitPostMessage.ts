@@ -1,9 +1,6 @@
-import { pushAlert } from 'business/stores/AppAlertsStore';
 import useInitialSettingStore, { InitialSetting } from 'business/stores/initial-setting-store';
-import i18n from 'i18n';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { paths } from 'ui/route-config/paths';
 import { postMessageTypes } from './types';
 
 const checkIsInIframe = () => {
@@ -44,21 +41,6 @@ const useInitPostMessage = () => {
 		const basePath = import.meta.env.BASE_URL;
 		if (window.location.pathname == basePath) {
 			sendPostmessage('isFinishedBack', 'true');
-		} else {
-			pushAlert({
-				type: 'warning',
-				messageText: i18n.t('backButtonText'),
-				hasConfirmAction: true,
-				hasRefuseAction: true,
-				actions: {
-					onCloseModal: () => {},
-					onConfirm: () => {
-						navigate(paths.Home);
-					},
-					onRefuse: () => {}
-				}
-			});
-			//navigate(-1);
 		}
 	};
 

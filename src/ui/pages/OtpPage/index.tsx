@@ -4,6 +4,7 @@ import VerificationOTPCommand from 'business/application/onlineOpenAccount/Verif
 import useCreateAuthRequest from 'business/hooks/useCreateAuthRequest';
 import useVerificationOTP from 'business/hooks/useVerificationOTP';
 
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
@@ -26,6 +27,7 @@ export default function OtpPage() {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const location = useLocation();
+	usePreventNavigate();
 
 	const [otpTime, setOtpTime] = useState<{ timer: number }>();
 

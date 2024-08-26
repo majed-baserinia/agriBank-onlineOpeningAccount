@@ -1,5 +1,6 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import phoneIcon from 'assets/icon/horizantal-phone.svg';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import useSaveNationalCodeImage from 'business/hooks/useSaveNationalCodeImage';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
@@ -27,7 +28,7 @@ export default function NationalCardImagePage() {
 	const { token, addNewData, isKycNeeded } = useDataSteps();
 	const [image, setImage] = useState<string | null>(null);
 	const { isLoading, mutate: postImage } = useSaveNationalCodeImage();
-
+	usePreventNavigate();
 	const handlesubmit = () => {
 		if (image) {
 			const data: SaveNationalCodeImageRequest = {

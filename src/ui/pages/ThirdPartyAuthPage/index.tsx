@@ -1,5 +1,5 @@
 import useCustomerDidKycOperation from 'business/hooks/useCustomerDidKycOperation';
-import { pushAlert } from 'business/stores/AppAlertsStore';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ export default function ThirdPartyAuthPage() {
 	const [url, setUrl] = useState('');
 	const { orderId, token } = useDataSteps();
 	const { mutate, isLoading } = useCustomerDidKycOperation();
-
+	usePreventNavigate();
 	useEffect(() => {
 		async function createUrlByOrderId() {
 			try {
@@ -49,17 +49,19 @@ export default function ThirdPartyAuthPage() {
 			// 	e.data.data.kycStatus === 'Reject' ||
 			// 	e.data.data.kycStatus === 'InProgress'
 			// ) {
-				mutate(
-					{ token: token! },
-					{
-						onSuccess: (res) => {
-							navigate(paths.result, { state: { status: 	e.data.data.kycStatus === 'InProgress' ? 'Approved' : 'Reject' } });
-						},
-						onError: (err) => {
-							navigate(paths.result, { state: { status: 'Reject' } });
-						}
+			mutate(
+				{ token: token! },
+				{
+					onSuccess: (res) => {
+						navigate(paths.result, {
+							state: { status: e.data.data.kycStatus === 'InProgress' ? 'Approved' : 'Reject' }
+						});
+					},
+					onError: (err) => {
+						navigate(paths.result, { state: { status: 'Reject' } });
 					}
-				);
+				}
+			);
 			// } else if (
 			// 	e.data.data.kycStatus === 'InvalidOrderId' ||
 			// 	e.data.data.kycStatus === 'InvalidKYCStatus' ||

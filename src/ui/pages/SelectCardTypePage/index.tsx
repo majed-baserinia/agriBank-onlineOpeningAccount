@@ -1,6 +1,8 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import infoIcon from 'assets/icon/info-circle.svg';
 import useCardsList from 'business/hooks/useCardLists';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,7 +15,6 @@ import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
-import { pushAlert } from 'business/stores/AppAlertsStore';
 
 type MenuItems = {
 	id: number;
@@ -28,7 +29,7 @@ export default function SelectCardTypePage() {
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-
+	usePreventNavigate();
 	const { addNewData, token, personalInfo } = useDataSteps();
 
 	const { data: CardsList, mutate: getCardsList, isLoading } = useCardsList(personalInfo?.accountCode!);
@@ -40,9 +41,14 @@ export default function SelectCardTypePage() {
 			{
 				onSuccess: (res) => {},
 				onError: (error) => {
-					pushAlert({type: 'error', messageText: error.detail, hasConfirmAction: true, actions:{
-						onConfirm: ()=>navigate(paths.Home)
-					}})
+					pushAlert({
+						type: 'error',
+						messageText: error.detail,
+						hasConfirmAction: true,
+						actions: {
+							onConfirm: () => navigate(paths.Home)
+						}
+					});
 				}
 			}
 		);
