@@ -31,6 +31,7 @@ export default function SelectAddressPage() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { locationInfo, token, selectedCardData } = useDataSteps();
+	const [preventNextStep, setPreventNextStep] = useState(false);
 
 	const [showNewAddressForm, setShowNewAddressForm] = useState(false);
 	const addressRef = useRef(`${locationInfo?.village} ${locationInfo?.mainStreet} ${locationInfo?.alley} `);
@@ -303,9 +304,17 @@ export default function SelectAddressPage() {
 														},
 														{
 															onSuccess: (data) => {
+																setPreventNextStep(false);
 																setValue('cardAddress', data.address);
 															},
 															onError: (err) => {
+																// @ts-ignore: Unreachable code error
+																if (err.error.code === 410) {
+																	//set button disable
+																	setPreventNextStep(true);
+																} else {
+																	setPreventNextStep(false);
+																}
 																pushAlert({
 																	type: 'error',
 																	// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
@@ -344,6 +353,7 @@ export default function SelectAddressPage() {
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
+								disabled={preventNextStep}
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
