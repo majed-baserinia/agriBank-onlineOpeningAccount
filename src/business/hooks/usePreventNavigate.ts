@@ -11,7 +11,7 @@ export type Options = {
 };
 
 const homePage = paths.Home;
-let lastNavigatedUrl: To | undefined = undefined;
+let currentUserNavigatedUrl: To | undefined = undefined;
 
 export function usePreventNavigate({ condition, allowAll }: Options = {}) {
 	const originalNavigate = useNavigate();
@@ -25,7 +25,7 @@ export function usePreventNavigate({ condition, allowAll }: Options = {}) {
 			return false;
 		}
 
-		if (nextLocation.pathname === lastNavigatedUrl) {
+		if (nextLocation.pathname === currentUserNavigatedUrl) {
 			return false;
 		}
 
@@ -33,7 +33,7 @@ export function usePreventNavigate({ condition, allowAll }: Options = {}) {
 	});
 
 	const customNavigate = (path: To, options?: NavigateOptions) => {
-		lastNavigatedUrl = path;
+		currentUserNavigatedUrl = path;
 		originalNavigate(path, options);
 	};
 
