@@ -1,5 +1,5 @@
 import type Glide from '@glidejs/glide';
-import { Theme, useTheme } from '@mui/material';
+import { Grid, GridProps, Theme, useTheme } from '@mui/material';
 import React, { useRef } from 'react';
 import OptionsContext from 'ui/htsc-components/Carousel/Context/OptionsContext';
 import { GlideEvents } from 'ui/htsc-components/Carousel/events';
@@ -12,9 +12,11 @@ export type Props = GlideOptions &
 	GlideEvents & {
 		className?: string;
 		children: React.ReactNode;
+	} & {
+		gridProps?: GridProps;
 	};
 
-export default function Root({ className, setDefaultOptions = true, children, ...options }: Props) {
+export default function Root({ className, setDefaultOptions = true, children, gridProps, ...options }: Props) {
 	const rootRef = useRef<HTMLDivElement>(null);
 	const theme = useTheme();
 	const { glide } = useInitializeGlider(rootRef, getGliderOptions(theme, options, setDefaultOptions));
@@ -25,9 +27,10 @@ export default function Root({ className, setDefaultOptions = true, children, ..
 
 	return (
 		<OptionsContext.Provider value={options}>
-			<div
+			<Grid
 				className="glide"
 				ref={rootRef}
+				{...gridProps}
 				style={
 					{
 						'--inactive-slide-opacity': options.focusActiveSlide?.inactiveSlideOpacity ?? 0.5,
@@ -36,7 +39,7 @@ export default function Root({ className, setDefaultOptions = true, children, ..
 				}
 			>
 				<Track className={className}>{children}</Track>
-			</div>
+			</Grid>
 		</OptionsContext.Provider>
 	);
 }
