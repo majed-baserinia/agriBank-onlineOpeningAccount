@@ -3,6 +3,7 @@ import useInitialSettingStore, { InitialSetting } from 'business/stores/initial-
 import i18n from 'i18n';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { paths } from 'ui/route-config/paths';
 import { postMessageTypes } from './types';
 
 const checkIsInIframe = () => {
@@ -52,7 +53,7 @@ const useInitPostMessage = () => {
 				actions: {
 					onCloseModal: () => {},
 					onConfirm: () => {
-						sendPostmessage('isFinishedBack', 'true');
+						navigate(paths.Home);
 					},
 					onRefuse: () => {}
 				}
