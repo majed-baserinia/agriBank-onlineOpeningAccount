@@ -1,5 +1,6 @@
 import useInitialSettingStore, { InitialSetting } from 'business/stores/initial-setting-store';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { postMessageTypes } from './types';
 
 const checkIsInIframe = () => {
@@ -13,7 +14,7 @@ export const sendPostmessage = (type: postMessageTypes, data: string) => {
 
 const useInitPostMessage = () => {
 	const { settings, setSettings } = useInitialSettingStore((s) => s);
-
+	const navigate = useNavigate();
 	useEffect(() => {
 		window.addEventListener('message', onRecievePostMessage);
 		if (checkIsInIframe()) sendPostmessage('iFrameReady', 'Hi Parent');
@@ -40,6 +41,7 @@ const useInitPostMessage = () => {
 		if (window.location.pathname == basePath) {
 			sendPostmessage('isFinishedBack', 'true');
 		}
+		navigate(-1);
 	};
 
 	return [checkIsInIframe()];

@@ -1,6 +1,6 @@
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import i18n from 'i18n';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import type { NavigateOptions, To } from 'react-router-dom';
 import { Location, useBlocker, useNavigate } from 'react-router-dom';
 import { paths } from 'ui/route-config/paths';
@@ -11,11 +11,10 @@ export type Options = {
 };
 
 const homePage = paths.Home;
-let currentUserNavigatedUrl: To | undefined = undefined;
+let currentUserNavigatedUrl: To | number | undefined = undefined;
 
 export function usePreventNavigate({ condition, allowAll }: Options = {}) {
 	const originalNavigate = useNavigate();
-	const [isShowingAlert, setIsShowingAlert] = useState(false);
 	const blocker = useBlocker(({ currentLocation, nextLocation }) => {
 		if (allowAll) {
 			return false;
@@ -32,44 +31,37 @@ export function usePreventNavigate({ condition, allowAll }: Options = {}) {
 		return condition?.(currentLocation, nextLocation) ?? true;
 	});
 
-	const customNavigate = (path: To, options?: NavigateOptions) => {
+	const customNavigate = (path: To | number, options?: NavigateOptions) => {
 		currentUserNavigatedUrl = path;
-		originalNavigate(path, options);
+		if (typeof path === 'number') {
+			originalNavigate(path);
+		} else {
+			originalNavigate(path, options);
+		}
 	};
 
 	useEffect(() => {
+		console.log('are3');
 		if (blocker.state === 'blocked') {
-			startOverAlert(customNavigate, isShowingAlert, setIsShowingAlert);
+			console.log('are4');
+			blocker.reset();
+			startOverAlert(customNavigate);
 		}
 	}, [blocker]);
 
 	return { navigate: customNavigate, blocker };
 }
 
-export function startOverAlert(
-	navigate: (path: To) => void,
-	isShowingAlert: boolean,
-	setIsShowingAlert: (v: boolean) => void
-) {
-	if (isShowingAlert) {
-		return;
-	}
-
-	setIsShowingAlert(true);
+export function startOverAlert(navigate: (path: To) => void) {
 	pushAlert({
 		type: 'warning',
 		messageText: i18n.t('backButtonText'),
 		hasConfirmAction: true,
 		hasRefuseAction: true,
 		actions: {
-			onCloseModal: () => {
-				setIsShowingAlert(false);
-			},
 			onConfirm: () => {
 				navigate(homePage);
-			},
-			onRefuse: () => {
-				setIsShowingAlert(false);
+				currentUserNavigatedUrl = undefined;
 			}
 		}
 	});
