@@ -12,7 +12,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
-import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
@@ -112,7 +111,6 @@ export default function OtpPage() {
 						wrap="nowrap"
 					>
 						<Grid>
-							<Title>{t('openAccount')}</Title>
 							{!matches ? (
 								<Stepper
 									list={[

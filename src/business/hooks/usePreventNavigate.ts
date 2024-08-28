@@ -41,9 +41,7 @@ export function usePreventNavigate({ condition, allowAll }: Options = {}) {
 	};
 
 	useEffect(() => {
-		console.log('are3');
 		if (blocker.state === 'blocked') {
-			console.log('are4');
 			blocker.reset();
 			startOverAlert(customNavigate);
 		}

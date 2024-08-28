@@ -18,7 +18,7 @@ export default function ThirdPartyAuthPage() {
 				const constructedUrl = `${apiConf.kycUrl}?orderId=${orderId}&redirectUrl=https://digitalbanking.bki.ir/onlineopeningaccount`;
 				setUrl(constructedUrl);
 			} catch {
-				console.log("can't get the config file ");
+				console.warn("can't get the config file ");
 			}
 		}
 		createUrlByOrderId();

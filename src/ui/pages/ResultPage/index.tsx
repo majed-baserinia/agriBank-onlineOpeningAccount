@@ -5,7 +5,6 @@ import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
-import Title from 'ui/components/Title';
 import AlertIcon from 'ui/htsc-components/alerts/alertIcon';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
@@ -47,7 +46,6 @@ export default function ResultPage() {
 						wrap="nowrap"
 					>
 						<Grid>
-							<Title>{t('openAccount')}</Title>
 							{!matches ? (
 								<Stepper
 									list={[

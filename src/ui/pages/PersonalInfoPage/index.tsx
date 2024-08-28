@@ -12,7 +12,6 @@ import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
-import Title from 'ui/components/Title';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
@@ -115,8 +114,6 @@ export default function PersonalInfoPage() {
 						wrap="nowrap"
 					>
 						<Grid>
-							<Title>{t('openAccount')}</Title>
-
 							{!matches ? (
 								<Stepper
 									list={[

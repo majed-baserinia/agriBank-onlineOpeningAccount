@@ -8,7 +8,6 @@ import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import StagesListComp from 'ui/components/StagesListComp';
-import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
@@ -102,7 +101,6 @@ export default function ObligationPage() {
 						wrap="nowrap"
 					>
 						<Grid>
-							<Title>{t('obligationTitle')}</Title>
 							{!matches ? (
 								<Stepper
 									list={[

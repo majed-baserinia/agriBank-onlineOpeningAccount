@@ -17,7 +17,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import RequestCardBottomSheet from 'ui/components/RequestCardBottomSheet';
 import StagesListComp from 'ui/components/StagesListComp';
-import Title from 'ui/components/Title';
 import AutoCompleteAdapter from 'ui/htsc-components/AutoCompleteAdapter';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
@@ -187,7 +186,6 @@ export default function LocationInfoPage() {
 						gap={'16px'}
 					>
 						<Grid>
-							<Title>{t('openAccount')}</Title>
 							{!matches ? (
 								<Stepper
 									list={[

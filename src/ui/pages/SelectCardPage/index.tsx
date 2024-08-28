@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import SelectableCards from 'ui/components/SelectableCards';
 import StagesListComp from 'ui/components/StagesListComp';
-import Title from 'ui/components/Title';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
@@ -61,7 +60,6 @@ export default function SelectCardPage() {
 								padding: '32px 32px 0 32px'
 							}}
 						>
-							<Title>{t('openAccount')}</Title>
 							{!matches ? (
 								<Stepper
 									list={[
