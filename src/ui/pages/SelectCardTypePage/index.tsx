@@ -57,7 +57,8 @@ export default function SelectCardTypePage() {
 			// ir there is only one item, we presume that it is selected
 			addNewData({ cards: CardsList[0] });
 			navigate(paths.selectCard, {
-				replace: true
+				replace: true,
+				state: { canGoBack: false }
 			});
 		} else {
 			const menuList = CardsList?.map((cardType, index) => {
@@ -68,10 +69,10 @@ export default function SelectCardTypePage() {
 						if (cardType.cardPatternItems.length === 1) {
 							// if only there is one pattern we presume that it is selected
 							addNewData({ selectedCardData: cardType.cardPatternItems[0] });
-							navigate(paths.selectAddress);
+							navigate(paths.selectAddress, { replace: true, state: { canGoBack: false } });
 						} else {
 							addNewData({ cards: cardType });
-							navigate(paths.selectCard);
+							navigate(paths.selectCard, { state: { canGoBack: true } });
 						}
 					}
 				};

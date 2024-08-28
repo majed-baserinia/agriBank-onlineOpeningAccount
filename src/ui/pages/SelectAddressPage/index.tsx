@@ -11,7 +11,7 @@ import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -23,10 +23,12 @@ import Stepper from 'ui/htsc-components/Stepper';
 import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 
 export default function SelectAddressPage() {
 	const { t } = useTranslation();
-	const navigate = useNavigate();
+	const location = useLocation()
+	const { navigate } = usePreventNavigate({ condition: () => !location.state.canGoBack });
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { locationInfo, token, selectedCardData } = useDataSteps();

@@ -301,7 +301,7 @@ export default function PersonalInfoPage() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%' } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: "8px" } }}
 								onClick={handleSubmit(submitHandler)}
 							>
 								{t('checkAndContinue')}

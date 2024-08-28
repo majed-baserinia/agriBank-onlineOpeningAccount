@@ -1,9 +1,10 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { CardPattern } from 'common/entities/CardsList/CardsListResponse';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import SelectableCards from 'ui/components/SelectableCards';
 import StagesListComp from 'ui/components/StagesListComp';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -14,7 +15,8 @@ import { stagesList } from '../HomePage';
 
 export default function SelectCardPage() {
 	const { t } = useTranslation();
-	const navigate = useNavigate();
+	const location = useLocation();
+	const { navigate } = usePreventNavigate({ condition: () => !location.state.canGoBack });
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
 	const { cards, addNewData } = useDataSteps();
@@ -28,7 +30,7 @@ export default function SelectCardPage() {
 	const submitHandler = () => {
 		if (selectedCard) {
 			addNewData({ selectedCardData: selectedCard });
-			navigate(paths.selectAddress);
+			navigate(paths.selectAddress, { state: { canGoBack: location.state.canGoBack } });
 		}
 	};
 
