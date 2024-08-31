@@ -9,7 +9,7 @@ import {
 	useMediaQuery,
 	useTheme
 } from '@mui/material';
-import { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { forwardRef, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import RenderInput from './RenderInput';
 import { Props } from './types';
@@ -123,8 +123,7 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 			container
 			flexDirection={'column'}
 			justifyContent={'space-between'}
-			 sx={open && matches ? { ...generateGridStyle(theme) } : null}
-			
+			sx={open && matches ? { ...generateGridStyle(theme) } : null}
 		>
 			<Autocomplete
 				popupIcon={<KeyboardArrowDownIcon />}
@@ -157,12 +156,7 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 						}}
 					/>
 				)}
-				ListboxComponent={(props) => (
-					<ul
-						{...props}
-						style={{ maxHeight: matches ? '100%' : '40vh' }}
-					></ul>
-				)}
+				ListboxComponent={ListboxComponent}
 				renderInput={(params) => (
 					<RenderInput
 						params={params}
@@ -200,3 +194,17 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 		</Grid>
 	);
 }
+
+const ListboxComponent = forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLUListElement>>(
+	function ListboxComponent(props, ref) {
+		const theme = useTheme();
+		const matches = useMediaQuery(theme.breakpoints.down('sm'));
+		return (
+			<ul
+				{...props}
+				ref={ref}
+				style={{ maxHeight: matches ? '100%' : '40vh' }}
+			></ul>
+		);
+	}
+);

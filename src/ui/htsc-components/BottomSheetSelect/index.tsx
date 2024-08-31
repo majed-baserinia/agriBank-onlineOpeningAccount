@@ -10,7 +10,7 @@ import {
 	useMediaQuery,
 	useTheme
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Sheet from 'react-modal-sheet';
 import { Props } from './type';
 
@@ -62,10 +62,10 @@ export default function BottomSheetSelect<T extends { value: string; name: strin
 					onClose={() => setOpen(false)}
 					error={error}
 				>
-					{list.map((item) => {
+					{list.map((item, index) => {
 						return (
 							<MenuItem
-								key={item.value}
+								key={`${item.value}-${index}`}
 								value={item.value}
 								onClick={() => handlClickItem(item)}
 							>
@@ -92,11 +92,11 @@ export default function BottomSheetSelect<T extends { value: string; name: strin
 						<Sheet.Content>
 							{
 								<Grid sx={{ overflow: 'auto' }}>
-									{list.map((item) => {
+									{list.map((item, index) => {
 										return (
-											<>
+											<Fragment key={`${item.value}-${index}`}>
 												<MenuItem
-													key={item.value}
+													key={`${item.value}-${index}`}
 													value={item.value}
 													onClick={() => handlClickItem(item)}
 												>
@@ -108,7 +108,7 @@ export default function BottomSheetSelect<T extends { value: string; name: strin
 													</Typography>
 												</MenuItem>
 												<Divider />
-											</>
+											</Fragment>
 										);
 									})}
 								</Grid>
