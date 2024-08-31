@@ -307,7 +307,16 @@
 	"cardIssuance": " صدور کارت",
 	"selectCardPageTitleText": "یک طرح برای کارت بانکی خود انتخاب کنید.",
 	"endPageErrorText": "عملیات با خطا مواجه شد ",
-	"jobGroup" : "گروه شغلی",
+	"jobGroup": "گروه شغلی",
 	"backButtonText": "در صورت تایید به صفحه اول باز خواهید گشت.",
-	"minLengthDateValidation" :"تاریخ را به صورت کامل وارد کنید."
+	"minLengthDateValidation": "تاریخ را به صورت کامل وارد کنید.",
+	"notEmptyCityText": "شهر را وارد کنید",
+	"notEmptyAlleyText": "کوچه را وارد کنید",
+	"notEmptybranchCodeText": "کد شعبه را وارد کنید",
+	"notEmptyJobText": "شغل را وارد کنید",
+	"notEmptymainStreetText": "خیابان را وارد کنید",
+	"notEmptypostalcodeText": "کد پستی را وارد کنید",
+	"notEmptyVillageText": "روستا را وارد کنید",
+	"notEmptyPhoneText": "شماره تلفن را وارد کنید",
+	"minLengthPhoneValidation": "شماره تلفن باید حداقل 8 کاراکتر باشد"
 }

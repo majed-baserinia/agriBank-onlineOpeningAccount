@@ -305,9 +305,18 @@
 	"cardType": "Card type",
 	"cardDesign": "Card Design",
 	"cardIssuance": "Card Issuance",
-	"selectCardPageTitleText":"Choose a plan for your bank card.",
-	"endPageErrorText" : "The operation encountered an error",
-	"jobGroup" : "Job Group",
-	"backButtonText" :"If approved, you will return to the first page.",
-	"minLengthDateValidation" :"Enter the date in full."
+	"selectCardPageTitleText": "Choose a plan for your bank card.",
+	"endPageErrorText": "The operation encountered an error",
+	"jobGroup": "Job Group",
+	"backButtonText": "If approved, you will return to the first page.",
+	"minLengthDateValidation": "Enter the date in full.",
+	"notEmptyCityText": "city can't be empty",
+	"notEmptyAlleyText": "alley can't be empty",
+	"notEmptybranchCodeText": "branch Code can't be empty",
+	"notEmptyJobText": "Job can't be empty",
+	"notEmptymainStreetText": "main street can't be empty",
+	"notEmptypostalcodeText": "postal code can't be empty",
+	"notEmptyVillageText": "village can't be empty",
+	"notEmptyPhoneText": "phone can't be empty",
+	"minLengthPhoneValidation": "hone must be atleast 8 charachter"
 }
