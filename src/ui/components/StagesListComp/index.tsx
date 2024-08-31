@@ -24,6 +24,7 @@ export default function StagesListComp(props: Props) {
 			{list.map((item) => {
 				return (
 					<Grid
+						key={item.id}
 						container
 						justifyContent={'space-between'}
 						alignItems={'center'}
