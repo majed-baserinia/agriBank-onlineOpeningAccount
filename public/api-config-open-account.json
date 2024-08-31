@@ -1,6 +1,6 @@
 {
 	"apiBaseUrl": "http://10.0.85.33:8090/api/bankingservices/kyc",
 	"ThemeRoute": "http://digitalBanking-tst.bki.ir/cdn/themes/",
-	"apiBaseUrlDigitalBanking": "http://10.0.85.33:8090",
+	"apiBaseUrlDigitalBanking": "http://10.0.189.141:31100",
 	"kycUrl": "https://core.ashname.shakeylead.com/keshavarzi/start"
 }

@@ -69,7 +69,7 @@ export default function SelectCardTypePage() {
 						if (cardType.cardPatternItems.length === 1) {
 							// if only there is one pattern we presume that it is selected
 							addNewData({ selectedCardData: cardType.cardPatternItems[0] });
-							navigate(paths.selectAddress, { replace: true, state: { canGoBack: false } });
+							navigate(paths.selectAddress, {  state: { canGoBack: true } });
 						} else {
 							addNewData({ cards: cardType });
 							navigate(paths.selectCard, { state: { canGoBack: true } });

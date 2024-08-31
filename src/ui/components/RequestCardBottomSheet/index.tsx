@@ -8,16 +8,19 @@ import { useNavigate } from 'react-router-dom';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import { paths } from 'ui/route-config/paths';
 import Menu from '../Menu';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 
 type Props = {
 	open: boolean;
 	setOpen: Dispatch<SetStateAction<boolean>>;
+	dontWantCard:()=>void
+	wantCard:()=>void
 };
 
 export default function RequestCardBottomSheet(props: Props) {
-	const { open, setOpen } = props;
+	const { open, setOpen,dontWantCard,wantCard } = props;
 	const { t } = useTranslation();
-	const navigate = useNavigate();
+	//const {navigate} = usePreventNavigate();
 	const { mutate: requestCard, isLoading: isLoadingRequestCard } = useRequestCard();
 	const { token } = useDataSteps();
 
@@ -34,9 +37,7 @@ export default function RequestCardBottomSheet(props: Props) {
 				sameHomeAddressForCard: false
 			},
 			{
-				onSuccess: () => {
-					navigate(paths.nationalCardImage);
-				},
+				onSuccess: dontWantCard,
 				onError: (err) => {
 					pushAlert({
 						type: 'error',
@@ -55,7 +56,7 @@ export default function RequestCardBottomSheet(props: Props) {
 			id: '1',
 			title: 'requestCardMenuTitle',
 			subtitle: 'requestCardMenuSubTitle',
-			routeTo: paths.selectCardType
+			onClick:()=> wantCard()
 		},
 		{
 			id: '2',

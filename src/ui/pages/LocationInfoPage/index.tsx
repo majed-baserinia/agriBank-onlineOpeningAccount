@@ -540,6 +540,8 @@ export default function LocationInfoPage() {
 			<RequestCardBottomSheet
 				open={openBottomSheet}
 				setOpen={setOpenBottomSheet}
+				dontWantCard={()=>navigate(paths.nationalCardImage)}
+				wantCard={()=>navigate(paths.selectCardType)}
 			/>
 		</Grid>
 	);

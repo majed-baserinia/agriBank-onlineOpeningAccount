@@ -1,9 +1,9 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
 	icon?: ReactNode;
@@ -18,9 +18,7 @@ export default function MenuItem(props: Props) {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const { t } = useTranslation();
-	const { navigate } = usePreventNavigate({
-		allowAll: true
-	});
+	const navigate = useNavigate();
 
 	return (
 		<Grid
