@@ -318,5 +318,6 @@
 	"notEmptypostalcodeText": "postal code can't be empty",
 	"notEmptyVillageText": "village can't be empty",
 	"notEmptyPhoneText": "phone can't be empty",
-	"minLengthPhoneValidation": "hone must be atleast 8 charachter"
+	"minLengthPhoneValidation": "hone must be atleast 8 charachter",
+	"initErrorText": "there is a problem with loading the app, please try later"
 }

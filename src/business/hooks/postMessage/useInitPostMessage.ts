@@ -1,5 +1,5 @@
 import useInitialSettingStore, { InitialSetting } from 'business/stores/initial-setting-store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postMessageTypes } from './types';
 
@@ -13,15 +13,36 @@ export const sendPostmessage = (type: postMessageTypes, data: string) => {
 };
 
 const useInitPostMessage = () => {
-	const { settings, setSettings } = useInitialSettingStore((s) => s);
 	const navigate = useNavigate();
+
+	const { settings, setSettings } = useInitialSettingStore((s) => s);
+	const needsInitData = import.meta.env.VITE_APP_NEEDS_INIT_POSTMESSAGE === 'true';
+	const [receivedInitPostmessage, setReceivedInitPostMessage] = useState(!needsInitData);
+
 	useEffect(() => {
 		window.addEventListener('message', onRecievePostMessage);
-		if (checkIsInIframe()) sendPostmessage('iFrameReady', 'Hi Parent');
+		let interval: NodeJS.Timeout;
+
+		if (checkIsInIframe() && !receivedInitPostmessage) {
+			let sendLimit = 20;
+			interval = setInterval(() => {
+				sendPostmessage('iFrameReady', 'Hi Parent');
+				sendLimit--;
+				if (sendLimit === 0 && !receivedInitPostmessage) {
+					sendPostmessage('isFinishedBack', 'true');
+					clearInterval(interval);
+				}
+			}, 300);
+		} else {
+			setReceivedInitPostMessage(true);
+		}
 
 		// Clean up the event listener on unmount
 		return () => {
 			window.removeEventListener('message', onRecievePostMessage);
+			if (interval) {
+				clearInterval(interval);
+			}
 		};
 	}, []);
 
@@ -32,6 +53,7 @@ const useInitPostMessage = () => {
 	};
 
 	const initiateIFrameHadnler = (data: InitialSetting) => {
+		setReceivedInitPostMessage(true);
 		setSettings(data);
 	};
 
@@ -44,7 +66,7 @@ const useInitPostMessage = () => {
 		navigate(-1);
 	};
 
-	return [checkIsInIframe()];
+	return { readyToLoad: receivedInitPostmessage, checkIsInIframe };
 };
 
 export default useInitPostMessage;

@@ -318,5 +318,7 @@
 	"notEmptypostalcodeText": "کد پستی را وارد کنید",
 	"notEmptyVillageText": "روستا را وارد کنید",
 	"notEmptyPhoneText": "شماره تلفن را وارد کنید",
-	"minLengthPhoneValidation": "شماره تلفن باید حداقل 8 کاراکتر باشد"
+	"minLengthPhoneValidation": "شماره تلفن باید حداقل 8 کاراکتر باشد",
+	"initErrorText": "مشکلی در اجرای برنامه وجود دارد، لطفا مجددا تلاش کنید."
+
 }
