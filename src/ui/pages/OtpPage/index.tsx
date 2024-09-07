@@ -4,6 +4,7 @@ import VerificationOTPCommand from 'business/application/onlineOpenAccount/Verif
 import useCreateAuthRequest from 'business/hooks/useCreateAuthRequest';
 import useVerificationOTP from 'business/hooks/useVerificationOTP';
 
+import usePostMessage from 'business/hooks/postMessage/usePostMessage';
 import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
@@ -33,13 +34,23 @@ export default function OtpPage() {
 	const { mutate: verifyOtp, isLoading: isLoadingVerify } = useVerificationOTP();
 	const { data: createAuthRes, mutate: sendAgain, isLoading: isLoadingSendAgain } = useCreateAuthRequest();
 
+	usePostMessage({ callback: readOtp, message: { type: 'GetOTP', OTPLen: '8', ReadMode: 'UserConsent' } });
+
 	useEffect(() => {
 		setOtpTime({ timer: location.state.otpTime });
 	}, []);
+
+	function readOtp(e: MessageEvent<any>) {
+		if (e.data.type === 'ResOTP') {
+			setValue('verifyCode', e.data.OTP);
+		}
+	}
+
 	const {
 		handleSubmit: handleSubmitForVerifyOtp,
 		formState,
-		control
+		control,
+		setValue
 	} = useForm<VerificationOTPCommand>({
 		resolver: (values, context, options) => {
 			values = { ...values };
@@ -155,6 +166,7 @@ export default function OtpPage() {
 									render={({ field }) => (
 										<Otp
 											onChange={(value) => field.onChange(value)}
+											defaultValue={field.value}
 											error={!!formState?.errors?.verifyCode}
 											helperText={formState?.errors?.verifyCode?.message}
 											label={t('activationCodeOtp')}
