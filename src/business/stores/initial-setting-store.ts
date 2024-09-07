@@ -2,12 +2,13 @@ import { create } from 'zustand';
 import { AuthTokens, clearAuth, saveAuthTokens } from '../infrastructure/auth-service';
 
 export interface InitialSetting {
-	language: string;
-	themeName: string;
-	theme: any;
+	language?: string;
+	themeName?: string;
+	theme?: any;
 	idToken: string | undefined;
 	refreshToken: string | undefined;
 	osType: number;
+	[key: string]: any; 
 }
 
 interface InitialSettingStore {
