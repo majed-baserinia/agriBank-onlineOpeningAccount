@@ -1,3 +1,4 @@
+import usePostMessage from 'business/hooks/postMessage/usePostMessage';
 import useCustomerDidKycOperation from 'business/hooks/useCustomerDidKycOperation';
 import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
@@ -10,6 +11,8 @@ export default function ThirdPartyAuthPage() {
 	const { orderId, token } = useDataSteps();
 	const { mutate, isLoading } = useCustomerDidKycOperation();
 	const { navigate } = usePreventNavigate();
+	usePostMessage({ callback: getResultFromWebView });
+
 	useEffect(() => {
 		async function createUrlByOrderId() {
 			try {
@@ -24,14 +27,9 @@ export default function ThirdPartyAuthPage() {
 		createUrlByOrderId();
 	}, []);
 
-	useEffect(() => {
-		window.addEventListener('message', getResultFromWebView, false);
-		return () => {
-			window.removeEventListener('message', getResultFromWebView, false);
-		};
-	}, []);
+	
 
-	const getResultFromWebView = (e: MessageEvent) => {
+	function getResultFromWebView(e: MessageEvent) {
 		if (e.data.event_id === 'kycResponse') {
 			// اتمام کار شرکت شاکلید
 			// e.data.data.kycStatus === 'unAthorized';
@@ -42,11 +40,7 @@ export default function ThirdPartyAuthPage() {
 			// e.data.data.kycStatus === 'Draft';
 			// e.data.data.kycStatus === 'InProgress';
 
-			// if (
-			// 	e.data.data.kycStatus === 'Approved' ||
-			// 	e.data.data.kycStatus === 'Reject' ||
-			// 	e.data.data.kycStatus === 'InProgress'
-			// ) {
+			
 			mutate(
 				{ token: token! },
 				{
@@ -60,15 +54,9 @@ export default function ThirdPartyAuthPage() {
 					}
 				}
 			);
-			// } else if (
-			// 	e.data.data.kycStatus === 'InvalidOrderId' ||
-			// 	e.data.data.kycStatus === 'InvalidKYCStatus' ||
-			// 	e.data.data.kycStatus === 'unAthorized'
-			// ) {
-			// 	pushAlert({ type: 'error', messageText: e.data.data.kycStatus, hasConfirmAction: true });
-			// }
+		
 		}
-	};
+	}
 
 	return url ? (
 		<iframe
