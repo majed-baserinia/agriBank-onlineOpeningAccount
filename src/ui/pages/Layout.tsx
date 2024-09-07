@@ -9,13 +9,10 @@ import Loader from 'ui/htsc-components/loader/Loader';
 import themeInitializer from 'ui/theme-config/baseTheme';
 
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
-import { useTranslation } from 'react-i18next';
 import ApiConfigSingleton from '../../business/stores/api-config-singleton';
 import useInitialSettingStore from '../../business/stores/initial-setting-store';
-import { pushAlert } from 'business/stores/AppAlertsStore';
 
 const Layout = () => {
-	const { t } = useTranslation();
 	const { readyToLoad } = useInitPostMessage();
 
 	const { settings, setSettings } = useInitialSettingStore((s) => s);
@@ -56,9 +53,6 @@ const Layout = () => {
 			});
 
 			seConfigReady(true);
-			if (!readyToLoad) {
-				pushAlert({ type: 'error', messageText: t('initErrorText') });
-			}
 		} catch (err) {
 			//TODO: add a convinent alert for this
 			//probaly send a postmessage to parent
@@ -74,16 +68,18 @@ const Layout = () => {
 			<GlobalStyle />
 
 			<MaterialThemeProvider>
-				{configReady && readyToLoad ? (
-					<div>
-						<AppAlerts />
-						{/* <div className="content-star xl:w-2/4 m-auto grid grid-rows-1 gap-y-4 p-7 md:w-3/4 lg:w-3/5"> */}
-						<Outlet />
-						{/* </div> */}
-					</div>
-				) : (
-					<Loader showLoader></Loader>
-				)}
+				<>
+					<AppAlerts />
+					{configReady && readyToLoad ? (
+						<div>
+							{/* <div className="content-star xl:w-2/4 m-auto grid grid-rows-1 gap-y-4 p-7 md:w-3/4 lg:w-3/5"> */}
+							<Outlet />
+							{/* </div> */}
+						</div>
+					) : (
+						<Loader showLoader={true}></Loader>
+					)}
+				</>
 			</MaterialThemeProvider>
 		</>
 	);
