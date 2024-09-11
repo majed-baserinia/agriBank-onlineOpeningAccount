@@ -18,7 +18,7 @@ export default function ThirdPartyAuthPage() {
 			try {
 				const res = await fetch('/api-config-open-account.json');
 				const apiConf = await res.json();
-				const constructedUrl = `${apiConf.kycUrl}?orderId=${orderId}&redirectUrl=https://digitalbanking.bki.ir/onlineopeningaccount`;
+				const constructedUrl =apiConf.kycUrl.replace('${orderId}', orderId);;
 				setUrl(constructedUrl);
 			} catch {
 				console.warn("can't get the config file ");
@@ -61,7 +61,7 @@ export default function ThirdPartyAuthPage() {
 	return url ? (
 		<iframe
 			style={{ width: '100vw', height: '100vh', border: 'none' }}
-			allow="camera *;microphone *"
+			allow="accelerometer *; gyroscope *;camera *;microphone *;"
 			scrolling="auto"
 			src={url}
 			allowFullScreen
