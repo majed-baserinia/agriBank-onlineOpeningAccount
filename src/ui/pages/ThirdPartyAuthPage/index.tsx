@@ -46,7 +46,7 @@ export default function ThirdPartyAuthPage() {
 				{
 					onSuccess: (res) => {
 						navigate(paths.result, {
-							state: { status: e.data.data.kycStatus === 'InProgress' ? 'Approved' : 'Reject' }
+							state: { status: e.data.data.kycStatus === 'InProgress' || e.data.data.kycStatus === 'Approved' ? 'Approved' : 'Reject' }
 						});
 					},
 					onError: (err) => {
