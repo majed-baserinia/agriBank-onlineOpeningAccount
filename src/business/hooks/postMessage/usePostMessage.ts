@@ -13,5 +13,5 @@ export default function usePostMessage(props: Props) {
 		return () => {
 			window.removeEventListener('message', callback);
 		};
-	});
+	},[]);
 }
