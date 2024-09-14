@@ -27,7 +27,7 @@ const useInitialSettingStore = create<InitialSettingStore>((set) => ({
 					refreshToken: newSetting.refreshToken
 				});
 			}
-			//set((prev) => ({ settings: { ...prev.settings, ...newSetting } }));
+
 			set((store) => {
 				return { settings: { ...store.settings, ...newSetting } };
 			});
