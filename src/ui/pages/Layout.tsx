@@ -56,12 +56,16 @@ const Layout = () => {
 		} catch (err) {
 			//TODO: add a convinent alert for this
 			//probaly send a postmessage to parent
+			alert("can't initiate");
 		}
 	};
 
 	useEffect(() => {
-		getConfig();
-	}, []);
+		if (readyToLoad) {
+			getConfig();
+		}
+	}, [readyToLoad]);
+
 
 	return (
 		<>
@@ -70,7 +74,7 @@ const Layout = () => {
 			<MaterialThemeProvider>
 				<>
 					<AppAlerts />
-					{configReady && readyToLoad ? (
+					{configReady ? (
 						<div>
 							{/* <div className="content-star xl:w-2/4 m-auto grid grid-rows-1 gap-y-4 p-7 md:w-3/4 lg:w-3/5"> */}
 							<Outlet />
