@@ -29,7 +29,7 @@ axiosRetry(axiosInstance, {
 });
 
 const refreshToken = async (refreshToken: string): Promise<string | undefined> => {
-	try {
+
 		const authTokens = getAuthTokens();
 		const baseUrl = ApiConfigSingleton.getApiConfig().baseUrl;
 		axiosForLogin.defaults.headers.common['Authorization'] = `Bearer ${authTokens?.idToken}`;
@@ -40,11 +40,9 @@ const refreshToken = async (refreshToken: string): Promise<string | undefined> =
 		const newRefreshToken = response.data.refreshToken;
 		saveAuthTokens({ idToken: newIdToken, refreshToken: newRefreshToken });
 		return newIdToken;
-	} catch (error) {
-		clearAuth();
-		window.location.href = '/';
-		// throw error;
-	}
+	
+	
+	
 };
 
 axiosForLogin.interceptors.request.use((config) => {
@@ -78,6 +76,8 @@ axiosInstance.interceptors.response.use(
 				axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${newIdToken}`;
 				return axiosInstance.request(originalRequest!);
 			} catch (refreshError) {
+				clearAuth();
+				window.location.href = import.meta.env.BASE_URL;
 				sendPostmessage('tokenIsNotValid', 'true');
 				return Promise.reject(refreshError);
 			}
