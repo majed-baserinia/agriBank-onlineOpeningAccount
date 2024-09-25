@@ -7,11 +7,10 @@ import {
 	InputLabel,
 	Select,
 	SelectChangeEvent,
-	Typography,
 	useMediaQuery,
 	useTheme
 } from '@mui/material';
-import { ReactElement, ReactNode, SyntheticEvent, useState } from 'react';
+import { ReactElement, ReactNode, SyntheticEvent, useEffect, useState } from 'react';
 
 import { Props } from './type';
 
@@ -34,6 +33,10 @@ export default function SelectAdapter(props: Props) {
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const [selectedValue, setSelectedValue] = useState<string>(defaultValue);
 	const [open, setOpen] = useState(false);
+
+	useEffect(() => {
+		setSelectedValue(defaultValue);
+	}, [defaultValue]);
 
 	//const handleChange = (event:ChangeEvent<{ value: unknown}>) => {
 
@@ -67,6 +70,7 @@ export default function SelectAdapter(props: Props) {
 		zIndex: '9',
 		padding: '16px',
 		height: window.innerHeight + 'px',
+		width: '100%',
 		backgroundColor: theme.palette.background.paper
 	};
 
@@ -74,13 +78,13 @@ export default function SelectAdapter(props: Props) {
 		'& .MuiMenu-list': {
 			backgroundColor: theme.palette.background.paper,
 			height: '100%',
-			width: '100%',
+			minWidth: '100%',
 			boxShadow: 'none'
 		},
 		'& .MuiMenu-paper': {
 			backgroundColor: theme.palette.background.paper,
 			height: '100%',
-			width: '100%',
+			minWidth: '100%',
 			boxShadow: 'none'
 		}
 	};
@@ -90,7 +94,7 @@ export default function SelectAdapter(props: Props) {
 			container
 			flexDirection={'column'}
 			justifyContent={'space-between'}
-			sx={open && matches ? { ...gridStyle } : null}
+			sx={{ ...(open && matches ? gridStyle : {}), transition: 'width 0.2s ease-out' }}
 		>
 			<FormControl
 				fullWidth
@@ -98,6 +102,9 @@ export default function SelectAdapter(props: Props) {
 			>
 				<InputLabel id="label">{label}</InputLabel>
 				<Select
+					// we need one more rerender to apply the new styles correctly
+					// the key props is for forcing a rerender
+					key={`${open}-${matches}`}
 					size={size}
 					labelId="label"
 					{...muiSelectProps}
@@ -131,15 +138,13 @@ export default function SelectAdapter(props: Props) {
 						dir: theme.direction,
 						sx: matches ? menuStyle : null,
 						PaperProps: {
-							style: { maxWidth: '200px', overflowX: 'auto' }
+							style: { maxWidth: '200px', overflowX: 'auto', padding: !matches ? '0 8px' : 'inherit' }
 						}
 					}}
 				>
 					{children}
 				</Select>
-				<FormHelperText error={error}>
-					{helperText}
-				</FormHelperText>
+				<FormHelperText error={error}>{helperText}</FormHelperText>
 			</FormControl>
 		</Grid>
 	);

@@ -87,7 +87,11 @@ export default function BottomSheetSelect<T extends { value: string; name: strin
 					onClose={() => setOpen(false)}
 					snapPoints={[450, 0]}
 				>
-					<Sheet.Container>
+					<Sheet.Container
+						style={{
+							backgroundColor: theme.palette.background.paper
+						}}
+					>
 						<Sheet.Header />
 						<Sheet.Content>
 							{
