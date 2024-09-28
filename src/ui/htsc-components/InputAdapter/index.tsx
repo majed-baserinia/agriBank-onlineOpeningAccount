@@ -146,7 +146,7 @@ export default function InputAdapter(props: InputAdapterProps) {
 				},
 				sx: {
 					input: {
-						color: theme.palette.grey[400]
+						color: theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.grey[400]
 					}
 				},
 				startAdornment: icon ? <InputAdornment position="start">{icon}</InputAdornment> : null,
