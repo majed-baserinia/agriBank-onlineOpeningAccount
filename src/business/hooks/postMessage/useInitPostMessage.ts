@@ -18,7 +18,10 @@ const useInitPostMessage = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
-	const needsInitData = import.meta.env.VITE_APP_NEEDS_INIT_POSTMESSAGE === 'true';
+	//we are checking the query string for 'Auth', in all situations it is true except the time that it is false 
+	const Auth = new URLSearchParams(window.location.search).get('Auth');
+	const needsInitData = Auth === 'false' ? false : true;
+
 	const { settings, setSettings } = useInitialSettingStore((s) => s);
 
 	const [receivedInitPostmessage, setReceivedInitPostmessage] = useState(false);
