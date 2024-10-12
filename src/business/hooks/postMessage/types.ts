@@ -10,7 +10,7 @@ export type postMessageTypes =
   | "tokenIsNotValid"
   | "iFrameReady"
   | "isFinishedBack"
-  | "reset"
+  | "wentBack"
   | "clearCache"
   | "navigate"
   | "readSMS";

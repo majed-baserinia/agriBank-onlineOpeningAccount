@@ -119,8 +119,11 @@ const useInitPostMessage = () => {
 
 		if (window.location.pathname == basePath || `${window.location.pathname}/` == basePath) {
 			sendPostmessage('isFinishedBack', 'true');
+		} else{
+			navigate(-1);
+			//send acknowledge to the parent
+			sendPostmessage('wentBack', 'true');
 		}
-		navigate(-1);
 	};
 
 	return { readyToLoad: receivedInitPostmessage, checkIsInIframe };
