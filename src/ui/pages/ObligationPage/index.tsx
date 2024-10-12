@@ -23,10 +23,10 @@ export default function ObligationPage() {
 	const { navigate } = usePreventNavigate();
 
 	const { token, addNewData } = useDataSteps();
-	const [aggrementAccepted, setAggrementAccepted] = useState(false);
+	const [agreementAccepted, setAgreementAccepted] = useState(false);
 
 	const { data: obligation, mutate: getObligation, isLoading: isLoadingGetObligation } = useGetObligation();
-	const { mutate: saveObligation, isLoading: isLoadingSaveObligation } = useSaveObligation();
+	const { mutate: saveObligation, isLoading: isLoadingSaveObligation, isSuccess } = useSaveObligation();
 
 	useEffect(() => {
 		if (token) {
@@ -61,7 +61,7 @@ export default function ObligationPage() {
 	}, []);
 
 	const handleSubmit = () => {
-		if (token && aggrementAccepted) {
+		if (token && agreementAccepted) {
 			saveObligation(
 				{ token },
 				{
@@ -72,7 +72,15 @@ export default function ObligationPage() {
 						pushAlert({
 							type: 'error',
 							messageText: err.detail,
-							hasConfirmAction: true
+							hasConfirmAction: true,
+							actions: {
+								onConfirm() {
+									// @ts-ignore: Unreachable code error
+									if ((err.error.code as number) === 401) {
+										navigate(paths.Home);
+									}
+								}
+							}
 						});
 					}
 				}
@@ -126,10 +134,10 @@ export default function ObligationPage() {
 									</Grid>
 									<Grid item>
 										<SwitchAdapter
-											checked={aggrementAccepted}
+											checked={agreementAccepted}
 											label={t('acceptObligation')}
 											onChange={() => {
-												setAggrementAccepted(!aggrementAccepted);
+												setAgreementAccepted(!agreementAccepted);
 											}}
 											type="small"
 										></SwitchAdapter>
@@ -139,7 +147,7 @@ export default function ObligationPage() {
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
-								disabled={!aggrementAccepted}
+								disabled={!agreementAccepted || isLoadingGetObligation || isLoadingSaveObligation || isSuccess}
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}

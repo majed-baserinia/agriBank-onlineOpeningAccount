@@ -31,8 +31,8 @@ export default function OtpPage() {
 	const [otpTime, setOtpTime] = useState<{ timer: number }>();
 
 	const { personalInfo, addNewData } = useDataSteps();
-	const { mutate: verifyOtp, isLoading: isLoadingVerify } = useVerificationOTP();
-	const { data: createAuthRes, mutate: sendAgain, isLoading: isLoadingSendAgain } = useCreateAuthRequest();
+	const { mutate: verifyOtp, isLoading: isLoadingVerify, isSuccess } = useVerificationOTP();
+	const { mutate: sendAgain, isLoading: isLoadingSendAgain } = useCreateAuthRequest();
 
 	usePostMessage({ callback: readOtp, message: { type: 'GetOTP', OTPLen: '8', ReadMode: 'UserConsent' } });
 
@@ -59,7 +59,7 @@ export default function OtpPage() {
 		context: VerificationOTPCommand
 	});
 
-	const handlOtpVerify = (data: VerificationOTPCommand) => {
+	const handleOtpVerify = (data: VerificationOTPCommand) => {
 		if (personalInfo) {
 			const { mobile, nationalCode } = personalInfo;
 			verifyOtp(
@@ -75,7 +75,15 @@ export default function OtpPage() {
 							// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 							// @ts-ignore: Unreachable code error
 							messageText: err.error ? (err.error.message as string) : err.detail,
-							hasConfirmAction: true
+							hasConfirmAction: true,
+							actions: {
+								onConfirm() {
+									// @ts-ignore: Unreachable code error
+									if ((err.error.code as number) === 401) {
+										navigate(paths.Home);
+									}
+								}
+							}
 						});
 					}
 				}
@@ -180,10 +188,11 @@ export default function OtpPage() {
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
+								disabled={isLoadingSendAgain || isLoadingVerify  || isSuccess}
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
-								onClick={handleSubmitForVerifyOtp(handlOtpVerify)}
+								onClick={handleSubmitForVerifyOtp(handleOtpVerify)}
 							>
 								{t('continue')}
 							</ButtonAdapter>

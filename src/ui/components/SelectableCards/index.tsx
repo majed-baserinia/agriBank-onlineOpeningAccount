@@ -49,12 +49,12 @@ export default function SelectableCards({ className, cards, onCardSelected }: Pr
 							alt="card-image"
 							src={data.picsAddress}
 						></img>
-						<Typography
+						{/* <Typography
 							textAlign={'center'}
 							sx={{ marginTop: '32px' }}
 						>
 							{data.titleKey}
-						</Typography>
+						</Typography> */}
 					</Carousel.Slide>
 				);
 			})}

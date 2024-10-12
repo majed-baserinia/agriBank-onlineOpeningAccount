@@ -4,6 +4,7 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 
 import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import CreateAuthRequestCommand from 'business/application/onlineOpenAccount/CreateAuthRequest/CreateAuthRequestCommand';
+import { sendPostmessage } from 'business/hooks/postMessage/useInitPostMessage';
 import useAccountsList from 'business/hooks/useAccountsList';
 import useCreateAuthRequest from 'business/hooks/useCreateAuthRequest';
 import { pushAlert } from 'business/stores/AppAlertsStore';
@@ -31,7 +32,11 @@ export default function PersonalInfoPage() {
 	const [accountCode, setAccountCode] = useState('');
 
 	const { data: accountsList, mutate: getAccountsList, isLoading: isLoadingGettingAccounts } = useAccountsList();
-	const { mutate: createAuthRequest, isLoading: isLoadingCreateAuthRequest } = useCreateAuthRequest();
+	const {
+		mutate: createAuthRequest,
+		isLoading: isLoadingCreateAuthRequest,
+		isSuccess
+	} = useCreateAuthRequest();
 
 	const { handleSubmit, control, reset, formState } = useForm<CreateAuthRequestCommand>({
 		resolver: (values, context, options) => {
@@ -85,7 +90,18 @@ export default function PersonalInfoPage() {
 						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 						// @ts-ignore: Unreachable code error
 						messageText: err.error ? (err.error.message as string) : err.detail,
-						hasConfirmAction: true
+						hasConfirmAction: true,
+						actions: {
+							onConfirm() {
+								// @ts-ignore: Unreachable code error
+								if ((err.error.code as number) === 420) {
+									sendPostmessage('isFinishedBack', '');
+								// @ts-ignore: Unreachable code error
+								} else if ((err.error.code as number) === 401) {
+									navigate(paths.Home);
+								}
+							}
+						}
 					});
 				}
 			}
@@ -299,9 +315,10 @@ export default function PersonalInfoPage() {
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
+								disabled={isLoadingCreateAuthRequest || isSuccess}
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%', marginTop: "8px" } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: '8px' } }}
 								onClick={handleSubmit(submitHandler)}
 							>
 								{t('checkAndContinue')}

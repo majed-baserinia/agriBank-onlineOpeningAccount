@@ -1,28 +1,29 @@
 import { Grid, Typography } from '@mui/material';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import useRequestCard from 'business/hooks/useRequestCard';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
-import { Dispatch, SetStateAction } from 'react';
+import { throttle } from 'common/utils';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import Loader from 'ui/htsc-components/loader/Loader';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import { paths } from 'ui/route-config/paths';
 import Menu from '../Menu';
-import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 
 type Props = {
 	open: boolean;
 	setOpen: Dispatch<SetStateAction<boolean>>;
-	dontWantCard:()=>void
-	wantCard:()=>void
 };
 
 export default function RequestCardBottomSheet(props: Props) {
-	const { open, setOpen,dontWantCard,wantCard } = props;
+	const { open, setOpen } = props;
 	const { t } = useTranslation();
-	//const {navigate} = usePreventNavigate();
-	const { mutate: requestCard, isLoading: isLoadingRequestCard } = useRequestCard();
+	const { navigate } = usePreventNavigate();
+
 	const { token } = useDataSteps();
+	const { mutate: requestCard, isLoading } = useRequestCard();
+
 
 	const handleSubmitWithNoCard = () => {
 		requestCard(
@@ -37,18 +38,30 @@ export default function RequestCardBottomSheet(props: Props) {
 				sameHomeAddressForCard: false
 			},
 			{
-				onSuccess: dontWantCard,
+				onSuccess: () => navigate(paths.nationalCardImage),
 				onError: (err) => {
 					pushAlert({
 						type: 'error',
 						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 						// @ts-ignore: Unreachable code error
 						messageText: err.error ? (err.error.message as string) : err.detail,
-						hasConfirmAction: true
+						hasConfirmAction: true,
+						actions: {
+							onConfirm() {
+								// @ts-ignore: Unreachable code error
+								if ((err.error.code as number) === 401) {
+									navigate(paths.Home);
+								}
+							}
+						}
 					});
 				}
 			}
 		);
+	};
+
+	const handleSubmitWithCard = () => {
+		navigate(paths.selectCardType);
 	};
 
 	const menuList = [
@@ -56,16 +69,17 @@ export default function RequestCardBottomSheet(props: Props) {
 			id: '1',
 			title: 'requestCardMenuTitle',
 			subtitle: 'requestCardMenuSubTitle',
-			onClick:()=> wantCard()
+			onClick: throttle(handleSubmitWithCard, 3000)
 		},
 		{
 			id: '2',
 			title: 'refuseCardMenuTitle',
 			subtitle: 'refuseCardMenuSubTitle',
-			onClick: handleSubmitWithNoCard
+			onClick: throttle(handleSubmitWithNoCard, 3000)
 		}
 	];
 
+	if (isLoading) return <Loader showLoader />;
 	return (
 		<ModalOrBottomSheet
 			breackpoint="sm"

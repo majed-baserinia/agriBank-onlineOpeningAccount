@@ -25,7 +25,7 @@ export default function NationalCardImagePage() {
 
 	const { token, addNewData, isKycNeeded } = useDataSteps();
 	const [image, setImage] = useState<string | null>(null);
-	const { isLoading, mutate: postImage } = useSaveNationalCodeImage();
+	const { isLoading, mutate: postImage, isSuccess } = useSaveNationalCodeImage();
 
 	const handlesubmit = () => {
 		if (image) {
@@ -42,7 +42,15 @@ export default function NationalCardImagePage() {
 						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 						// @ts-ignore: Unreachable code error
 						messageText: err.error ? (err.error.message as string) : err.detail,
-						hasConfirmAction: true
+						hasConfirmAction: true,
+						actions: {
+							onConfirm() {
+								// @ts-ignore: Unreachable code error
+								if ((err.error.code as number) === 401) {
+									navigate(paths.Home);
+								}
+							}
+						}
 					});
 				},
 				onSuccess: (res) => {
@@ -129,7 +137,7 @@ export default function NationalCardImagePage() {
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
-								disabled={!image}
+								disabled={!image || isLoading || isSuccess}
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%' } }}

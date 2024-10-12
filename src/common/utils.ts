@@ -93,3 +93,14 @@ export function convertToPersianNumber(prmInputText: string) {
 
   return prmInputText;
 }
+
+
+export const throttle = (fn: (...args: unknown[]) => void, delay: number) => {
+  let lastInvoke: number = 0;
+  return (...args: unknown[]) => {
+    if (lastInvoke + delay < Date.now()) {
+      lastInvoke = Date.now();
+      fn(...args);
+    }
+  };
+};

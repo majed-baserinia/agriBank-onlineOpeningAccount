@@ -4,12 +4,9 @@ import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 
 import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import SaveAddressCommand from 'business/application/onlineOpenAccount/SaveAddress/SaveAddressCommand';
-import useCities from 'business/hooks/useCities';
 import useGetBranches from 'business/hooks/useGetBranches';
-import useJobDetail from 'business/hooks/useJobDetail';
-import useJobs from 'business/hooks/useJobs';
 import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
-import useProvinces from 'business/hooks/useProvinces';
+import useProvinceAndCities from 'business/hooks/useProvinceAndCities';
 import useSaveAddress from 'business/hooks/useSaveAdderss';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
@@ -26,22 +23,18 @@ import Stepper from 'ui/htsc-components/Stepper';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 import { Option } from './type';
+import useHandlejobs from '../../../business/hooks/useHandleJobs';
 
 export default function LocationInfoPage() {
 	const { t } = useTranslation();
 	const { navigate } = usePreventNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-
 	const { addNewData, token } = useDataSteps();
-
 	const [openBottomSheet, setOpenBottomSheet] = useState(false);
-
-	const { data: jobs, mutate: getJobs, isLoading: isLoadingJobs } = useJobs();
-	const { data: jobDetails, mutate: getJobDetails, isLoading: isLoadingJobsDetail } = useJobDetail();
-	const { data: provinces, mutate: getProvinces, isLoading: isLoadingProvinces } = useProvinces();
-	const { data: cities, mutate: getCities, isLoading: isLoadingCities } = useCities();
-	const { mutate: saveAddress, isLoading: isLoadingSaveAddress } = useSaveAddress();
+	const { cities, handlProvinceChahange, isLoading, provinces } = useProvinceAndCities();
+	const { handleJobChange, isLoading: jobLoading, jobDetails, jobs } = useHandlejobs();
+	const { mutate: saveAddress, isLoading: isLoadingSaveAddress, isSuccess } = useSaveAddress();
 	const {
 		data: branches,
 		mutate: getBranches,
@@ -49,56 +42,12 @@ export default function LocationInfoPage() {
 		reset: clearBranches
 	} = useGetBranches();
 
-	const { handleSubmit, control, reset } = useForm<SaveAddressCommand>({
+	const { handleSubmit, control, reset, formState } = useForm<SaveAddressCommand>({
 		resolver: (values, context, options) => {
 			return validator(values, context, options);
 		},
 		context: SaveAddressCommand
 	});
-
-	useEffect(() => {
-		getJobs(
-			{ code: '' },
-			{
-				onError: () => {
-					pushAlert({
-						type: 'error',
-						hasConfirmAction: true,
-						actions: {
-							onCloseModal: () => {
-								navigate(paths.Home);
-							},
-							onConfirm: () => {
-								navigate(paths.Home);
-							}
-						}
-					});
-				}
-			}
-		);
-	}, []);
-
-	useEffect(() => {
-		getProvinces(
-			{},
-			{
-				onError: () => {
-					pushAlert({
-						type: 'error',
-						hasConfirmAction: true,
-						actions: {
-							onCloseModal: () => {
-								navigate(paths.Home);
-							},
-							onConfirm: () => {
-								navigate(paths.Home);
-							}
-						}
-					});
-				}
-			}
-		);
-	}, []);
 
 	useEffect(() => {
 		const savedData = localStorage.getItem('dataSteps');
@@ -123,21 +72,6 @@ export default function LocationInfoPage() {
 		};
 	}, []);
 
-	const handlProvinceChahange = (provinceId: number) => {
-		getCities(
-			{ provinceId: provinceId },
-			{
-				onError: (err) => {
-					pushAlert({
-						type: 'error',
-						messageText: err.detail,
-						hasConfirmAction: true
-					});
-				}
-			}
-		);
-	};
-
 	const submitHandler = (data: SaveAddressCommand) => {
 		addNewData({ locationInfo: data });
 		saveAddress(
@@ -156,7 +90,15 @@ export default function LocationInfoPage() {
 						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 						// @ts-ignore: Unreachable code error
 						messageText: err.error ? (err.error.message as string) : err.detail,
-						hasConfirmAction: true
+						hasConfirmAction: true,
+						actions: {
+							onConfirm() {
+								// @ts-ignore: Unreachable code error
+								if ((err.error.code as number) === 401) {
+									navigate(paths.Home);
+								}
+							}
+						}
 					});
 				}
 			}
@@ -240,8 +182,8 @@ export default function LocationInfoPage() {
 													text: option.label
 												})}
 												loading={isLoadingGetBranches}
-												// error={!!formState.errors.branchCode?.message}
-												// helperText={formState.errors.branchCode?.message}
+												error={!!formState.errors.branchCode?.message}
+												helperText={formState.errors.branchCode?.message}
 											/>
 										)}
 									/>
@@ -280,8 +222,8 @@ export default function LocationInfoPage() {
 														field.onChange(Number(selectedProvince.value));
 														handlProvinceChahange(Number(selectedProvince.value));
 													}}
-													// error={!!formState.errors.provinceId?.message}
-													// helperText={formState.errors.provinceId?.message}
+													error={!!formState.errors.provinceId?.message}
+													helperText={formState.errors.provinceId?.message}
 												/>
 											)}
 										/>
@@ -312,8 +254,8 @@ export default function LocationInfoPage() {
 													onChange={(selectedCity) => {
 														field.onChange(Number(selectedCity.value));
 													}}
-													// error={!!formState.errors.cityId?.message}
-													// helperText={formState.errors.cityId?.message}
+													error={!!formState.errors.cityId?.message}
+													helperText={formState.errors.cityId?.message}
 												/>
 											)}
 										/>
@@ -336,8 +278,8 @@ export default function LocationInfoPage() {
 													isRequired
 													label={t('village')}
 													onChange={(value) => field.onChange(value)}
-													// error={!!formState.errors.village?.message}
-													// helperText={formState.errors.village?.message}
+													error={!!formState.errors.village?.message}
+													helperText={formState.errors.village?.message}
 												/>
 											)}
 										/>
@@ -360,8 +302,8 @@ export default function LocationInfoPage() {
 													isRequired
 													label={t('street')}
 													onChange={(value) => field.onChange(value)}
-													// error={!!formState.errors.mainStreet?.message}
-													// helperText={formState.errors.mainStreet?.message}
+													error={!!formState.errors.mainStreet?.message}
+													helperText={formState.errors.mainStreet?.message}
 												/>
 											)}
 										/>
@@ -384,8 +326,8 @@ export default function LocationInfoPage() {
 													isRequired
 													label={t('alley')}
 													onChange={(value) => field.onChange(value)}
-													// error={!!formState.errors.alley?.message}
-													// helperText={formState.errors.alley?.message}
+													error={!!formState.errors.alley?.message}
+													helperText={formState.errors.alley?.message}
 												/>
 											)}
 										/>
@@ -409,8 +351,8 @@ export default function LocationInfoPage() {
 													type="number"
 													label={t('postalCode')}
 													onChange={(value) => field.onChange(value)}
-													// error={!!formState.errors.postalCode?.message}
-													// helperText={formState.errors.postalCode?.message}
+													error={!!formState.errors.postalCode?.message}
+													helperText={formState.errors.postalCode?.message}
 												/>
 											)}
 										/>
@@ -434,8 +376,8 @@ export default function LocationInfoPage() {
 													type="number"
 													label={t('phone')}
 													onChange={(value) => field.onChange(value)}
-													// error={!!formState.errors.phone?.message}
-													// helperText={formState.errors.phone?.message}
+													error={!!formState.errors.phone?.message}
+													helperText={formState.errors.phone?.message}
 												/>
 											)}
 										/>
@@ -462,21 +404,10 @@ export default function LocationInfoPage() {
 										}
 										label={t('jobGroup')}
 										onChange={(selectedJob) => {
-											getJobDetails(
-												{ code: '', jobId: selectedJob.value },
-												{
-													onError: (err) => {
-														pushAlert({
-															type: 'error',
-															messageText: err.detail,
-															hasConfirmAction: true
-														});
-													}
-												}
-											);
+											handleJobChange(selectedJob);
 										}}
-										// error={!!formState.errors.jobDetailId?.message}
-										// helperText={formState.errors.jobDetailId?.message}
+										error={!!formState.errors.jobDetailId?.message}
+										helperText={formState.errors.jobDetailId?.message}
 									/>
 								</Grid>
 								<Grid
@@ -504,8 +435,8 @@ export default function LocationInfoPage() {
 												onChange={(selectedCity) => {
 													field.onChange(Number(selectedCity.value));
 												}}
-												// error={!!formState.errors.jobDetailId?.message}
-												// helperText={formState.errors.jobDetailId?.message}
+												error={!!formState.errors.jobDetailId?.message}
+												helperText={formState.errors.jobDetailId?.message}
 											/>
 										)}
 									/>
@@ -514,6 +445,7 @@ export default function LocationInfoPage() {
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
+								disabled={isLoadingSaveAddress  || isSuccess}
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%' } }}
@@ -536,12 +468,10 @@ export default function LocationInfoPage() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isLoadingCities || isLoadingSaveAddress || isLoadingJobs || isLoadingProvinces} />
+			<Loader showLoader={isLoading || isLoadingSaveAddress || jobLoading} />
 			<RequestCardBottomSheet
 				open={openBottomSheet}
 				setOpen={setOpenBottomSheet}
-				dontWantCard={()=>navigate(paths.nationalCardImage)}
-				wantCard={()=>navigate(paths.selectCardType)}
 			/>
 		</Grid>
 	);

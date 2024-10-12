@@ -2,16 +2,15 @@ import validator from '@Fluentvalidator/extentions/fluentValidationResolver';
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import InquiryGNAFForCardCommand from 'business/application/onlineOpenAccount/InquiryGNAFForCard/InquiryGNAFForCardCommand';
 import RequestCardCommand from 'business/application/onlineOpenAccount/RequestCard/RequestCardCommand';
-import useCities from 'business/hooks/useCities';
 import useInquiryGNAFForCard from 'business/hooks/useInquiryGNAFForCard';
-import useProvinces from 'business/hooks/useProvinces';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import useRequestCard from 'business/hooks/useRequestCard';
 import { pushAlert } from 'business/stores/AppAlertsStore';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
@@ -22,12 +21,12 @@ import RadioButtonAdapter from 'ui/htsc-components/RadioButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 import { paths } from 'ui/route-config/paths';
+import useProvinceAndCities from '../../../business/hooks/useProvinceAndCities';
 import { stagesList } from '../HomePage';
-import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 
 export default function SelectAddressPage() {
 	const { t } = useTranslation();
-	const location = useLocation()
+	const location = useLocation();
 	const { navigate } = usePreventNavigate({ condition: () => !location.state.canGoBack });
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
@@ -41,47 +40,9 @@ export default function SelectAddressPage() {
 		{ value: 'otherLocation', label: 'sendOtherLocationTitle', sx: { order: 2 } }
 	]);
 
-	const { data: provinces, mutate: getProvinces, isLoading: isLoadingProvinces } = useProvinces();
-	const { data: cities, mutate: getCities, isLoading: isLoadingCities } = useCities();
-	const { mutate: requestCard, isLoading: isLoadingRequestCard } = useRequestCard();
+	const { cities, handlProvinceChahange, provinces, isLoading } = useProvinceAndCities();
+	const { mutate: requestCard, isLoading: isLoadingRequestCard, isSuccess } = useRequestCard();
 	const { mutate: InquiryGNAFForCard, isLoading: isLoadingInquiryGNAFForCard } = useInquiryGNAFForCard();
-
-	useEffect(() => {
-		getProvinces(
-			{},
-			{
-				onError: () => {
-					pushAlert({
-						type: 'error',
-						hasConfirmAction: true,
-						actions: {
-							onCloseModal: () => {
-								navigate(paths.Home);
-							},
-							onConfirm: () => {
-								navigate(paths.Home);
-							}
-						}
-					});
-				}
-			}
-		);
-	}, []);
-
-	const handlProvinceChahange = (provinceId: number) => {
-		getCities(
-			{ provinceId: provinceId },
-			{
-				onError: (err) => {
-					pushAlert({
-						type: 'error',
-						messageText: err.detail,
-						hasConfirmAction: true
-					});
-				}
-			}
-		);
-	};
 
 	const handleRadioChange = (value: string) => {
 		if (value === 'otherLocation') {
@@ -131,7 +92,15 @@ export default function SelectAddressPage() {
 						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 						// @ts-ignore: Unreachable code error
 						messageText: err.error ? (err.error.message as string) : err.detail,
-						hasConfirmAction: true
+						hasConfirmAction: true,
+						actions: {
+							onConfirm() {
+								// @ts-ignore: Unreachable code error
+								if ((err.error.code as number) === 401) {
+									navigate(paths.Home);
+								}
+							}
+						}
 					});
 				}
 			}
@@ -160,7 +129,15 @@ export default function SelectAddressPage() {
 						// TODO: needs to refactor but when? first backend needs to change it and give us the new version of the api
 						// @ts-ignore: Unreachable code error
 						messageText: err.error ? (err.error.message as string) : err.detail,
-						hasConfirmAction: true
+						hasConfirmAction: true,
+						actions: {
+							onConfirm() {
+								// @ts-ignore: Unreachable code error
+								if ((err.error.code as number) === 401) {
+									navigate(paths.Home);
+								}
+							}
+						}
 					});
 				}
 			}
@@ -353,7 +330,7 @@ export default function SelectAddressPage() {
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
-								disabled={preventNextStep}
+								disabled={preventNextStep || isLoadingRequestCard || isSuccess}
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
@@ -380,11 +357,7 @@ export default function SelectAddressPage() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader
-				showLoader={
-					isLoadingCities || isLoadingInquiryGNAFForCard || isLoadingProvinces || isLoadingRequestCard
-				}
-			/>
+			<Loader showLoader={isLoading || isLoadingInquiryGNAFForCard || isLoadingRequestCard} />
 		</Grid>
 	);
 }
