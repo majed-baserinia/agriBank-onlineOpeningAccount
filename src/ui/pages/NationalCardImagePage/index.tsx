@@ -27,12 +27,12 @@ export default function NationalCardImagePage() {
 	const [image, setImage] = useState<string | null>(null);
 	const { isLoading, mutate: postImage, isSuccess } = useSaveNationalCodeImage();
 
-	const handlesubmit = () => {
+	const handleSubmit = () => {
 		if (image) {
 			const data: SaveNationalCodeImageRequest = {
 				binaries: image,
 				fileName: 'nationalCard.jpg',
-				mimeType: 'image/jpeg',
+				//mimeType: 'image/jpeg',
 				token: token!
 			};
 			postImage(data, {
@@ -54,8 +54,8 @@ export default function NationalCardImagePage() {
 					});
 				},
 				onSuccess: (res) => {
-					addNewData({ orderId: res });
-					if (isKycNeeded) {
+					addNewData({ kycUrl: res.kycUrl });
+					if (res.isKYCNeeded) {
 						navigate(paths.thirdPartyAuth);
 					} else {
 						navigate(paths.result);
@@ -141,7 +141,7 @@ export default function NationalCardImagePage() {
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%' } }}
-								onClick={handlesubmit}
+								onClick={handleSubmit}
 							>
 								{t('continue')}
 							</ButtonAdapter>

@@ -17,7 +17,7 @@ export class SaveNationalCodeImageCommandHandler
 		return apiClient.post(<SaveNationalCodeImageRequest>{
 			binaries: value.binaries,
 			fileName: value.fileName,
-			mimeType: value.mimeType,
+			//mimeType: value.mimeType,
 			token: value.token
 		});
 	}
