@@ -13,8 +13,6 @@ interface Props {
 const MaterialThemeProvider = ({ children }: Props) => {
 	const settings = useInitialSettingStore((s) => s.settings);
 
-
-	
 	const themeTemplate = createTheme({
 		...settings.theme,
 		direction: settings.language === 'fa-IR' ? 'rtl' : 'ltr',
@@ -186,11 +184,29 @@ const MaterialThemeProvider = ({ children }: Props) => {
 						}
 					}
 				]
+			},
+			MuiSelect: {
+				styleOverrides: {
+					root: {
+						variants: [
+							{
+								props: { size: 'small' },
+								style: {
+									height: '40px'
+								}
+							},
+							{
+								props: { size: 'medium' },
+								style: {
+									height: '48px'
+								}
+							}
+						]
+					}
+				}
 			}
 		}
 	});
-
-	
 
 	const emotionCache = useMemo(() => {
 		if (settings.language === 'fa-IR') {
