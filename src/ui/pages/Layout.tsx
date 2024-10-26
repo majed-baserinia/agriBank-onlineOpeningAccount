@@ -49,6 +49,7 @@ const Layout = () => {
 			setSettings({
 				...settings,
 				theme: theme,
+				themeName: themeName as string,
 				language: language ? language : 'fa-IR'
 			});
 
@@ -65,7 +66,6 @@ const Layout = () => {
 			getConfig();
 		}
 	}, [readyToLoad]);
-
 
 	return (
 		<>

@@ -15,7 +15,7 @@ interface Data {
 	locationInfo?: SaveAddressCommand;
 	cards?: CardType;
 	selectedCardData?: SelectedCardData;
-	orderId?: string;
+	kycUrl?: string;
 	otl?: string;
 	isKycNeeded?: boolean;
 }
@@ -33,6 +33,15 @@ export const useDataSteps = create<Functions & Data>((set) => ({
 	},
 	reset: () => {
 		localStorage.removeItem('dataSteps');
-		set((store) => ({}));
+		set((store) => ({
+			personalInfo: undefined,
+			token: undefined,
+			locationInfo: undefined,
+			cards: undefined,
+			selectedCardData: undefined,
+			kycUrl: undefined,
+			otl: undefined,
+			isKycNeeded: undefined
+		}));
 	}
 }));
