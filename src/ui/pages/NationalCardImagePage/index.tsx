@@ -1,5 +1,4 @@
 import { Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
-import phoneIcon from 'assets/icon/horizantal-phone.svg';
 import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import useSaveNationalCodeImage from 'business/hooks/useSaveNationalCodeImage';
 import { pushAlert } from 'business/stores/AppAlertsStore';
@@ -13,7 +12,6 @@ import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import Loader from 'ui/htsc-components/loader/Loader';
 import PhotoCamera from 'ui/htsc-components/PhotoCamera';
 import Stepper from 'ui/htsc-components/Stepper';
-import SvgToIcon from 'ui/htsc-components/SvgToIcon';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 
@@ -104,16 +102,20 @@ export default function NationalCardImagePage() {
 								/>
 							) : null}
 							<Grid
-								marginBottom={'16px'}
-								container
 								flexWrap={'nowrap'}
-								gap={'8px'}
+								sx={{ marginBottom: '38px' }}
 							>
+								<Typography variant="bodyMd">{t('nationalImagePageTitleText')}.</Typography>
 								<Typography
-									variant="bodyMd"
-									sx={{ marginBottom: '8px' }}
+									variant="bodySm"
+									display={'list'}
+									marginTop={10}
+									color={'red'}
+									sx={{
+										listStyle: 'disc'
+									}}
 								>
-									{t('nationalImagePageTitleText')}
+									{t('otherAccpectedMethodForNationalCode')}.
 								</Typography>
 							</Grid>
 
@@ -123,16 +125,6 @@ export default function NationalCardImagePage() {
 										setImage(photo);
 									}}
 								/>
-							</Grid>
-							<Grid
-								container
-								gap={4}
-							>
-								<SvgToIcon
-									icon={phoneIcon}
-									alt="phone-icon"
-								/>
-								<Typography>{t('takePictureHintText')}</Typography>
 							</Grid>
 						</Grid>
 						<Grid container>
