@@ -105,12 +105,18 @@ export default function NationalCardImagePage() {
 								flexWrap={'nowrap'}
 								sx={{ marginBottom: '38px' }}
 							>
-								<Typography variant="bodyMd">{t('nationalImagePageTitleText')}.</Typography>
+								<Typography
+									variant="bodyMd"
+									textAlign={'justify'}
+								>
+									{t('nationalImagePageTitleText')}.
+								</Typography>
 								<Typography
 									variant="bodySm"
 									display={'list'}
 									marginTop={10}
 									color={'red'}
+									textAlign={'justify'}
 									sx={{
 										listStyle: 'disc'
 									}}
