@@ -20,7 +20,8 @@ const useInitPostMessage = () => {
 
 	//we are checking the query string for 'Auth', in all situations it is true except the time that it is false 
 	const Auth = new URLSearchParams(window.location.search).get('Auth');
-	const needsInitData = Auth === 'false' ? false : true;
+	const needsInitData = Auth === null ? false : true;
+	// console.log(Auth)
 
 	const { settings, setSettings } = useInitialSettingStore((s) => s);
 
@@ -119,7 +120,7 @@ const useInitPostMessage = () => {
 
 		if (window.location.pathname == basePath || `${window.location.pathname}/` == basePath) {
 			sendPostmessage('isFinishedBack', 'true');
-		} else{
+		} else {
 			navigate(-1);
 			//send acknowledge to the parent
 			sendPostmessage('wentBack', 'true');
