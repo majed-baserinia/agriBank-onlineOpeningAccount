@@ -127,9 +127,6 @@ export default function InputAdapter(props: InputAdapterProps) {
 			value={value}
 			onChange={handleChange}
 			sx={{
-				'& .MuiOutlinedInput-root': {
-					height: heightSizeList[size]
-				},
 				'& .MuiOutlinedInput-root fieldset': {
 					borderWidth: success || error ? '2px' : '1px',
 					borderColor: success ? theme.palette.success[400] : null

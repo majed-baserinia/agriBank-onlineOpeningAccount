@@ -20,7 +20,7 @@ const useInitPostMessage = () => {
 
 	//we are checking the query string for 'Auth', in all situations it is true except the time that it is false 
 	const Auth = new URLSearchParams(window.location.search).get('Auth');
-	const needsInitData = Auth === null ? false : true;
+	const needsInitData = Auth === null && false;
 	// console.log(Auth)
 
 	const { settings, setSettings } = useInitialSettingStore((s) => s);

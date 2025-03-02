@@ -120,11 +120,11 @@ input.datepickerInput {
 	width: 100%;
 	padding: 4px 12px;
 }
-input.datepickerInput:hover{
+input.datepickerInput:hover {
 	border: 1px solid #828282;
 }
 
-input.datepickerInput:focus{
+input.datepickerInput:focus {
 	outline: none;
 	border: 2px solid var(--rmdp-deselect-teal);
 }
@@ -157,6 +157,8 @@ input.error {
 	:first-child {
 	background-color: var(--rmdp-deselect-teal);
 	color: white;
+	position: relative;
+	z-index: 10;
 }
 
 .rmdp-calendar:has(.rmdp-header + div .rmdp-year-picker[style*='display: block'])
@@ -166,4 +168,6 @@ input.error {
 	:last-child {
 	background-color: var(--rmdp-deselect-teal);
 	color: white;
+	position: relative;
+	z-index: 10;
 }
