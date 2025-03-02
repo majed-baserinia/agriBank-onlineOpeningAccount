@@ -24,6 +24,7 @@ import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 import { Option } from './type';
 import useHandlejobs from '../../../business/hooks/useHandleJobs';
+import { persianToEnglishDigits } from 'common/utils/formatInput';
 
 export default function LocationInfoPage() {
 	const { t } = useTranslation();
@@ -61,14 +62,15 @@ export default function LocationInfoPage() {
 		let timeoutId: ReturnType<typeof setTimeout>;
 
 		return (value: string) => {
+			const changeDigit = persianToEnglishDigits(value);
 			clearTimeout(timeoutId);
 			timeoutId = setTimeout(() => {
-				if (value) {
-					getBranches({ branchSearch: value });
+				if (changeDigit) {
+					getBranches({ branchSearch: changeDigit });
 				} else {
 					clearBranches();
 				}
-			}, 500);
+			}, 1000);
 		};
 	}, []);
 
@@ -78,11 +80,11 @@ export default function LocationInfoPage() {
 			{ ...data, token: token! },
 			{
 				onSuccess: (res) => {
-					if (res.isRequestCardPossible) {
-						setOpenBottomSheet(true);
-					} else {
-						navigate(paths.nationalCardImage);
-					}
+					// if (res.isRequestCardPossible) {
+					// setOpenBottomSheet(true);
+					// } else {
+					navigate(paths.nationalCardImage);
+					// }
 				},
 				onError: (err) => {
 					pushAlert({
@@ -174,10 +176,11 @@ export default function LocationInfoPage() {
 													}
 												}}
 												onInputChange={(val) => handleBranchSearchWithDebounce(val)}
-												options={branches?.map((branch) => ({
-													label: `${branch.cityName} ${branch.branchName}  ${branch.branchCode}`,
-													value: branch.branchCode
-												}))}
+												options={
+													branches?.map((branch) => ({
+														label: `${branch.cityName} ${branch.branchName}  ${branch.branchCode}`,
+														value: branch.branchCode
+													}))}
 												valueToShowToInput={(option: Option) => ({
 													text: option.label
 												})}
@@ -445,7 +448,7 @@ export default function LocationInfoPage() {
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
-								disabled={isLoadingSaveAddress  || isSuccess}
+								disabled={isLoadingSaveAddress || isSuccess}
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%' } }}

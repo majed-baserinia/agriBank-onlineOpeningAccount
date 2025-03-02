@@ -13,6 +13,7 @@ import { forwardRef, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import RenderInput from './RenderInput';
 import { Props } from './types';
+import { persianToEnglishDigits } from 'common/utils/formatInput';
 
 // TODO: may need to add card format and functionality to edit card number
 // there is already implemented in the chargeAccount repo
@@ -80,7 +81,7 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 
 		if (matches && !hasConfirmButton) {
 			setOpen(false);
-			history.back();
+			// history.back();
 		} else {
 			setOpen(false);
 		}
@@ -94,8 +95,8 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 			setInputValue('');
 			onInputChange('');
 		} else {
-			setInputValue(value);
-			onInputChange(value);
+			setInputValue(persianToEnglishDigits(value));
+			onInputChange(persianToEnglishDigits(value));
 		}
 	};
 
@@ -141,7 +142,7 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 				getOptionLabel={getOptionLabel}
 				isOptionEqualToValue={isOptionEqualToValueFunction}
 				onOpen={() => {
-					matches && history.pushState(true, 'inputOpen');
+					// matches && history.pushState(true, 'inputOpen');
 					setOpen(true);
 				}}
 				onClose={() => {
@@ -180,7 +181,7 @@ export default function AutoCompleteAdapter<T extends Record<any, unknown>>(prop
 							width: '100%'
 						}}
 						onClick={() => {
-							matches && history.back();
+							// matches && history.back();
 							setOpen(false);
 						}}
 						variant="contained"

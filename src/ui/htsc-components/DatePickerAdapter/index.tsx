@@ -24,6 +24,7 @@ export default function DatePickerAdapter(props: Props) {
 
 	const [value, setValue] = useState<Value>();
 	const datepicker = useRef();
+	persian_fa.weekDays = [["شنبه", "ش"], ["یکشنبه", "ی"], ["دوشنبه", "د"], ["سه‌شنبه", "س"], ["چهارشنبه", "چ"], ["پنجشنبه", "پ"], ["جمعه", "ج"]]
 
 	useEffect(() => {
 		if (defaultValue) {
