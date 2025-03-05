@@ -127,7 +127,7 @@ export default function ObligationPage() {
 							) : null}
 							{!isLoadingGetObligation ? (
 								<>
-									<Grid item>
+									<Grid item sx={{ textAlign: 'justify' }}>
 										<Typography variant={'body1'}>
 											<div dangerouslySetInnerHTML={{ __html: obligation?.aggrementText! }} />
 										</Typography>
