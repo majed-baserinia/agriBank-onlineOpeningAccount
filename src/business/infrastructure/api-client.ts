@@ -8,6 +8,7 @@ import { ErrorType } from 'common/entities/ErrorType';
 import i18n from 'i18n';
 import { t } from 'i18next';
 import { clearAuth, getAuthTokens, saveAuthTokens } from './auth-service';
+import { persianToEnglishDigits } from 'common/utils/formatInput';
 
 const axiosInstance = axios.create({
 	headers: {
@@ -30,29 +31,37 @@ axiosRetry(axiosInstance, {
 
 const refreshToken = async (refreshToken: string): Promise<string | undefined> => {
 
-		const authTokens = getAuthTokens();
-		const baseUrl = ApiConfigSingleton.getApiConfig().baseUrl;
-		axiosForLogin.defaults.headers.common['Authorization'] = `Bearer ${authTokens?.idToken}`;
-		const response = await axiosForLogin.post(baseUrl + '/refreshtoken', {
-			refreshToken: refreshToken
-		});
-		const newIdToken = response.data.idToken;
-		const newRefreshToken = response.data.refreshToken;
-		saveAuthTokens({ idToken: newIdToken, refreshToken: newRefreshToken });
-		return newIdToken;
-	
-	
-	
+	const authTokens = getAuthTokens();
+	const baseUrl = ApiConfigSingleton.getApiConfig().baseUrl;
+	axiosForLogin.defaults.headers.common['Authorization'] = `Bearer ${authTokens?.idToken}`;
+	const response = await axiosForLogin.post(baseUrl + '/refreshtoken', {
+		refreshToken: refreshToken
+	});
+	const newIdToken = response.data.idToken;
+	const newRefreshToken = response.data.refreshToken;
+	saveAuthTokens({ idToken: newIdToken, refreshToken: newRefreshToken });
+	return newIdToken;
+
+
+
 };
 
 axiosForLogin.interceptors.request.use((config) => {
 	config.headers['accept-language'] = i18n.language;
 	config.headers['os-type'] = useInitialSettingStore.getState().settings.osType;
-
 	return config;
 });
 
 axiosInstance.interceptors.request.use((config) => {
+	if (config.headers["Content-Type"] === "application/json" && config.data.branchSearch) {
+		try {
+			const stringData = JSON.stringify(config.data);
+			const modifyNumbers = persianToEnglishDigits(stringData);
+			config.data = JSON.parse(modifyNumbers);
+		} catch (e) {
+			console.error("Invalid JSON format in body", e);
+		}
+	}
 	const authTokens = getAuthTokens();
 	if (authTokens) {
 		const { idToken } = authTokens;
