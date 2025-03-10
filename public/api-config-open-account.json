@@ -1,6 +1,13 @@
 {
 	"apiBaseUrl": "http://10.0.85.33:8090/api/bankingservices/kyc",
+
+	"apiBaseUrl-test": "http://10.0.85.33:8090/api/bankingservices/kyc",
+	"apiBaseUrl-pilot": "https://mbs-pilot.bki.ir/api/bankingservices/kyc",
+	"apiBaseUrl-production": "https://mbs.bki.ir/api/bankingservices/kyc",
+
+	"apiBaseUrlDigitalBanking": "https://digitalbanking.bki.ir",
+
 	"ThemeRoute": "https://cdn-tst.bki.ir/cdn/themes/",
-	"apiBaseUrlDigitalBanking": "http://10.0.189.141:31100",
+
 	"kycUrl": "https://core.ashname.shakeylead.com/keshavarzi/start?orderId=${orderId}&redirectUrl=https://digitalbanking.bki.ir/onlineopeningaccount"
 }

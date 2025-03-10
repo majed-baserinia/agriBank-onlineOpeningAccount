@@ -30,6 +30,7 @@ export default function SelectAddressPage() {
 	const { navigate } = usePreventNavigate({ condition: () => !location.state.canGoBack });
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesInfo = useMediaQuery(theme.breakpoints.down('lg'));
 	const { locationInfo, token, selectedCardData } = useDataSteps();
 	const [preventNextStep, setPreventNextStep] = useState(false);
 
@@ -146,7 +147,7 @@ export default function SelectAddressPage() {
 
 	return (
 		<Grid
-			container
+			container={matchesInfo ? false : true}
 			sx={{ padding: matches ? '0' : '64px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
@@ -220,8 +221,8 @@ export default function SelectAddressPage() {
 											onChange={(selectedProvince) => {
 												handlProvinceChahange(Number(selectedProvince.value));
 											}}
-											// error={!!formState.errors.cityId?.message}
-											// helperText={formState.errors.cityId?.message}
+										// error={!!formState.errors.cityId?.message}
+										// helperText={formState.errors.cityId?.message}
 										/>
 									</Grid>
 									<Grid>
@@ -241,8 +242,8 @@ export default function SelectAddressPage() {
 													onChange={(selectedCity) => {
 														field.onChange(Number(selectedCity.value));
 													}}
-													// error={!!formState.errors.cityId?.message}
-													// helperText={formState.errors.cityId?.message}
+												// error={!!formState.errors.cityId?.message}
+												// helperText={formState.errors.cityId?.message}
 												/>
 											)}
 										/>
@@ -262,8 +263,8 @@ export default function SelectAddressPage() {
 														type="number"
 														label={t('postalCode')}
 														onChange={(value) => field.onChange(value)}
-														// error={!!formState.errors.postalCode?.message}
-														// helperText={formState.errors.postalCode?.message}
+													// error={!!formState.errors.postalCode?.message}
+													// helperText={formState.errors.postalCode?.message}
 													/>
 												)}
 											/>
@@ -298,7 +299,7 @@ export default function SelectAddressPage() {
 																	// @ts-ignore: Unreachable code error
 																	messageText: err.error
 																		? // @ts-ignore: Unreachable code error
-																			(err.error.message as string)
+																		(err.error.message as string)
 																		: err.detail,
 																	hasConfirmAction: true
 																});
@@ -346,7 +347,7 @@ export default function SelectAddressPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{matches ? null : (
+			{matchesInfo ? null : (
 				<Grid
 					item
 					md={3}

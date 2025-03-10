@@ -28,6 +28,7 @@ export default function SelectCardTypePage() {
 	const theme = useTheme();
 	const { navigate } = usePreventNavigate();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesInfo = useMediaQuery(theme.breakpoints.down('lg'));
 	const { addNewData, token, personalInfo } = useDataSteps();
 
 	const { data: CardsList, mutate: getCardsList, isLoading } = useCardsList(personalInfo?.accountCode!);
@@ -37,7 +38,7 @@ export default function SelectCardTypePage() {
 		getCardsList(
 			{ accountCode: personalInfo?.accountCode! },
 			{
-				onSuccess: (res) => {},
+				onSuccess: (res) => { },
 				onError: (error) => {
 					pushAlert({
 						type: 'error',
@@ -69,7 +70,7 @@ export default function SelectCardTypePage() {
 						if (cardType.cardPatternItems.length === 1) {
 							// if only there is one pattern we presume that it is selected
 							addNewData({ selectedCardData: cardType.cardPatternItems[0] });
-							navigate(paths.selectAddress, {  state: { canGoBack: true } });
+							navigate(paths.selectAddress, { state: { canGoBack: true } });
 						} else {
 							addNewData({ cards: cardType });
 							navigate(paths.selectCard, { state: { canGoBack: true } });
@@ -89,7 +90,7 @@ export default function SelectCardTypePage() {
 
 	return (
 		<Grid
-			container
+			container={matchesInfo ? false : true}
 			sx={{ padding: matches ? '0' : '64px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
@@ -154,7 +155,7 @@ export default function SelectCardTypePage() {
 				</BoxAdapter>
 			</Grid>
 
-			{matches ? null : (
+			{matchesInfo ? null : (
 				<Grid
 					item
 					md={3}

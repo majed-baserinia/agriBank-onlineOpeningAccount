@@ -27,6 +27,7 @@ export default function PersonalInfoPage() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesInfo = useMediaQuery(theme.breakpoints.down('lg'));
 	const { addNewData, otl } = useDataSteps();
 
 	const [accountCode, setAccountCode] = useState('');
@@ -96,7 +97,7 @@ export default function PersonalInfoPage() {
 								// @ts-ignore: Unreachable code error
 								if ((err.error.code as number) === 420) {
 									sendPostmessage('isFinishedBack', '');
-								// @ts-ignore: Unreachable code error
+									// @ts-ignore: Unreachable code error
 								} else if ((err.error.code as number) === 401) {
 									navigate(paths.Home);
 								}
@@ -110,7 +111,7 @@ export default function PersonalInfoPage() {
 
 	return (
 		<Grid
-			container
+			container={matchesInfo ? false : true}
 			sx={{ padding: matches ? '0' : '64px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
@@ -327,7 +328,7 @@ export default function PersonalInfoPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{matches ? null : (
+			{matchesInfo ? null : (
 				<Grid
 					item
 					md={3}

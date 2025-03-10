@@ -17,6 +17,7 @@ export default function ResultPage() {
 	const location = useLocation();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesInfo = useMediaQuery(theme.breakpoints.down('lg'));
 	const { reset } = useDataSteps();
 	usePreventNavigate();
 	const handleSubmit = () => {
@@ -26,7 +27,7 @@ export default function ResultPage() {
 
 	return (
 		<Grid
-			container
+			container={matchesInfo ? false : true}
 			sx={{ padding: matches ? '0' : '64px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
@@ -112,7 +113,7 @@ export default function ResultPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{matches ? null : (
+			{matchesInfo ? null : (
 				<Grid
 					item
 					md={3}

@@ -24,6 +24,7 @@ import { stagesList } from '../HomePage';
 export default function OtpPage() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesInfo = useMediaQuery(theme.breakpoints.down('lg'));
 	const { t } = useTranslation();
 	const location = useLocation();
 	const { navigate } = usePreventNavigate();
@@ -110,7 +111,7 @@ export default function OtpPage() {
 	};
 	return (
 		<Grid
-			container
+			container={matchesInfo ? false : true}
 			sx={{ padding: matches ? '0' : '64px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
@@ -188,7 +189,7 @@ export default function OtpPage() {
 						</Grid>
 						<Grid container>
 							<ButtonAdapter
-								disabled={isLoadingSendAgain || isLoadingVerify  || isSuccess}
+								disabled={isLoadingSendAgain || isLoadingVerify || isSuccess}
 								variant="contained"
 								size="medium"
 								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
@@ -200,7 +201,7 @@ export default function OtpPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{matches ? null : (
+			{matchesInfo ? null : (
 				<Grid
 					item
 					md={3}

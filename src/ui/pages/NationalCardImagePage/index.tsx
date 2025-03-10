@@ -20,6 +20,7 @@ export default function NationalCardImagePage() {
 	const { navigate } = usePreventNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesInfo = useMediaQuery(theme.breakpoints.down('lg'));
 
 	const { token, addNewData, isKycNeeded } = useDataSteps();
 	const [image, setImage] = useState<string | null>(null);
@@ -65,7 +66,7 @@ export default function NationalCardImagePage() {
 
 	return (
 		<Grid
-			container
+			container={matchesInfo ? false : true}
 			sx={{ padding: matches ? '0' : '64px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
@@ -147,7 +148,7 @@ export default function NationalCardImagePage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{matches ? null : (
+			{matchesInfo ? null : (
 				<Grid
 					item
 					md={3}

@@ -19,6 +19,7 @@ export default function SelectCardPage() {
 	const { navigate } = usePreventNavigate({ condition: () => !location.state.canGoBack });
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesInfo = useMediaQuery(theme.breakpoints.down('lg'));
 	const { cards, addNewData } = useDataSteps();
 
 	const [selectedCard, setSelectedCard] = useState<CardPattern>();
@@ -36,7 +37,7 @@ export default function SelectCardPage() {
 
 	return (
 		<Grid
-			container
+			container={matchesInfo ? false : true}
 			sx={{ padding: matches ? '0' : '64px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
@@ -117,7 +118,7 @@ export default function SelectCardPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{matches ? null : (
+			{matchesInfo ? null : (
 				<Grid
 					item
 					md={3}

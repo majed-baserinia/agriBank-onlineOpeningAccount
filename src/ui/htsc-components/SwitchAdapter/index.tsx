@@ -10,6 +10,7 @@ export default function SwitchAdapter(props: Props) {
 		<Grid
 			container
 			alignItems={'center'}
+			marginTop={20}
 			justifyContent={spaceBetween ? 'space-between' : 'initial'}
 			gap={'8px'}
 		>
@@ -30,6 +31,6 @@ export default function SwitchAdapter(props: Props) {
 					{...switchProps}
 				/>
 			)}
-		</Grid>
+		</ Grid>
 	);
 }

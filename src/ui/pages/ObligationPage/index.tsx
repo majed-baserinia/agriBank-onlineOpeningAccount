@@ -19,6 +19,7 @@ import { stagesList } from '../HomePage';
 export default function ObligationPage() {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesInfo = useMediaQuery(theme.breakpoints.down('lg'));
 	const { t } = useTranslation();
 	const { navigate } = usePreventNavigate();
 
@@ -89,7 +90,7 @@ export default function ObligationPage() {
 	};
 	return (
 		<Grid
-			container
+			container={matchesInfo ? false : true}
 			sx={{ padding: matches ? '0' : '64px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
@@ -126,26 +127,24 @@ export default function ObligationPage() {
 								/>
 							) : null}
 							{!isLoadingGetObligation ? (
-								<>
-									<Grid item sx={{ textAlign: 'justify' }}>
-										<Typography variant={'body1'}>
-											<div dangerouslySetInnerHTML={{ __html: obligation?.aggrementText! }} />
-										</Typography>
-									</Grid>
-									<Grid item>
-										<SwitchAdapter
-											checked={agreementAccepted}
-											label={t('acceptObligation')}
-											onChange={() => {
-												setAgreementAccepted(!agreementAccepted);
-											}}
-											type="small"
-										></SwitchAdapter>
-									</Grid>
-								</>
+								<Grid item sx={{ textAlign: 'justify' }}>
+									<Typography variant={'body1'}>
+										<div dangerouslySetInnerHTML={{ __html: obligation?.aggrementText! }} />
+									</Typography>
+								</Grid>
 							) : null}
 						</Grid>
-						<Grid container>
+						<Grid >
+							<Grid display={"flex"} justifySelf={"right"}>
+								<SwitchAdapter
+									checked={agreementAccepted}
+									label={t('acceptObligation')}
+									onChange={() => {
+										setAgreementAccepted(!agreementAccepted);
+									}}
+									type="small"
+								></SwitchAdapter>
+							</Grid>
 							<ButtonAdapter
 								disabled={!agreementAccepted || isLoadingGetObligation || isLoadingSaveObligation || isSuccess}
 								variant="contained"
@@ -159,7 +158,7 @@ export default function ObligationPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{matches ? null : (
+			{matchesInfo ? null : (
 				<Grid
 					item
 					md={3}

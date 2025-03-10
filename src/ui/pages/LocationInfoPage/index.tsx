@@ -31,6 +31,7 @@ export default function LocationInfoPage() {
 	const { navigate } = usePreventNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const matchesInfo = useMediaQuery(theme.breakpoints.down('lg'));
 	const { addNewData, token } = useDataSteps();
 	const [openBottomSheet, setOpenBottomSheet] = useState(false);
 	const { cities, handlProvinceChahange, isLoading, provinces } = useProvinceAndCities();
@@ -109,7 +110,7 @@ export default function LocationInfoPage() {
 
 	return (
 		<Grid
-			container
+			container={matchesInfo ? false : true}
 			sx={{ padding: matches ? '0' : '64px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
@@ -143,7 +144,7 @@ export default function LocationInfoPage() {
 										t('sendDocuments'),
 										t('end')
 									]}
-									active={0}
+									active={3}
 								/>
 							) : null}
 							<Grid
@@ -460,7 +461,7 @@ export default function LocationInfoPage() {
 					</Grid>
 				</BoxAdapter>
 			</Grid>
-			{matches ? null : (
+			{matchesInfo ? null : (
 				<Grid
 					item
 					md={3}
