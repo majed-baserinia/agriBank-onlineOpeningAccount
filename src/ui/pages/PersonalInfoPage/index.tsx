@@ -280,6 +280,7 @@ export default function PersonalInfoPage() {
 										name="birthDate"
 										render={({ field }) => (
 											<DatePickerAdapter
+												isRequired
 												defaultValue={field?.value}
 												label={t('birthDate')}
 												onChange={(value) => field.onChange(value)}
@@ -303,6 +304,7 @@ export default function PersonalInfoPage() {
 										name="identityIssueDate"
 										render={({ field }) => (
 											<DatePickerAdapter
+												isRequired
 												defaultValue={field?.value}
 												label={t('identityIssueDate')}
 												onChange={(value) => field.onChange(value)}

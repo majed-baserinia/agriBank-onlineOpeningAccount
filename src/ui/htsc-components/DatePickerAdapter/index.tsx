@@ -20,7 +20,7 @@ import { Props } from './type';
 export default function DatePickerAdapter(props: Props) {
 	const { t } = useTranslation();
 	const appLanguage = useInitialSettingStore((store) => store.settings.language);
-	const { label = t('date'), helperText, onChange, error, defaultValue } = props;
+	const { label = t('date'), helperText, onChange, error, defaultValue, isRequired } = props;
 
 	const [value, setValue] = useState<Value>();
 	const datepicker = useRef();
@@ -53,6 +53,7 @@ export default function DatePickerAdapter(props: Props) {
 	return (
 		<InputAdapter
 			label={label}
+			isRequired={isRequired}
 			type="date"
 			defaultValue={value as string}
 			onChange={handleInputChange}
