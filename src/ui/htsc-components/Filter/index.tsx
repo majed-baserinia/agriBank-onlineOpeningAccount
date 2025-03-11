@@ -159,7 +159,6 @@ export default function Filter<T extends {}>(props: Props<T>) {
 						variant="contained"
 						onClick={handleSubmitFilterButton}
 					>
-						efj
 					</ButtonAdapter>
 				</Grid>
 			</ModalOrBottomSheet>

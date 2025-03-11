@@ -81,11 +81,11 @@ export default function LocationInfoPage() {
 			{ ...data, token: token! },
 			{
 				onSuccess: (res) => {
-					// if (res.isRequestCardPossible) {
-					// setOpenBottomSheet(true);
-					// } else {
-					navigate(paths.selectCardType);
-					// }
+					if (res.isRequestCardPossible) {
+						setOpenBottomSheet(true);
+					} else {
+						navigate(paths.selectCardType);
+					}
 				},
 				onError: (err) => {
 					pushAlert({

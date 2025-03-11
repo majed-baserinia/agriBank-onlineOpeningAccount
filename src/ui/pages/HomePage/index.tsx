@@ -13,6 +13,8 @@ import StagesListComp from 'ui/components/StagesListComp';
 import Title from 'ui/components/Title';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import { paths } from 'ui/route-config/paths';
+import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
+import { useEffect } from 'react';
 
 export const stagesList = [
 	{
@@ -58,6 +60,11 @@ export default function HomePage() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const { reset } = useDataSteps();
+
+	useEffect(() => {
+		reset();
+	}, [])
 
 	const handleSubmit = () => {
 		navigate(paths.PersonalInfoPage);

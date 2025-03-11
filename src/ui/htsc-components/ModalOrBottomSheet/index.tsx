@@ -10,8 +10,12 @@ import {
 	useMediaQuery,
 	useTheme
 } from '@mui/material';
+import { pushAlert } from 'business/stores/AppAlertsStore';
 import { ReactNode } from 'react';
 import Sheet from 'react-modal-sheet';
+import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
+import { paths } from 'ui/route-config/paths';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
 	breackpoint: 'md' | 'sm' | 'lg' | 'xs';
@@ -27,11 +31,26 @@ export default function ModalOrBottomSheet(props: Props) {
 	const { breackpoint, children, snapPoints = [450, 0], ModalpaperProps, open, setOpen, title } = props;
 	const theme = useTheme();
 	const isMatched = useMediaQuery(theme.breakpoints.down(breackpoint));
+	const { navigate } = usePreventNavigate();
+	const { t } = useTranslation();
 
 	return isMatched ? (
 		<Sheet
 			isOpen={open}
-			onClose={() => setOpen(false)}
+			onClose={() => {
+				// setOpen(false)
+				pushAlert({
+					type: 'warning',
+					messageText: t("backButtonText"),
+					hasRefuseAction: true,
+					hasConfirmAction: true,
+					actions: {
+						onConfirm: () => {
+							navigate(paths.Home);
+						},
+					}
+				});
+			}}
 			snapPoints={snapPoints}
 		>
 			<Sheet.Container style={{ backgroundColor: theme.palette.background.paper, padding: '16px' }}>
@@ -45,12 +64,25 @@ export default function ModalOrBottomSheet(props: Props) {
 				</Sheet.Header>
 				<Sheet.Content>{children}</Sheet.Content>
 			</Sheet.Container>
-			<Sheet.Backdrop />
+			<Sheet.Backdrop onTap={(e) => e.preventDefault()} />
 		</Sheet>
 	) : (
 		<Dialog
 			open={open}
-			onClose={() => setOpen(false)}
+			onClose={() => {
+				// setOpen(false)
+				pushAlert({
+					type: 'warning',
+					messageText: t("backButtonText"),
+					hasRefuseAction: true,
+					hasConfirmAction: true,
+					actions: {
+						onConfirm: () => {
+							navigate(paths.Home);
+						},
+					}
+				});
+			}}
 			PaperProps={ModalpaperProps}
 			fullWidth
 		>
@@ -66,7 +98,20 @@ export default function ModalOrBottomSheet(props: Props) {
 					>
 						{title}
 					</Typography>
-					<IconButton onClick={() => setOpen(false)}>
+					<IconButton onClick={() => {
+						// setOpen(false)
+						pushAlert({
+							type: 'warning',
+							messageText: t("backButtonText"),
+							hasRefuseAction: true,
+							hasConfirmAction: true,
+							actions: {
+								onConfirm: () => {
+									navigate(paths.Home);
+								},
+							}
+						});
+					}}>
 						<CloseIcon />
 					</IconButton>
 				</Grid>
