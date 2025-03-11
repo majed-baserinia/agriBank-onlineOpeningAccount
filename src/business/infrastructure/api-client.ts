@@ -53,7 +53,7 @@ axiosForLogin.interceptors.request.use((config) => {
 });
 
 axiosInstance.interceptors.request.use((config) => {
-	if (config.headers["Content-Type"] === "application/json" && config.data.branchSearch) {
+	if (config.headers["Content-Type"] === "application/json" && config.data?.branchSearch) {
 		try {
 			const stringData = JSON.stringify(config.data);
 			const modifyNumbers = persianToEnglishDigits(stringData);
