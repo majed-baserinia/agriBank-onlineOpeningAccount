@@ -73,7 +73,7 @@ export default function HomePage() {
 	return (
 		<Grid
 			container
-			sx={{ padding: matches ? '0' : '64px 0' }}
+			sx={{ padding: matches ? '0' : '10px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
 			dir={theme.direction}
@@ -107,7 +107,7 @@ export default function HomePage() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%' } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
 								onClick={() => handleSubmit()}
 							>
 								{t('openAccount')}

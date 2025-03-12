@@ -38,7 +38,7 @@ export default function SelectCardPage() {
 	return (
 		<Grid
 			container={matchesInfo ? false : true}
-			sx={{ padding: matches ? '0' : '64px 0' }}
+			sx={{ padding: matches ? '0' : '40px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
 			dir={theme.direction}

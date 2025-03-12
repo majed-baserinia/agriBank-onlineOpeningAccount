@@ -28,7 +28,7 @@ export default function ResultPage() {
 	return (
 		<Grid
 			container={matchesInfo ? false : true}
-			sx={{ padding: matches ? '0' : '64px 0' }}
+			sx={{ padding: matches ? '0' : '10px 0' }}
 			justifyContent={'center'}
 			gap={'24px'}
 			dir={theme.direction}
@@ -104,7 +104,7 @@ export default function ResultPage() {
 							<ButtonAdapter
 								variant="contained"
 								size="medium"
-								muiButtonProps={{ sx: { width: '100%', marginTop: '16px' } }}
+								muiButtonProps={{ sx: { width: '100%', marginTop: '20px' } }}
 								onClick={handleSubmit}
 							>
 								{t('confirm')}
