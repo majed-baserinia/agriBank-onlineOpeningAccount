@@ -60,11 +60,11 @@ export default function HomePage() {
 	const navigate = useNavigate();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const { reset } = useDataSteps();
+	// const { reset } = useDataSteps();
 
-	useEffect(() => {
-		reset();
-	}, [])
+	// useEffect(() => {
+	// reset();
+	// }, [])
 
 	const handleSubmit = () => {
 		navigate(paths.PersonalInfoPage);
