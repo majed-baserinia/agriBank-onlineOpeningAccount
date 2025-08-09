@@ -84,7 +84,8 @@ export default function LocationInfoPage() {
 					if (res.isRequestCardPossible) {
 						setOpenBottomSheet(true);
 					} else {
-						navigate(paths.selectCardType);
+						// navigate(paths.selectCardType);
+						navigate(paths.nationalCardImage)
 					}
 				},
 				onError: (err) => {
