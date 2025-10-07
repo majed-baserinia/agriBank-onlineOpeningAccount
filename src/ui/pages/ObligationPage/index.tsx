@@ -10,11 +10,11 @@ import { useTranslation } from 'react-i18next';
 import StagesListComp from 'ui/components/StagesListComp';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import Loader from 'ui/htsc-components/loader/Loader';
 import Stepper from 'ui/htsc-components/Stepper';
 import SwitchAdapter from 'ui/htsc-components/SwitchAdapter';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
+import { useLoadingHandler } from "@agribank/ui/components/Loader";
 
 export default function ObligationPage() {
 	const theme = useTheme();
@@ -88,6 +88,8 @@ export default function ObligationPage() {
 			);
 		}
 	};
+
+	useLoadingHandler(isLoadingGetObligation || isLoadingSaveObligation);
 	return (
 		<Grid
 			container={matchesInfo ? false : true}
@@ -169,7 +171,7 @@ export default function ObligationPage() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isLoadingGetObligation || isLoadingSaveObligation} />
+			{/* <Loader showLoader={isLoadingGetObligation || isLoadingSaveObligation} /> */}
 		</Grid>
 	);
 }

@@ -17,10 +17,10 @@ import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import DatePickerAdapter from 'ui/htsc-components/DatePickerAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
-import Loader from 'ui/htsc-components/loader/Loader';
 import Stepper from 'ui/htsc-components/Stepper';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
+import { useLoadingHandler } from "@agribank/ui/components/Loader";
 
 export default function PersonalInfoPage() {
 	const { t } = useTranslation();
@@ -109,6 +109,7 @@ export default function PersonalInfoPage() {
 		);
 	};
 
+	useLoadingHandler(isLoadingGettingAccounts || isLoadingCreateAuthRequest);
 	return (
 		<Grid
 			container={matchesInfo ? false : true}
@@ -341,7 +342,7 @@ export default function PersonalInfoPage() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isLoadingGettingAccounts || isLoadingCreateAuthRequest} />
+			{/* <Loader showLoader={isLoadingGettingAccounts || isLoadingCreateAuthRequest} /> */}
 		</Grid>
 	);
 }

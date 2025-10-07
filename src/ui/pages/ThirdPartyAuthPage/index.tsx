@@ -4,8 +4,8 @@ import { usePreventNavigate } from 'business/hooks/usePreventNavigate';
 import useInitialSettingStore from 'business/stores/initial-setting-store';
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { useEffect, useState } from 'react';
-import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
+import { Loader } from "@agribank/ui/components/Loader";
 
 export default function ThirdPartyAuthPage() {
 	const { settings } = useInitialSettingStore((s) => s);
@@ -62,6 +62,7 @@ export default function ThirdPartyAuthPage() {
 			allowFullScreen
 		></iframe>
 	) : (
-		<Loader showLoader />
+		<Loader.Controlled showLoader />
+		// <Loader showLoader />
 	);
 }

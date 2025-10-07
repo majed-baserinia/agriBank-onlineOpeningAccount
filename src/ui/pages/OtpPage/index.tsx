@@ -15,11 +15,11 @@ import { useLocation } from 'react-router-dom';
 import StagesListComp from 'ui/components/StagesListComp';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import Loader from 'ui/htsc-components/loader/Loader';
 import Otp from 'ui/htsc-components/Otp';
 import Stepper from 'ui/htsc-components/Stepper';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
+import { useLoadingHandler } from "@agribank/ui/components/Loader";
 
 export default function OtpPage() {
 	const theme = useTheme();
@@ -109,6 +109,8 @@ export default function OtpPage() {
 			});
 		}
 	};
+
+	useLoadingHandler(isLoadingVerify || isLoadingSendAgain);
 	return (
 		<Grid
 			container={matchesInfo ? false : true}
@@ -212,7 +214,7 @@ export default function OtpPage() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isLoadingVerify || isLoadingSendAgain} />
+			{/* <Loader showLoader={isLoadingVerify || isLoadingSendAgain} /> */}
 		</Grid>
 	);
 }

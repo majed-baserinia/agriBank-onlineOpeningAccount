@@ -9,11 +9,11 @@ import { useTranslation } from 'react-i18next';
 import StagesListComp from 'ui/components/StagesListComp';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import Loader from 'ui/htsc-components/loader/Loader';
 import PhotoCamera from 'ui/htsc-components/PhotoCamera';
 import Stepper from 'ui/htsc-components/Stepper';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
+import { useLoadingHandler } from "@agribank/ui/components/Loader";
 
 export default function NationalCardImagePage() {
 	const { t } = useTranslation();
@@ -63,7 +63,7 @@ export default function NationalCardImagePage() {
 			});
 		}
 	};
-
+	useLoadingHandler(isLoading);
 	return (
 		<Grid
 			container={matchesInfo ? false : true}
@@ -159,7 +159,7 @@ export default function NationalCardImagePage() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isLoading} />
+			{/* <Loader showLoader={isLoading} /> */}
 		</Grid>
 	);
 }

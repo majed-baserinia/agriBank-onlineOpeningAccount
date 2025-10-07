@@ -11,9 +11,9 @@ import StagesListComp from 'ui/components/StagesListComp';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import SvgToIcon from 'ui/htsc-components/SvgToIcon';
-import Loader from 'ui/htsc-components/loader/Loader';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
+import { useLoadingHandler } from "@agribank/ui/components/Loader";
 
 type MenuItems = {
 	id: number;
@@ -86,8 +86,8 @@ export default function SelectCardTypePage() {
 	}, [CardsList]);
 
 	//display the loader this way to user becouse user shouldn't see the page if there is no Checks that user represent or sign.
-	if (isLoading) return <Loader showLoader />;
-
+	// if (isLoading) return <Loader showLoader />;
+	useLoadingHandler(isLoading);
 	return (
 		<Grid
 			container={matchesInfo ? false : true}

@@ -8,7 +8,7 @@ import StagesListComp from 'ui/components/StagesListComp';
 import AlertIcon from 'ui/htsc-components/alerts/alertIcon';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
-import Loader from 'ui/htsc-components/loader/Loader';
+// import Loader from 'ui/htsc-components/loader/Loader';
 import Stepper from 'ui/htsc-components/Stepper';
 import { stagesList } from '../HomePage';
 
@@ -124,7 +124,7 @@ export default function ResultPage() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={false} />
+			{/* <Loader showLoader={false} /> */}
 		</Grid>
 	);
 }

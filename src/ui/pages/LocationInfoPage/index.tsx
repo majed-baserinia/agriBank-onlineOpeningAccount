@@ -18,13 +18,13 @@ import AutoCompleteAdapter from 'ui/htsc-components/AutoCompleteAdapter';
 import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
-import Loader from 'ui/htsc-components/loader/Loader';
 import Stepper from 'ui/htsc-components/Stepper';
 import { paths } from 'ui/route-config/paths';
 import { stagesList } from '../HomePage';
 import { Option } from './type';
 import useHandlejobs from '../../../business/hooks/useHandleJobs';
 import { persianToEnglishDigits } from 'common/utils/formatInput';
+import { useLoadingHandler } from "@agribank/ui/components/Loader";
 
 export default function LocationInfoPage() {
 	const { t } = useTranslation();
@@ -57,6 +57,7 @@ export default function LocationInfoPage() {
 			const dataSteps = JSON.parse(savedData);
 			reset({ ...dataSteps.locationInfo });
 		}
+		window.scrollTo({ top: 0 });
 	}, []);
 
 	const handleBranchSearchWithDebounce = useMemo(() => {
@@ -109,6 +110,7 @@ export default function LocationInfoPage() {
 		);
 	};
 
+	useLoadingHandler(isLoading || isLoadingSaveAddress || jobLoading);
 	return (
 		<Grid
 			container={matchesInfo ? false : true}
@@ -473,7 +475,7 @@ export default function LocationInfoPage() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isLoading || isLoadingSaveAddress || jobLoading} />
+			{/* <Loader showLoader={isLoading || isLoadingSaveAddress || jobLoading} /> */}
 			<RequestCardBottomSheet
 				open={openBottomSheet}
 				setOpen={setOpenBottomSheet}

@@ -16,13 +16,13 @@ import BottomSheetSelect from 'ui/htsc-components/BottomSheetSelect';
 import BoxAdapter from 'ui/htsc-components/BoxAdapter';
 import ButtonAdapter from 'ui/htsc-components/ButtonAdapter';
 import InputAdapter from 'ui/htsc-components/InputAdapter';
-import Loader from 'ui/htsc-components/loader/Loader';
 import RadioButtonAdapter from 'ui/htsc-components/RadioButtonAdapter';
 import Stepper from 'ui/htsc-components/Stepper';
 import TextareaAdapter from 'ui/htsc-components/TextareaAdapter';
 import { paths } from 'ui/route-config/paths';
 import useProvinceAndCities from '../../../business/hooks/useProvinceAndCities';
 import { stagesList } from '../HomePage';
+import { useLoadingHandler } from "@agribank/ui/components/Loader";
 
 export default function SelectAddressPage() {
 	const { t } = useTranslation();
@@ -145,6 +145,7 @@ export default function SelectAddressPage() {
 		);
 	};
 
+	useLoadingHandler(isLoading || isLoadingInquiryGNAFForCard || isLoadingRequestCard);
 	return (
 		<Grid
 			container={matchesInfo ? false : true}
@@ -358,7 +359,7 @@ export default function SelectAddressPage() {
 					</BoxAdapter>
 				</Grid>
 			)}
-			<Loader showLoader={isLoading || isLoadingInquiryGNAFForCard || isLoadingRequestCard} />
+			{/* <Loader showLoader={isLoading || isLoadingInquiryGNAFForCard || isLoadingRequestCard} /> */}
 		</Grid>
 	);
 }

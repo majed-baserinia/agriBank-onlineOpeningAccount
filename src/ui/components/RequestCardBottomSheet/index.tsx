@@ -6,10 +6,10 @@ import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import { throttle } from 'common/utils';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Loader from 'ui/htsc-components/loader/Loader';
 import ModalOrBottomSheet from 'ui/htsc-components/ModalOrBottomSheet';
 import { paths } from 'ui/route-config/paths';
 import Menu from '../Menu';
+import { useLoadingHandler } from "@agribank/ui/components/Loader";
 
 type Props = {
 	open: boolean;
@@ -79,7 +79,8 @@ export default function RequestCardBottomSheet(props: Props) {
 		}
 	];
 
-	if (isLoading) return <Loader showLoader />;
+	useLoadingHandler(isLoading);
+
 	return (
 		<ModalOrBottomSheet
 			breackpoint="sm"

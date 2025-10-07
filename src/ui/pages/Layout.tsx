@@ -1,16 +1,16 @@
 import useInitPostMessage from 'business/hooks/postMessage/useInitPostMessage';
 import { changeLanguage } from 'i18next';
 import { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useLocation, Outlet } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import MaterialThemeProvider from 'ui/components/MaterialThemeProvider';
 import AppAlerts from 'ui/htsc-components/alerts/AppAlerts';
-import Loader from 'ui/htsc-components/loader/Loader';
 import themeInitializer from 'ui/theme-config/baseTheme';
 
 import { useDataSteps } from 'business/stores/onlineOpenAccount/dataSteps';
 import ApiConfigSingleton from '../../business/stores/api-config-singleton';
 import useInitialSettingStore from '../../business/stores/initial-setting-store';
+import { Loader } from "@agribank/ui/components/Loader";
 
 const Layout = () => {
 	const { readyToLoad } = useInitPostMessage();
@@ -18,6 +18,9 @@ const Layout = () => {
 	const { settings, setSettings } = useInitialSettingStore((s) => s);
 	const [configReady, seConfigReady] = useState(false);
 	const { addNewData } = useDataSteps();
+	const location = useLocation();
+	console.log('Current route:', location.pathname);
+	console.log('settings:', settings);
 
 	const GlobalStyle = createGlobalStyle`
       html, body {
@@ -62,30 +65,26 @@ const Layout = () => {
 	};
 
 	useEffect(() => {
-		if (readyToLoad) {
-			getConfig();
-		}
+		void getConfig();
 	}, [readyToLoad]);
 
-	return (
-		<>
-			<GlobalStyle />
 
+	if (!readyToLoad) {
+		return settings?.theme?.palette ? < MaterialThemeProvider >
+			<Loader.Controlled showLoader />
+		</MaterialThemeProvider >
+			: <></>
+	}
+	return (
+		settings?.theme?.palette ? <div className='w-full h-full'>
 			<MaterialThemeProvider>
-				<>
-					<AppAlerts />
-					{configReady ? (
-						<div>
-							{/* <div className="content-star xl:w-2/4 m-auto grid grid-rows-1 gap-y-4 p-7 md:w-3/4 lg:w-3/5"> */}
-							<Outlet />
-							{/* </div> */}
-						</div>
-					) : (
-						<Loader showLoader={true}></Loader>
-					)}
-				</>
-			</MaterialThemeProvider>
-		</>
+				<GlobalStyle />
+				<Loader.UnControlled />
+				<AppAlerts />
+				<Outlet />
+			</MaterialThemeProvider >
+		</div>
+			: <Loader.Controlled showLoader />
 	);
 };
 

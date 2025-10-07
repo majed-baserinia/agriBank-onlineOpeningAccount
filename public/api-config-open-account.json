@@ -1,5 +1,5 @@
 {
-	"apiBaseUrl": "https://mbs-pilot.bki.ir/api/bankingservices/kyc",
+	"apiBaseUrl": "https://mbs.bki.ir/api/bankingservices/kyc",
 	"apiBaseUrlDigitalBanking": "https://digitalbanking.bki.ir",
 	"kycUrl": "https://core.ashname.shakeylead.com/keshavarzi/start?orderId=${orderId}&redirectUrl=https://digitalbanking.bki.ir/onlineopeningaccount",
 	"ThemeRoute": "https://cdn.bki.ir/cdn/themes/",
